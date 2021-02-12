@@ -5,16 +5,18 @@ namespace App\Http\Controllers\Teacher;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
-use App\Models\MasterKelas;
-use App\Models\MasterJurusan;
-use App\Models\MasterMapel;
-use App\Models\MasterSemester;
-use App\Models\MasterJadwalPelajaran;
-use App\Models\UserDetail;
+use App\Model\MasterKelas;
+use App\Model\MasterJurusan;
+use App\Model\MasterMapel;
+use App\Model\MasterSemester;
+use App\Model\MasterJadwalPelajaran;
+use App\Model\UserDetail;
 use DB;
+
 class MapelController extends BaseController
 {
-    public function mapelGet(){
+    public function mapelGet()
+    {
         $params = [
             'showKelas'     => MasterKelas::get(),
             'showJurusan'   => MasterJurusan::get(),
@@ -25,21 +27,21 @@ class MapelController extends BaseController
     }
 
     public function getDataMapel(Request $request)
-	{
-		$draw   = $request->get('draw');
-		$start  = $request->get('start');
-		$length = $request->get('length');
-		$search = $request->input('search.value');
+    {
+        $draw   = $request->get('draw');
+        $start  = $request->get('start');
+        $length = $request->get('length');
+        $search = $request->input('search.value');
 
-		$count  = MasterJadwalPelajaran::count();
-		$data   = MasterJadwalPelajaran::get();
+        $count  = MasterJadwalPelajaran::count();
+        $data   = MasterJadwalPelajaran::get();
 
-		$data = array(
-			'draw'              => $draw,
-			'recordsTotal'      => $count,
-			'recordsFiltered'   => $count,
-			'data'              => $data
-		);
+        $data = array(
+            'draw'              => $draw,
+            'recordsTotal'      => $count,
+            'recordsFiltered'   => $count,
+            'data'              => $data
+        );
         echo json_encode($data);
     }
 
@@ -50,10 +52,10 @@ class MapelController extends BaseController
         $detailUser         = UserDetail::where('email', $user_email)->first();
 
         MasterJadwalPelajaran::create([
-            'nama_kelas'        => $request->jurusan.' '.$request->kelas.'-'.$request->jurusan.'_'.$request->mata_pelajaran,
+            'nama_kelas'        => $request->jurusan . ' ' . $request->kelas . '-' . $request->jurusan . '_' . $request->mata_pelajaran,
             'guru'              => $detailUser->name,
-            'jenjang'           => "Kelas ".$request->kelas,
-            'kelas'             => $request->jurusan.' '.$request->kelas.'-'.$request->jurusan,
+            'jenjang'           => "Kelas " . $request->kelas,
+            'kelas'             => $request->jurusan . ' ' . $request->kelas . '-' . $request->jurusan,
             'mata_pelajaran'    => $request->mata_pelajaran,
             'kkm'               => '75',
         ]);
@@ -66,7 +68,7 @@ class MapelController extends BaseController
     public function deleteMapel(Request $request)
     {
         $user = $request->user();
-		foreach ($request->data as $key => $id) {
+        foreach ($request->data as $key => $id) {
             $expenses = MasterJadwalPelajaran::where('id', $id)->first();
             if ($expenses != null) {
                 $expenses->delete();

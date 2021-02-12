@@ -30,7 +30,7 @@
   </div>
   <div class="alert alert-primary " role="alert">
     <h4 class="alert-heading">Info!</h4>
-    <p>Tahun Ajaran {{ $showSemester->tahun_ajaran }} - Semester {{ $showSemester->semester }}</p>
+    {{-- <p>Tahun Ajaran {{ $showSemester->tahun_ajaran }} - Semester {{ $showSemester->semester }}</p> --}}
   </div>
   <div class="row profile-body">  
 

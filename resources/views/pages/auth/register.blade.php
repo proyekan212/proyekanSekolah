@@ -36,7 +36,7 @@
                   </label>
                 </div>
                 <div class="mt-3">
-                  <a href="{{ url('/') }}" class="btn btn-primary mr-2 mb-2 mb-md-0">Sing up</a>
+                  <a href="{{ url('/register/create') }}" class="btn btn-primary mr-2 mb-2 mb-md-0">Sing up</a>
                   <button type="button" class="btn btn-outline-primary btn-icon-text mb-2 mb-md-0">
                     <i class="btn-icon-prepend" data-feather="twitter"></i>
                     Sign up with twitter

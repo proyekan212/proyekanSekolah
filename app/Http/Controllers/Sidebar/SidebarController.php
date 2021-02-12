@@ -1,14 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Sidebar;
 
 use App\Http\Controllers\Controller;
-use App\Model\MasterJadwalPelajaran;
-use App\Model\MasterSemester;
-use Illuminate\Http\Request;
 use App\Model\Menu;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class SidebarController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,14 +15,9 @@ class DashboardController extends Controller
      */
     public function index()
     {
-
-        // $menu = Menu::all();
-        $mapel = MasterJadwalPelajaran::all();
-        $semester = MasterSemester::all();
-        return view('dashboard', [
-            'showSemester'      => $semester,
-            'showMataPelajaran' => $mapel,
-            // 'menu' => $menu
+        $menu = Menu::all();
+        return view('layout.master', [
+            'menu' => $menu
         ]);
     }
 

@@ -9,7 +9,7 @@ class Dashboard extends Model
 {
     public static function getMenu($roleid){
         $q  = " select m.parent_code, m.code, m.name, m.status, m.icon";
-        $q .= " from menu m, role r, menu_role mr";
+        $q .= " from menus m, roles r, menu_roles mr";
         $q .= " where mr.role_id = ?";
         $q .= " and mr.role_id = r.id";
         $q .= " and mr.menu_id = m.id";

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
-use App\Models\User;
+use App\Model \User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
@@ -38,11 +38,13 @@ class AuthController extends BaseController
     
     public function register(Request $request)
     {
+        
         User::create([
             'username' => 'admin@admin.com',
             'password' => bcrypt('admin'),
             'role_id' => 1,
         ]);
+
         return redirect()->route('login')->with('error', 'Login Fail, Invalid Email/Password');
     }
 

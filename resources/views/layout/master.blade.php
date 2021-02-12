@@ -31,11 +31,12 @@
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
-    @if (Request::segment(1) == 'kelas')
+    {{-- @if (Request::segment(1) == 'kelas')
      @include('layout.sidebar2')
     @else
-      @include('layout.sidebar')
-    @endif    
+      
+    @endif     --}}
+    @include('layout.sidebar')
     <div class="page-wrapper">
       @include('layout.header')
       <div class="page-content">
