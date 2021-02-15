@@ -94,6 +94,7 @@ class KejadianJurnalController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MasterKejadianJurnal::where('id', $id)->update(['hapus'=> 1]);
+        return redirect('kelas/kejadian_jurnal');
     }
 }
