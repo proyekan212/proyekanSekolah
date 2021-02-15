@@ -66,46 +66,50 @@
         <form>
         <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Waktu</label>
+              <label class="col-form-label">Foto</label>
+            </div>
+            <div class="col-lg-8">
+
+              <input type="file" class="form-control" name="photo">
+              <!-- <div class="input-group date datepicker" id="datePickerExample">
+                <input type="text" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
+              </div> -->
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">NISN</label>
+            </div>
+            <div class="col-lg-8">
+              <input type="text" class="form-control" placeholder="NISN">
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Nama</label>
+            </div>
+            <div class="col-lg-8">
+              <select name="user_id" class="form-control form-control-sm mb-3">
+                <option selected value="">- Nama -</option>
+                @foreach($users as $user)
+
+                  @if($user->role->name_role == "siswa")
+                   <option selected value="{{$user->id}}">{{$user->username}}</option>
+
+                  @endif
+                @endforeach
+
+              </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Tempat Tanggal Lahir</label>
             </div>
             <div class="col-lg-8">
               <div class="input-group date datepicker" id="datePickerExample">
-                <input type="text" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
+                <input type="date" name="ttl" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
               </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Nama Siswa</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Nama Siswa -</option>
-                <option value=""></option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kejadian Atau Prilaku</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Butir Sikap</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Butir Sikap -</option>
-                <option value="Tanggung Jawab">Tanggung Jawab</option>
-                <option value="Jujur">Jujur</option>
-                <option value="Gotong Royong">Gotong Royong</option>
-                <option value="Percaya Diri">Percaya Diri</option>
-                <option value="Disiplin">Disiplin</option>
-              </select>
             </div>
           </div>
           <div class="form-group row">
@@ -117,6 +121,18 @@
                 <option selected>- Pilih Jenis Kejadian -</option>
                 <option value="Positif (+)">Positif (+)</option>
                 <option value="Negatif (-)">Negatif (-)</option>
+              </select>
+            </div>
+          </div>
+           <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Jenis Kelamin</label>
+            </div>
+            <div class="col-lg-8">
+              <select name="jurusan" class="form-control form-control-sm mb-3">
+                <option selected value="">- Pilih Jenis Kejadian -</option>
+                <option value="L">Laki-Laki</option>
+                <option value="P">Perempuan</option>
               </select>
             </div>
           </div>

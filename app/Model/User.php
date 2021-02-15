@@ -17,10 +17,14 @@ class User extends Authenticatable
         'username',
         'password',
         'token',
-        'role_id', 
         'created_at',
         'updated_at',
         'deleted_at',
         'verification_token'
     ];
+
+    public function role() {
+        return $this->belongsTo('App\Model\Role');
+    }
+
 }

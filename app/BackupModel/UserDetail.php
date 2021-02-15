@@ -15,8 +15,14 @@ class UserDetail extends Model
         'last_login',
         'mobile_phone',
         'full_address',
+        'tanggal_lahir'
         'role_id',
         'status',
         'updated_at',
     ];
+
+
+    public function role () {
+        return $this->belongsTo('App\Model\Role');
+    }
 }
