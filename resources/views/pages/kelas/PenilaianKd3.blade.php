@@ -10,7 +10,7 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">RPP</li>
+    <li class="breadcrumb-item active" aria-current="page">PENILAIAN KETERAMPILAN </li>
   </ol>
 </nav>
 
@@ -29,16 +29,47 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Hari/Tanggal</th>
-                <th>Jam</th>
                 <th>Pertemuan</th>
-                <th>Materi</th>
-                <th>KI/KD</th>
-                <th>Tambahan</th>
+                <th>Kompetensi Dasar</th>
+                <th>Skema</th>
+                <th>Keterangan</th>
+                <th>Waktu</th>
+                <th>Hasil</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
+<?php $no = 1;?>
+<tr>
+@foreach($data as $data)     
+          <td><?php echo $no;?></td>
+            <td>{{$data->pertemuan}}</td>
+            <td>{{$data->kompetensi_dasar}}</td>
+            <td>{{$data->skema_penilaian}}</td>
+            <td>{{$data->instruksi}}</td>
+            <td>{{$data->mulai_pengerjaan}} - {{$data->finish_pengerjaan}}</td>
+            <td>{{$data->penilaian_harian}}</td>
+            <?php $no++;?>
+            <td class="flex ">
+                        <button data-toggle="modal" data-target="#UpdateData" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            edit
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('/kelas/penilaian_pengetahuan', $data->id)}}" onclick="deleteData('{{$data->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>
+            </tr>
+            @endforeach
+
             </tbody>
           </table>
         </div>
@@ -51,41 +82,27 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Buat Kelas RPP</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tugas Kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
+        <form method="post" action="{{ url('kelas/penilaian_pengetahuan')}}">
+        @csrf
           <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Tanggal (*)</label>
-            </div>
-            <div class="col-lg-8">
-              <div class="input-group date datepicker" id="datePickerExample">
-                <input type="text" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Jam Ke (*)</label>
+              <label class="col-form-label">Mulai Pengerjaan</label>
             </div>
             <div class="col-lg-3">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Jam Ke -</option>
-                <option value=""></option>
-              </select>
+              <input type="date" name="mulai_pengerjaan" class="form-control"  />
             </div>
             <div class="col-lg-2">
-              <label class="col-form-label">Sampai Ke (*)</label>
+              <label class="col-form-label">Finish Pengerjaan</label>
             </div>
             <div class="col-lg-3">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Jam Ke -</option>
-                <option value=""></option>
-              </select>
+              <input type="date"  name="finish_pengerjaan" class="form-control"   />
+              
             </div>
           </div>
           <div class="form-group row">
@@ -93,29 +110,37 @@
               <label class="col-form-label">Pertemuan Ke (*)</label>
             </div>
             <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
+              <select name="pertemuan" class="form-control form-control-sm mb-3">
                   <option selected>- Pilih Pertemuan -</option>
-                  <option value=""></option>
+                  <?php
+                    for ($x = 1; $x <= 4; $x++) { 
+                      echo "<option value='pertermuan $x'> pertemuan $x</option> ";
+                    }
+                  ?>
+                </select>
+            </div>
+          </div>
+          <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Skema</label>
+            </div>
+            <div class="col-lg-8">
+              <select name="skema_penilaian" class="form-control form-control-sm mb-3">
+                  <option selected value="">- Pilih Skema</option>
+                  <option selected value="tes tulis">Tes Tulis</option>
+                  <option selected value="tes lisan">Tes Lisan</option>
+                  <option selected value="penugasan">Penugasan</option>
+                  
+                  
                 </select>
             </div>
           </div>
           <div class="form-group mb-0 row">
             <div class="col-lg-3">
-              <label class="col-form-label">Bahasan Materi (*)</label>
+              <label class="col-form-label">Penilaian Harian</label>
             </div>
             <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kompetensi Inti (KI) (*)</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Kompetensi Inti (KI) -</option>
-                <option value=""></option>
-              </select>
+              <input class="form-control" type="number" maxlength="10" name="penilaian_harian" id="defaultconfig-3" placeholder="Type Something..">
             </div>
           </div>
           <div class="form-group mb-0 row">
@@ -123,21 +148,26 @@
               <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
             </div>
             <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Kompetensi Dasar (KD) -</option>
-                <option value=""></option>
+              <select name="kompetensi_dasar" class="form-control form-control-sm mb-3">
+                <option selected>- Pilih Kompetensi Inti (KI) -</option>
+                    @foreach($kompetensi_dasars as $row) 
+                      <option value="{{$row->id}}">
+                        {{$row->nama_kompetensi_dasar}}
+                      </option>
+                    @endforeach
               </select>
             </div>
           </div>
+          <!--  -->
           <div class="form-group mb-0 row">
             <div class="col-lg-3">
-              <label class="col-form-label">Tujuan Pembelajaran (Opsional)</label>
+              <label class="col-form-label">Keterangan</label>
             </div>
             <div class="col-lg-8">
-              <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
+              <textarea class="form-control" name="instruksi" id="simpleMdeExample" rows="10"></textarea>
             </div>
           </div>
-          <div class="form-group mb-0 row">
+          <!-- <div class="form-group mb-0 row">
             <div class="col-lg-3">
               <label class="col-form-label">Metode (Opsional)</label>
             </div>
@@ -168,16 +198,35 @@
             <div class="col-lg-8">
               <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
             </div>
-          </div>
-        </form>
+          </div> -->
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-success">Simpan</button>
+        <button type="submit" class="btn btn-success">Simpan</button>
       </div>
+      </form>
     </div>
   </div>
 </div>
+
+<script>
+function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+          event.submit();
+        }
+        
+    })
+  }
+</script>
 @endsection
 
 @push('plugin-scripts')
