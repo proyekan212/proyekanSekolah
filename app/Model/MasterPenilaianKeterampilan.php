@@ -2,7 +2,9 @@
 
 namespace App\Model;
 
+use Hamcrest\Type\IsNumeric;
 use Illuminate\Database\Eloquent\Model;
+
 
 class MasterPenilaianKeterampilan extends Model
 {
@@ -18,13 +20,15 @@ class MasterPenilaianKeterampilan extends Model
 
     public function kd () {
         $data = explode(',',strval($this->kompetensi_dasar));
-
-        $kompetensi_dasar = "";
+        
+        $kompetensi_dasar = array();
 
         foreach($data as $row) {
-
+            if(is_numeric($row)) {
+                array_push($kompetensi_dasar,KompetensiDasar::where('id', $row)->first());
+                
+            }
         }
-
         return $kompetensi_dasar;
         
     }

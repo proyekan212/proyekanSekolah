@@ -42,7 +42,9 @@
               @foreach($datas as $data)
                 <tr>
                   <td>@foreach($data->kd() as $row)
-                        {{$row}}
+                        <p>
+                        {{$row->nama_kompetensi_dasar}}
+                        </p>
                       @endforeach
                   </td>
                   <td></td>
