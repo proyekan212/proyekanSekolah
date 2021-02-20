@@ -40,7 +40,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
     Route::resource('/kelas/penilaian_pengetahuan', 'Kelas\PenilaianPengetahuanController');
     Route::resource('/kelas/penilaian_keterampilan', 'Kelas\PenilaianKeterampilanController');
-    Route::get('/kelas/penilaian_semester', 'Kelas\PenilaianSemesterController@RppGet');
+    Route::resource('/kelas/penilaian_semester', 'Kelas\PenilaianSemesterController');
+    Route::resource('/kelas/jurnal_guru', 'Kelas\JurnalGuruController');
 
 
     //PROFILE

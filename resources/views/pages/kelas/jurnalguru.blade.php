@@ -10,7 +10,7 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Penilaian Keterampilan</li>
+    <li class="breadcrumb-item active" aria-current="page">Jurnal Guru</li>
   </ol>
 </nav>
 
@@ -19,9 +19,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Penilaian Keterampilan Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
+          <h6 class="card-title mb-0">Jurnal Guru Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Rencana Pembelajaran</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Jurnal Guru</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -29,38 +29,20 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Skema Penilaian</th>
-                <th>Nama Penilaian</th>
-                <th>Kompetensi Dasar</th>
-                <th>Keterangan</th>
                 <th>Waktu</th>
-                <th>Hasil</th>
+                <th>Pertemuan Ke</th>
+                <th>Materi</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
-              @foreach($datas as $key => $data)
+                @foreach($jurnal_gurus as $index => $row)
+
                 <tr>
-                  <td>
-                    {{$key+1}}
-                  </td>
-                  <td>{{$data->skema}}</td>
-                  <td>{{$data->nama_penilaian}}</td>
-                  <td>
-                  @foreach($data->kd() as $row)
-                        <p>
-                        {{$row->nama_kompetensi_dasar}}
-                        </p>
-                      @endforeach
-                  </td>
-                  <td>
-                    {{$data->keterangan}}
-                  </td>
-                  <td>
-                    {{$data->mulai_pengerjaan}} - {{$data->finish_pengerjaan}}
-                  </td>
-                  <td></td>
-          
+                  <td>{{$index+1}}</td>
+                  <td>{{$row->waktu}}</td>
+                  <td>{{$row->pertemuan}}</td>
+                  <td>{{$row->materi}}</td>
                   <td class="flex ">
                         <button data-toggle="modal" data-target="#UpdateData" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
@@ -68,7 +50,7 @@
                           </span>
                         </button>
                 
-                      <form method="post" action="{{ url('/kelas/penilaian_keterampilan', $data->id)}}" onclick="deleteData('{{$data->id}}', this)" >
+                      <form method="post" action="{{ url('/kelas/jurnal_guru', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
@@ -77,8 +59,7 @@
                           </span>
                         </button>
                       </form>
-                    </td>
-                
+                </td>
                 </tr>
               @endforeach
             </tbody>
@@ -94,74 +75,44 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Penialain Keterampilan</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Jurnal Guru</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form method="post" action="{{ url('kelas/penilaian_keterampilan')}}">
+        <form method="post" action="{{ url('kelas/jurnal_guru')}}">
         @csrf
+        <input type="text" hidden name="kelas_id" value="1">
           <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Mulai Pengerjaan</label>
+              <label class="col-form-label">Tanggal</label>
             </div>
-            <div class="col-lg-3">
-              <input type="date" name="mulai_pengerjaan" class="form-control"  />
-            </div>
-            <div class="col-lg-2">
-              <label class="col-form-label">Finish Pengerjaan</label>
-            </div>
-            <div class="col-lg-3">
-              <input type="date"  name="finish_pengerjaan" class="form-control"   />
-              
+            <div class="col-lg-8">
+              <input type="date" name="waktu" class="form-control"  />
             </div>
           </div>
           <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Nama Penilaian</label>
+              <label class="col-form-label">Pertemuan ke (*)</label>
             </div>
             <div class="col-lg-8">
-             <input type="text" class="form-control" name="nama_penilaian" placeholder="Nama Penilaian, Contoh: Praktik Present">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Skema</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="skema_penilaian" class="form-control form-control-sm mb-3">
-                  <option selected value="">- Pilih Skema</option>
-                  <option selected value="tes tulis">Tes Tulis</option>
-                  <option selected value="tes lisan">Tes Lisan</option>
-                  <option selected value="penugasan">Penugasan</option>
-                  
-                  
+            <select name="pertemuan" class="form-control form-control-sm mb-3">
+                  <option selected>- Pilih Pertemuan -</option>
+                  <?php
+                    for ($x = 1; $x <= 4; $x++) { 
+                      echo "<option value='pertermuan $x'> pertemuan $x</option> ";
+                    }
+                  ?>
                 </select>
             </div>
           </div>
           <div class="form-group mb-0 row">
             <div class="col-lg-3">
-              <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
+              <label class="col-form-label">Materi</label>
             </div>
             <div class="col-lg-8">
-                @foreach($kompetensi_dasar as $data) 
-                    <p class="flex items-center mb-1 md:mb-2">
-                      <input type="checkbox" name="kompetensi_dasar[]" value="{{$data->id}}">
-                      <span class=" capitalize pl-2 text-xs lg:text-sm">
-                      {{$data->nama_kompetensi_dasar}}
-                      </span>
-                    </p>   
-                @endforeach
-            </div>
-          </div>
-          <!--  -->
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Keterangan</label>
-            </div>
-            <div class="col-lg-8">
-              <textarea class="form-control" name="keterangan" id="simpleMdeExample" rows="10"></textarea>
+              <textarea class="form-control" name="materi" id="simpleMdeExample" rows="10"></textarea>
             </div>
           </div>
           <!-- <div class="form-group mb-0 row">

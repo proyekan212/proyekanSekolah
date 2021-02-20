@@ -39,12 +39,26 @@
                 <th>NAMA</th>
                 <th>L/P</th>
                 <th>TTL</th>
-                <th>KELAS</th>
-                <th>STATUS</th>
-                <th>TERAKHIR AKTIF</th>
+                <th>Nilai Pas</th>
+                <th>Nilai Akhir</th>
+              
               </tr>
             </thead>
             <tbody>
+            
+              @foreach($siswa as $index => $row) 
+                
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$row->photo}}</td>
+                  <td>{{$row->nisn_or_nip}}</td>
+                  <td class="capitalize">{{$row->name}}</td>
+                  <td>{{$row->jenis_kelamin}}</td>
+                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
+                  <td>0</td>
+                  <td>0</td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>

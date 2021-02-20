@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Kelas;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\User;
-
+use App\Model\UserDetail;
 
 class DaftarSiswaKelasController extends Controller
 {
@@ -16,9 +16,12 @@ class DaftarSiswaKelasController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+
+        $siswa = UserDetail::with(['role' => function($query) {
+            $query->where('name_role', '=', 'siswa');
+        }])->get();
         return view('pages.kelas.daftarsiswakelas',[
-            'users' => $users,
+            'siswa' => $siswa,
         ]);   
      }
 

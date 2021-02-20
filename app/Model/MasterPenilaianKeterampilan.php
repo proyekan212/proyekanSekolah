@@ -14,6 +14,7 @@ class MasterPenilaianKeterampilan extends Model
         'skema',
         'kompetensi_dasar',
         'keterangan',
+        'hapus',
         'mulai_pengerjaan',
         'finish_pengerjaan'
     ];

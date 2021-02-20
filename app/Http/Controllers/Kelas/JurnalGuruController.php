@@ -3,28 +3,22 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
-use App\Model\UserDetail;
+use App\Model\JurnalGuru;
 use Illuminate\Http\Request;
 
 
-class PenilaianSemesterController extends Controller
+class JurnalGuruController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \IlluminatUserDetail::all()e\Http\Response
+     * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-
-        $siswa = UserDetail::with(['role' => function($query) {
-            $query->where('name_role', '=', 'siswa');
-        }])->get();
-        
-        return view('pages.kelas.PenilaianSemester', [
-            'siswa'=> $siswa
+    {
+        return view('pages.kelas.jurnalguru',[
+            'jurnal_gurus' => JurnalGuru::where('hapus', '0')->get()
         ]
-        
     );
     }
 
@@ -46,7 +40,13 @@ class PenilaianSemesterController extends Controller
      */
     public function store(Request $request)
     {
-        //
+       $data = $request->all();
+
+       JurnalGuru::create(
+           $data
+       );
+
+       return redirect('kelas/jurnal_guru');
     }
 
     /**
@@ -91,6 +91,8 @@ class PenilaianSemesterController extends Controller
      */
     public function destroy($id)
     {
-        //
+        JurnalGuru::where('id', $id)->update(['hapus'=> 1]);
+
+        return redirect('kelas/jurnal_guru');
     }
 }

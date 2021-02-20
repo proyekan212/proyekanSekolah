@@ -17,15 +17,18 @@ class CreateUserDetailsTable extends Migration
             $table->bigIncrements('id');
             $table->string('photo');
             $table->string('name');
+            $table->string('jenis_kelamin');
+            $table->string('tempat_lahir');
+            $table->date('tanggal_lahir');
             $table->string('nisn_or_nip');
             $table->string('email');
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('role_id');
             $table->timestamp('last_login');
-            
+            $table->integer('kelas_id');
             $table->string('mobile_phone');
             $table->string('full_address');
-            $table->integer('status');
+            $table->integer('status')->default(0);
             $table->timestamps();
             // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');

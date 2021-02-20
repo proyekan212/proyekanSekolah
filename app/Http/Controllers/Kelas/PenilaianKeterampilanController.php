@@ -21,7 +21,7 @@ class PenilaianKeterampilanController extends Controller
         
         return view('pages.kelas.PenilaianKd4', [
             'kompetensi_dasar'=> $kompetensi_dasar,
-            'datas'=>MasterPenilaianKeterampilan::all()
+            'datas'=>MasterPenilaianKeterampilan::where('hapus', 0)->get()
         ]);
     }
 
@@ -59,6 +59,8 @@ class PenilaianKeterampilanController extends Controller
             'mulai_pengerjaan' => $request->mulai_pengerjaan,
             'finish_pengerjaan' => $request->finish_pengerjaan
         ]);
+
+        return redirect('kelas/penilaian_keterampilan');
 
     }
 
@@ -104,6 +106,7 @@ class PenilaianKeterampilanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MasterPenilaianKeterampilan::where('id', $id)->update(['hapus' => 1]);
+        return redirect('kelas/penilaian_keterampilan');
     }
 }

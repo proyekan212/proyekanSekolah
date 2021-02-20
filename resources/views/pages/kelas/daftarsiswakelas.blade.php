@@ -9,14 +9,14 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Kejadian / Jurnal</li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar siswa kelas</li>
   </ol>
 </nav>
 
-<div class="alert alert-primary " role="alert">
+<!-- <div class="alert alert-primary " role="alert">
   <h4 class="alert-heading">Info!</h4>
   <p>Jurnal oleh guru mata pelajaran dibuat untuk seluruh peserta didik yang mengikuti mata pelajarannya, setiap kejadian terhadap siswa di dalam kelas mata pelajaran yang Anda ampu dapat dicatat dalam jurnal guru agar dapat dimonitor Wali Kelas dan Guru BK</p>
-</div>
+</div> -->
 
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
@@ -26,7 +26,7 @@
           <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
-            <button type="button" class="btn btn-outline-danger" onclick="showSwal('passing-parameter-execute-cancel')">Cetak Excel</button>
+            <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -45,6 +45,30 @@
               </tr>
             </thead>
             <tbody>
+              @foreach($siswa as $index => $row)
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$row->photo}}</td>
+                  <td>{{$row->nisn_or_nip}}</td>
+                  <td class="capitalize">{{$row->name}}</td>
+                  <td>{{$row->jenis_kelamin}}</td>
+                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
+                  <td>{{$row->kelas->kelas}}</td>
+                  <td class="capitalize">@if($row->status == 0)
+                      <span class="text-danger">
+                        offline
+                      </span>
+                      @else 
+                      <span class="text-success">
+                        Online
+                      </span>
+
+                      @endif
+                  </td>
+                  <td>
+                  tergabung</td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -57,98 +81,50 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Jurnal Guru</h5>
+        <h5 class="modal-title capitalize" id="exampleModalLabel">sinkronkan siswa ke dalam kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form>
-        <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Foto</label>
-            </div>
-            <div class="col-lg-8">
-
-              <input type="file" class="form-control" name="photo">
-              <!-- <div class="input-group date datepicker" id="datePickerExample">
-                <input type="text" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
-              </div> -->
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">NISN</label>
-            </div>
-            <div class="col-lg-8">
-              <input type="text" class="form-control" placeholder="NISN">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Nama</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="user_id" class="form-control form-control-sm mb-3">
-                <option selected value="">- Nama -</option>
-                @foreach($users as $user)
-
-                  @if($user->role->name_role == "siswa")
-                   <option selected value="{{$user->id}}">{{$user->username}}</option>
-
-                  @endif
-                @endforeach
-
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Tempat Tanggal Lahir</label>
-            </div>
-            <div class="col-lg-8">
-              <div class="input-group date datepicker" id="datePickerExample">
-                <input type="date" name="ttl" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Positif/Negatif</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Jenis Kejadian -</option>
-                <option value="Positif (+)">Positif (+)</option>
-                <option value="Negatif (-)">Negatif (-)</option>
-              </select>
-            </div>
-          </div>
-           <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Jenis Kelamin</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected value="">- Pilih Jenis Kejadian -</option>
-                <option value="L">Laki-Laki</option>
-                <option value="P">Perempuan</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Tindak Lanjut</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-        </form>
+      <div class="table-responsive">
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>FOTO</th>
+                <th>NISN</th>
+                <th>NAMA</th>
+                <th>L/P</th>
+                <th>TTL</th>
+                <th>KELAS</th>
+                <th>ROMBEL</th>
+                <th>AKSI</th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($siswa as $index => $row)
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$row->photo}}</td>
+                  <td>{{$row->nisn_or_nip}}</td>
+                  <td class="capitalize">{{$row->name}}</td>
+                  <td>{{$row->jenis_kelamin}}</td>
+                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
+                  <td>{{$row->kelas->kelas}}</td>
+                  <td class="uppercase">
+                    IPA X IPA 1
+                  </td>
+                  <td></td>
+                </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-success">Simpan Kejadian</button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
+        <button type="button" class="btn btn-primary">Sinkronkan</button>
       </div>
     </div>
   </div>
