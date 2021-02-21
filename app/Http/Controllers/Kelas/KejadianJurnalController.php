@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kelas;
 use App\Http\Controllers\Controller;
 use App\Model\MasterKejadianJurnal;
 use App\Model\User;
+use App\Model\UserDetail;
 use Illuminate\Http\Request;
 
 class KejadianJurnalController extends Controller
@@ -16,10 +17,12 @@ class KejadianJurnalController extends Controller
      */
     public function index()
     {
-        $user = User::all();
+        $siswa = UserDetail::with(['role' => function($query) {
+            $query->where('name_role', '=', 'siswa');
+        }])->get();
         $datas = MasterKejadianJurnal::where('hapus', 0)->get();
         return view('pages.kelas.kejadianjurnal', [
-            "users"=> $user,
+            "users"=> $siswa,
             "datas" => $datas
         ]);
     }

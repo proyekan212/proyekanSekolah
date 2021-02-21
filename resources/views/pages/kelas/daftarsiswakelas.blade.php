@@ -48,25 +48,27 @@
               @foreach($siswa as $index => $row)
                 <tr>
                   <td>{{$index+1}}</td>
-                  <td>{{$row->photo}}</td>
-                  <td>{{$row->nisn_or_nip}}</td>
-                  <td class="capitalize">{{$row->name}}</td>
-                  <td>{{$row->jenis_kelamin}}</td>
-                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
-                  <td>{{$row->kelas->kelas}}</td>
-                  <td class="capitalize">@if($row->status == 0)
-                      <span class="text-danger">
-                        offline
-                      </span>
-                      @else 
-                      <span class="text-success">
-                        Online
-                      </span>
+                  <td>{{$row->user->photo}}</td>
+                  <td>{{$row->user->nisn_or_nip}}</td>
+                  <td>{{$row->user->name}}</td>
+                  <td class="capitalize">{{$row->user->jenis_kelamin}}</td>
+                  <td class=  "capitalize">{{$row->user->tempat_lahir}}, {{$row->user->tanggal_lahir}}</td>
 
+                  <td>{{$row->kelas->kelas}} {{$row->rombel->name}}</td>
+                  <td>@if($row->user->status == 0)
+                        <span class="text-red-400 capitalize">
+                          offline
+                        </span>
+                      @else
+
+                        <span class="text-green-600 capitalize">
+                          online
+                        </span>
                       @endif
                   </td>
-                  <td>
-                  tergabung</td>
+                  
+                <td></td>
+                  
                 </tr>
               @endforeach
             </tbody>
@@ -87,41 +89,52 @@
         </button>
       </div>
       <div class="modal-body">
-      <div class="table-responsive">
-          <table id="dataTableExample" class="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>FOTO</th>
-                <th>NISN</th>
-                <th>NAMA</th>
-                <th>L/P</th>
-                <th>TTL</th>
-                <th>KELAS</th>
-                <th>ROMBEL</th>
-                <th>AKSI</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($siswa as $index => $row)
+        <div class="table-responsive">
+            <table id="dataTableExample" class="table">
+              <thead>
                 <tr>
-                  <td>{{$index+1}}</td>
-                  <td>{{$row->photo}}</td>
-                  <td>{{$row->nisn_or_nip}}</td>
-                  <td class="capitalize">{{$row->name}}</td>
-                  <td>{{$row->jenis_kelamin}}</td>
-                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
-                  <td>{{$row->kelas->kelas}}</td>
-                  <td class="uppercase">
-                    IPA X IPA 1
-                  </td>
-                  <td></td>
+                  <th>No</th>
+                  <th>NISN</th>
+                  <th>NAMA</th>
+                  <th>L/P</th>
+                  <th>KELAS</th>
+                  <th>ROMBEL</th>
+                  <th>AKSI</th>
                 </tr>
-              @endforeach
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                @foreach($siswa as $key => $row) 
+                  <tr>
+                    <td>
+                      {{$key+1}}
+                    </td>
+                    <td>{{$row->user->nisn_or_nip}}</td>
+                    <td>{{$row->user->name}}</td>
+                    <td class="capitalize">
+                      {{$row->user->jenis_kelamin}}
+                    </td>
+                    <td>
+                      {{$row->kelas->kelas}}
+                    </td>
+                    <td>
+                      {{$row->rombel->jurusan->jurusan}} {{$row->kelas->kode}} {{$row->rombel->name}} 
+                    </td>
+                    <td>
+                      <span class="bg-green-500 text-white text-xs px-6 py-2 rounded-2xl"> 
+                        <i class="fas fa-check">
+                        </i>
+
+                        <span class="capitalize">
+                          tergabung
+                        </span>
+                      </span> 
+                    </td>                 
+                  </tr>
+                @endforeach
+              </tbody>
+            </table>
+          </div>
         </div>
-      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
         <button type="button" class="btn btn-primary">Sinkronkan</button>

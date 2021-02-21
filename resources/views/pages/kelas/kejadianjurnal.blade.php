@@ -23,7 +23,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Jurnal Guru Pada MIPA X-MIPA-1_MIPA Biologi</h6>
+          <h6 class="card-title mb-0">Kejadian Jurnal Siswa Pada MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Kejadian</button>
             <button type="button" class="btn btn-outline-danger" onclick="showSwal('passing-parameter-execute-cancel')">Cetak Excel</button>
@@ -49,7 +49,7 @@
                   <tr>
                     <td>{{$key+1}}</td>
                     <td>{{$data->waktu}}</td>
-                    <td>{{$data->siswa->username}}</td>
+                    <td>{{$data->siswa->name}}</td>
                     <td>{{$data->kejadian}}</td>
                     <td>{{$data->butir_sikap}}</td>
                     <td>{{$data->tindakan}}</td>
@@ -101,9 +101,9 @@
               <label class="col-form-label">Waktu</label>
             </div>
             <div class="col-lg-8">
-              <div class="input-group date datepicker" id="datePickerExample">
-                <input type="date" name="waktu" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
-              </div>
+              
+                <input type="date" name="waktu" class="form-control">
+              
             </div>
           </div>
           <div class="form-group row">
@@ -114,9 +114,9 @@
               <select name="user_id" class="form-control form-control-sm mb-3">
                 <option selected>- Nama Siswa -</option>
                 @foreach ( $users as $user )
-                  @if($user->role->name_role == 'siswa' )
-                   <option value="{{$user->id}}">{{ $user->username}}</option>
-                  @endif
+                 <option value="{{$user->id}}">
+                  {{$user->name}}
+                 </option>
                 @endforeach
               </select>
             </div>
@@ -180,7 +180,7 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Jurnal Guru</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Form Kejadian Jurnal Siswa</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>

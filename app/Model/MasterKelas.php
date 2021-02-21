@@ -13,4 +13,8 @@ class MasterKelas extends Model
         'kelas',
         'id'
     ];
+
+    public function daftar_kelas() {
+        return $this->belongsToMany('App\Model\DaftarKelas');
+    }
 }

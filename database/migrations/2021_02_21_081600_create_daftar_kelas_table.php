@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterKompetensiIntisTable extends Migration
+class CreateDaftarKelasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,11 @@ class CreateMasterKompetensiIntisTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_kompetensi_intis', function (Blueprint $table) {
+        Schema::create('daftar_kelas', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->integer('user_id');
+            $table->integer('kelas_id');
+            $table->integer('rombel_id');
             $table->timestamps();
         });
     }
@@ -27,6 +29,6 @@ class CreateMasterKompetensiIntisTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_kompetensi_intis');
+        Schema::dropIfExists('daftar_kelas');
     }
 }

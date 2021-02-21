@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kelas', 'Kelas\KelasController@KelasGet');
     Route::get('/kelas/video_conference', 'Kelas\VideoConferenceController@VideoConferenceGet');
     Route::get('/kelas/absensi_kelas', 'Kelas\AbsensiKelasController@AbsensiKelasGet');
-    Route::get('/kelas/kompetensi_dasar', 'Kelas\KompetensiDasarController@KompetensiDasarGet');
+    Route::resource('/kelas/kompetensi_dasar', 'Kelas\KompetensiDasarController');
     Route::get('/kelas/rpp', 'Kelas\RppController@RppGet');
     Route::resource('/kelas/kejadian_jurnal', 'Kelas\KejadianJurnalController');
     Route::get('/kelas/materi_bahan_ajar', 'Kelas\MateriBahanAjarController@MateriBahanAjarGet');

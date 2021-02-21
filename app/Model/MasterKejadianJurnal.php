@@ -18,7 +18,7 @@ class MasterKejadianJurnal extends Model
     ];
 
     public function siswa() {
-        return $this->hasOne('App\Model\User', 'id', 'user_id');
+        return $this->belongsTo('App\Model\UserDetail', 'user_id', 'id');
     }
 
 }
