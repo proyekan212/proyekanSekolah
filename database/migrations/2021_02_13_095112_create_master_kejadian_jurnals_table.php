@@ -16,7 +16,6 @@ class CreateMasterKejadianJurnalsTable extends Migration
         Schema::create('master_kejadian_jurnals', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('waktu');
             $table->text('kejadian');
             $table->string('butir_sikap');

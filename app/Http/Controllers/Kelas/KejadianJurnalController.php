@@ -74,7 +74,19 @@ class KejadianJurnalController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kejadian = MasterKejadianJurnal::all()->where('id',$id);
+        // dd($kejadian);
+        $siswaCurrent = UserDetail::with(['role' => function($query) {
+            $query->where('name_role', '=', 'siswa');
+        }])->where('id','=',$id)->get();
+        $siswa = UserDetail::with(['role' => function($query) {
+            $query->where('name_role', '=', 'siswa');
+        }])->where('id','!=',$id)->get();
+        return view('pages.kelas.kejadianjurnaledit', [
+            "users"=> $siswa,
+            "usersCurrent" => $siswaCurrent,
+            "kejadians" => $kejadian          
+        ]);
     }
 
     /**
@@ -86,7 +98,14 @@ class KejadianJurnalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+       
+       MasterKejadianJurnal::where('id','=',$id)(
+           $data
+       )->update($id);
+
+       return redirect('kelas/kejadian_jurnal');
     }
 
     /**

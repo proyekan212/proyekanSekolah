@@ -55,9 +55,11 @@
                     <td>{{$data->tindakan}}</td>
                     <td>{{$data->tindak_lanjut}}</td>
                     <td class="flex ">
-                        <button data-toggle="modal" data-target="#UpdateData" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
+                            <a href="{{ url('kelas/kejadian_jurnal/edit', $data->id)}}">
                             edit
+                            </a>
                           </span>
                         </button>
                 
@@ -176,98 +178,6 @@
   </div>
 </div>
 
-<div class="modal fade" id="UpdateData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Kejadian Jurnal Siswa</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form method="POST" action="{{ url('kelas/kejadian_jurnal') }}">
-      <div class="modal-body">
-       
-          @csrf
-        <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Waktu</label>
-            </div>
-            <div class="col-lg-8">
-              <div class="input-group date datepicker" id="datePickerExample">
-                <input type="date" name="waktu" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
-              </div>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Nama Siswa</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="user_id" class="form-control form-control-sm mb-3">
-                <option selected>- Nama Siswa -</option>
-                @foreach ( $users as $user )
-                  @if($user->role->name_role == 'siswa' )
-                   <option value="{{$user->id}}">{{ $user->username}}</option>
-                  @endif
-                @endforeach
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kejadian Atau Prilaku</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" name="kejadian" maxlength="10" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Butir Sikap</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="butir_sikap" class="form-control form-control-sm mb-3">
-                <option selected value="">- Butir Sikap -</option>
-                <option value="Tanggung Jawab">Tanggung Jawab</option>
-                <option value="Jujur">Jujur</option>
-                <option value="Gotong Royong">Gotong Royong</option>
-                <option value="Percaya Diri">Percaya Diri</option>
-                <option value="Disiplin">Disiplin</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Positif/Negatif</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="tindakan" class="form-control form-control-sm mb-3">
-                <option selected value="">- Pilih Jenis Kejadian -</option>
-                <option value="Positif (+)">Positif (+)</option>
-                <option value="Negatif (-)">Negatif (-)</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Tindak Lanjut</label>
-            </div>
-            <div class="col-lg-8">
-              <textarea class="form-control" name="tindak_lanjut" id="defaultconfig-3" rows="3" type="text" placeholder="Type Something.."> 
-              </textarea>
-            </div>
-          </div>
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-success">Simpan Kejadian</button>
-      </div>
-      </form>
-    </div>
-  </div>
-</div>
 <script type="text/javascript">
   function editData(id){
     console.log(id);
