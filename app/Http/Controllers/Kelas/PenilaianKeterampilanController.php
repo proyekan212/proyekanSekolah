@@ -17,7 +17,7 @@ class PenilaianKeterampilanController extends Controller
      */
     public function index()
     {
-        $kompetensi_dasar = KompetensiDasar::all();
+        $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
         
         return view('pages.kelas.PenilaianKd4', [
             'kompetensi_dasar'=> $kompetensi_dasar,

@@ -17,7 +17,7 @@ class CreateMasterPenilaianPengetahuansTable extends Migration
             $table->id();
             $table->string('pertemuan');
             $table->string('skema_penilaian');
-            $table->integer('kompetensi_dasar');
+            $table->integer('kompetensi_dasar_id');
             $table->integer('penilaian_harian');
             $table->text('instruksi');
             $table->smallInteger('hapus')->default(0);

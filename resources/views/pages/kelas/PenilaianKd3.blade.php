@@ -10,7 +10,7 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">PENILAIAN KETERAMPILAN </li>
+    <li class="breadcrumb-item active" aria-current="page">PENILAIAN Pengetahuan </li>
   </ol>
 </nav>
 
@@ -19,7 +19,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Penilaian Keterampilan Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
+          <h6 class="card-title mb-0">Penilaian Pengetahuan Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Rencana Pembelajaran</button>
           </div>
@@ -44,7 +44,7 @@
 @foreach($data as $data)     
           <td><?php echo $no;?></td>
             <td>{{$data->pertemuan}}</td>
-            <td>{{$data->kompetensi_dasar}}</td>
+            <td><b>{{$data->kompetensi_dasar->kompetensi_inti->kode}}.{{$data->kompetensi_dasar->id}}</b> {{$data->kompetensi_dasar->nama_kompetensi_dasar}}</td>
             <td>{{$data->skema_penilaian}}</td>
             <td>{{$data->instruksi}}</td>
             <td>{{$data->mulai_pengerjaan}} - {{$data->finish_pengerjaan}}</td>
@@ -148,12 +148,15 @@
               <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
             </div>
             <div class="col-lg-8">
-              <select name="kompetensi_dasar" class="form-control form-control-sm mb-3">
+              <select name="kompetensi_dasar_id" class="form-control form-control-sm mb-3">
                 <option selected>- Pilih Kompetensi Inti (KI) -</option>
-                    @foreach($kompetensi_dasars as $row) 
+                    @foreach($kompetensi_dasars as $index => $row) 
+
+                      @if($row->kompetensi_inti->name == 'pengetahuan')
                       <option value="{{$row->id}}">
-                        {{$row->nama_kompetensi_dasar}}
+                        {{$row->kompetensi_inti->kode}}.{{$index+1}} {{$row->nama_kompetensi_dasar}}
                       </option>
+                      @endif
                     @endforeach
               </select>
             </div>

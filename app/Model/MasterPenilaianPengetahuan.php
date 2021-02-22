@@ -13,10 +13,16 @@ class MasterPenilaianPengetahuan extends Model
         'hapus',
         'pertemuan',
         'skema_penilaian',
-        'kompetensi_dasar',
+        'kompetensi_dasar_id',
         'penilaian_harian',
         'instruksi',
         'mulai_pengerjaan',
         'finish_pengerjaan'
     ];
+
+    public function kompetensi_dasar () {
+        return $this->belongsTo('App\Model\KompetensiDasar', 'kompetensi_dasar_id', 'id');
+    }
+
+    
 }

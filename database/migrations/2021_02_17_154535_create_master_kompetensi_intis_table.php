@@ -16,6 +16,7 @@ class CreateMasterKompetensiIntisTable extends Migration
         Schema::create('master_kompetensi_intis', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('kode');
             $table->timestamps();
         });
     }

@@ -10,7 +10,8 @@ class MasterKompetensiInti extends Model
 
     protected $fillable = [
         'id',
-        'name'
+        'name',
+        'kode'
 
     ];
 

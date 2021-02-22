@@ -10,16 +10,17 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Penilaian Keterampilan</li>
+    <li class="breadcrumb-item active" aria-current="page">Penilaian keterampilan</li>
   </ol>
 </nav>
 
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
+  {{$kompetensi_dasar}}
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Penilaian Keterampilan Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
+          <h6 class="card-title mb-0">Penilaian keterampilan Kelas di MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Rencana Pembelajaran</button>
           </div>
@@ -94,7 +95,7 @@
   <div class="modal-dialog modal-xl" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Penialain Keterampilan</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Penialain keterampilan</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
