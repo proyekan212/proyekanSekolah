@@ -5,15 +5,40 @@ namespace App\Http\Controllers\Kelas;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
+use App\Model\MasterRpp;
 use DB;
 class RppController extends BaseController
 {
-    public function RppGet(Request $request){
-        return view('pages.kelas.rpp');
+    public function index(Request $request){
+
+        $rpp = MasterRpp::all();
+        return view('pages.kelas.rpp', [
+            'rpp'=> $rpp
+        ]);
     }
 
-    public function __construct()
-    {
-        $this->middleware('auth');
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
+
+    public function store(Request $request) {
+        // $request->validate([
+        //     'file' => 'required|mimes:pdf,xlx',
+        // ]);
+        $file = $request->file('file');
+        $filename = time().'.'.$file->getClientOriginalName();
+        $file_formatted = str_replace(' ', '_', $filename);
+        
+        $file->move('rpp', $file_formatted);
+        MasterRpp::create([
+            'name' => $request->input('name'),
+            'name_file' => $file_formatted,
+            'created_at' => time(),
+            'kelas_id' => 1
+        ]);
+
+        return redirect('kelas/rpp');
+        
     }
 }

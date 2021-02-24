@@ -33,7 +33,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/kelas/video_conference', 'Kelas\VideoConferenceController@VideoConferenceGet');
     Route::get('/kelas/absensi_kelas', 'Kelas\AbsensiKelasController@AbsensiKelasGet');
     Route::resource('/kelas/kompetensi_dasar', 'Kelas\KompetensiDasarController');
-    Route::get('/kelas/rpp', 'Kelas\RppController@RppGet');
+    Route::resource('/kelas/rpp', 'Kelas\RppController');
     Route::resource('/kelas/kejadian_jurnal', 'Kelas\KejadianJurnalController');
     Route::get('/kelas/kejadian_jurnal/edit/{id}', 'Kelas\KejadianJurnalController@edit');
     Route::post('/kelas/kejadian_jurnal/update/{id}', 'Kelas\KejadianJurnalController@store');

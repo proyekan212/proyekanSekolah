@@ -29,16 +29,24 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>Hari/Tanggal</th>
-                <th>Jam</th>
-                <th>Pertemuan</th>
-                <th>Materi</th>
-                <th>KI/KD</th>
-                <th>Tambahan</th>
+                <th>Name</th>
+                <th>File</th>
                 <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
+              @foreach($rpp as $index => $row)
+                <tr>
+                  <td>{{$index+1}}</td>
+                  <td>{{$row->name}}</td>
+                  <td>
+                    <a href="{{ url('/rpp/'.$row->name_file)}}">
+                    <img src="{{ url('/rpp/'.$row->name_file)}}" alt="">
+                    </a>
+                  </td>
+                  <td></td>
+                </tr>
+              @endforeach
             </tbody>
           </table>
         </div>
@@ -57,124 +65,35 @@
         </button>
       </div>
       <div class="modal-body">
-        <form>
-          <div class="form-group row">
+        <form enctype="multipart/form-data" action="{{ url('kelas/rpp')}}" method="post">
+        @csrf
+        <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Tanggal (*)</label>
+              <label class="col-form-label">Nama</label>
             </div>
             <div class="col-lg-8">
-              <div class="input-group date datepicker" id="datePickerExample">
-                <input type="text" class="form-control"><span class="input-group-addon"><i data-feather="calendar"></i></span>
+              <div class="form-group" id="">
+                <input type="text" class="form-control" name="name">
               </div>
             </div>
           </div>
           <div class="form-group row">
             <div class="col-lg-3">
-              <label class="col-form-label">Jam Ke (*)</label>
-            </div>
-            <div class="col-lg-3">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Jam Ke -</option>
-                <option value=""></option>
-              </select>
-            </div>
-            <div class="col-lg-2">
-              <label class="col-form-label">Sampai Ke (*)</label>
-            </div>
-            <div class="col-lg-3">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Jam Ke -</option>
-                <option value=""></option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Pertemuan Ke (*)</label>
+              <label class="col-form-label">File</label>
             </div>
             <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                  <option selected>- Pilih Pertemuan -</option>
-                  <option value=""></option>
-                </select>
+              <div class="form-group" id="">
+                <input type="file" class="form-control" name="file">
+              </div>
             </div>
           </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Bahasan Materi (*)</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kompetensi Inti (KI) (*)</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Kompetensi Inti (KI) -</option>
-                <option value=""></option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
-            </div>
-            <div class="col-lg-8">
-              <select name="jurusan" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Kompetensi Dasar (KD) -</option>
-                <option value=""></option>
-              </select>
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Tujuan Pembelajaran (Opsional)</label>
-            </div>
-            <div class="col-lg-8">
-              <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Metode (Opsional)</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Media/Sumber Belajar (Opsional)</label>
-            </div>
-            <div class="col-lg-8">
-              <input class="form-control" maxlength="10" name="defaultconfig-3" id="defaultconfig-3" type="text" placeholder="Type Something..">
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Kegiatan Pembelajaran (Opsional)</label>
-            </div>
-            <div class="col-lg-8">
-              <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
-            </div>
-          </div>
-          <div class="form-group mb-0 row">
-            <div class="col-lg-3">
-              <label class="col-form-label">Penilaian (Opsional)</label>
-            </div>
-            <div class="col-lg-8">
-              <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
-            </div>
-          </div>
-        </form>
+        
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-success">Simpan</button>
+        <button type="submit" class="btn btn-success">Simpan</button>
       </div>
+      </form>
     </div>
   </div>
 </div>

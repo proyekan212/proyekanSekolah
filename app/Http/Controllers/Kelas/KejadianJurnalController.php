@@ -74,18 +74,14 @@ class KejadianJurnalController extends Controller
      */
     public function edit($id)
     {
-        $kejadian = MasterKejadianJurnal::all()->where('id',$id);
-        // dd($kejadian);
-        $siswaCurrent = UserDetail::with(['role' => function($query) {
-            $query->where('name_role', '=', 'siswa');
-        }])->where('id','=',$id)->get();
-        $siswa = UserDetail::with(['role' => function($query) {
-            $query->where('name_role', '=', 'siswa');
-        }])->where('id','!=',$id)->get();
+        $data = MasterKejadianJurnal::where('id', $id)->first();
+        $siswa = UserDetail::with(['role' => function($q) {
+            $q->where('name_role', '=', 'siswa');
+        }])->get();
+
         return view('pages.kelas.kejadianjurnaledit', [
-            "users"=> $siswa,
-            "usersCurrent" => $siswaCurrent,
-            "kejadians" => $kejadian          
+            'data'=> $data,
+            'siswa' => $siswa
         ]);
     }
 
@@ -98,14 +94,24 @@ class KejadianJurnalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->all();
+        
+        $data = [
+           
+        ];
 
        
-       MasterKejadianJurnal::where('id','=',$id)(
-           $data
-       )->update($id);
 
-       return redirect('kelas/kejadian_jurnal');
+       
+        $input = MasterKejadianJurnal::where('id', $id)->update([
+            'waktu'=>$request->input('waktu'),
+            'user_id' => $request->input('user_id'),
+            'kejadian' => $request->input('kejadian'),
+            'butir_sikap' => $request->input('butir_sikap'),
+            'tindakan' => $request->input('tindakan'),
+            'tindak_lanjut' => $request->input('tindak_lanjut')
+        ]);
+     
+        return redirect('kelas/kejadian_jurnal');       
     }
 
     /**
