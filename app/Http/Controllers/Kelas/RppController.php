@@ -11,7 +11,7 @@ class RppController extends BaseController
 {
     public function index(Request $request){
 
-        $rpp = MasterRpp::all();
+        $rpp = MasterRpp::where('hapus', 0)->get();
         return view('pages.kelas.rpp', [
             'rpp'=> $rpp
         ]);
@@ -40,5 +40,14 @@ class RppController extends BaseController
 
         return redirect('kelas/rpp');
         
+    }
+
+
+    public function destroy($id) {
+       MasterRpp::where('id', $id)->update([
+           'hapus'=> 1
+       ]);
+
+       return redirect('kelas/rpp');
     }
 }

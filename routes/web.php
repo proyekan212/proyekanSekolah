@@ -37,7 +37,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/kelas/kejadian_jurnal', 'Kelas\KejadianJurnalController');
     Route::get('/kelas/kejadian_jurnal/edit/{id}', 'Kelas\KejadianJurnalController@edit');
     Route::post('/kelas/kejadian_jurnal/update/{id}', 'Kelas\KejadianJurnalController@store');
-    Route::get('/kelas/materi_bahan_ajar', 'Kelas\MateriBahanAjarController@MateriBahanAjarGet');
+    Route::resource('/kelas/materi_bahan_ajar', 'Kelas\MateriBahanAjarController');
     Route::resource('/kelas/daftar_siswa_kelas', 'Kelas\DaftarSiswaKelasController');
     Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
     Route::resource('/kelas/penilaian_pengetahuan', 'Kelas\PenilaianPengetahuanController');

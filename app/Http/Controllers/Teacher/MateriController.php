@@ -8,8 +8,8 @@ use App\Auth;
 use DB;
 class MateriController extends BaseController
 {
-    public function materiGet(Request $request){
-        return view('pages.teacher.materi');
+    public function index(Request $request){
+        return view('pages.kelas.teacher.materi');
     }
 
 

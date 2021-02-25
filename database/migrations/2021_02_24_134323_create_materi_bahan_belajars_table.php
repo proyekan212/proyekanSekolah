@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterRppsTable extends Migration
+class CreateMateriBahanBelajarsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateMasterRppsTable extends Migration
      */
     public function up()
     {
-        Schema::create('master_rpps', function (Blueprint $table) {
+        Schema::create('materi_bahan_belajars', function (Blueprint $table) {
             $table->id();
-            $table->integer('hapus')->default(0);
+            $table->string('link');
             $table->string('name');
-            $table->string('name_file');
+            $table->integer('rating')->default(0);
+            $table->integer('sender_id');
             $table->integer('kelas_id');
             $table->timestamps();
         });
@@ -30,6 +31,6 @@ class CreateMasterRppsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_rpps');
+        Schema::dropIfExists('materi_bahan_belajars');
     }
 }
