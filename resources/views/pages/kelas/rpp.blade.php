@@ -135,7 +135,9 @@
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       
-        event.submit();
+        if(result.value) {
+          event.submit();
+        }
     })
   }
 </script>
