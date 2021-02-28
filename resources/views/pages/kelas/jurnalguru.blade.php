@@ -1,9 +1,9 @@
 @extends('layout.master')
 
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/simplemde/simplemde.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/simplemde/simplemde.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -36,38 +36,40 @@
               </tr>
             </thead>
             <tbody>
-                @foreach($jurnal_gurus as $index => $row)
+              @foreach($jurnal_gurus as $index => $row)
 
-                <tr>
-                  <td>{{$index+1}}</td>
-                  <td>{{$row->waktu}}</td>
-                  <td>{{$row->pertemuan}}</td>
-                  <td>{{$row->materi}}</td>
-                  <td class="flex ">
-                        <button data-toggle="modal" data-target="#UpdateData" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
-                          <span class="material-icons">
-                            edit
-                          </span>
-                        </button>
-                
-                      <form method="post" action="{{ url('/kelas/jurnal_guru', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
-                        @csrf
-                        {{ method_field('DELETE') }}
-                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
-                          <span class="material-icons"> 
-                            delete_forever  
-                          </span>
-                        </button>
-                      </form>
+              <tr>
+                <td>{{$index+1}}</td>
+                <td>{{$row->waktu}}</td>
+                <td>{{$row->pertemuan}}</td>
+                <td>{{$row->materi}}</td>
+                <td class="flex ">
+                  <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                    <span class="material-icons">
+                      <a href="{{ url('kelas/jurnal_guru/edit', $row->id)}}">
+                        edit
+                      </a>
+                    </span>
+                  </button>
+
+                  <form method="post" action="{{ url('kelas/jurnal_guru', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                    @csrf
+                    {{ method_field('DELETE') }}
+                    <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                      <span class="material-icons"> 
+                        delete_forever  
+                      </span>
+                    </button>
+                  </form>
                 </td>
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 
@@ -82,8 +84,8 @@
       </div>
       <div class="modal-body">
         <form method="post" action="{{ url('kelas/jurnal_guru')}}">
-        @csrf
-        <input type="text" hidden name="kelas_id" value="1">
+          @csrf
+          <input type="text" hidden name="kelas_id" value="1">
           <div class="form-group row">
             <div class="col-lg-3">
               <label class="col-form-label">Tanggal</label>
@@ -97,14 +99,14 @@
               <label class="col-form-label">Pertemuan ke (*)</label>
             </div>
             <div class="col-lg-8">
-            <select name="pertemuan" class="form-control form-control-sm mb-3">
-                  <option selected>- Pilih Pertemuan -</option>
-                  <?php
-                    for ($x = 1; $x <= 4; $x++) { 
-                      echo "<option value='pertermuan $x'> pertemuan $x</option> ";
-                    }
-                  ?>
-                </select>
+              <select name="pertemuan" class="form-control form-control-sm mb-3">
+                <option selected>- Pilih Pertemuan -</option>
+                <?php
+                for ($x = 1; $x <= 4; $x++) { 
+                  echo "<option value='pertermuan $x'> pertemuan $x</option> ";
+                }
+                ?>
+              </select>
             </div>
           </div>
           <div class="form-group mb-0 row">
@@ -147,19 +149,19 @@
               <textarea class="form-control" name="tinymce" id="simpleMdeExample" rows="10"></textarea>
             </div>
           </div> -->
-        
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-success">Simpan</button>
-      </div>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
+          <button type="submit" class="btn btn-success">Simpan</button>
+        </div>
       </form>
     </div>
   </div>
 </div>
 
 <script>
-function deleteData(id, event) {
+  function deleteData(id, event) {
     Swal.fire({
       title: 'Apakah yakin menghapus data ini ?',
       icon: 'warning',
@@ -168,30 +170,30 @@ function deleteData(id, event) {
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-        if(result.value) {
-          event.submit();
-        }
-        
+      if(result.value) {
+        event.submit();
+      }
+
     })
   }
 </script>
 @endsection
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
-  <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/simplemde/simplemde.min.js') }}"></script>
-  <script src="{{ asset('assets/plugins/ace-builds/ace.js') }}"></script>
-  <script src="{{ asset('assets/plugins/ace-builds/theme-chaos.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/tinymce/tinymce.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/simplemde/simplemde.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/ace-builds/ace.js') }}"></script>
+<script src="{{ asset('assets/plugins/ace-builds/theme-chaos.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/tinymce.js') }}"></script>
-  <script src="{{ asset('assets/js/simplemde.js') }}"></script>
-  <script src="{{ asset('assets/js/ace.js') }}"></script>
-  <script src="{{ asset('assets/js/data-table.js') }}"></script>
-  <script src="{{ asset('assets/js/datepicker.js') }}"></script>
-  <script src="{{ asset('assets/js/timepicker.js') }}"></script>
+<script src="{{ asset('assets/js/tinymce.js') }}"></script>
+<script src="{{ asset('assets/js/simplemde.js') }}"></script>
+<script src="{{ asset('assets/js/ace.js') }}"></script>
+<script src="{{ asset('assets/js/data-table.js') }}"></script>
+<script src="{{ asset('assets/js/datepicker.js') }}"></script>
+<script src="{{ asset('assets/js/timepicker.js') }}"></script>
 @endpush

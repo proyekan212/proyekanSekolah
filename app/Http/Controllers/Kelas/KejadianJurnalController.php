@@ -74,7 +74,8 @@ class KejadianJurnalController extends Controller
      */
     public function edit($id)
     {
-        $data = MasterKejadianJurnal::where('id', $id)->first();
+        $data = MasterKejadianJurnal::findOrFail($id);
+        
         $siswa = UserDetail::with(['role' => function($q) {
             $q->where('name_role', '=', 'siswa');
         }])->get();
@@ -94,11 +95,6 @@ class KejadianJurnalController extends Controller
      */
     public function update(Request $request, $id)
     {
-        
-        $data = [
-           
-        ];
-
        
 
        

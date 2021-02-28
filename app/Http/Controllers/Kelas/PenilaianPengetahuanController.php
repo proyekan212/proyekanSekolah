@@ -46,9 +46,15 @@ class PenilaianPengetahuanController extends Controller
         $data = $request->all();
         //    dd($data);
            
-           MasterPenilaianPengetahuan::create(
-               $data
-           );
+           MasterPenilaianPengetahuan::create([
+        'pertemuan' => $request->pertemuan,
+        'skema_penilaian' => $request->skema_penilaian,
+        'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
+        'penilaian_harian' => $request->penilaian_harian,
+        'instruksi' => $request->instruksi,
+        'mulai_pengerjaan' => $request->mulai_pengerjaan,
+        'finish_pengerjaan' => $request->finish_pengerjaan
+           ]);
     
            return redirect('kelas/penilaian_pengetahuan');
     }
@@ -72,7 +78,12 @@ class PenilaianPengetahuanController extends Controller
      */
     public function edit($id)
     {
-        //
+         $kompetensi_dasars = KompetensiDasar::all();
+        $data = MasterPenilaianPengetahuan::findOrFail($id);
+        return view('pages.kelas.PenilaianKd3edit', [
+            'kompetensi_dasars'=> $kompetensi_dasars,
+            'datas'=> $data,
+        ]);
     }
 
     /**
@@ -84,7 +95,21 @@ class PenilaianPengetahuanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // // dd($request->all());
+        $data = $request->all();
+        //    dd($data);
+           
+           MasterPenilaianPengetahuan::where('id', $id)->update([
+              'pertemuan' => $request->pertemuan,
+        'skema_penilaian' => $request->skema_penilaian,
+        'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
+        'penilaian_harian' => $request->penilaian_harian,
+        'instruksi' => $request->instruksi,
+        'mulai_pengerjaan' => $request->mulai_pengerjaan,
+        'finish_pengerjaan' => $request->finish_pengerjaan
+           ]);
+    
+           return redirect('kelas/penilaian_pengetahuan');
     }
 
     /**

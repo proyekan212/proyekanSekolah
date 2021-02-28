@@ -68,7 +68,12 @@ class JurnalGuruController extends Controller
      */
     public function edit($id)
     {
-        //
+        // $kompetensi_dasars = KompetensiDasar::all();
+        $data = JurnalGuru::findOrFail($id);
+        return view('pages.kelas.jurnalguruedit', [
+            // 'kompetensi_dasars'=> $kompetensi_dasars,
+            'datas'=> $data,
+        ]);
     }
 
     /**
@@ -80,7 +85,18 @@ class JurnalGuruController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->all();
+
+       JurnalGuru::where('id', $id)->update([
+        'waktu' => $request->waktu,
+        'kelas_id' => $request->kelas_id,
+        // 'hapus' => $request->hapus,
+        'pertemuan' => $request->pertemuan,
+        'materi' => $request->materi
+
+       ]);
+
+       return redirect('kelas/jurnal_guru');
     }
 
     /**

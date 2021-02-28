@@ -10,13 +10,21 @@
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Penilaian keterampilan</li>
+    <li class="breadcrumb-item active" aria-current="page">Penilaian Keterampilan</li>
   </ol>
 </nav>
+<div class="alert alert-primary " role="alert">
+  <h4 class="alert-heading">Info!</h4>
+  <p>
+    
+              @foreach($kompetensi_dasar as  $data)
+              {{$data->nama_kompetensi_dasar}}
+              @endforeach
 
+  </p>
+</div>
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
-  {{$kompetensi_dasar}}
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
@@ -50,7 +58,7 @@
                   <td>
                   @foreach($data->kd() as $row)
                         <p>
-                        {{$row->nama_kompetensi_dasar}}
+                       -  {{$row->nama_kompetensi_dasar}}
                         </p>
                       @endforeach
                   </td>
@@ -63,13 +71,15 @@
                   <td></td>
           
                   <td class="flex ">
-                        <button data-toggle="modal" data-target="#UpdateData" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                       <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
+                            <a href="{{ url('kelas/penilaian_keterampilan/edit', $data->id)}}">
                             edit
+                            </a>
                           </span>
                         </button>
                 
-                      <form method="post" action="{{ url('/kelas/penilaian_keterampilan', $data->id)}}" onclick="deleteData('{{$data->id}}', this)" >
+                      <form method="post" action="{{ url('kelas/penilaian_keterampilan', $data->id)}}" onclick="deleteData('{{$data->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
