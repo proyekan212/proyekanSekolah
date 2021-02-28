@@ -14,7 +14,8 @@ class MasterKejadianJurnal extends Model
         'kejadian',
         'butir_sikap',
         'tindakan',
-        'tindak_lanjut'
+        'tindak_lanjut',
+        'hapus',
     ];
 
     public function siswa() {

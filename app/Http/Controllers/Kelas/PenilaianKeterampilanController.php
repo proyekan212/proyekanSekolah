@@ -83,7 +83,13 @@ class PenilaianKeterampilanController extends Controller
      */
     public function edit($id)
     {
-        //
+        $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
+        $data = MasterPenilaianKeterampilan::findOrFail($id);
+        
+        return view('pages.kelas.PenilaianKd4edit', [
+            'kompetensi_dasar'=> $kompetensi_dasar,
+            'datas'=> $data
+        ]);
     }
 
     /**
@@ -95,7 +101,24 @@ class PenilaianKeterampilanController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $kompetensi_dasar = "";
+
+        foreach($request->kompetensi_dasar as $row) {
+
+            $kompetensi_dasar  .=  strval($row).',' ;
+        }
+
+       
+        $input = MasterPenilaianKeterampilan::where('id', $id)->update([
+             'nama_penilaian'=> $request->nama_penilaian,
+            'skema' => $request->skema_penilaian,
+            'kompetensi_dasar'=>$kompetensi_dasar,
+            'keterangan' => $request->keterangan,
+            'mulai_pengerjaan' => $request->mulai_pengerjaan,
+            'finish_pengerjaan' => $request->finish_pengerjaan
+        ]);
+     
+        return redirect('kelas/penilaian_keterampilan');   
     }
 
     /**
