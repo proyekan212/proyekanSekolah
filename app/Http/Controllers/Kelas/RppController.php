@@ -42,6 +42,15 @@ class RppController extends BaseController
         
     }
 
+    public function edit($id) {
+
+    }
+
+    public function update($id) {
+
+        
+    }
+
 
     public function destroy($id) {
        MasterRpp::where('id', $id)->update([

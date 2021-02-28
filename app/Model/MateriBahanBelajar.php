@@ -25,4 +25,8 @@ class MateriBahanBelajar extends Model
         'kelas_id',
         'rating_id'
     ];
+
+    public function user() {
+        return $this->belongsTo('App\Model\UserDetail', 'sender_id', 'id');
+    }
 }

@@ -38,13 +38,35 @@
               @foreach($rpp as $index => $row)
                 <tr>
                   <td>{{$index+1}}</td>
-                  <td>{{$row->name}}</td>
+                  <td style="width: 30%;">{{$row->name}}</td>
                   <td>
                     <a href="{{ url('/rpp/'.$row->name_file)}}">
-                    <img src="{{ url('/rpp/'.$row->name_file)}}" alt="">
+                      <span class="capitalize">
+                        download file 
+                      </span>
+                      <i class="fas fa-download">
+                      </i>
                     </a>
                   </td>
-                  <td></td>
+                  <td class="flex">
+                    <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                        <span class="material-icons">
+                          <a href="{{ url('kelas/kejadian_jurnal/edit', $row->id)}}">
+                          edit
+                          </a>
+                        </span>
+                    </button>
+                
+                      <form method="post" action="{{ url('kelas/rpp', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                  </td>
                 </tr>
               @endforeach
             </tbody>
@@ -97,6 +119,26 @@
     </div>
   </div>
 </div>
+
+
+<script type="text/javascript">
+  function editData(id){
+    console.log(id);
+  }
+  function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+      
+        event.submit();
+    })
+  }
+</script>
 @endsection
 
 @push('plugin-scripts')

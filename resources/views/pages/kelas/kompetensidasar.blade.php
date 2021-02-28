@@ -38,9 +38,16 @@
 
               <tr>
                 <td class=""><span class="capitalize text-lg ">
-                {{$index+1}} - {{$row->name}}</span></td>
+                {{$index+1}} - {{$row->name}}</span>
+                </td>
                 <td>
-                  <b class="capitalize font-semibold text-base">Semester Ganjil</b>
+                <div class="flex items-center">
+                <b class="capitalize font-semibold text-base">Semester Ganjil</b>
+                   <a href="" class="pl-4">
+                      <i class="fas fa-edit">
+                      </i>
+                   </a>
+                 </div>
                   
                   <ul class="mt-2">
                     @foreach($row->kompetensi_dasar as $index_kd => $kd)
@@ -49,7 +56,9 @@
                     <li class="text-sm">
                       <b>{{$index+1}}.{{$index_kd}}</b> {{$kd->nama_kompetensi_dasar}} 
                     </li>
-
+                    <li class="flex">
+                      
+                    </li>
                     @endif
 
                     @endforeach

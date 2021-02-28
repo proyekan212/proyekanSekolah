@@ -10,12 +10,24 @@ use DB;
 class MateriBahanAjarController extends BaseController
 {
     public function index(Request $request){
-        return view('pages.kelas.teacher.materi');
+
+        $materi = MateriBahanBelajar::where('hapus', 0)->get();
+        return view('pages.kelas.teacher.materi', [
+            'materi' => $materi
+        ]);
     }
 
     public function __construct()
     {
         $this->middleware('auth');
+    }
+
+    public function destroy($id) {
+        MateriBahanBelajar::where('id', $id)->update([
+            'hapus' => 1,
+        ]);
+
+        return redirect('kelas/materi_bahan_ajar');
     }
 
     public function store(Request $request) {
@@ -26,6 +38,8 @@ class MateriBahanAjarController extends BaseController
             'kelas_id' => 1,
             'created_at' => time(),
         ]);
+
+        return redirect('kelas/materi_bahan_ajar');
     }
 }
 
