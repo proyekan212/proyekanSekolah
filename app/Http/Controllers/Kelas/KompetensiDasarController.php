@@ -9,9 +9,9 @@ use App\Model\MasterKompetensiInti;
 use DB;
 class KompetensiDasarController extends BaseController
 {
-    public function index(Request $request){
+    public function index(){
         return view('pages.kelas.kompetensidasar', [
-            'kompetensi_inti' => MasterKompetensiInti::all()
+            'kompetensi_inti' => MasterKompetensiInti::all(),
         ]);
     }
 

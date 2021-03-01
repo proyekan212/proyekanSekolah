@@ -22,7 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 
     //SIDEBAR
-    Route::get('*', 'Sidebar/SidebarController@index');
+    // Route::get('*', 'Sidebar/SidebarController@index');
 
     //DASHBOARD GURU
     Route::get('/dashboard', 'Dashboard\DashboardController@index');
@@ -40,8 +40,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/absen', 'Teacher\AbsenController@absenGet');
 
     //MASUK KELAS
-    Route::get('/kelas', 'Kelas\KelasController@KelasGet');
-    //VIDEO CONFERENCE
+     Route::get('kelas', 'Kelas\KelasController@index');
+     Route::post('kelas', 'Kelas\KelasController@store');   
+   
+     //VIDEO CONFERENCE
     Route::get('/kelas/video_conference', 'Kelas\VideoConferenceController@VideoConferenceGet');
     //ABSENSI KELAS
     Route::get('/kelas/absensi_kelas', 'Kelas\AbsensiKelasController@AbsensiKelasGet');

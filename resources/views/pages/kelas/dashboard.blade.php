@@ -94,7 +94,7 @@
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                   <div class="ml-2">
-                    <p>IPS X-Ips-1_MIPA Biologi</p>
+                    <p>{{$kelas->rombel->jurusan->jurusan}} {{$kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
                     <p class="tx-11 text-muted">Mata Pelajaran IPS Biologi Kelas Kelas X</p>
                   </div>
                 </div>
@@ -103,7 +103,7 @@
             <div class="card-body">
               <p class="mb-3 tx-14">Erni Wiyanti, S.Pd., M.M.</p>
               <p class="mb-3 tx-14">Mata Pelajaran MIPA Biologi Kelas Kelas X 8 Pertemuan</p>
-              <p class="mb-3 tx-14">36 Siswa | Max KD : 9 | KKM : 75</p>
+              <p class="mb-3 tx-14">{{$kelas->daftar_kelas->count()}} Siswa | Max KD : 9 | KKM : 75</p>
             </div>
             <div class="card-footer">
               <div class="d-flex post-actions">

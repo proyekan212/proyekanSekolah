@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Model\MasterJadwalPelajaran;
+use App\Model\MasterKelas;
 use App\Model\MasterSemester;
 use Illuminate\Http\Request;
 use App\Model\Menu;
@@ -21,9 +22,12 @@ class DashboardController extends Controller
         // $menu = Menu::all();
         $mapel = MasterJadwalPelajaran::all();
         $semester = MasterSemester::all();
+
+        $kelas = MasterKelas::all();
         return view('dashboard', [
             'showSemester'      => $semester,
             'showMataPelajaran' => $mapel,
+            'kelas' => $kelas
             // 'menu' => $menu
         ]);
     }

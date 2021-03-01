@@ -23,7 +23,7 @@
           <li class="nav-item nav-category">{{ $menu['parent_name'] }}</li>
             @foreach ($menu['sub_menu'] as $sub)
             <li class="nav-item {{ active_class(['/matapelajaran']) }}">
-              <a href="{{ url($sub['sub_code']) }}" class="nav-link">
+              <a href="{{ url($sub['sub_code'], $kelas_id) }}" class="nav-link">
                 <i class="link-icon" data-feather="{{ $sub['sub_icon'] }}"></i>
                 <span class="link-title">{{ $sub['sub_name'] }}</span>
               </a>
