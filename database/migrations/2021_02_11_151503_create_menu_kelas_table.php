@@ -21,8 +21,8 @@ class CreateMenuKelasTable extends Migration
             $table->string('status');
             $table->string('icon');
             $table->string('reorder');
+            $table->timestamp('deleted_at');
             $table->timestamps();
-            $table->timestamps('deleted_at');
         });
     }
 

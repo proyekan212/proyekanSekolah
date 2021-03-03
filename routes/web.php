@@ -17,7 +17,7 @@ Route::post('/', 'Auth\AuthController@login')->name('loginPost');
 // Route::group(['middleware' => ['auth', 'addmenuroles', 'addmenuroles2']], function () {
 
 Route::group(['middleware' => ['auth']], function () {
-    
+
     //LOGOUT
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 
@@ -40,9 +40,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/absen', 'Teacher\AbsenController@absenGet');
 
     //MASUK KELAS
-     Route::get('kelas', 'Kelas\KelasController@index');
-     Route::post('kelas', 'Kelas\KelasController@store');   
-   
+    Route::get('kelas', 'Kelas\KelasController@index');
+    Route::post('kelas', 'Kelas\KelasController@store');   
+
      //VIDEO CONFERENCE
     Route::get('/kelas/video_conference', 'Kelas\VideoConferenceController@VideoConferenceGet');
     //ABSENSI KELAS
@@ -57,6 +57,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kelas/kejadian_jurnal/update/{id}', 'Kelas\KejadianJurnalController@update');
     //MATERI BAHAN AJAR
     Route::resource('/kelas/materi_bahan_ajar', 'Kelas\MateriBahanAjarController');
+    // Route::get('/kelas/materi_bahan_ajar/edit/{id}', 'Kelas\MateriBahanAjarController@edit');
+    // Route::post('/kelas/materi_bahan_ajar/update/{id}', 'Kelas\MateriBahanAjarController@update');
     //DAFTAR SISWA KELAS
     Route::resource('/kelas/daftar_siswa_kelas', 'Kelas\DaftarSiswaKelasController');
     //CBT

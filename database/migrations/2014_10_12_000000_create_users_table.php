@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->string('token')->nullable();
             $table->integer('role_id')->unsigned();
-            $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
+            // $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->string('verify_token')->nullable();
             $table->timestamps();
         });

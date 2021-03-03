@@ -48,7 +48,7 @@
               </p>
               <div class="flex justify-between">
                 <a
-                  href=""
+                  href="{{ url ('kelas/materi_bahan_ajar', $row->id) }}"
                   style="font-size: 24px;"
                   class="text-blue-600 transition-all duration-300 hover:text-blue-400"
                 >

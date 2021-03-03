@@ -41,6 +41,21 @@ class MateriBahanAjarController extends BaseController
 
         return redirect('kelas/materi_bahan_ajar');
     }
+    public function show($id) {
+        $materi = MateriBahanBelajar::where('id', $id)->first();
+        return view('pages.kelas.teacher.materiedit', [
+            'materi' => $materi
+        ]);
+    }
+
+    public function update(Request $request, $id){
+        MateriBahanBelajar::where('id', $id)->update([
+            'link' => $request->input('link'),
+            'name' => $request->input('name'),
+        ]);
+
+        return redirect('kelas/materi_bahan_ajar');
+    }
 }
 
 
