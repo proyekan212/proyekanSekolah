@@ -10,8 +10,13 @@ use DB;
 class MateriBahanAjarController extends BaseController
 {
     public function index(Request $request){
-
-        $materi = MateriBahanBelajar::where('hapus', 0)->get();
+        
+       
+        $materi = MateriBahanBelajar::where([
+            ['hapus', '=', '0'],
+            ['kelas_id', '=', $request->session()->get('kelas_id')]
+        ])->get();
+        
         return view('pages.kelas.teacher.materi', [
             'materi' => $materi
         ]);
