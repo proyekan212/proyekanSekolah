@@ -2,9 +2,13 @@
 
 namespace App\Providers;
 
+use App\Auth;
 use App\Model\Menu;
 use App\Model\MenuKelas;
-
+use App\Model\MenuRole;
+use App\Model\MenuRoleKelas;
+use App\Model\User;
+use App\Model\UserDetail;
 use View;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Schema;
@@ -32,7 +36,13 @@ class AppServiceProvider extends ServiceProvider
 
         Schema::defaultStringLength(191);
         View::composer('pages/kelas/*', function ($view) {
-            $menu = MenuKelas::all();
+            $user_role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
+            // dd($user_role->role_id);
+            // $menu = MenuRole::where('role_id', $user_role)->get();
+            $menu = MenuRoleKelas::where('role_id', 2)->get();
+            // dd($menu);
+
+            // dd($menu);
             $view->with('menu', $menu);
         });
         View::composer('pages/teacher.*', function ($view) {
@@ -40,7 +50,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('menu', $menu);
         });
         View::composer('dashboard', function ($view) {
-            $menu = Menu::all();
+            // dd($this->app->request->user()->id);
+            $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
+            $menu = MenuRole::where('role_id', $role->role_id)->get();
             $view->with('menu', $menu);
         });
         View::composer('profile', function ($view) {

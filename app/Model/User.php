@@ -14,6 +14,7 @@ class User extends Authenticatable
     //
     protected $table = 'users';
     protected $fillable = [
+        'id',
         'username',
         'password',
         'token',
@@ -25,6 +26,10 @@ class User extends Authenticatable
 
     public function role() {
         return $this->belongsTo('App\Model\Role');
+    }
+
+    public function user_detail () {
+        return $this->belongsTo('App\Model\UserDetail', 'user_id', 'id');
     }
 
 }
