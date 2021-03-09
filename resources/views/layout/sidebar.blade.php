@@ -9,8 +9,8 @@
       <span></span>
     </div>
   </div>
-  <div class="sidebar-body">
-    <ul class="nav">
+  <div class="sidebar-body" style="overflow-y: scroll;">
+    <ul class="nav" >
       <!-- {{-- @foreach (session('menus') as $menu) --}} -->
         
 

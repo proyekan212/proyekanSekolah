@@ -49,6 +49,11 @@ class AppServiceProvider extends ServiceProvider
             $menu = Menu::all();
             $view->with('menu', $menu);
         });
+         View::composer('pages/admin.*', function ($view) {
+            $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
+            $menu = MenuRole::where('role_id', $role->role_id)->get();
+            $view->with('menu', $menu);
+        });
         View::composer('dashboard', function ($view) {
             // dd($this->app->request->user()->id);
             $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();

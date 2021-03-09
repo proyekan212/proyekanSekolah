@@ -80,6 +80,43 @@ Route::group(['middleware' => ['auth']], function () {
 
     //PROFILE
     Route::get('/profile', 'Profile\ProfileController@ProfileGet');
+
+    //Admnistrator
+    //SettingSemester
+    Route::resource('/Setting_Semester', 'Admin\SettingSemesterController');
+    //SettingSemester
+    Route::resource('/Setting_Kelas_Ajar', 'Admin\SettingKelasAjarController');
+    //SettingSemester
+    Route::resource('/Data_Master_Kelas', 'Admin\DataMasterKelasController');
+    //SettingSemester
+    Route::resource('/Data_Master_Jurusan', 'Admin\DataMasterJurusanController');
+    //SettingSemester
+    Route::resource('/Data_Master_Siswa', 'Admin\DataMasterSiswaController');
+    //SettingSemester
+    Route::resource('/Data_Master_Guru', 'Admin\DataMasterGuruController');
+    //SettingSemester
+    Route::resource('/Jadwal_Pelajaran', 'Admin\JadwalPelajaranController');
+    //SettingSemester
+    Route::resource('/Kompetensi_Inti', 'Admin\KompetensiIntiController');
+    //SettingSemester
+    Route::resource('/Kompetensi_Dasar', 'Admin\KompetensiDasarController');
+    //SettingSemester
+    Route::resource('/Monitoring_Aktivitas_Guru', 'Admin\MonitoringAktivitasGuruController');
+    //SettingSemester
+    Route::resource('/Monitoring_Aktivitas_Siswa', 'Admin\MonitoringAktivitasSiswaController');
+     //SettingSemester
+    Route::resource('/Master_KKM', 'Admin\MasterKKMController');
+     //SettingSemester
+    Route::resource('/Laporan_Kehadian_Siswa', 'Admin\LaporanKehadiranSiswaController');
+     //SettingSemester
+    Route::resource('/Laporan_Kehadian_Guru', 'Admin\LaporanKehadiranGuruController');
+     //SettingSemester
+    Route::resource('/Laporan_Cetak_Penilaian', 'Admin\LaporanCetakPenilaianController');
+     //SettingSemester
+    Route::resource('/Tahun_Akademik', 'Admin\TahunAkademikController');
+    
+
+
 });
 
 //register
