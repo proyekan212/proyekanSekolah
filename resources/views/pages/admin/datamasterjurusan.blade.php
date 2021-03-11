@@ -23,9 +23,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
+          <h6 class="card-title mb-0">Daftar Master Jurusan</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Add Jurusan</button>
             <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
           </div>
         </div>
@@ -35,14 +35,33 @@
               <tr>
                  <th>No</th>
                   <th>Jurusan</th>
+                  <th>Action</th>
               </tr>
             </thead>
             <tbody>
               @foreach($datas as $index => $row)
                 <tr>
                   <td>{{$index+1}}</td>
-                 <td>{{$row->jurusan}}</td>        
-                <td></td>
+                 <td class="uppercase">{{$row->jurusan}}</td>        
+                 <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('kelas/kejadian_jurnal/edit', $row->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Data_Master_Jurusan', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>
                 </tr>
               @endforeach
             </tbody>
@@ -62,35 +81,48 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+
+      <form action="{{ url('Data_Master_Jurusan')}}" method="post">
+      @csrf
+      
       <div class="modal-body">
-        <div class="table-responsive">
-            <table id="dataTableExample" class="table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Jurusan</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($datas as $key => $row) 
-                  <tr>
-                    <td>
-                      {{$key+1}}
-                    </td>
-                    <td>{{$row->jurusan}}</td>              
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
+      <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Nama Jurusan</label>
+         </div>
+         <div class="col-lg-8">
+           <input type="text" class="form-control" name="jurusan">
+         </div>
+       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-primary">Sinkronkan</button>
+        <button type="submit" class="btn btn-primary">Sinkronkan</button>
       </div>
+
+      </form>
     </div>
   </div>
 </div>
+<script type="text/javascript">
+  function editData(id){
+    console.log(id);
+  }
+  function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+        event.submit();
+
+        }
+    })
+  }
+</script>
 @endsection
 
 @push('plugin-scripts')

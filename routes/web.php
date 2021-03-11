@@ -115,6 +115,10 @@ Route::group(['middleware' => ['auth']], function () {
      //SettingSemester
     Route::resource('/Tahun_Akademik', 'Admin\TahunAkademikController');
     
+    // Data Master Mata Pelajaran
+    Route::resource('/data_master_mapel', 'Admin\MasterMapelController');
+
+    
 
 
 });

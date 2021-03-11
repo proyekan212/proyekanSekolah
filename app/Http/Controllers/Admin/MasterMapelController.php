@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterJurusan;
 use App\Model\MasterKKM;
+use App\Model\MasterMapel;
+use App\Models\MasterMapel as ModelsMasterMapel;
 use Illuminate\Http\Request;
 
-class MasterKKMController extends Controller
+
+class MasterMapelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +18,22 @@ class MasterKKMController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-
-        $datas = MasterKKM::where('hapus', 0)->get();
-        return view('pages.admin.masterkkm', [
-            'datas' => $datas
+    { 
+        $kkm = MasterKKM::where('hapus', 0)->get();
+        $datas = MasterMapel::with(['jurusan', 'kkm'])
+        ->where('hapus', 0)
+        ->whereHas("jurusan", function($query) {
+            $query->where('hapus', '=', 0);
+        })
+        ->whereHas("kkm", function($query) {
+            $query->where('hapus', '=', 0);
+        })
+        ->get();
+        $jurusan = MasterJurusan::where('hapus', 0)->get();
+        return view('pages.admin.master_mapel',[
+            "kkm" => $kkm,
+            "jurusan" => $jurusan,
+            "datas" => $datas
         ]);
     }
 
@@ -40,13 +55,13 @@ class MasterKKMController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MasterMapel::create([
+            'nama_mapel' => $request->input('mapel'),
+            'jurusan_id' => $request->input('jurusan'),
+            'kkm_id' => $request->input('kkm')
+        ]);
 
-       MasterKKM::create([
-           'kkm' => $request->input('kkm')
-       ]);
-
-       return redirect('/Master_KKM');
+        return redirect('data_master_mapel');
     }
 
     /**
@@ -91,10 +106,10 @@ class MasterKKMController extends Controller
      */
     public function destroy($id)
     {
-        MasterKKM::where('id', $id)->update([
-            'hapus' => 1
+        MasterMapel::where('id', $id)->update([
+            'hapus'=> 1
         ]);
 
-        return redirect('Master_KKM');
+        return redirect('data_master_mapel');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterJurusan;
 use Illuminate\Http\Request;
 use DB;
 class DataMasterJurusanController extends Controller
@@ -14,8 +15,9 @@ class DataMasterJurusanController extends Controller
      */
     public function index()
     {
+        $datas = MasterJurusan::where('hapus', 0)->get();
          return view('pages.admin.datamasterjurusan', [
-           'datas' => DB::table('master_jurusans')->get(),
+           'datas' => $datas,
         ]);
     }
 
@@ -24,7 +26,7 @@ class DataMasterJurusanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+public function ceate()
     {
         //
     }
@@ -37,7 +39,11 @@ class DataMasterJurusanController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MasterJurusan::create([
+            'jurusan' => $request->input('jurusan')
+        ]);
+
+        return redirect('Data_Master_Jurusan');
     }
 
     /**
@@ -82,6 +88,10 @@ class DataMasterJurusanController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MasterJurusan::where('id', $id)->update([
+            'hapus'=> 1
+        ]);
+        
+        return redirect('Data_Master_Jurusan');
     }
 }

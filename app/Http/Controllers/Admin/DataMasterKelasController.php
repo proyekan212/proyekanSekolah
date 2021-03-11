@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterKelas;
+use App\Model\MasterKodeKelas;
+use App\Model\RombelKelas;
 use Illuminate\Http\Request;
 use DB;
 class DataMasterKelasController extends Controller
@@ -14,8 +17,13 @@ class DataMasterKelasController extends Controller
      */
     public function index()
     {
+        $datas = MasterKelas::all();
+        $kode_kelas = MasterKodeKelas::all();
+        $rombel_kelas = RombelKelas::all();
         return view('pages.admin.datamasterkelas', [
-            'datas' => DB::table('master_kelas')->get(),
+            'datas' => $datas,
+            'kode_kelas' => $kode_kelas,
+            'rombel_kelas' => $rombel_kelas
         ]);
     }
 
@@ -37,7 +45,13 @@ class DataMasterKelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        MasterKelas::create([
+            'kode_kelas_id'=>$request->input('kode_kelas'),
+            'rombel_id' => $request->input('rombel'),
+            'kelas' => $request->input('kelas'),
+        ]);
+
+        return redirect('Data_Master_Kelas');
     }
 
     /**

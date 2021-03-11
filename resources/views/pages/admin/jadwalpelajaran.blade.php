@@ -23,7 +23,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
+          <h6 class="card-title mb-0">Daftar Mata Pelajaran</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
             <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
@@ -34,16 +34,16 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Kelas</th>
-                  <th>Guru</th>
-                  <th>Jenjang</th>
-                  <th>Kelas</th>
-                  <th>Mata Pelajaran</th>
+                  <th>Nama Pelajaran</th>
+                  <th>Jurusan</th>
                   <th>KKM</th>
+                  <!-- <th>Kelas</th>
+                  <th>Mata Pelajaran</th>
+                  <th>KKM</th> -->
                 </tr>
               </thead>
               <tbody>
-                @foreach($datas as $key => $row) 
+                <!-- @foreach($datas as $key => $row) 
                   <tr>
                     <td>
                       {{$key+1}}
@@ -55,7 +55,7 @@
                     <td>{{$row->mata_pelajaran}}</td>            
                     <td>{{$row->kkm}}</td>                   
                   </tr>
-                @endforeach
+                @endforeach -->
               </tbody>
           </table>
         </div>
@@ -68,48 +68,87 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title capitalize" id="exampleModalLabel">sinkronkan siswa ke dalam kelas</h5>
+        <h5 class="modal-title capitalize" id="exampleModalLabel">tambah mapel</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+     
       <div class="modal-body">
-        <div class="table-responsive">
-            <table id="dataTableExample" class="table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Nama Kelas</th>
-                  <th>Guru</th>
-                  <th>Jenjang</th>
-                  <th>Kelas</th>
-                  <th>Mata Pelajaran</th>
-                  <th>KKM</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($datas as $key => $row) 
-                  <tr>
-                    <td>
-                      {{$key+1}}
-                    </td>
-                    <td>{{$row->nama_kelas}}</td>            
-                    <td>{{$row->guru}}</td>            
-                    <td>{{$row->jenjang}}</td>            
-                    <td>{{$row->kelas}}</td>            
-                    <td>{{$row->mata_pelajaran}}</td>            
-                    <td>{{$row->kkm}}</td>                   
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
-          </div>
-        </div>
+       
+       @csrf
+     <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Waktu</label>
+         </div>
+         <div class="col-lg-8">
+           
+             <input type="date" name="waktu" class="form-control">
+           
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Nama Siswa</label>
+         </div>
+         <div class="col-lg-8">
+           <select name="user_id" class="form-control form-control-sm mb-3">
+             <option selected>- Nama Siswa -</option>
+             
+           </select>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Kejadian Atau Prilaku</label>
+         </div>
+         <div class="col-lg-8">
+           <input class="form-control" name="kejadian" maxlength="10" id="defaultconfig-3" type="text" placeholder="Type Something..">
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Butir Sikap</label>
+         </div>
+         <div class="col-lg-8">
+           <select name="butir_sikap" class="form-control form-control-sm mb-3">
+             <option selected value="">- Butir Sikap -</option>
+             <option value="Tanggung Jawab">Tanggung Jawab</option>
+             <option value="Jujur">Jujur</option>
+             <option value="Gotong Royong">Gotong Royong</option>
+             <option value="Percaya Diri">Percaya Diri</option>
+             <option value="Disiplin">Disiplin</option>
+           </select>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Positif/Negatif</label>
+         </div>
+         <div class="col-lg-8">
+           <select name="tindakan" class="form-control form-control-sm mb-3">
+             <option selected value="">- Pilih Jenis Kejadian -</option>
+             <option value="Positif (+)">Positif (+)</option>
+             <option value="Negatif (-)">Negatif (-)</option>
+           </select>
+         </div>
+       </div>
+       <div class="form-group row">
+         <div class="col-lg-3">
+           <label class="col-form-label">Tindak Lanjut</label>
+         </div>
+         <div class="col-lg-8">
+           <textarea class="form-control" name="tindak_lanjut" id="defaultconfig-3" rows="3" type="text" placeholder="Type Something.."> 
+           </textarea>
+         </div>
+       </div>
+     
+   </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-primary">Sinkronkan</button>
+        <button type="button" class="btn btn-primary">add mapel</button>
       </div>
-    </div>
+    
   </div>
 </div>
 @endsection

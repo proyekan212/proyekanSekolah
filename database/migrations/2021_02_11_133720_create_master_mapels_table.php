@@ -12,11 +12,15 @@ class CreateMasterMapelsTable extends Migration
      * @return void
      */
     public function up()
-    {
+    {   
+        Schema::dropIfExists('master_mapels');
         Schema::create('master_mapels', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('kode_mapel');
+            // $table->string('kode_mapel');
             $table->string('nama_mapel');
+            $table->integer('jurusan_id');
+            $table->integer('kkm_id');
+            $table->integer('hapus')->default(0);
             $table->timestamps();
         });
     }
