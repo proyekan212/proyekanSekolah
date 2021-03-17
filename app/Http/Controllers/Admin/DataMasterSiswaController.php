@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DB;
+use App\Model\UserDetail;
 class DataMasterSiswaController extends Controller
 {
     /**
@@ -14,8 +14,9 @@ class DataMasterSiswaController extends Controller
      */
     public function index()
     {
+
         return view('pages.admin.datamastersiswa', [
-          // 'datas' => DB::table('master_kelas')->get(),
+          'datas' => UserDetail::all()->where('role_id',3),
         ]);
     }
 

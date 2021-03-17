@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use App\Model\UserDetail;
 class DataMasterGuruController extends Controller
 {
     /**
@@ -15,6 +15,7 @@ class DataMasterGuruController extends Controller
     public function index()
     {
          return view('pages.admin.datamasterguru', [
+          'datas' => UserDetail::all()->where('role_id',2),
             // 'kompetensi_inti' => MasterKompetensiInti::all(),
         ]);
     }

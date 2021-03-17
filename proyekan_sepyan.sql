@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: Mar 17, 2021 at 10:54 AM
--- Server version: 10.5.8-MariaDB
--- PHP Version: 7.4.14
+-- Host: 127.0.0.1
+-- Generation Time: Mar 17, 2021 at 10:05 AM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -153,6 +154,14 @@ CREATE TABLE `master_jadwal_pelajarans` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `master_jadwal_pelajarans`
+--
+
+INSERT INTO `master_jadwal_pelajarans` (`id`, `nama_kelas`, `guru`, `jenjang`, `kelas`, `mata_pelajaran`, `kkm`, `created_at`, `updated_at`) VALUES
+(1, '2021 ganjil IPA A', 'Hari', 'ganjil', 'IPA A', 'Kalkulus', 90, '2021-03-17 08:41:26', '2021-03-17 09:04:35'),
+(2, '2021 genap IPS A', 'Apri', 'genap', 'IPS A', 'Kalkulus', 90, '2021-03-17 08:59:13', '2021-03-17 08:59:13');
 
 -- --------------------------------------------------------
 
@@ -317,8 +326,8 @@ CREATE TABLE `master_mapels` (
 --
 
 INSERT INTO `master_mapels` (`id`, `nama_mapel`, `jurusan_id`, `kkm_id`, `hapus`, `created_at`, `updated_at`) VALUES
-(1, 'puisi', 1, 1, 0, '2021-03-10 22:45:32', '2021-03-10 22:45:32'),
-(2, 'Kalkulus', 3, 1, 0, '2021-03-10 22:53:23', '2021-03-10 22:53:23'),
+(1, 'puisi', 1, 2, 1, '2021-03-10 22:45:32', '2021-03-10 22:45:32'),
+(2, 'Kalkulus', 3, 2, 0, '2021-03-10 22:53:23', '2021-03-10 22:53:23'),
 (3, 'kalkulus', 3, 2, 0, '2021-03-10 23:14:20', '2021-03-10 23:14:20');
 
 -- --------------------------------------------------------
@@ -1085,7 +1094,7 @@ ALTER TABLE `kompetensi_dasars`
 -- AUTO_INCREMENT for table `master_jadwal_pelajarans`
 --
 ALTER TABLE `master_jadwal_pelajarans`
-  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(6) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `master_jurusans`

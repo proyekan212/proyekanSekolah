@@ -34,8 +34,9 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Pelajaran</th>
-                  <th>Jurusan</th>
+                  <th>Nama Kelas</th>
+                  <th>Guru</th>
+                  <th>Mata Pelajaran</th>
                   <th>KKM</th>
                   <!-- <th>Kelas</th>
                   <th>Mata Pelajaran</th>
@@ -43,19 +44,36 @@
                 </tr>
               </thead>
               <tbody>
-                <!-- @foreach($datas as $key => $row) 
+                @foreach($datas as $key => $row) 
                   <tr>
                     <td>
                       {{$key+1}}
                     </td>
                     <td>{{$row->nama_kelas}}</td>            
-                    <td>{{$row->guru}}</td>            
-                    <td>{{$row->jenjang}}</td>            
-                    <td>{{$row->kelas}}</td>            
+                    <td>{{$row->guru}}</td>                        
                     <td>{{$row->mata_pelajaran}}</td>            
-                    <td>{{$row->kkm}}</td>                   
+                    <td>{{$row->kkm}}</td>  
+                    <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('Jadwal_Pelajaran', $row->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Jadwal_Pelajaran', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>                 
                   </tr>
-                @endforeach -->
+                @endforeach
               </tbody>
           </table>
         </div>
@@ -65,90 +83,80 @@
 </div>
 
 <div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
+  <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title capitalize" id="exampleModalLabel">tambah mapel</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Kelas Belajar</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     
       <div class="modal-body">
-       
-       @csrf
-     <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Waktu</label>
-         </div>
-         <div class="col-lg-8">
-           
-             <input type="date" name="waktu" class="form-control">
-           
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Nama Siswa</label>
-         </div>
-         <div class="col-lg-8">
-           <select name="user_id" class="form-control form-control-sm mb-3">
-             <option selected>- Nama Siswa -</option>
-             
-           </select>
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Kejadian Atau Prilaku</label>
-         </div>
-         <div class="col-lg-8">
-           <input class="form-control" name="kejadian" maxlength="10" id="defaultconfig-3" type="text" placeholder="Type Something..">
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Butir Sikap</label>
-         </div>
-         <div class="col-lg-8">
-           <select name="butir_sikap" class="form-control form-control-sm mb-3">
-             <option selected value="">- Butir Sikap -</option>
-             <option value="Tanggung Jawab">Tanggung Jawab</option>
-             <option value="Jujur">Jujur</option>
-             <option value="Gotong Royong">Gotong Royong</option>
-             <option value="Percaya Diri">Percaya Diri</option>
-             <option value="Disiplin">Disiplin</option>
-           </select>
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Positif/Negatif</label>
-         </div>
-         <div class="col-lg-8">
-           <select name="tindakan" class="form-control form-control-sm mb-3">
-             <option selected value="">- Pilih Jenis Kejadian -</option>
-             <option value="Positif (+)">Positif (+)</option>
-             <option value="Negatif (-)">Negatif (-)</option>
-           </select>
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Tindak Lanjut</label>
-         </div>
-         <div class="col-lg-8">
-           <textarea class="form-control" name="tindak_lanjut" id="defaultconfig-3" rows="3" type="text" placeholder="Type Something.."> 
-           </textarea>
-         </div>
-       </div>
-     
-   </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-primary">add mapel</button>
+        <form id="inser_data" method="POST" enctype="multipart/form-data">
+        <!--   <div class="form-group">
+            <label for="recipient-name">Pilih Kelas:</label>
+            <select name="kelas" class="form-control form-control-sm mb-3">
+              <option selected>Open this select menu</option>
+              @foreach($showKelas as $value)
+              <option value="{{ $value->kode }}">{{ $value->kelas }}</option>
+              @endforeach
+            </select>
+          </div> -->
+          <div class="form-group">
+            <label for="recipient-name">Pilih Guru:</label>
+            <select name="guru" class="form-control form-control-sm mb-3">
+              <!-- <option selected>Open this select menu</option> -->
+              <option value="Hari">Hari</option>
+              <option value="Apri">Apri</option>
+              <option value="Iwan Sapta">Iwan Sapta</option>
+              <option value="Mursalin">Mursalin</option>
+              <option value="Mukayin">Mukayin</option>
+            </select>
+          </div>
+         <!--  <div class="form-group">
+            <label for="message-text">Pilih Jurusan:</label>
+            <select name="jurusan" class="form-control form-control-sm mb-3">
+              <option selected>Open this select menu</option>
+              @foreach($showJurusan as $value)
+              <option value="{{ $value->jurusan }}">{{ $value->jurusan }}</option>
+              @endforeach
+            </select>
+          </div> -->
+           <div class="form-group">
+            <label for="message-text">Pilih Jenjang:</label>
+            <select name="nama_semester" class="form-control form-control-sm mb-3">
+              <!-- <option selected>Open this select menu</option> -->
+              @foreach($showTahunAjaran as $value)
+              <option value="{{ $value->nama_semester }}">{{ $value->nama_semester }}</option>
+              @endforeach
+            </select>
+          </div>
+           <div class="form-group">
+            <label for="recipient-name">Pilih Kelas:</label>
+            <select name="kelas" class="form-control form-control-sm mb-3">
+              <!-- <option selected>Open this select menu</option> -->
+              @foreach($showKelas as $value)
+              <option value="{{ $value->kelas }}">{{ $value->kelas }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message-text">Pilih Mata Pelajaran:</label>
+            <select name="mata_pelajaran" class="form-control form-control-sm mb-3">
+              <option selected><!-- Open this select menu --></option>
+              @foreach($showMapel as $value)
+              <option value="{{ $value->id }}">{{ $value->nama_mapel }}</option>
+              @endforeach
+            </select>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+            <button type="submit" class="btn btn-success">Simpan</button>
+          </div>
+          @csrf
+        </form>
       </div>
-    
+    </div>
   </div>
 </div>
 @endsection
