@@ -1,6 +1,131 @@
 @extends('layout.master')
 
 @section('content')
+
+@if($user->user_detail->role->name_role == 'siswa')
+  <div class="w-full  flex flex-col mb-4  bg-white rounded-xl p-4">
+    <span class="text-sm mb-2 text-blue-400">
+    Tahun Ajaran 2020/2021
+    </span>
+    <span class="text-gray-800 text-sm font-semibold">
+      Kelas XI IPA
+    </span>
+  </div>
+  <div class="grid grid-cols-12 gap-6">
+    <div class="col-span-full md:col-span-3">
+      <div class="w-full bg-white p-4 flex items-center  rounded-xl shadow-md">
+        <span style="font-size:50px;" class="material-icons pr-4 text-red-400">
+          assignment_ind
+        </span>
+        <div class="grid md:flex md:flex-col">
+          <span class="text-sm capitalize font-semibold text-red-400">
+            Kamu belum absen
+          </span>
+          <form action="">
+            <button class=" text-xs py-2  md:py-1 md:text-sm w-full  bg-red-400 rounded-lg capitalize font-semibold  text-white">
+              absen 
+            </button>
+          </form>
+        </div>
+      </div>
+
+      <div class="mt-4 w-full rounded-xl shadow-md bg-white p-4">
+        calendar
+      </div>
+    </div>
+    <div id="tugas-terbaru" class="col-span-full md:col-span-9">
+      <div class="bg-white shadow-md p-4 rounded-xl">
+        jadwal pelajaran
+      </div> 
+    </div>
+  </div>
+<div class="w-full mt-8">
+  <h1 class="text-lg  text-gray-800 font-bold ">
+    Mata Pelajaran
+  </h1>
+  <div class="mt-4  grid  lg:grid-cols-4   gap-6">
+    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
+      <h1 class="text-gray-700 mb-2 text-base">
+        Fisika
+      </h1>
+      
+      <span class="text-gray text-xs">
+      Verrand Bagus Prof
+      </span>
+      <form action="" class="mt-2">
+      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
+        Masuk
+      </button>
+      </form>
+     
+    </div>
+    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
+      <h1 class="text-gray-700 mb-2 text-base">
+        Fisika
+      </h1>
+      
+      <span class="text-gray text-xs">
+      Verrand Bagus Prof
+      </span>
+      <form action="" class="mt-2">
+      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
+        Masuk
+      </button>
+      </form>
+     
+    </div>
+    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
+      <h1 class="text-gray-700 mb-2 text-base">
+        Fisika
+      </h1>
+      
+      <span class="text-gray text-xs">
+      Verrand Bagus Prof
+      </span>
+      <form action="" class="mt-2">
+      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
+        Masuk
+      </button>
+      </form>
+     
+    </div>
+    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
+      <h1 class="text-gray-700 mb-2 text-base">
+        Fisika
+      </h1>
+      
+      <span class="text-gray text-xs">
+      Verrand Bagus Prof
+      </span>
+      <form action="" class="mt-2">
+      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
+        Masuk
+      </button>
+      </form>
+     
+    </div>
+    <div class="w-full hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
+      <h1 class="text-gray-700 mb-2 text-base">
+        Fisika
+      </h1>
+      
+      <span class="text-gray text-xs">
+      Verrand Bagus Prof
+      </span>
+      <form action="" class="mt-2">
+      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
+        Masuk
+      </button>
+      </form>
+     
+    </div>
+  </div>
+  
+</div>
+  
+  
+@else
+@if(Auth::user()->id != '1')
 <div class="profile-page tx-13">
   <div class="row">
     <div class="col-12 grid-margin">
@@ -29,11 +154,16 @@
     </div>
   </div>
 </div>
-
+@else
+    @endif
 <div id="kelas" class="md:p-6 w-full lg:p-8 p-4">
+@if(Auth::user()->id != '1')
+
     <h2 class="lg:text-lg text-base font-semibold text-blue-600">
     Tahun Ajaran 2020/2021 - Semester Genap
     </h2>
+    @else
+    @endif
     <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-3">
       @foreach($kelas as $row)
       <div id="card" class="w-full bg-blue-50 md:p-4 p-3 rounded-md shadow-md">
@@ -67,4 +197,21 @@
       @endforeach
     </div>
 </div>
+
+<style lang="css">
+  .mapel {
+    transition: all;
+    margin-top: 8px;
+    transition-duration: .3s;
+  }
+
+  .mapel:hover {
+    transition:all;
+    margin-top: 0px;
+    transition-duration: .3s;
+  }
+</style>
+@endif
+
+
 @endsection

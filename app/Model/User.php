@@ -29,7 +29,9 @@ class User extends Authenticatable
     }
 
     public function user_detail () {
-        return $this->belongsTo('App\Model\UserDetail', 'user_id', 'id');
+        return $this->hasOne('App\Model\UserDetail', 'user_id', 'id');
     }
+
+
 
 }

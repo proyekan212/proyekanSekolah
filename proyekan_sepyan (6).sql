@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 11, 2021 at 01:20 PM
+-- Generation Time: Mar 17, 2021 at 10:54 AM
 -- Server version: 10.5.8-MariaDB
 -- PHP Version: 7.4.14
 
@@ -202,7 +202,8 @@ CREATE TABLE `master_kejadian_jurnals` (
 
 INSERT INTO `master_kejadian_jurnals` (`id`, `user_id`, `waktu`, `kejadian`, `butir_sikap`, `hapus`, `tindakan`, `tindak_lanjut`, `created_at`, `updated_at`) VALUES
 (1, 2, '2021-03-09 16:21:46', 'bacot', 'Tanggung Jawab', 1, 'Positif (+)', 'kgkgkgkgjk', '2021-02-22 10:11:48', '2021-03-09 09:21:46'),
-(2, 1, '2021-02-26 06:06:23', 'kejadiandq', 'Jujur', 1, 'Positif (+)', 'kgkgkgkgjk', '2021-02-22 23:16:33', '2021-02-25 23:06:23');
+(2, 1, '2021-02-26 06:06:23', 'kejadiandq', 'Jujur', 1, 'Positif (+)', 'kgkgkgkgjk', '2021-02-22 23:16:33', '2021-02-25 23:06:23'),
+(3, 2, '2021-03-12 17:00:00', 'dwq', 'Tanggung Jawab', 0, 'Positif (+)', 'membantu', '2021-03-14 07:09:57', '2021-03-14 07:09:57');
 
 -- --------------------------------------------------------
 
@@ -447,7 +448,8 @@ CREATE TABLE `materi_bahan_belajars` (
 INSERT INTO `materi_bahan_belajars` (`id`, `link`, `name`, `hapus`, `rating`, `sender_id`, `kelas_id`, `created_at`, `updated_at`) VALUES
 (1, 'ri6YWr03izo', 'Attack On Titan Ost', 1, 0, 1, 1, '2021-02-25 07:42:14', '2021-02-25 07:45:13'),
 (2, 'ri6YWr03izo', 'Attack On Titan Ost', 0, 0, 1, 1, '2021-02-25 07:46:22', '2021-02-25 07:46:22'),
-(3, '1T2gaG5vPk8', 'Kok bisa', 1, 0, 1, 1, '2021-02-25 07:51:58', '2021-02-28 04:16:40');
+(3, '1T2gaG5vPk8', 'Kok bisa', 1, 0, 1, 1, '2021-02-25 07:51:58', '2021-02-28 04:16:40'),
+(4, 'er3JP2MDXK4', 'Upin Ipin', 0, 0, 5, 1, '2021-03-14 07:14:36', '2021-03-14 07:14:36');
 
 -- --------------------------------------------------------
 
@@ -565,18 +567,18 @@ CREATE TABLE `menu_roles` (
 --
 
 INSERT INTO `menu_roles` (`id`, `menu_id`, `role_id`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(1, 1, 1, '2021-01-07 02:57:07', '2021-01-07 02:57:07', NULL),
-(2, 2, 1, '2021-01-07 02:57:12', '2021-01-07 02:57:17', NULL),
-(3, 3, 1, '2021-01-07 02:57:12', '2021-01-07 02:57:17', NULL),
-(4, 4, 1, '2021-01-07 02:57:12', '2021-01-07 02:57:17', NULL),
+(1, 1, 0, '2021-01-07 02:57:07', '2021-03-16 11:08:34', '2021-03-16 11:08:34'),
+(2, 2, 0, '2021-01-07 02:57:12', '2021-03-16 11:08:43', '2021-03-16 11:08:43'),
+(3, 3, 0, '2021-01-07 02:57:12', '2021-03-16 11:09:12', '2021-03-16 11:09:12'),
+(4, 4, 0, '2021-01-07 02:57:12', '2021-03-16 11:08:50', '2021-03-16 11:08:50'),
 (5, 5, 3, '2021-01-07 06:27:49', '2021-03-04 15:49:55', NULL),
 (6, 6, 3, '2021-01-07 06:27:51', '2021-03-04 15:49:41', NULL),
 (7, 7, 1, '2021-01-07 06:40:30', '2021-03-05 07:54:21', NULL),
 (8, 8, 1, '2021-01-07 06:40:32', '2021-03-05 07:54:34', NULL),
 (9, 9, 1, '2021-01-07 06:41:29', '2021-03-04 15:50:20', NULL),
 (10, 10, 1, '2021-01-07 06:41:31', '2021-03-04 15:50:29', NULL),
-(11, 5, 1, '2021-01-07 06:42:22', '2021-01-07 06:42:22', NULL),
-(12, 6, 1, '2021-01-07 06:42:24', '2021-01-07 06:42:24', NULL),
+(11, 5, 0, '2021-01-07 06:42:22', '2021-03-16 11:09:37', '2021-03-16 11:09:37'),
+(12, 6, 0, '2021-01-07 06:42:24', '2021-03-16 11:09:40', '2021-03-16 11:09:40'),
 (13, 7, 1, '2021-01-07 06:42:26', '2021-01-07 06:42:26', NULL),
 (17, 1, 2, '2021-01-07 06:46:40', '2021-03-04 15:50:58', NULL),
 (18, 2, 2, '2021-01-07 06:46:40', '2021-03-04 15:50:58', NULL),
@@ -1095,7 +1097,7 @@ ALTER TABLE `master_jurusans`
 -- AUTO_INCREMENT for table `master_kejadian_jurnals`
 --
 ALTER TABLE `master_kejadian_jurnals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `master_kelas`
@@ -1155,7 +1157,7 @@ ALTER TABLE `master_semesters`
 -- AUTO_INCREMENT for table `materi_bahan_belajars`
 --
 ALTER TABLE `materi_bahan_belajars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `menus`

@@ -43,7 +43,7 @@
                 class="bg-green-500 py-1 mb-2 md:mb-4 flex justify-center text-white rounded-xl"
               >
                 <span class="text-xs capitalize">
-                  {{$row->user->name}}
+                  
                 </span>
               </p>
               <div class="flex justify-between">

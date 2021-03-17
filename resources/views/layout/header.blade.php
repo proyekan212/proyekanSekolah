@@ -18,6 +18,7 @@
               <p class="email text-muted mb-3">amiahburton@gmail.com</p>
             </div>
           </div>
+         
           <div class="dropdown-body">
             <ul class="profile-nav p-0 pt-3">
               <li class="nav-item">
@@ -38,4 +39,5 @@
       </li>
     </ul>
   </div>
+ 
 </nav>

@@ -8,6 +8,7 @@ use App\Model\MasterKelas;
 use App\Model\MasterSemester;
 use Illuminate\Http\Request;
 use App\Model\Menu;
+use App\Model\User;
 
 class DashboardController extends Controller
 {
@@ -16,18 +17,21 @@ class DashboardController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         // $menu = Menu::all();
+
+
         $mapel = MasterJadwalPelajaran::all();
         $semester = MasterSemester::all();
-
+        $user = User::where('id', $request->user()->id)->first();
         $kelas = MasterKelas::all();
         return view('dashboard', [
             'showSemester'      => $semester,
             'showMataPelajaran' => $mapel,
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'user' => $user,
             // 'menu' => $menu
         ]);
     }
