@@ -84,35 +84,35 @@ Route::group(['middleware' => ['auth']], function () {
     //Admnistrator
     //SettingSemester
     Route::resource('/Setting_Semester', 'Admin\SettingSemesterController');
-    //SettingSemester
+    //SettingKelasAjar
     Route::resource('/Setting_Kelas_Ajar', 'Admin\SettingKelasAjarController');
-    //SettingSemester
+    //DataMasterKelas
     Route::resource('/Data_Master_Kelas', 'Admin\DataMasterKelasController');
-    //SettingSemester
+    //DataMasterJurusan
     Route::resource('/Data_Master_Jurusan', 'Admin\DataMasterJurusanController');
-    //SettingSemester
+    //DataMasterSiswa
     Route::resource('/Data_Master_Siswa', 'Admin\DataMasterSiswaController');
-    //SettingSemester
+    //DataMasterGuru
     Route::resource('/Data_Master_Guru', 'Admin\DataMasterGuruController');
-    //SettingSemester
+    //JadwalPelajaran
     Route::resource('/Jadwal_Pelajaran', 'Admin\JadwalPelajaranController');
-    //SettingSemester
+    //KompetensiInti
     Route::resource('/Kompetensi_Inti', 'Admin\KompetensiIntiController');
-    //SettingSemester
+    //KompetensiDasar
     Route::resource('/Kompetensi_Dasar', 'Admin\KompetensiDasarController');
-    //SettingSemester
+    //MonitoringAktivitasGuru
     Route::resource('/Monitoring_Aktivitas_Guru', 'Admin\MonitoringAktivitasGuruController');
-    //SettingSemester
+    //MonitoringAktivitasSiswa
     Route::resource('/Monitoring_Aktivitas_Siswa', 'Admin\MonitoringAktivitasSiswaController');
-     //SettingSemester
+     //MasterKKM
     Route::resource('/Master_KKM', 'Admin\MasterKKMController');
-     //SettingSemester
+     //LaporanKehadiranSiswa
     Route::resource('/Laporan_Kehadian_Siswa', 'Admin\LaporanKehadiranSiswaController');
-     //SettingSemester
+     //LaporanKehadiranGuru
     Route::resource('/Laporan_Kehadian_Guru', 'Admin\LaporanKehadiranGuruController');
-     //SettingSemester
+     //LaporanCetakPenilaian
     Route::resource('/Laporan_Cetak_Penilaian', 'Admin\LaporanCetakPenilaianController');
-     //SettingSemester
+     //TahunAkademik
     Route::resource('/Tahun_Akademik', 'Admin\TahunAkademikController');
     
     // Data Master Mata Pelajaran

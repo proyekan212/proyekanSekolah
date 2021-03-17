@@ -54,7 +54,10 @@ public function ceate()
      */
     public function show($id)
     {
-        //
+       $datas = MasterJurusan::where('id', $id)->first();
+         return view('pages.admin.datamasterjurusanedit', [
+           'datas' => $datas,
+        ]);
     }
 
     /**
@@ -77,7 +80,11 @@ public function ceate()
      */
     public function update(Request $request, $id)
     {
-        //
+        MasterJurusan::where('id', $id)->update([
+            'jurusan' => $request->input('jurusan')
+        ]);
+
+        return redirect('Data_Master_Jurusan');
     }
 
     /**

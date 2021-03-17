@@ -50,13 +50,13 @@
                   <td class="flex ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
-                            <a href="{{ url('kelas/kejadian_jurnal/edit', $row->id)}}">
+                            <a href="{{ url('/Data_Master_Kelas', $row->id)}}">
                             edit
                             </a>
                           </span>
                         </button>
                 
-                      <form method="post" action="{{ url('Master_KKM', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                      <form method="post" action="{{ url('Data_Master_Kelas', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">

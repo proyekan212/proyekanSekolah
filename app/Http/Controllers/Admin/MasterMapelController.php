@@ -72,7 +72,15 @@ class MasterMapelController extends Controller
      */
     public function show($id)
     {
-        //
+       $kkm = MasterKKM::where('hapus', 0)->get();
+        $datas = MasterMapel::where('id', $id)->first();
+        
+        $jurusan = MasterJurusan::where('hapus', 0)->get();
+        return view('pages.admin.master_mapeledit',[
+            "kkm" => $kkm,
+            "jurusan" => $jurusan,
+            "datas" => $datas
+        ]);
     }
 
     /**
@@ -95,7 +103,13 @@ class MasterMapelController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         MasterMapel::where('id', $id)->update([
+            'nama_mapel' => $request->input('mapel'),
+            'jurusan_id' => $request->input('jurusan'),
+            'kkm_id' => $request->input('kkm')
+        ]);
+
+        return redirect('data_master_mapel');
     }
 
     /**

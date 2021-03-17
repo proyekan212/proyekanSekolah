@@ -62,7 +62,15 @@ class DataMasterKelasController extends Controller
      */
     public function show($id)
     {
-        //
+         $datas = MasterKelas::where('id', $id)->first();
+        $kode_kelas = MasterKodeKelas::all();
+        $rombel_kelas = RombelKelas::all();
+        return view('pages.admin.datamasterkelasedit', [
+            'datas' => $datas,
+            'kode_kelas' => $kode_kelas,
+            'rombel_kelas' => $rombel_kelas
+        ]);
+      
     }
 
     /**
@@ -85,7 +93,14 @@ class DataMasterKelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         MasterKelas::where('id', $id)->update([
+            'kode_kelas_id'=>$request->input('kode_kelas'),
+            'rombel_id' => $request->input('rombel'),
+            'kelas' => $request->input('kelas'),
+        ]);
+
+        return redirect('Data_Master_Kelas');
+
     }
 
     /**

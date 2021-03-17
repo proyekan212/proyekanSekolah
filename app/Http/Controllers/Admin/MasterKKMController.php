@@ -57,7 +57,10 @@ class MasterKKMController extends Controller
      */
     public function show($id)
     {
-        //
+        $datas = MasterKKM::where('id', $id)->first();
+        return view('pages.admin.masterkkmedit', [
+            'datas' => $datas
+        ]);
     }
 
     /**
@@ -80,7 +83,11 @@ class MasterKKMController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         MasterKKM::where('id', $id)->update([
+           'kkm' => $request->input('kkm')
+       ]);
+
+       return redirect('/Master_KKM');
     }
 
     /**
