@@ -54,6 +54,7 @@ class PenilaianKeterampilanController extends Controller
         MasterPenilaianKeterampilan::create([
             'nama_penilaian'=> $request->nama_penilaian,
             'skema' => $request->skema_penilaian,
+            'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
             'kompetensi_dasar'=>$kompetensi_dasar,
             'keterangan' => $request->keterangan,
             'mulai_pengerjaan' => $request->mulai_pengerjaan,

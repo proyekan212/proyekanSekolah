@@ -16,7 +16,7 @@ class JadwalPelajaranController extends Controller
     {
       return view('pages.admin.jadwalpelajaran', [
             // 'kompetensi_inti' => MasterKompetensiInti::all(),
-        'datas' => DB::table('master_jadwal_pelajarans')->get(),
+        // 'datas' => DB::table('master_jadwal_pelajarans')->get(),
         ]);
     }
 

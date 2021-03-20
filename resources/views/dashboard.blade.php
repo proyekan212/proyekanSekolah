@@ -10,6 +10,8 @@
     <span class="text-gray-800 text-sm font-semibold">
       Kelas XI IPA
     </span>
+
+    
   </div>
   <div class="grid grid-cols-12 gap-6">
     <div class="col-span-full md:col-span-3">
@@ -44,81 +46,29 @@
     Mata Pelajaran
   </h1>
   <div class="mt-4  grid  lg:grid-cols-4   gap-6">
+    @foreach($daftarKelas->kelas->jadwal_pelajaran as $row)
     <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
-      <h1 class="text-gray-700 mb-2 text-base">
-        Fisika
+      <h1 class="capitalize text-gray-700 mb-2 text-base">
+        Kelas {{$row->master_mapel->nama_mapel}}
       </h1>
       
       <span class="text-gray text-xs">
-      Verrand Bagus Prof
+      {{$row->user->user_detail->name}}
       </span>
-      <form action="" class="mt-2">
-      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
-        Masuk
-      </button>
+      <form action="{{ url('kelas_mapel') }}" method="post" class="mt-2">
+      @csrf
+        <input type="text"  hidden name="kelas_mapel_id" value="{{$row->id}}">
+        <button type="submit" class="py-1 rounded-lg w-full bg-blue-400 text-white">
+          Masuk
+        </button>
       </form>
      
     </div>
-    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
-      <h1 class="text-gray-700 mb-2 text-base">
-        Fisika
-      </h1>
-      
-      <span class="text-gray text-xs">
-      Verrand Bagus Prof
-      </span>
-      <form action="" class="mt-2">
-      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
-        Masuk
-      </button>
-      </form>
+    @endforeach
+    
      
     </div>
-    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
-      <h1 class="text-gray-700 mb-2 text-base">
-        Fisika
-      </h1>
-      
-      <span class="text-gray text-xs">
-      Verrand Bagus Prof
-      </span>
-      <form action="" class="mt-2">
-      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
-        Masuk
-      </button>
-      </form>
-     
-    </div>
-    <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
-      <h1 class="text-gray-700 mb-2 text-base">
-        Fisika
-      </h1>
-      
-      <span class="text-gray text-xs">
-      Verrand Bagus Prof
-      </span>
-      <form action="" class="mt-2">
-      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
-        Masuk
-      </button>
-      </form>
-     
-    </div>
-    <div class="w-full hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
-      <h1 class="text-gray-700 mb-2 text-base">
-        Fisika
-      </h1>
-      
-      <span class="text-gray text-xs">
-      Verrand Bagus Prof
-      </span>
-      <form action="" class="mt-2">
-      <button class="py-1 rounded-lg w-full bg-blue-400 text-white">
-        Masuk
-      </button>
-      </form>
-     
-    </div>
+    
   </div>
   
 </div>
@@ -149,8 +99,7 @@
         </div>
         <div class="header-links">
           
-        </div>
-      </div>
+        </div>      </div>
     </div>
   </div>
 </div>
@@ -164,33 +113,45 @@
     </h2>
     @else
     @endif
-    <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-3">
+    <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-4">
       @foreach($kelas as $row)
-      <div id="card" class="w-full bg-blue-50 md:p-4 p-3 rounded-md shadow-md">
+      <div id="card" class="w-full bg-blue-50 md:p-6 p-4  rounded-md shadow-md">
         <div id="card-content" class="flex flex-col items-center">
             <h3 class="capitalize text-blue-500 mb-1 md:mb-2 md:text-base text-sm">
-            {{$row->rombel->jurusan->name}} {{$row->kode_kelas->kode}} {{$row->kelas}} {{$row->rombel->name}} Fisika
+            {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
             </h3>
             <p class="capitalize text-gray-400 mb-2 md:mb-4 lg:mb-6 ">
-            Mata Pelajaran MIPA {{$row->rombel->name}} {{$row->kode_kelas->name}}
+            tahun akademik {{$row->tahun_akademik->tahun_akademik}}
             </p>
             <div class="mb-2 md:mb-4 lg:mb-6">
               <table class="w-full text-gray-600">
                 <tr>
-                  <td class="px-2 border-r-2 border-gray-500">Siswa: {{$row->daftar_kelas->count()}}</td>
+                  <td class="px-2 border-r-2 border-gray-500">Siswa: {{$row->daftar_kelas->count()}} </td>
                   <td class="px-2 border-r-2 border-gray-500">Max KD: 7</td>
                   <td class="px-2 "> KKM: 75  </td>
                 </tr>
               </table>
             </div>
 
+            
+            @if($row->jadwal_pelajaran->first() === null) 
             <form class="w-full" method="post" action="{{ url ('kelas')}}">
               @csrf
               <input type="text" hidden name="kelas_id" value="{{$row->id}}">
               <button type="submit" class="w-full md:mt-4 rounded-xl font-semibold text-white hover:bg-green-400 transition-all duration-300 border-none outline-none bg-green-500 py-2 capitalize">
+                Buat Kelas
+              </button>
+            </form>
+            @else
+            <form class="w-full" method="get" action="{{ url ('kelas')}}">
+              @csrf
+              <input type="text" hidden name="kelas_id" value="{{$row->id}}">
+              <button type="submit" class="w-full md:mt-4 rounded-xl font-semibold text-white hover:bg-blue-400 transition-all duration-300 border-none outline-none bg-blue-500 py-2 capitalize">
                 Masuk
               </button>
             </form>
+
+            @endif
             
         </div>
       </div>

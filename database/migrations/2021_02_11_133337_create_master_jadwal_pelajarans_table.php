@@ -13,15 +13,14 @@ class CreateMasterJadwalPelajaransTable extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('master_jadwal_pelajarans');
         Schema::create('master_jadwal_pelajarans', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('nama_kelas');
-            $table->string('guru');
-            $table->string('jenjang');
             $table->integer('kelas_id');
             $table->integer('mapel_id');
+            $table->integer('hapus')->default(0);
             $table->integer('kkm');
-            $table->integer('role_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }

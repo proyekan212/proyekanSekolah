@@ -94,7 +94,7 @@
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                   <div class="ml-2">
-                    <p>{{$kelas->rombel->jurusan->jurusan}} {{$kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
+                    <p>{{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
                     <p class="tx-11 text-muted">Mata Pelajaran IPS Biologi Kelas Kelas X</p>
                   </div>
                 </div>

@@ -1,24 +1,27 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Model\TahunAkademik;
+use App\Model\MasterJadwalPelajaran;
 use Illuminate\Http\Request;
 
-class TahunAkademikController extends Controller
+class KelasMapelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-        $tahunAkademik = TahunAkademik::where('hapus', 0)->get();
-         return view('pages.admin.tahunakademik', [
-            'tahun_akademik' => $tahunAkademik
-        ]);    
+        $kelasMapel = MasterJadwalPelajaran::where([
+            ['hapus', '=', 0],
+            ['id', '=', $request->session()->get('kelas_mapel')]
+        ])->first();
+        return view('pages.student.kelas_mapel', [
+            'kelas_mapel' => $kelasMapel
+        ]);
     }
 
     /**
@@ -26,9 +29,9 @@ class TahunAkademikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-      
+        //
     }
 
     /**
@@ -39,12 +42,9 @@ class TahunAkademikController extends Controller
      */
     public function store(Request $request)
     {
-        
-        TahunAkademik::create([
-            'tahun_akademik' => $request->input('tahun_akademik'),
-        ]);
+        $request->session()->put('kelas_mapel', $request->input('kelas_mapel_id'));
 
-        return redirect('tahun_akademik');
+        return redirect('kelas_mapel');
     }
 
     /**
@@ -89,11 +89,6 @@ class TahunAkademikController extends Controller
      */
     public function destroy($id)
     {
-        
-        TahunAkademik::where('id',$id)->update([
-            'hapus' => 1
-        ]);
-
-        return redirect('tahun_akademik');
+        //
     }
 }

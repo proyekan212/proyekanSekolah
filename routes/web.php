@@ -113,11 +113,12 @@ Route::group(['middleware' => ['auth']], function () {
      //LaporanCetakPenilaian
     Route::resource('/Laporan_Cetak_Penilaian', 'Admin\LaporanCetakPenilaianController');
      //TahunAkademik
-    Route::resource('/Tahun_Akademik', 'Admin\TahunAkademikController');
-    
+    Route::resource('/tahun_akademik', 'Admin\TahunAkademikController');
+    Route::resource('/data_kelas', 'Admin\DataKelasController');
     // Data Master Mata Pelajaran
     Route::resource('/data_master_mapel', 'Admin\MasterMapelController');
 
+    Route::resource('/kelas_mapel', 'Student\KelasMapelController');
     
 
 

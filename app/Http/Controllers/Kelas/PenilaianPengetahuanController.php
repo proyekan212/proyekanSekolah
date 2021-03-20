@@ -14,10 +14,13 @@ class PenilaianPengetahuanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
         $kompetensi_dasars = KompetensiDasar::all();
-        $data = MasterPenilaianPengetahuan::where('hapus', '0')->get();
+        $data = MasterPenilaianPengetahuan::where([
+            ['hapus', '=', 0],
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
+        ])->get();
         return view('pages.kelas.PenilaianKd3', [
             'kompetensi_dasars'=> $kompetensi_dasars,
             'data'=> $data,
@@ -47,13 +50,14 @@ class PenilaianPengetahuanController extends Controller
         //    dd($data);
            
            MasterPenilaianPengetahuan::create([
-        'pertemuan' => $request->pertemuan,
-        'skema_penilaian' => $request->skema_penilaian,
-        'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
-        'penilaian_harian' => $request->penilaian_harian,
-        'instruksi' => $request->instruksi,
-        'mulai_pengerjaan' => $request->mulai_pengerjaan,
-        'finish_pengerjaan' => $request->finish_pengerjaan
+            'pertemuan' => $request->pertemuan,
+            'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+            'skema_penilaian' => $request->skema_penilaian,
+            'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
+            'penilaian_harian' => $request->penilaian_harian,
+            'instruksi' => $request->instruksi,
+            'mulai_pengerjaan' => $request->mulai_pengerjaan,
+            'finish_pengerjaan' => $request->finish_pengerjaan
            ]);
     
            return redirect('kelas/penilaian_pengetahuan');

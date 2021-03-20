@@ -16,7 +16,7 @@ class DaftarKelas extends Model
     ];
 
     public function kelas () {
-       return $this->belongsTo('App\Model\MasterKelas', 'kelas_id', 'id');    
+       return $this->belongsTo('App\Model\Kelas', 'kelas_id', 'id');    
     }
 
     public function rombel() {

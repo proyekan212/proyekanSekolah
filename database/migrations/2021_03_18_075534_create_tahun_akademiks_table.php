@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMasterKelasTable extends Migration
+class CreateTahunAkademiksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,15 +12,12 @@ class CreateMasterKelasTable extends Migration
      * @return void
      */
     public function up()
-    {
-        Schema::dropIfExists('master_kelas');
-        
-        Schema::create('master_kelas', function (Blueprint $table) {
-            $table->bigIncrements('id');
+    {   
+        Schema::dropIfExists('tahun_akademiks');
+        Schema::create('tahun_akademiks', function (Blueprint $table) {
+            $table->id();
+            $table->string('tahun_akademik');
             $table->integer('hapus')->default(0);
-            $table->integer('kode_kelas_id');
-            $table->integer('rombel_id');
-            $table->string('kelas');
             $table->timestamps();
         });
     }
@@ -32,6 +29,6 @@ class CreateMasterKelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('master_kelas');
+        Schema::dropIfExists('tahun_akademiks');
     }
 }

@@ -8,8 +8,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar siswa kelas</li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >Data Kelas</li>
   </ol>
 </nav>
 
@@ -23,30 +23,38 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Tahun Akademik</h6>
+          <h6 class="card-title mb-0">Data</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Tahun Akademik</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Add Data Kelas</button>
             <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
           </div>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>Tahun Akademik</th>
-                  <th>Action</th>
-                  <!-- <th>Kelas</th>
-                  <th>Mata Pelajaran</th>
-                  <th>KKM</th> -->
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($tahun_akademik as $index => $row)
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Kelas</th>
+                <th>Tahun Ajaran</th>
+                <th>Rombel</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach($datas as $index => $row)
+
                     <tr>
-                        <td>{{$index + 1}}</td>
                         <td>
-                            {{$row->tahun_akademik}}
+                            {{$index + 1 }}
+                        </td>
+                        <td>
+                            {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
+                        </td>
+                        <td>
+                          {{$row->tahun_akademik->tahun_akademik}}
+                        </td>
+                        <td>
+                          {{$row->rombel->name}}
                         </td>
                         <td class="flex ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
@@ -57,7 +65,7 @@
                           </span>
                         </button>
                 
-                      <form method="post" action="{{ url('tahun_akademik', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                      <form method="post" action="{{ url('Master_KKM', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
@@ -68,8 +76,9 @@
                       </form>
                     </td>
                     </tr>
+
                 @endforeach
-              </tbody>
+            </tbody>
           </table>
         </div>
       </div>
@@ -81,35 +90,72 @@
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title capitalize" id="exampleModalLabel">tambah mapel</h5>
+        <h5 class="modal-title capitalize" id="exampleModalLabel">sinkronkan siswa ke dalam kelas</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-     
-     <form action="{{ url ('tahun_akademik')}}" method="post">
-      @csrf
       <div class="modal-body">
-    
+        <form action="{{ URL ('data_kelas')}}" method="post">
+          @csrf
+        <div class="form-group row">
+              <div class="col-lg-3">
+                <label class="col-form-label">Kelas</label>
+              </div>
+              <div class="col-lg-8">
+              <select name="kelas" id="">
+              @foreach($master_kelas as $row)
+                    <option value="{{$row->id}}">
+                      {{$row->kelas}}
+                    </option>
+                  @endforeach
+              </select>
+                 
+               </div>
+              
+            
+          </div>
 
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Tambah Tahun Akademik</label>
-         </div>
-         <div class="col-lg-8">
-           <input type="text" name="tahun_akademik" class="form-control"> 
-         </div>
-       </div>
-     
-   </div>
+          <div class="form-group row">
+              <div class="col-lg-3">
+                <label class="col-form-label">Tahun Akademik</label>
+              </div>
+              <div class="col-lg-8">
+              
+                  <select name="tahun_akademik" id="">
+                    @foreach($tahun_akademik as $row)
+                      <option value="{{$row->id}}">
+                        {{$row->tahun_akademik}}
+                      </option>
+                    @endforeach
+                  </select>
+              </div>
+              
+            
+          </div>
+
+          <div class="form-group row">
+              <div class="col-lg-3">
+                <label class="col-form-label">Rombel</label>
+              </div>
+              <div class="col-lg-8">
+                  <input type="text" required   placeholder="" name="rombel" required class="form-control">  
+                </div>
+
+          </div>
+      </div>
+
+       
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">add mapel</button>
+        <button type="submit" class="btn btn-primary">Add Kelas
+        </button>
       </div>
-  </form>
+
+      </form>
+    </div>
   </div>
 </div>
-
 <script type="text/javascript">
   function editData(id){
     console.log(id);

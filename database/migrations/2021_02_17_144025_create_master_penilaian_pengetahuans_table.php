@@ -20,6 +20,7 @@ class CreateMasterPenilaianPengetahuansTable extends Migration
             $table->integer('kompetensi_dasar_id');
             $table->integer('penilaian_harian');
             $table->text('instruksi');
+            $table->integer('kelas_mapel_id');
             $table->smallInteger('hapus')->default(0);
             $table->timestamp('mulai_pengerjaan')->nullable();
             $table->timestamp('finish_pengerjaan')->nullable();

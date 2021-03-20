@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\Kelas;
+use App\Model\MasterKelas;
+use App\Model\RombelKelas;
 use App\Model\TahunAkademik;
 use Illuminate\Http\Request;
 
-class TahunAkademikController extends Controller
+class DataKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +18,16 @@ class TahunAkademikController extends Controller
      */
     public function index()
     {   
-        $tahunAkademik = TahunAkademik::where('hapus', 0)->get();
-         return view('pages.admin.tahunakademik', [
-            'tahun_akademik' => $tahunAkademik
-        ]);    
+        $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
+        $rombel = RombelKelas::where('hapus', 0)->get();
+        $master_kelas = MasterKelas::where('hapus', 0)->get();
+        $datas = Kelas::where('hapus', 0)->get();
+        return view('pages.admin.datakelas', [
+            'datas' => $datas,
+            'tahun_akademik' => $tahun_akademik,
+            'rombel' => $rombel,
+            'master_kelas' => $master_kelas
+        ]);
     }
 
     /**
@@ -26,9 +35,9 @@ class TahunAkademikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-      
+        //
     }
 
     /**
@@ -39,12 +48,13 @@ class TahunAkademikController extends Controller
      */
     public function store(Request $request)
     {
-        
-        TahunAkademik::create([
-            'tahun_akademik' => $request->input('tahun_akademik'),
+        Kelas::create([
+            'master_kelas_id' => $request->input('kelas'),
+            'tahun_akademik_id' => $request->input('tahun_akademik'),
+            'rombel_id'=> 1
         ]);
 
-        return redirect('tahun_akademik');
+        return redirect('data_kelas');
     }
 
     /**
@@ -89,11 +99,6 @@ class TahunAkademikController extends Controller
      */
     public function destroy($id)
     {
-        
-        TahunAkademik::where('id',$id)->update([
-            'hapus' => 1
-        ]);
-
-        return redirect('tahun_akademik');
+        //
     }
 }

@@ -1,12 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Student;
 
 use App\Http\Controllers\Controller;
-use App\Model\TahunAkademik;
 use Illuminate\Http\Request;
 
-class TahunAkademikController extends Controller
+class UploadTugasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,11 +13,8 @@ class TahunAkademikController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $tahunAkademik = TahunAkademik::where('hapus', 0)->get();
-         return view('pages.admin.tahunakademik', [
-            'tahun_akademik' => $tahunAkademik
-        ]);    
+    {
+        //
     }
 
     /**
@@ -26,9 +22,9 @@ class TahunAkademikController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create()
     {
-      
+        //
     }
 
     /**
@@ -39,12 +35,7 @@ class TahunAkademikController extends Controller
      */
     public function store(Request $request)
     {
-        
-        TahunAkademik::create([
-            'tahun_akademik' => $request->input('tahun_akademik'),
-        ]);
-
-        return redirect('tahun_akademik');
+        //
     }
 
     /**
@@ -89,11 +80,6 @@ class TahunAkademikController extends Controller
      */
     public function destroy($id)
     {
-        
-        TahunAkademik::where('id',$id)->update([
-            'hapus' => 1
-        ]);
-
-        return redirect('tahun_akademik');
+        //
     }
 }

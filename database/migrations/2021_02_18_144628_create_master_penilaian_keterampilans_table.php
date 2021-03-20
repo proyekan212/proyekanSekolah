@@ -19,6 +19,7 @@ class CreateMasterPenilaianKeterampilansTable extends Migration
             $table->string('nama_penilaian');
             $table->text('kompetensi_dasar');
             $table->text('keterangan');
+            $table->integer('kelas_mapel_id');
             $table->integer('hapus')->default(0);
             $table->date('mulai_pengerjaan')->nullable();
             $table->date('finish_pengerjaan')->nullable();

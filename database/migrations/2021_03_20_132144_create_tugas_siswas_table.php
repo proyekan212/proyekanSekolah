@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateRombelKelasTable extends Migration
+class CreateTugasSiswasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,12 @@ class CreateRombelKelasTable extends Migration
      */
     public function up()
     {
-        Schema::create('rombel_kelas', function (Blueprint $table) {
+        Schema::create('tugas_siswas', function (Blueprint $table) {
             $table->id();
-            $table->integer('hapus')->default(0);
-            $table->integer('jurusan_id');
-            $table->string('name');
+            $table->integer('kompetensi_inti_id');
+            $table->string('file_path');
+            $table->integer('penilaian_id');
+            $table->integer('user_id');
             $table->timestamps();
         });
     }
@@ -29,6 +30,6 @@ class CreateRombelKelasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('rombel_kelas');
+        Schema::dropIfExists('tugas_siswas');
     }
 }

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Model\DaftarKelas;
+use App\Model\Kelas;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterKelas;
 use App\Model\MasterSemester;
@@ -22,14 +24,25 @@ class DashboardController extends Controller
 
         // $menu = Menu::all();
 
-
+        // untuk siswa
         $mapel = MasterJadwalPelajaran::all();
         $semester = MasterSemester::all();
         $user = User::where('id', $request->user()->id)->first();
-        $kelas = MasterKelas::all();
+
+        $daftarKelas = DaftarKelas::with(['kelas', 'user'])
+        ->whereHas('user', function($q) use($request) {
+            $q->where('id','=', $request->user()->id);
+        })->first();
+
+
+        // untuk guru
+        $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request) {
+            $q->where('user_id', '=', $request->user()->id);
+        }])->get();
         return view('dashboard', [
             'showSemester'      => $semester,
             'showMataPelajaran' => $mapel,
+            'daftarKelas' => $daftarKelas,
             'kelas' => $kelas,
             'user' => $user,
             // 'menu' => $menu

@@ -14,6 +14,7 @@ class MasterPenilaianKeterampilan extends Model
         'skema',
         'kompetensi_dasar',
         'keterangan',
+        'kelas_mapel_id',
         'hapus',
         'mulai_pengerjaan',
         'finish_pengerjaan'
@@ -32,6 +33,10 @@ class MasterPenilaianKeterampilan extends Model
         }
         return $kompetensi_dasar;
         
+    }
+
+    public function kelas_mapel() {
+        return $this->belongsTo('App\MasterJadwalPelajaran', 'kelas_mapel_id', 'id');
     }
 
 
