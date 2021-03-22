@@ -8,7 +8,9 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
+    <li class="breadcrumb-item"><a href="#">Kelas 
+    
+    </a></li>
     <li class="breadcrumb-item active" aria-current="page">Absensi Kelas</li>
   </ol>
 </nav>
@@ -31,19 +33,30 @@
               <tr>
                 <th>No</th>
                 <th>Nama Siswa</th>
-                <th>1 Januari 2021</th>
-                <th>2 Januari 2021</th>
-                <th>3 Januari 2021</th>
-                <th>4 Januari 2021</th>
-                <th>5 Januari 2021</th>
-                <th>6 Januari 2021</th>
-                <th>7 Januari 2021</th>
-                <th>8 Januari 2021</th>
-                <th>9 Januari 2021</th>
-                <th>10 Januari 2021</th>
+                <?php
+                  $maxDays = date('t');
+                  $currentMonth = date('F');
+
+                  for($i=1; $i <= $maxDays; $i++) {
+
+                    echo "<th>$i $currentMonth</th>";
+                  }
+                
+                ?>
               </tr>
             </thead>
             <tbody>
+                  @foreach($daftar_kelas as $index => $row) 
+                    <tr>
+                      <td>
+                        {{$index + 1}}
+                      </td>
+
+                      <td>
+                        {{$row->user->name}}
+                      </td>
+                    </tr>
+                  @endforeach
             </tbody>
           </table>
         </div>

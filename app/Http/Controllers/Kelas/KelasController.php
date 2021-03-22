@@ -13,10 +13,13 @@ class KelasController extends BaseController
 {
     public function index(Request $request){
         
+
+        // dd($request->all());
         $kelasMapel = MasterJadwalPelajaran::where('user_id', $request->user()->id)->first();
-        $request->session()->put('kelas_mapel', $kelasMapel->id);
+        // $request->session()->put('kelas_mapel', $kelasMapel->id);
+        $request->session()->put('kelas_mapel', $request->input('kelas_mapel'));
         
-        $request->session()->put('kelas_id', $kelasMapel->kelas->id);
+        $request->session()->put('kelas_id', $request->input('kelas_id'));
         $kelas = Kelas::where('id', $request->session()->get('kelas_id'))->first();
         return view('pages.kelas.dashboard', [
             'kelas' => $kelas
@@ -41,6 +44,8 @@ class KelasController extends BaseController
             'user_id' => $request->user()->id,
             
         ]);
+
+        $request->session()->put('kelas_mapel', $jadwalMapel->id);
         
         return redirect('dashboard');
     }

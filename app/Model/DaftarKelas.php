@@ -23,7 +23,7 @@ class DaftarKelas extends Model
       return  $this->belongsTo('App\Model\RombelKelas', 'rombel_id', 'id');
     }
 
-    public function user() {
+    public function user_detail() {
        return $this->belongsTo('App\Model\UserDetail', 'user_id', 'id');
     }
 }

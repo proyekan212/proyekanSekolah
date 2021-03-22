@@ -46,7 +46,7 @@ Route::group(['middleware' => ['auth']], function () {
      //VIDEO CONFERENCE
     Route::get('/kelas/video_conference', 'Kelas\VideoConferenceController@VideoConferenceGet');
     //ABSENSI KELAS
-    Route::get('/kelas/absensi_kelas', 'Kelas\AbsensiKelasController@AbsensiKelasGet');
+    Route::resource('/kelas/absensi_kelas', 'Kelas\AbsensiKelasController');
     //KOMPETENSI DASAR
     Route::resource('/kelas/kompetensi_dasar', 'Kelas\KompetensiDasarController');
     //RPP (UPLOAD FILE)
@@ -80,6 +80,11 @@ Route::group(['middleware' => ['auth']], function () {
 
     //PROFILE
     Route::get('/profile', 'Profile\ProfileController@ProfileGet');
+
+
+    // settings kelas
+    Route::resource('/kelas/pengaturan_kelas', 'Kelas\PengaturanKelasController');
+
 
     //Admnistrator
     //SettingSemester
@@ -120,7 +125,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
     
-
+    
 
 });
 

@@ -25,6 +25,7 @@
                 <h5 class="mb-0">
                     <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapseOne">
                         {{$row->pertemuan}}
+                       
                     </button>
                 </h5>
                 </div>
@@ -61,7 +62,9 @@
                 <div class="card-body">
                     <div>
                         <p>Tugas:</p> {{$row->keterangan}}
-                    </div>
+
+
+                    </div>  
 
                     <div class="mt-4">
                        <p>Kumpulkan Tugas:</p>  <input type="file">

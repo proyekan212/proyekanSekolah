@@ -1,19 +1,12 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
-use App\Model\DaftarKelas;
-use App\Model\Kelas;
 use App\Model\MasterJadwalPelajaran;
-use App\Model\MasterKelas;
-use App\Model\MasterSemester;
 use Illuminate\Http\Request;
-use App\Model\Menu;
-use App\Model\User;
-use App\Model\UserDetail;
 
-class DashboardController extends Controller
+class PengaturanKelasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,32 +15,9 @@ class DashboardController extends Controller
      */
     public function index(Request $request)
     {
-
-        // $menu = Menu::all();
-
-        // untuk siswa
-        $mapel = MasterJadwalPelajaran::all();
-        $semester = MasterSemester::all();
-        $user = User::where('id', $request->user()->id)->first();
-        $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
-        $daftarKelas = DaftarKelas::with(['kelas', 'user_detail'])
-        ->whereHas('user_detail', function($q) use($user_detail) {
-            $q->where('id','=', $user_detail->id);
-        })->first();
-        // dd($daftarKelas);
-
-
-        // untuk guru
-        $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request) {
-            $q->where('user_id', '=', $request->user()->id);
-        }])->get();
-        return view('dashboard', [
-            'showSemester'      => $semester,
-            'showMataPelajaran' => $mapel,
-            'daftarKelas' => $daftarKelas,
-            'kelas' => $kelas,
-            'user' => $user,
-            // 'menu' => $menu
+       $data = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+        return view('pages.kelas.pengaturan_kelas',[
+            'data' => $data
         ]);
     }
 
@@ -103,7 +73,12 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        MasterJadwalPelajaran::where('id', $id)->update([
+            'kkm' => $request->input('kkm'),
+            'pertemuan' => $request->input('pertemuan')
+        ]);
+
+        return redirect('kelas/pengaturan_kelas');
     }
 
     /**

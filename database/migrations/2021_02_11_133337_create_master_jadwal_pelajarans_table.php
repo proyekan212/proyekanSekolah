@@ -18,8 +18,9 @@ class CreateMasterJadwalPelajaransTable extends Migration
             $table->bigIncrements('id');
             $table->integer('kelas_id');
             $table->integer('mapel_id');
+            $table->integer('pertemuan')->default(16);
             $table->integer('hapus')->default(0);
-            $table->integer('kkm');
+            $table->integer('kkm')->default(75);
             $table->integer('user_id');
             $table->timestamps();
         });
