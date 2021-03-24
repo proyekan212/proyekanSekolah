@@ -30,7 +30,7 @@ class MasterPenilaianPengetahuan extends Model
         return $this->belongsTo('App\MasterJadwalPelajaran', 'kelas_mapel_id', 'id');
     }
 
-    public function tugas_siswa() {
-        return $this->hasMany('App\Model\TugasSiswa', 'penilaian_id', 'id');
+    public function tugas_pengetahuan() {
+        return $this->hasMany('App\Model\TugasSiswaPengetahuan', 'penilaian_pengetahuan_id', 'id');
     }
 }

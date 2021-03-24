@@ -48,14 +48,14 @@
               @foreach($siswa as $index => $row)
                 <tr>
                   <td>{{$index+1}}</td>
-                  <td>{{$row->user->photo}}</td>
-                  <td>{{$row->user->nisn_or_nip}}</td>
-                  <td>{{$row->user->name}}</td>
-                  <td class="capitalize">{{$row->user->jenis_kelamin}}</td>
-                  <td class=  "capitalize">{{$row->user->tempat_lahir}}, {{$row->user->tanggal_lahir}}</td>
+                  <td>{{$row->user_detail->photo}}</td>
+                  <td>{{$row->user_detail->nisn_or_nip}}</td>
+                  <td>{{$row->user_detail->name}}</td>
+                  <td class="capitalize">{{$row->user_detail->jenis_kelamin}}</td>
+                  <td class=  "capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
 
                   <td>{{$row->kelas->kelas}} {{$row->rombel->name}}</td>
-                  <td>@if($row->user->status == 0)
+                  <td>@if($row->user_detail->status == 0)
                         <span class="text-red-400 capitalize">
                           offline
                         </span>
@@ -108,10 +108,10 @@
                     <td>
                       {{$key+1}}
                     </td>
-                    <td>{{$row->user->nisn_or_nip}}</td>
-                    <td>{{$row->user->name}}</td>
+                    <td>{{$row->user_detail->nisn_or_nip}}</td>
+                    <td>{{$row->user_detail->name}}</td>
                     <td class="capitalize">
-                      {{$row->user->jenis_kelamin}}
+                      {{$row->user_detail->jenis_kelamin}}
                     </td>
                     <td>
                       {{$row->kelas->kelas}}

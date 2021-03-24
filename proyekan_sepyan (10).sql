@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 22, 2021 at 11:18 PM
+-- Generation Time: Mar 24, 2021 at 07:04 PM
 -- Server version: 10.5.8-MariaDB
 -- PHP Version: 7.4.14
 
@@ -183,7 +183,8 @@ CREATE TABLE `master_jadwal_pelajarans` (
 --
 
 INSERT INTO `master_jadwal_pelajarans` (`id`, `kelas_id`, `mapel_id`, `pertemuan`, `hapus`, `kkm`, `user_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 20, 0, 75, 5, '2021-03-22 08:01:00', '2021-03-22 08:01:09');
+(1, 1, 1, 20, 0, 75, 5, '2021-03-22 08:01:00', '2021-03-22 08:01:09'),
+(2, 2, 1, 16, 0, 75, 5, '2021-03-23 03:57:35', '2021-03-23 03:57:35');
 
 -- --------------------------------------------------------
 
@@ -377,7 +378,9 @@ CREATE TABLE `master_penilaian_keterampilans` (
 --
 
 INSERT INTO `master_penilaian_keterampilans` (`id`, `skema`, `nama_penilaian`, `kompetensi_dasar`, `keterangan`, `kelas_mapel_id`, `hapus`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
-(1, 'tes lisan', 'sqdqw', '5,', 'oke', 1, 0, NULL, NULL, '2021-03-21 01:36:09', '2021-03-21 01:36:09');
+(1, 'tes lisan', 'sqdqw', '5,', 'oke', 1, 0, NULL, NULL, '2021-03-21 01:36:09', '2021-03-21 01:36:09'),
+(2, 'tes tulis', 'hilih', '5,', 'eqwewq', 2, 0, NULL, NULL, '2021-03-23 05:20:36', '2021-03-23 05:20:36'),
+(3, 'penugasan', 'apaseh', '5,', 'apa cok', 2, 0, NULL, '2021-03-17', '2021-03-23 05:37:08', '2021-03-23 05:37:08');
 
 -- --------------------------------------------------------
 
@@ -777,7 +780,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (74, '2021_02_17_144025_create_master_penilaian_pengetahuans_table', 38),
 (76, '2021_02_18_144628_create_master_penilaian_keterampilans_table', 40),
 (79, '2021_03_20_132144_create_tugas_siswas_table', 41),
-(82, '2021_02_11_133337_create_master_jadwal_pelajarans_table', 42);
+(82, '2021_02_11_133337_create_master_jadwal_pelajarans_table', 42),
+(86, '2021_03_23_113936_create_tugas_siswa_pengetahuans_table', 43),
+(87, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 44);
 
 -- --------------------------------------------------------
 
@@ -886,6 +891,50 @@ INSERT INTO `tugas_siswas` (`id`, `kompetensi_inti_id`, `file_path`, `penilaian_
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `tugas_siswa_keterampilans`
+--
+
+CREATE TABLE `tugas_siswa_keterampilans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penilaian_keterampilan_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `filename_path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tugas_siswa_keterampilans`
+--
+
+INSERT INTO `tugas_siswa_keterampilans` (`id`, `penilaian_keterampilan_id`, `user_id`, `filename_path`, `created_at`, `updated_at`) VALUES
+(1, 2, 4, 'warukatadq', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tugas_siswa_pengetahuans`
+--
+
+CREATE TABLE `tugas_siswa_pengetahuans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penilaian_pengetahuan_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `filename_path` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `tugas_siswa_pengetahuans`
+--
+
+INSERT INTO `tugas_siswa_pengetahuans` (`id`, `penilaian_pengetahuan_id`, `user_id`, `filename_path`, `created_at`, `updated_at`) VALUES
+(1, 2, 4, 'oke', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -905,11 +954,11 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `token`, `role_id`, `verify_token`, `created_at`, `updated_at`) VALUES
-(1, 'Mdz2rlIUud@gmail.com', '$2y$10$jf1nu.PLJPk89ACcvZzZlObIJViLoXSLY4.nex9De8dyW6.sxcKNa', NULL, 1, NULL, NULL, NULL),
-(2, 'UGYYaV08WU@gmail.com', '$2y$10$Njh0dC3V0gLxrbpX5j6oEeXr1uBYqwGM0.Z705LzCwWx8/QZkIU1e', NULL, 2, NULL, NULL, NULL),
+(1, 'admin@gmail.com', '$2y$10$jf1nu.PLJPk89ACcvZzZlObIJViLoXSLY4.nex9De8dyW6.sxcKNa', NULL, 1, NULL, NULL, NULL),
+(2, 'user@gmail.com', '$2y$10$Njh0dC3V0gLxrbpX5j6oEeXr1uBYqwGM0.Z705LzCwWx8/QZkIU1e', NULL, 2, NULL, NULL, NULL),
 (3, 'WXX5IZqkdx@gmail.com', '$2y$10$ROopXxnt8PcBqJBy5nJEre0krSle26kolE9gCuEF.985dPd6CAo0i', NULL, 3, NULL, NULL, NULL),
 (4, '1DI3n4JBM6@gmail.com', '$2y$10$P/h5kYYaQodj2INejtoWCu0ltNnlZ.B2SzgNwzTDvrf4oFNblmrrW', NULL, 4, NULL, NULL, NULL),
-(5, 'ovAJdO5n82@gmail.com', '$2y$10$ysnP/.0sTmkNGmtcKesBcOSTWMljDPagnCnbY9veeFbm6W23e4VeS', NULL, 5, NULL, NULL, NULL);
+(5, 'guru@gmail.com', '$2y$10$ysnP/.0sTmkNGmtcKesBcOSTWMljDPagnCnbY9veeFbm6W23e4VeS', NULL, 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1138,6 +1187,18 @@ ALTER TABLE `tugas_siswas`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `tugas_siswa_keterampilans`
+--
+ALTER TABLE `tugas_siswa_keterampilans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tugas_siswa_pengetahuans`
+--
+ALTER TABLE `tugas_siswa_pengetahuans`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -1193,7 +1254,7 @@ ALTER TABLE `kompetensi_dasars`
 -- AUTO_INCREMENT for table `master_jadwal_pelajarans`
 --
 ALTER TABLE `master_jadwal_pelajarans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `master_jurusans`
@@ -1241,7 +1302,7 @@ ALTER TABLE `master_mapels`
 -- AUTO_INCREMENT for table `master_penilaian_keterampilans`
 --
 ALTER TABLE `master_penilaian_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `master_penilaian_pengetahuans`
@@ -1295,7 +1356,7 @@ ALTER TABLE `menu_role_kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1319,6 +1380,18 @@ ALTER TABLE `tahun_akademiks`
 -- AUTO_INCREMENT for table `tugas_siswas`
 --
 ALTER TABLE `tugas_siswas`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tugas_siswa_keterampilans`
+--
+ALTER TABLE `tugas_siswa_keterampilans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `tugas_siswa_pengetahuans`
+--
+ALTER TABLE `tugas_siswa_pengetahuans`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
