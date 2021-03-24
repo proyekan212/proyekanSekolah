@@ -20,14 +20,30 @@
         <div class="flex w-full px-4 flex row">
           <div id="accordion" class="w-full">
           @foreach($kelas_mapel->penilaian_pengetahuan as $row)
+
           <div class="card">
-                <div class="card-header" id="headingOne">
+                <div class="card-header flex justify-between items-center" id="headingOne">
                 <h5 class="mb-0">
-                    <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapseOne">
+                    <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapse{{$row->id}}">
                         {{$row->pertemuan}}
                        
                     </button>
                 </h5>
+                @if($row->tugas_pengetahuan->count() > 0) 
+                    <span class="text-green-400">
+                      sudah mengumpulkan
+                      <i  class="pl-2 fas fa-check">
+                        
+                      </i>
+                    </span>
+                  @else
+                     <span class="text-red-400">
+                      belum mengumpulkan
+                      <i class="pl-2 fas fa-times">
+                        
+                      </i>
+                    </span>
+                  @endif
                 </div>
 
                 <div id="collapse{{$row->id}}" class="collapse show" aria-labelledby="heading{{$row->id}}" data-parent="#accordion">
@@ -37,7 +53,18 @@
                     </div>
 
                     <div class="mt-4">
-                       <p>Kumpulkan Tugas:</p>  <input type="file">
+                         @if($row->tugas_pengetahuan->count() > 0) 
+                         <a href="">
+
+                            {{$row->tugas_pengetahuan[0]->filename_path}}
+                           <i class="fas fa-download"></i>
+                         </a>
+                         @else
+                          <div class="flex flex-col"> 
+                            belum mengumpulkan tugas
+                            <input type="file">
+                          </div>
+                      @endif
                     </div>
                 </div>
                 </div>
@@ -49,13 +76,30 @@
       </div>
       <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><div id="accordion">
           @foreach($kelas_mapel->penilaian_keterampilan as $index => $row)
-          <div class="card">
-                <div class="card-header" id="headingOne">
-                <h5 class="mb-0">
-                    <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapseOne">
-                       Pertemuan {{$index + 1}}
-                    </button>
-                </h5>
+
+          <div class="card ">
+                <div class="card-header flex justify-between items-center" id="headingOne">
+                  <h5 class="mb-0">
+                      <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapse{{$row->id}}">
+                         Pertemuan {{$index + 1}}
+                      </button>
+                  </h5>
+
+                  @if($row->tugas_keterampilan->count() > 0) 
+                    <span class="text-green-400">
+                      sudah mengumpulkan
+                      <i  class="pl-2 fas fa-check">
+                        
+                      </i>
+                    </span>
+                  @else
+                     <span class="text-red-400">
+                      belum mengumpulkan
+                      <i class="pl-2 fas fa-times">
+                        
+                      </i>
+                    </span>
+                  @endif
                 </div>
 
                 <div id="collapse{{$row->id}}" class="collapse show" aria-labelledby="heading{{$row->id}}" data-parent="#accordion">
@@ -65,10 +109,21 @@
 
 
                     </div>  
-
                     <div class="mt-4">
-                       <p>Kumpulkan Tugas:</p>  <input type="file">
+                       @if($row->tugas_keterampilan->count() > 0) 
+                         <a href="">
+
+                            {{$row->tugas_keterampilan[0]->filename_path}}
+                           <i class="fas fa-download"></i>
+                         </a>
+                         @else
+                          <div class="flex flex-col"> 
+                            belum mengumpulkan tugas
+                            <input type="file">
+                          </div>
+                      @endif
                     </div>
+                      
                 </div>
                 </div>
          </div>

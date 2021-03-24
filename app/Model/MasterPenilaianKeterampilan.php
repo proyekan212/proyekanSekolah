@@ -36,7 +36,11 @@ class MasterPenilaianKeterampilan extends Model
     }
 
     public function kelas_mapel() {
-        return $this->belongsTo('App\MasterJadwalPelajaran', 'kelas_mapel_id', 'id');
+        return $this->belongsTo('App\Model\MasterJadwalPelajaran', 'kelas_mapel_id', 'id');
+    }
+
+    public function tugas_keterampilan() {
+        return $this->hasMany('App\Model\TugasSiswaKeterampilan', 'penilaian_keterampilan_id', 'id');
     }
 
 

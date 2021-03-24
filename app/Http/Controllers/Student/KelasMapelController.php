@@ -15,7 +15,13 @@ class KelasMapelController extends Controller
      */
     public function index(Request $request)
     {   
-        $kelasMapel = MasterJadwalPelajaran::where([
+        $kelasMapel = MasterJadwalPelajaran::with(['penilaian_pengetahuan.tugas_pengetahuan' => function($q) use($request) {
+                $q->where('user_id', '=', $request->user()->id);
+             },
+             'penilaian_keterampilan.tugas_keterampilan' => function($q) use($request) {
+                $q->where('user_id', '=', $request->user()->id);
+             }
+            ])->where([
             ['hapus', '=', 0],
             ['id', '=', $request->session()->get('kelas_mapel')]
         ])->first();

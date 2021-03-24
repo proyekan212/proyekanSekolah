@@ -53,7 +53,7 @@
                       </td>
 
                       <td>
-                        {{$row->user->name}}
+                        {{$row->user_detail->name}}
                       </td>
                     </tr>
                   @endforeach

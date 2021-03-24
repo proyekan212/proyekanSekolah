@@ -3,7 +3,8 @@
 @section('content')
 
 @if($user->user_detail->role->name_role == 'siswa')
-  <div class="w-full  flex flex-col mb-4  bg-white rounded-xl p-4">
+ <div>
+ <div class="w-full  flex flex-col mb-4  bg-white rounded-xl p-4">
     <span class="text-sm mb-2 text-blue-400">
     Tahun Ajaran 2020/2021
     </span>
@@ -14,7 +15,7 @@
     
   </div>
   <div class="grid grid-cols-12 gap-6">
-    <div class="col-span-full md:col-span-3">
+    <div class=" col-span-4">
       <div class="w-full bg-white p-4 flex items-center  rounded-xl shadow-md">
         <span style="font-size:50px;" class="material-icons pr-4 text-red-400">
           assignment_ind
@@ -35,7 +36,7 @@
         calendar
       </div>
     </div>
-    <div id="tugas-terbaru" class="col-span-full md:col-span-9">
+    <div id="tugas-terbaru" class="col-span-8">
       <div class="bg-white shadow-md p-4 rounded-xl">
         jadwal pelajaran
       </div> 
@@ -72,6 +73,7 @@
   </div>
   
 </div>
+ </div>
   
   
 @else
