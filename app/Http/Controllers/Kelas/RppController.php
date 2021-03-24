@@ -35,7 +35,7 @@ class RppController extends BaseController
             'name' => $request->input('name'),
             'name_file' => $file_formatted,
             'created_at' => time(),
-            'kelas_id' => 1
+            'kelas_id' => $request->session()->get('kelas_mapel'),
         ]);
 
         return redirect('kelas/rpp');
@@ -59,4 +59,5 @@ class RppController extends BaseController
 
        return redirect('kelas/rpp');
     }
+
 }

@@ -7,6 +7,7 @@ use App\Model\MasterKejadianJurnal;
 use App\Model\User;
 use App\Model\UserDetail;
 use Illuminate\Http\Request;
+use App\Exports\KejadianJurnalExport;
 
 class KejadianJurnalController extends Controller
 {
@@ -47,13 +48,13 @@ class KejadianJurnalController extends Controller
     {   
        $data = $request->all();
     //    dd($data);
-       
+
        MasterKejadianJurnal::create(
            $data
        );
 
        return redirect('kelas/kejadian_jurnal');
-    }
+   }
 
     /**
      * Display the specified resource.
@@ -95,9 +96,9 @@ class KejadianJurnalController extends Controller
      */
     public function update(Request $request, $id)
     {
-       
 
-       
+
+
         $input = MasterKejadianJurnal::where('id', $id)->update([
             'waktu'=>$request->input('waktu'),
             'user_id' => $request->input('user_id'),
@@ -106,7 +107,7 @@ class KejadianJurnalController extends Controller
             'tindakan' => $request->input('tindakan'),
             'tindak_lanjut' => $request->input('tindak_lanjut')
         ]);
-     
+
         return redirect('kelas/kejadian_jurnal');       
     }
 
