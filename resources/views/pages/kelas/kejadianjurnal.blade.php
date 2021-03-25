@@ -114,10 +114,10 @@
             </div>
             <div class="col-lg-8">
               <select name="user_id" class="form-control form-control-sm mb-3">
-                <option selected>- Nama Siswa -</option>
-                @foreach ( $users as $user )
-                 <option value="{{$user->id}}">
-                  {{$user->name}}
+                
+                @foreach ( $daftarKelas as $row )
+                 <option value="{{$row->user_detail->id}}">
+                  {{$row->user_detail->name}}
                  </option>
                 @endforeach
               </select>

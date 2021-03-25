@@ -20,6 +20,7 @@ class CreateMasterKejadianJurnalsTable extends Migration
             $table->text('kejadian');
             $table->string('butir_sikap');
             $table->boolean('hapus')->default(0);
+            $table->integer('kelas_mapel_id');
             $table->string('tindakan');
             $table->text('tindak_lanjut');
             $table->timestamps();

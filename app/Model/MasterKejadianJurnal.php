@@ -15,11 +15,16 @@ class MasterKejadianJurnal extends Model
         'butir_sikap',
         'tindakan',
         'tindak_lanjut',
+        'kelas_mapel_id',
         'hapus',
     ];
 
     public function siswa() {
         return $this->belongsTo('App\Model\UserDetail', 'user_id', 'id');
+    }
+
+    public function kelas_mapel() {
+        return $this->belongsTo('App\Model\MasterJadwaPelajaran', 'kelas_mapel_id', 'id');
     }
 
 }

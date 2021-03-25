@@ -11,7 +11,11 @@ class RppController extends BaseController
 {
     public function index(Request $request){
 
-        $rpp = MasterRpp::where('hapus', 0)->get();
+        $kelas_mapel = 
+        $rpp = MasterRpp::where([
+            ['hapus', '=', 0],
+            ['kelas_id', '=', $request->session()->get('kelas_mapel')]
+        ])->get();
         return view('pages.kelas.rpp', [
             'rpp'=> $rpp
         ]);
@@ -35,7 +39,7 @@ class RppController extends BaseController
             'name' => $request->input('name'),
             'name_file' => $file_formatted,
             'created_at' => time(),
-            'kelas_id' => 1
+            'kelas_id' => $request->session()->get('kelas_mapel')
         ]);
 
         return redirect('kelas/rpp');

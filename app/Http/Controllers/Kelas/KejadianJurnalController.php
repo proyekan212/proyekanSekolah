@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kelas;
 use App\Http\Controllers\Controller;
 use App\Model\MasterKejadianJurnal;
 use App\Model\User;
+use App\Model\DaftarKelas;
 use App\Model\UserDetail;
 use Illuminate\Http\Request;
 
@@ -15,14 +16,16 @@ class KejadianJurnalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $siswa = UserDetail::with(['role' => function($query) {
-            $query->where('name_role', '=', 'siswa');
-        }])->get();
-        $datas = MasterKejadianJurnal::where('hapus', 0)->get();
+        $daftarKelas = DaftarKelas::where([
+            ['kelas_id', '=',$request->session()->get('kelas_id')]
+        ])->get();
+
+        // dd($request->session()->get('kelas_id'));
+        $datas = MasterKejadianJurnal::where('hapus', 0)->get(QHe);
         return view('pages.kelas.kejadianjurnal', [
-            "users"=> $siswa,
+            "daftarKelas"=> $daftarKelas,
             "datas" => $datas
         ]);
     }
@@ -45,11 +48,19 @@ class KejadianJurnalController extends Controller
      */
     public function store(Request $request)
     {   
-       $data = $request->all();
+       // $data = $request->all();
     //    dd($data);
        
-       MasterKejadianJurnal::create(
-           $data
+
+       MasterKejadianJurnal::create([
+        'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+        'waktu' => $request->input('waktu'),
+        'kejadian' => $request->input('kejadian'),
+        'tindakan' => $request->input('tindakan'),
+        'tindak_lanjut' => $request->input('tindak_lanjut'),
+        'butir_sikap' => $request->input('butir_sikap'),
+        'user_id' => $request->input('user_id')     
+        ]
        );
 
        return redirect('kelas/kejadian_jurnal');
