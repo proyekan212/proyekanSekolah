@@ -61,8 +61,9 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('/kelas/materi_bahan_ajar/update/{id}', 'Kelas\MateriBahanAjarController@update');
     //DAFTAR SISWA KELAS
     Route::resource('/kelas/daftar_siswa_kelas', 'Kelas\DaftarSiswaKelasController');
+    Route::get('/kelas/daftar_siswa_kelas/download', 'Kelas\ExportExcelController@daftar_siswa_kelas');
     //CBT
-    Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
+    // Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
     //PENILAIAN PENGETAHUAN (KD3)
     Route::resource('/kelas/penilaian_pengetahuan', 'Kelas\PenilaianPengetahuanController');
     Route::get('/kelas/penilaian_pengetahuan/edit/{id}', 'Kelas\PenilaianPengetahuanController@edit');

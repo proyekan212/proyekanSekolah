@@ -2,14 +2,13 @@
 
 namespace App\Exports;
 
-use App\DaftarKelas;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\FromArray;
 
 class DaftarSiswaKelasExport implements FromArray, WithHeadings
 {
-       /**
+    /**
     * @return \Illuminate\Support\Collection
     */
     protected $data;

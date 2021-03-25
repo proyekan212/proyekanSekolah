@@ -3,27 +3,18 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
-use App\Model\DaftarKelas;
 use Illuminate\Http\Request;
-use App\Model\User;
-use App\Model\UserDetail;
-use App\Exports\DaftarSiswaKelasExport;
 
-class DaftarSiswaKelasController extends Controller
+class ExportExcelController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function daftar_siswa_kelas()
     {
-
-        $daftarKelas = DaftarKelas::all();
-        
-        return view('pages.kelas.daftarsiswakelas',[
-            'siswa' => $daftarKelas
-        ]);   
+       return redirect('/kelas/daftar_siswa_kelas');
     }
 
     /**
@@ -31,11 +22,11 @@ class DaftarSiswaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function excel()
+    public function create()
     {
-     
+        //
     }
-   
+
     /**
      * Store a newly created resource in storage.
      *
@@ -91,5 +82,4 @@ class DaftarSiswaKelasController extends Controller
     {
         //
     }
-    
 }
