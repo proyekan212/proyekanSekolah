@@ -27,11 +27,12 @@
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
 
-            <a href="{{url('/kelas/daftar_siswa_kelas/download')}}">
-
+           <a href="{{url('daftar_siswa_kelas_excel')}}">
+                
              <button type="submit" class="btn btn-outline-primary">Cetak Excel</button>
+                     
 
-           </a>
+</a>
            
          </div>
        </div>
