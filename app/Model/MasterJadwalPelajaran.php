@@ -38,4 +38,8 @@ class MasterJadwalPelajaran extends Model
     public function penilaian_keterampilan() {
         return $this->hasMany('App\Model\MasterPenilaianKeterampilan', 'kelas_mapel_id', 'id');
     }
+
+    public function absen() {
+        return $this->hasMany('App\Model\Absen', 'kelas_mapel_id', 'id');
+    }
 }

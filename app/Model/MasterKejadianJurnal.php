@@ -11,7 +11,7 @@ class MasterKejadianJurnal extends Model
         'id',
         'user_id',
         'waktu',
-        'kejadian',
+        'kejadian', 
         'butir_sikap',
         'tindakan',
         'tindak_lanjut',

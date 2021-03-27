@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
-use App\Model\DaftarKelas;
 use Illuminate\Http\Request;
-use App\Model\User;
-use App\Model\UserDetail;
 
-class DaftarSiswaKelasController extends Controller
+class CetakExcelController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,13 +14,8 @@ class DaftarSiswaKelasController extends Controller
      */
     public function index()
     {
-
-        $daftarKelas = DaftarKelas::all();
-        
-        return view('pages.kelas.daftarsiswakelas',[
-            'siswa' => $daftarKelas
-        ]);   
-     }
+        dd('wqewqe');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -54,7 +46,7 @@ class DaftarSiswaKelasController extends Controller
      */
     public function show($id)
     {
-        
+        //
     }
 
     /**
@@ -89,10 +81,5 @@ class DaftarSiswaKelasController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function cetak_excel () {
-
-        dd("coba");
     }
 }

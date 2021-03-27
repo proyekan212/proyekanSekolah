@@ -26,7 +26,9 @@
           <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
-            <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
+           <form action="{{ url('cetak_excel')}}" method="get">
+              <button type="submit" class="btn btn-outline-primary">Cetak Excel</button>
+           </form>
           </div>
         </div>
         <div class="table-responsive">

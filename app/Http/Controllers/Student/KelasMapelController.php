@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Student;
 use App\Http\Controllers\Controller;
 use App\Model\MasterJadwalPelajaran;
 use Illuminate\Http\Request;
+use App\Model\Absen;
+use App\Model\UserDetail;
 
 class KelasMapelController extends Controller
 {
@@ -49,6 +51,32 @@ class KelasMapelController extends Controller
     public function store(Request $request)
     {
         $request->session()->put('kelas_mapel', $request->input('kelas_mapel_id'));
+
+        $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
+
+        $currentAbsen = Absen::where([
+            [ 'kelas_mapel_id', '=', $request->session()->get('kelas_mapel')],
+            ['user_detail_id', '=', $user_detail->id]
+        ])->first();
+         $checkAbsenDate = null;
+
+        if($currentAbsen != null) {
+            
+            $checkAbsenDate= date("Y-m-d", strtotime($currentAbsen->absen_at));
+        }
+
+         if($checkAbsenDate != date("Y-m-d") || $checkAbsenDate != null) {
+                   Absen::create([
+                'kelas_mapel_id' => $request->session()->get('kelas_mapel'), 
+                'user_detail_id' => $user_detail->id,
+                'absen_at' => now(),
+                'status' => 'hadir'
+                 ]);
+            }
+ 
+        
+
+     
 
         return redirect('kelas_mapel');
     }
