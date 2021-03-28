@@ -61,6 +61,7 @@ class MateriBahanAjarController extends BaseController
 
         return redirect('kelas/materi_bahan_ajar');
     }
+
 }
 
 

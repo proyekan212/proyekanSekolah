@@ -26,7 +26,12 @@
           <h6 class="card-title mb-0">Kejadian Jurnal Siswa Pada MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Kejadian</button>
-            <button type="button" class="btn btn-outline-danger" onclick="showSwal('passing-parameter-execute-cancel')">Cetak Excel</button>
+            <a href="{{url('kejadian_jurnal_excel')}}">
+                
+             <button type="submit" class="btn btn-outline-primary">Cetak Excel</button>
+                     
+
+</a>
           </div>
         </div>
         <div class="table-responsive">

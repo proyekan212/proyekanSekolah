@@ -66,10 +66,11 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     //cetak_excel
-    Route::resource('/cetak_excel', 'Kelas\CetakExcelController');
+    Route::resource('/daftar_siswa_kelas_excel', 'Kelas\CetakExcelController@daftar_siswa_kelas_excel');
+    Route::resource('/kejadian_jurnal_excel', 'Kelas\CetakExcelController@kejadian_jurnal_excel');
 
     //CBT
-    Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
+    // Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
     //PENILAIAN PENGETAHUAN (KD3)
     Route::resource('/kelas/penilaian_pengetahuan', 'Kelas\PenilaianPengetahuanController');
     Route::get('/kelas/penilaian_pengetahuan/edit/{id}', 'Kelas\PenilaianPengetahuanController@edit');
@@ -132,6 +133,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
     
+    //Download Excel
+    Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
+    Route::get('kejadian_jurnal_excel', 'Kelas\ExportExcelController@kejadian_jurnal');
     
 
 });

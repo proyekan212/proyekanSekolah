@@ -7,6 +7,7 @@ use App\Model\DaftarKelas;
 use Illuminate\Http\Request;
 use App\Model\User;
 use App\Model\UserDetail;
+use App\Exports\DaftarSiswaKelasExport;
 
 class DaftarSiswaKelasController extends Controller
 {
@@ -23,7 +24,7 @@ class DaftarSiswaKelasController extends Controller
         return view('pages.kelas.daftarsiswakelas',[
             'siswa' => $daftarKelas
         ]);   
-     }
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -32,9 +33,9 @@ class DaftarSiswaKelasController extends Controller
      */
     public function create()
     {
-        //
+     
     }
-
+   
     /**
      * Store a newly created resource in storage.
      *
@@ -91,8 +92,3 @@ class DaftarSiswaKelasController extends Controller
         //
     }
 
-    public function cetak_excel () {
-
-        dd("coba");
-    }
-}
