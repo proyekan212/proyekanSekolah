@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 24, 2021 at 07:04 PM
--- Server version: 10.5.8-MariaDB
--- PHP Version: 7.4.14
+-- Generation Time: Mar 28, 2021 at 12:22 PM
+-- Server version: 10.5.9-MariaDB
+-- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `proyekan_sepyan`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `absens`
+--
+
+CREATE TABLE `absens` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kelas_mapel_id` int(11) NOT NULL,
+  `user_detail_id` int(11) NOT NULL,
+  `status` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `absen_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `absens`
+--
+
+INSERT INTO `absens` (`id`, `kelas_mapel_id`, `user_detail_id`, `status`, `absen_at`, `created_at`, `updated_at`) VALUES
+(1, 1, 2, 'hadir', '2021-03-26 06:15:19', '2021-03-26 06:15:19', '2021-03-26 06:15:19'),
+(2, 2, 3, 'hadir', '2021-03-26 07:02:46', '2021-03-26 07:02:46', '2021-03-26 07:02:46');
 
 -- --------------------------------------------------------
 
@@ -222,6 +246,7 @@ CREATE TABLE `master_kejadian_jurnals` (
   `kejadian` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `butir_sikap` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `hapus` tinyint(1) NOT NULL DEFAULT 0,
+  `kelas_mapel_id` int(11) NOT NULL,
   `tindakan` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `tindak_lanjut` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -232,10 +257,8 @@ CREATE TABLE `master_kejadian_jurnals` (
 -- Dumping data for table `master_kejadian_jurnals`
 --
 
-INSERT INTO `master_kejadian_jurnals` (`id`, `user_id`, `waktu`, `kejadian`, `butir_sikap`, `hapus`, `tindakan`, `tindak_lanjut`, `created_at`, `updated_at`) VALUES
-(1, 2, '2021-03-09 16:21:46', 'bacot', 'Tanggung Jawab', 1, 'Positif (+)', 'kgkgkgkgjk', '2021-02-22 10:11:48', '2021-03-09 09:21:46'),
-(2, 1, '2021-02-26 06:06:23', 'kejadiandq', 'Jujur', 1, 'Positif (+)', 'kgkgkgkgjk', '2021-02-22 23:16:33', '2021-02-25 23:06:23'),
-(3, 2, '2021-03-12 17:00:00', 'dwq', 'Tanggung Jawab', 0, 'Positif (+)', 'membantu', '2021-03-14 07:09:57', '2021-03-14 07:09:57');
+INSERT INTO `master_kejadian_jurnals` (`id`, `user_id`, `waktu`, `kejadian`, `butir_sikap`, `hapus`, `kelas_mapel_id`, `tindakan`, `tindak_lanjut`, `created_at`, `updated_at`) VALUES
+(1, 3, '2021-03-25 06:31:56', 'eek dicela', 'Jujur', 0, 2, 'Negatif (-)', 'eek dicelana', '2021-03-24 23:31:56', '2021-03-24 23:31:56');
 
 -- --------------------------------------------------------
 
@@ -434,7 +457,8 @@ CREATE TABLE `master_rpps` (
 
 INSERT INTO `master_rpps` (`id`, `hapus`, `name`, `name_file`, `kelas_id`, `created_at`, `updated_at`) VALUES
 (1, 1, 'laffa kita', '1614260240.profile__PT_LAFFA_KITA_BERJAYA.pdf', 1, '2021-02-25 06:37:20', '2021-02-25 23:12:37'),
-(2, 1, 'dqwd', '1614511019.db_logpm.sql', 1, '2021-02-28 04:16:59', '2021-02-28 04:17:03');
+(2, 1, 'dqwd', '1614511019.db_logpm.sql', 1, '2021-02-28 04:16:59', '2021-02-28 04:17:03'),
+(3, 0, 'Jambu', '1616651090.DETEKSI_SERANGAN_MENGGUNAKAN_HONEYPOT_BERBASIS_ANDROID_cd.pdf', 2, '2021-03-24 22:44:50', '2021-03-24 22:44:50');
 
 -- --------------------------------------------------------
 
@@ -765,7 +789,6 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (29, '2021_02_11_133827_create_user_details_table', 14),
 (32, '2021_02_21_081600_create_daftar_kelas_table', 16),
 (36, '2021_02_17_154535_create_master_kompetensi_intis_table', 20),
-(37, '2021_02_13_095112_create_master_kejadian_jurnals_table', 21),
 (42, '2021_02_23_150357_create_master_rpps_table', 22),
 (47, '2021_02_24_134323_create_materi_bahan_belajars_table', 23),
 (49, '2021_02_28_141528_create_master_kode_kelas_table', 25),
@@ -782,7 +805,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (79, '2021_03_20_132144_create_tugas_siswas_table', 41),
 (82, '2021_02_11_133337_create_master_jadwal_pelajarans_table', 42),
 (86, '2021_03_23_113936_create_tugas_siswa_pengetahuans_table', 43),
-(87, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 44);
+(87, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 44),
+(88, '2021_02_13_095112_create_master_kejadian_jurnals_table', 45),
+(92, '2021_03_26_124141_create_absens_table', 46);
 
 -- --------------------------------------------------------
 
@@ -1001,6 +1026,12 @@ INSERT INTO `user_details` (`id`, `photo`, `name`, `jenis_kelamin`, `tempat_lahi
 --
 
 --
+-- Indexes for table `absens`
+--
+ALTER TABLE `absens`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `config`
 --
 ALTER TABLE `config`
@@ -1215,6 +1246,12 @@ ALTER TABLE `user_details`
 --
 
 --
+-- AUTO_INCREMENT for table `absens`
+--
+ALTER TABLE `absens`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT for table `config`
 --
 ALTER TABLE `config`
@@ -1266,7 +1303,7 @@ ALTER TABLE `master_jurusans`
 -- AUTO_INCREMENT for table `master_kejadian_jurnals`
 --
 ALTER TABLE `master_kejadian_jurnals`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `master_kelas`
@@ -1314,7 +1351,7 @@ ALTER TABLE `master_penilaian_pengetahuans`
 -- AUTO_INCREMENT for table `master_rpps`
 --
 ALTER TABLE `master_rpps`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `master_semesters`
@@ -1356,7 +1393,7 @@ ALTER TABLE `menu_role_kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
 
 --
 -- AUTO_INCREMENT for table `roles`
