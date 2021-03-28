@@ -31,7 +31,7 @@ class DaftarSiswaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function excel()
+    public function create()
     {
      
     }

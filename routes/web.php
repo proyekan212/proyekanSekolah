@@ -61,8 +61,6 @@ Route::group(['middleware' => ['auth']], function () {
     // Route::post('/kelas/materi_bahan_ajar/update/{id}', 'Kelas\MateriBahanAjarController@update');
     //DAFTAR SISWA KELAS
     Route::resource('/kelas/daftar_siswa_kelas', 'Kelas\DaftarSiswaKelasController');
-    Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
-
     //CBT
     // Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');
     //PENILAIAN PENGETAHUAN (KD3)
@@ -127,6 +125,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
     
+    //Download Excel
+    Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
+    Route::get('kejadian_jurnal_excel', 'Kelas\ExportExcelController@kejadian_jurnal');
     
 
 });

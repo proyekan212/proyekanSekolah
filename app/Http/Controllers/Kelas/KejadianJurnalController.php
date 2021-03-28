@@ -7,7 +7,6 @@ use App\Model\MasterKejadianJurnal;
 use App\Model\User;
 use App\Model\UserDetail;
 use Illuminate\Http\Request;
-use App\Exports\KejadianJurnalExport;
 
 class KejadianJurnalController extends Controller
 {

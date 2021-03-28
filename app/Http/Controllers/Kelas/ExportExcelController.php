@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Model\DaftarKelas;
 use App\Exports\DaftarSiswaKelasExport;
+use App\Exports\KejadianJurnalExport;
 use Excel;
 
 class ExportExcelController extends Controller
@@ -33,7 +34,7 @@ class ExportExcelController extends Controller
         //    $data_kelas = $value->kelas->kelas . ' ' . $value->rombel->name;
         // $data_kelas_excel = [$data_kelas_id, $data_siswa_photo,  $data_siswa_nisn_or_nip, $data_siswa_name, $data_siswa_jenis_kelamin, $data_siswa_tempat_tanggal_lahir, $data_kelas];
         // }
-       
+
 
         // append(' ', array($data_kelas_id, $data_siswa_photo,  $data_siswa_nisn_or_nip, $data_siswa_name, $data_siswa_jenis_kelamin, $data_siswa_tempat_tanggal_lahir, $data_kelas));
         // dd($data_kelas_excel);
@@ -48,6 +49,14 @@ class ExportExcelController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function kejadian_jurnal(Request $request)
+    {
+        $tanggal = date('Y-M-d');
+        $export = new KejadianJurnalExport();
+        
+        return Excel::download( $export, 'Kejadian Jurnal'.' Tanggal '.$tanggal.' '.'.xlsx');  
+    }
     public function create()
     {
         //
