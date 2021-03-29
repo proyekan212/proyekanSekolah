@@ -18,16 +18,37 @@ class KejadianJurnalController extends Controller
      */
     public function index(Request $request)
     {
+
         $daftarKelas = DaftarKelas::where([
             ['kelas_id', '=',$request->session()->get('kelas_id')]
         ])->get();
 
         // dd($request->session()->get('kelas_id'));
-        $datas = MasterKejadianJurnal::where('hapus', 0)->get();
+        $datas = MasterKejadianJurnal::where([
+            ['hapus', '=', '0'],
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+        ])->get();
         return view('pages.kelas.kejadianjurnal', [
             "daftarKelas"=> $daftarKelas,
             "datas" => $datas
-        ]);
+]);
+        // $siswa = UserDetail::with(['role' => function($query) {
+        //     $query->where('name_role', '=', 'siswa');
+        // }])->get();
+        // $datas = MasterKejadianJurnal::where([
+        //     ['hapus', '=', '0'],
+        //     ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+        // ])->get();
+        // $datas_id = MasterKejadianJurnal::where([
+        //     ['hapus', '=', '0'],
+        //     ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+        // ])->get('kelas_mapel_id');
+        // return view('pages.kelas.kejadianjurnal', [
+        //     "users"=> $siswa,
+        //     "datas" => $datas,
+        //     "datas_id" => $datas_id
+
+        // ]);
     }
 
     /**

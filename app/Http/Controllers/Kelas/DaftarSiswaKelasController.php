@@ -16,10 +16,10 @@ class DaftarSiswaKelasController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
-        $daftarKelas = DaftarKelas::all();
+        $daftarKelas = DaftarKelas::where('kelas_id',$request->session()->get('kelas_id'))->get();
         
         return view('pages.kelas.daftarsiswakelas',[
             'siswa' => $daftarKelas
