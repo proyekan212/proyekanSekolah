@@ -23,7 +23,7 @@ class KejadianJurnalController extends Controller
         ])->get();
 
         // dd($request->session()->get('kelas_id'));
-        $datas = MasterKejadianJurnal::where('hapus', 0)->get(QHe);
+        $datas = MasterKejadianJurnal::where('hapus', 0)->get();
         return view('pages.kelas.kejadianjurnal', [
             "daftarKelas"=> $daftarKelas,
             "datas" => $datas
@@ -51,7 +51,7 @@ class KejadianJurnalController extends Controller
        // $data = $request->all();
     //    dd($data);
 
-     
+
 
      MasterKejadianJurnal::create([
         'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
@@ -61,13 +61,13 @@ class KejadianJurnalController extends Controller
         'tindak_lanjut' => $request->input('tindak_lanjut'),
         'butir_sikap' => $request->input('butir_sikap'),
         'user_id' => $request->input('user_id')     
-    ]
+    ]);
 
 
-    MasterKejadianJurnal::create(
-     $data
+ //    MasterKejadianJurnal::create(
+ //     $data
 
- );
+ // );
 
     return redirect('kelas/kejadian_jurnal');
 }

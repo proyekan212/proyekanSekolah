@@ -66,8 +66,8 @@ Route::group(['middleware' => ['auth']], function () {
     
 
     //cetak_excel
-    Route::resource('/daftar_siswa_kelas_excel', 'Kelas\CetakExcelController@daftar_siswa_kelas_excel');
-    Route::resource('/kejadian_jurnal_excel', 'Kelas\CetakExcelController@kejadian_jurnal_excel');
+    Route::resource('/daftar_siswa_kelas_excel', 'Kelas\CetakExcelController@daftar_siswa_kelas');
+    Route::resource('/kejadian_jurnal_excel', 'Kelas\CetakExcelController@kejadian_jurnal');
 
     //CBT
     // Route::get('/kelas/cbt', 'Kelas\CbtController@CbtGet');

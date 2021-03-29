@@ -50,7 +50,7 @@ class ExportExcelController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function kejadian_jurnal_excel(Request $request)
+    public function kejadian_jurnal(Request $request)
     {
         $tanggal = date('Y-M-d');
         $export = new KejadianJurnalExport();

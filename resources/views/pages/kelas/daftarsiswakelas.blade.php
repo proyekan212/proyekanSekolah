@@ -27,9 +27,9 @@
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
 
-           <form action="{{ url('daftar_siswa_kelas_excel')}}" method="get">
+            <a href ="{{ url('daftar_siswa_kelas_excel')}}">
               <button type="submit" class="btn btn-outline-primary">Cetak Excel</button>
-           </form>
+            </a>
           </div>
         </div>
         <div class="table-responsive">
@@ -49,72 +49,37 @@
             </thead>
             <tbody>
               @foreach($siswa as $index => $row)
-                <tr>
-                  <td>{{$index+1}}</td>
-                  <td>{{$row->user_detail->photo}}</td>
-                  <td>{{$row->user_detail->nisn_or_nip}}</td>
-                  <td>{{$row->user_detail->name}}</td>
-                  <td class="capitalize">{{$row->user_detail->jenis_kelamin}}</td>
-                  <td class=  "capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
+              <tr>
+                <td>{{$index+1}}</td>
+                <td>{{$row->user_detail->photo}}</td>
+                <td>{{$row->user_detail->nisn_or_nip}}</td>
+                <td>{{$row->user_detail->name}}</td>
+                <td class="capitalize">{{$row->user_detail->jenis_kelamin}}</td>
+                <td class=  "capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
 
+                <td>{{$row->kelas->kelas}} {{$row->rombel->name}}</td>
+                <td>@if($row->user_detail->status == 0)
+                  <span class="text-red-400 capitalize">
+                    offline
+                  </span>
+                  @else
 
-           <a href="{{url('daftar_siswa_kelas_excel')}}">
-                
-             <button type="submit" class="btn btn-outline-primary">Cetak Excel</button>
-                     
+                  <span class="text-green-600 capitalize">
+                    online
+                  </span>
+                  @endif
+                </td>
 
-</a>
-           
-         </div>
-       </div>
-       <div class="table-responsive">
-        <table id="dataTableExample" class="table">
-          <thead>
-            <tr>
-              <th>No</th>
-              <th>FOTO</th>
-              <th>NISN</th>
-              <th>NAMA</th>
-              <th>L/P</th>
-              <th>TTL</th>
-              <th>KELAS</th>
-              <th>STATUS</th>
-              <th>TERAKHIR AKTIF</th>
-            </tr>
-          </thead>
-          <tbody>
-            @foreach($siswa as $index => $row)
-            <tr>
-              <td>{{$index+1}}</td>
-              <td>{{$row->user_detail->photo}}</td>
-              <td>{{$row->user_detail->nisn_or_nip}}</td>
-              <td>{{$row->user_detail->name}}</td>
-              <td class="capitalize">{{$row->user_detail->jenis_kelamin}}</td>
-              <td class=  "capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
+                <td></td>
 
-              <td>{{$row->kelas->kelas}} {{$row->rombel->name}}</td>
-              <td>@if($row->user_detail->status == 0)
-                <span class="text-red-400 capitalize">
-                  offline
-                </span>
-                @else
-
-                <span class="text-green-600 capitalize">
-                  online
-                </span>
-                @endif
-              </td>
-
-              <td></td>
-
-            </tr>
-            @endforeach
-          </tbody>
-        </table>
+              </tr>
+              @endforeach
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </div>
 
 <div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
