@@ -38,7 +38,7 @@ class ExportExcelController extends Controller
 
         // append(' ', array($data_kelas_id, $data_siswa_photo,  $data_siswa_nisn_or_nip, $data_siswa_name, $data_siswa_jenis_kelamin, $data_siswa_tempat_tanggal_lahir, $data_kelas));
         // dd($data_kelas_excel);
-        $export = new DaftarSiswaKelasExport();
+        $export = new DaftarSiswaKelasExport($request->session()->get('kelas_id'));
         
         return Excel::download( $export, 'Kelas '.$request->session()->get('kelas_mapel').' Tanggal '.$tanggal.' '.'.xlsx');  
 
@@ -53,8 +53,8 @@ class ExportExcelController extends Controller
     public function kejadian_jurnal(Request $request)
     {
         $tanggal = date('Y-M-d');
-        $export = new KejadianJurnalExport();
-        
+        $export = new KejadianJurnalExport($request->session()->get('kelas_id'));
+        // dd($export);
         return Excel::download( $export, 'Kejadian Jurnal'.' Tanggal '.$tanggal.' '.'.xlsx');  
     }
     public function create()

@@ -15,15 +15,23 @@ class KejadianJurnalController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $siswa = UserDetail::with(['role' => function($query) {
             $query->where('name_role', '=', 'siswa');
         }])->get();
-        $datas = MasterKejadianJurnal::where('hapus', 0)->get();
+        $datas = MasterKejadianJurnal::where([
+            ['hapus', '=', '0'],
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+        ])->get();
+        $datas_id = MasterKejadianJurnal::where([
+            ['hapus', '=', '0'],
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+        ])->get('kelas_mapel_id');
         return view('pages.kelas.kejadianjurnal', [
             "users"=> $siswa,
-            "datas" => $datas
+            "datas" => $datas,
+            "datas_id" => $datas_id
         ]);
     }
 

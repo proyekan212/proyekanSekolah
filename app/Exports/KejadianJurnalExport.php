@@ -19,6 +19,13 @@ class KejadianJurnalExport implements FromCollection,WithMapping, WithHeadings
     // {
     //     $this->data = $data;
     // }
+
+     protected $id;
+
+     function __construct($id) {
+            $this->id = $id;
+     }
+
     public function headings(): array
     {
         return [ "NO"	,"WAKTU"	,"NAMA SISWA"	,"KEJADIAN / PERILAKU"	,"BUTIR SIKAP"	,"POSITIF / NEGATIF"	,"TINDAK LANJUT"];
@@ -30,7 +37,7 @@ class KejadianJurnalExport implements FromCollection,WithMapping, WithHeadings
     public function collection()
     {
         //returns Data with User data, all user data, not restricted to start/end dates
-        return MasterKejadianJurnal::with('siswa')->get();
+        return MasterKejadianJurnal::with('siswa')->where('kelas_mapel_id',$this->id)->get();
     }
     public function map($data) : array {
         return [

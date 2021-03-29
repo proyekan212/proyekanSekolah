@@ -18,6 +18,12 @@ class DaftarSiswaKelasExport implements FromCollection,WithMapping, WithHeadings
     // {
     //     $this->data = $data;
     // }
+
+       protected $id;
+
+     function __construct($id) {
+            $this->id = $id;
+     }
     public function headings(): array
     {
         return ["NO" , "NAMA"   , "NISP / NIP" , "NAMA SISWA" , "JENIS KELAMIN"  , "TEMPAT/TANGGAL LAHIR"  ,  "KELAS"];
@@ -27,7 +33,7 @@ class DaftarSiswaKelasExport implements FromCollection,WithMapping, WithHeadings
     public function collection()
     {
         //returns Data with User data, all user data, not restricted to start/end dates
-        return DaftarKelas::with('user_detail')->get();
+        return DaftarKelas::with('user_detail')->where('kelas_id',$this->id)->get();
     }
     public function map($data) : array {
         return [
