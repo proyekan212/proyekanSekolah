@@ -21,7 +21,6 @@ class Absen extends Model
 
 
     }
-
     public function user_detail() {
 
     	return $this->belongsTo('App\Model\UserDetail', 'user_detail_id', 'id');
