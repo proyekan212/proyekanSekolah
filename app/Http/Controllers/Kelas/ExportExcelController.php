@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Model\DaftarKelas;
 use App\Exports\DaftarSiswaKelasExport;
 use App\Exports\KejadianJurnalExport;
+use App\Exports\AbsensiKelasExport;
 use Excel;
 
 class ExportExcelController extends Controller
@@ -57,6 +58,15 @@ class ExportExcelController extends Controller
         // dd($export);
         return Excel::download( $export, 'Kejadian Jurnal'.' Tanggal '.$tanggal.' '.'.xlsx');  
     }
+
+     public function rekap_absen(Request $request)
+    {
+        $tanggal = date('Y-M-d');
+        $export = new AbsensiKelasExport($request->session()->get('kelas_id'));
+        // dd($export);
+        return Excel::download( $export, 'Absensi Kelas'.' Tanggal '.$tanggal.' '.'.xlsx');  
+    }
+ 
     public function create()
     {
         //
