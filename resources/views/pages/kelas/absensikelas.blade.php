@@ -40,13 +40,9 @@
                 <?php
                   $maxDays = date('t');
                   $currentMonth = date('F');
-<<<<<<< HEAD
 
                   for($i=1; $i <= 16; $i++) {
 
-=======
-                  for($i=1; $i <= 16; $i++) {
->>>>>>> Nabil
                     echo "<th>Pertemuan $i</th>";
                   }
                 
@@ -64,7 +60,7 @@
                         {{$row->user_detail->name}}
                       </td>
                       @foreach($row->kelas->jadwal_pelajaran[0]->absen as $absen) 
-                       @if($absen != null)
+                       @if($absen->user_detail_id == $row->user_id)
                          <td class="text-xs text-green-600 capitalize">  
                             {{$absen->status}}
                         </td>
