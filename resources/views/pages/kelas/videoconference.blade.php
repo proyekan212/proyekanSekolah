@@ -1,8 +1,8 @@
 @extends('layout.master')
 
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -51,7 +51,7 @@
   </div>
 </div>
 
-<div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
+<div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true"  >
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -76,7 +76,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-success">Generate Virtual Meeting</button>
+        <button type="button" id="CreateMeet" class="btn btn-success">Generate Virtual Meeting</button>
       </div>
     </div>
   </div>
@@ -84,13 +84,39 @@
 @endsection
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
-  <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/data-table.js') }}"></script>
-  <script src="{{ asset('assets/js/datepicker.js') }}"></script>
-  <script src="{{ asset('assets/js/timepicker.js') }}"></script>
+<script src="{{ asset('assets/js/data-table.js') }}"></script>
+<script src="{{ asset('assets/js/datepicker.js') }}"></script>
+<script src="{{ asset('assets/js/timepicker.js') }}"></script>
 @endpush
+
+
+
+<!-- Jitsi Video Conference -->
+<script src='https://meet.jit.si/external_api.js'></script>
+<script src="https://meet.jit.si/libs/lib-jitsi-meet.min.js"></script>
+
+<script>
+  JitsiMeetJS.init();
+  var connection = new JitsiMeetJS.JitsiConnection(null, null, options);
+  connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_ESTABLISHED, onConnectionSuccess);
+  connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_FAILED, onConnectionFailed);
+  connection.addEventListener(JitsiMeetJS.events.connection.CONNECTION_DISCONNECTED, disconnect);
+
+  connection.connect();
+
+  room = connection.initJitsiConference("conference1", confOptions);
+room.on(JitsiMeetJS.events.conference.TRACK_ADDED, onRemoteTrack);
+room.on(JitsiMeetJS.events.conference.CONFERENCE_JOINED, onConferenceJoined);
+
+JitsiMeetJS.createLocalTracks().then(onLocalTracks);
+
+document.getElementById("CreateMeet").onclick =  room.join();
+
+
+</script>

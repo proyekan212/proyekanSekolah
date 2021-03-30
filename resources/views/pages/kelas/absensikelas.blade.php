@@ -26,7 +26,6 @@
             <button type="button" class="btn btn-outline-success">Rekap Absensi Kelas</button>
           </div>
         </div>
-        
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>
@@ -36,10 +35,8 @@
                 <?php
                   $maxDays = date('t');
                   $currentMonth = date('F');
-
-                  for($i=1; $i <= $maxDays; $i++) {
-
-                    echo "<th>$i $currentMonth</th>";
+                  for($i=1; $i <= 16; $i++) {
+                    echo "<th>Pertemuan $i</th>";
                   }
                 
                 ?>
@@ -55,6 +52,19 @@
                       <td>
                         {{$row->user_detail->name}}
                       </td>
+                      @foreach($row->kelas->jadwal_pelajaran[0]->absen as $absen) 
+                       @if($absen != null)
+                         <td class="text-xs text-green-600 capitalize">  
+                            {{$absen->status}}
+                        </td>
+
+                      @else 
+                         <td>  
+                           -
+                        </td>
+
+                      @endif
+                      @endforeach
                     </tr>
                   @endforeach
             </tbody>

@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Download Excel
     Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
     Route::get('kejadian_jurnal_excel/', 'Kelas\ExportExcelController@kejadian_jurnal');
+    Route::get('rekap_absen_excel/', 'Kelas\ExportExcelController@rekap_absen');
     
 
 });
