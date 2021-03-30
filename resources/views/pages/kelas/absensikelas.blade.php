@@ -23,7 +23,12 @@
           <h6 class="card-title mb-0">Absensi Kelas MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success">Rekap Konfirmasi Kehadiran Kelas Siswa</button>
-            <button type="button" class="btn btn-outline-success">Rekap Absensi Kelas</button>
+                        <a href="{{url('rekap_absen_excel')}}">
+                
+                     
+            <button type="submit" class="btn btn-outline-success">Rekap Absensi Kelas</button>
+
+</a>
           </div>
         </div>
         <div class="table-responsive">
@@ -35,9 +40,13 @@
                 <?php
                   $maxDays = date('t');
                   $currentMonth = date('F');
+<<<<<<< HEAD
 
                   for($i=1; $i <= 16; $i++) {
 
+=======
+                  for($i=1; $i <= 16; $i++) {
+>>>>>>> Nabil
                     echo "<th>Pertemuan $i</th>";
                   }
                 
