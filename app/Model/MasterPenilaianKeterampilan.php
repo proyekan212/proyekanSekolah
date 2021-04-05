@@ -35,7 +35,7 @@ class MasterPenilaianKeterampilan extends Model
         
     }
 
-    public function kelas_mapel() {
+    public function jadwal_pelajaran() {
         return $this->belongsTo('App\Model\MasterJadwalPelajaran', 'kelas_mapel_id', 'id');
     }
 

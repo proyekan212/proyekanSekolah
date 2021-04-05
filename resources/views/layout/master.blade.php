@@ -22,6 +22,12 @@
       rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
   rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css"
+  rel="stylesheet">
+  <link href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"
+  rel="stylesheet">
+  <link href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.bootstrap4.min.css"
+  rel="stylesheet">
   <!-- end plugin css -->
 
   @stack('plugin-styles')
@@ -33,8 +39,7 @@
   @stack('style')
 </head>
 <body data-base-url="{{url('/')}}">
-  <div id="#app">
-  </div>
+  
   <script src="{{ asset('assets/js/spinner.js') }}"></script>
 
   <div class="main-wrapper" id="app">
@@ -77,6 +82,8 @@
     <!-- end common js -->
 
     <script src="{{ asset('assets/js/sweet-alert.js') }}"></script>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
     @stack('custom-scripts')
 </body>

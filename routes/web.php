@@ -132,6 +132,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/data_master_mapel', 'Admin\MasterMapelController');
 
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
+
+     Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');
+
     
     //Download Excel
     Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
@@ -140,6 +143,8 @@ Route::group(['middleware' => ['auth']], function () {
     
 
 });
+
+
 
 //register
 Route::get('/register', function () {

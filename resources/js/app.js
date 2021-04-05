@@ -1,6 +1,15 @@
-// import Vue from "vue";
+import Vue from "vue";
+// import axios from 'axios';
+import dt from 'datatables.net';
+import { VuejsDatatableFactory } from 'vuejs-datatable';
 
-// import MateriBahanAjar from "../views/vue/views/kelas/MateriBahanAjar.vue";
+window.$ = window.jQuery = require('jquery');
+window.axios = require('axios');
+
+Vue.use(VuejsDatatableFactory);
+
+
+// import Penilaian from './src/components/Penilaian';
 // new Vue({
 //   el: "#app",
 //   data() {
@@ -9,6 +18,6 @@
 //     };
 //   },
 //   components: {
-//     "materi-bahan-ajar": MateriBahanAjar
+//     'penilaian' : Penilaian
 //   }
 // });

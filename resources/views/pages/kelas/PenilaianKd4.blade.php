@@ -34,6 +34,7 @@
           </div>
         </div>
         <div class="table-responsive">
+
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
@@ -68,7 +69,10 @@
                   <td>
                     {{$data->mulai_pengerjaan}} - {{$data->finish_pengerjaan}}
                   </td>
-                  <td></td>
+                  <td>
+                    
+                    <button data-ref="penilaian" type="button" onclick="fetchDataPenilaian('{{$key}}', '{{$data->id}}')" class="btn btn-outline-success" data-toggle="modal" data-target=".Penilaian{{$key}}">Hasil</button>
+                  </td>
           
                   <td class="flex ">
                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
@@ -218,7 +222,130 @@
   </div>
 </div>
 
+  @foreach($datas as $key => $data)
+<div class="modal fade Penilaian{{$key}}" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Penialain keterampilan</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+       <div class="table-responsive">
+
+          <table id="dataTableExample" class="table">
+            <thead>
+              <tr>
+                <th>No</th>
+                <th>Nisn</th>
+                <th>Nama</th>
+                <th>Gender</th>
+                <th>Nilai</th>
+                <th>Status</th>
+                
+                <th>Remedial</th>
+                <th>
+                  Tugas
+                </th>
+                <th>Feedback</th>
+              </tr>
+            </thead>
+            <tbody>
+                @foreach($data->jadwal_pelajaran->kelas->daftar_kelas as $index => $siswa)
+                <tr>
+                  <td>
+                    {{$index+1}}
+
+                  </td>
+                  <td>{{$siswa->user_detail->nisn_or_nip}}</td>
+                  <td>{{$siswa->user_detail->name}}</td>
+                  <td>{{$siswa->user_detail->jenis_kelamin}}</td>
+                  <td>
+                    <input type="number" value="" onchange="nilai(this,'{{$key}}')" class="form-control">
+                  </td>
+                  <td>
+                    status
+                  </td>
+                  <td>
+                    <input type="number" value="" class="form-control">
+                  
+                  </td>
+                   
+                    
+
+                    @foreach($siswa->kelas->jadwal_pelajaran[0]->penilaian_keterampilan as $keterampilan) 
+
+                      @if($keterampilan->id === $data->id)
+                        <td>
+                            @if($keterampilan->tugas_keterampilan)
+
+                                @if($keterampilan->tugas_keterampilan->count() != 0)
+                                    @foreach($keterampilan->tugas_keterampilan as $tugas)
+                                        @if($tugas->user_id !== $siswa->user_detail->id)
+                                          
+                                             <span class="
+                                            py-2 px-3 bg-red-400 text-white text-xs">
+                                              belum mengumpulkan
+                                           </span>
+
+                                            @else
+
+                                            <a href="{{ url('/tugas/keterampilan/'.$tugas->filename_path)}}">
+                                              <i class="fas fa-eye"></i>
+                                              <span>
+                                                cek
+                                              </span>
+                                            </a>
+                                          @endif
+
+
+
+                                    @endforeach
+                                @else
+                                  <span class="
+                                          py-2 px-3 bg-red-400 text-white text-xs">
+                                            belum mengumpulkan
+                                    </span>
+                                @endif
+                           
+                            @endif  
+                          @else 
+                        
+                        </td >                
+                    @endif
+                    @endforeach
+                
+                  <td class=" ">
+                      <textarea name="" class="form-control" id="" rows="3"></textarea>
+                    </td>
+
+                </tr>
+
+                @endforeach
+           
+            </tbody>
+          </table>
+        </div>
+      </div>
+  </div>
+</div>
+</div>
+   @endforeach
 <script>
+
+function nilai(event, id) {
+  console.log(event.value);
+
+  axios.post("");
+}
+function fetchDataPenilaian(index){
+
+  const dataList = document.querySelectorAll('[data-ref="penilaian"]');
+  const penilaian = document.getElementById('penilaian');
+  penilaian.item = "asw"
+} 
 function deleteData(id, event) {
     Swal.fire({
       title: 'Apakah yakin menghapus data ini ?',
@@ -234,6 +361,8 @@ function deleteData(id, event) {
         
     })
   }
+
+
 </script>
 @endsection
 

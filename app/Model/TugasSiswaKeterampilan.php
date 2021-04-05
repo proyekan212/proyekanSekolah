@@ -17,4 +17,8 @@ class TugasSiswaKeterampilan extends Model
     public function master_keterampilan() {
     	return $this->belongsTo('App\Model\MasterPenilaianKeterampilan', 'penilaian_keterampilan_id', 'id');
     }
+
+    public function nilai_keterampilan() {
+    	return $this->hasOne('App\Model\MasterNilaiKeterampilan', 'penilaian_keterampilan_id', 'id');
+    }
 }

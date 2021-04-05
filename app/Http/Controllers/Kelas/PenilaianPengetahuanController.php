@@ -7,6 +7,8 @@ use App\Model\KompetensiDasar;
 use App\Model\MasterPenilaianPengetahuan;
 use Illuminate\Http\Request;
 
+use App\Model\DaftarKelas;
+
 class PenilaianPengetahuanController extends Controller
 {
     /**
@@ -17,6 +19,8 @@ class PenilaianPengetahuanController extends Controller
     public function index(Request $request)
     {   
         $kompetensi_dasars = KompetensiDasar::all();
+        $daftarKelas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'));
+
         $data = MasterPenilaianPengetahuan::where([
             ['hapus', '=', 0],
             ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
@@ -24,6 +28,7 @@ class PenilaianPengetahuanController extends Controller
         return view('pages.kelas.PenilaianKd3', [
             'kompetensi_dasars'=> $kompetensi_dasars,
             'data'=> $data,
+
         ]);
     }
 

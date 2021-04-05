@@ -117,10 +117,20 @@
                            <i class="fas fa-download"></i>
                          </a>
                          @else
-                          <div class="flex flex-col"> 
-                            belum mengumpulkan tugas
-                            <input type="file">
-                          </div>
+
+                         <form enctype="multipart/form-data" action="{{ URL ('tugas_siswa_keterampilan')}}" method="post" >
+                          @csrf
+                          <input type="hidden" name=" penilaian_keterampilan" value="{{$row->id}}">
+                            <div class="flex flex-col"> 
+                              belum mengumpulkan tugas
+                              <input type="file" name="file">
+                           </div>
+
+                           <button type="submit" class="px-4 py-2 rounded-lg bg-blue-400 text-white ">
+                             Kirim
+                           </button>
+                         </form>
+                        
                       @endif
                     </div>
                       

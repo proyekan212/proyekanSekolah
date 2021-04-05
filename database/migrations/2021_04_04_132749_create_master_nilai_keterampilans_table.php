@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAbsensTable extends Migration
+class CreateMasterNilaiKeterampilansTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateAbsensTable extends Migration
      */
     public function up()
     {
-        Schema::create('absens', function (Blueprint $table) {
+        Schema::create('master_nilai_keterampilans', function (Blueprint $table) {
             $table->id();
-            $table->integer('kelas_mapel_id');
-            $table->integer('user_detail_id');
-            $table->string('status');
-            $table->timestamp('absen_at')->nullable(true);
+            $table->integer('penilaian_keterampilan_id');
+            $table->integer('nilai')->default(0);
+            $table->integer('remidi')->nullable(true);
+            $table->text('feedback')->blank(true);
+
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateAbsensTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('absens');
+        Schema::dropIfExists('master_nilai_keterampilans');
     }
 }
