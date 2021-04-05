@@ -111,11 +111,26 @@
                     </div>  
                     <div class="mt-4">
                        @if($row->tugas_keterampilan->count() > 0) 
-                         <a href="">
-
-                            {{$row->tugas_keterampilan[0]->filename_path}}
-                           <i class="fas fa-download"></i>
+                        <div class="flex ">
+                           <a href="{{url('/tugas/keterampilan/', $row->tugas_keterampilan[0]->filename_path)}}">
+                            check
+                           <i class="fas fa-eye"></i>
                          </a>
+  
+
+
+                          <form method="post" onclick="deleteData('{{$row->id}}', this)" class="pl-16" action="{{url('tugas_siswa_keterampilan', $row->tugas_keterampilan[0]->id)}}" >
+                            @csrf
+                        {{ method_field('DELETE') }}
+
+                            <button type="button" style="font-size: 20px;" class="text-red-400" >
+                              <i class="fas fa-trash ">
+                                
+                              </i>
+                            </button>
+                            
+                          </form>
+                        </div>
                          @else
 
                          <form enctype="multipart/form-data" action="{{ URL ('tugas_siswa_keterampilan')}}" method="post" >
@@ -145,6 +160,27 @@
     
 </div>
 @endsection
+
+<script type="text/javascript">
+function deleteData(id, event) {
+
+  console.log(event);
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+          event.submit();
+        }
+        
+    })
+  }
+
+</script>
 
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>

@@ -133,7 +133,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
 
-     Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');
+    //tugas siswa
+    Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');
 
     
     //Download Excel

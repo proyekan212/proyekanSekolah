@@ -4,7 +4,9 @@ namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use File;
 use App\Model\TugasSiswaKeterampilan;
+use Illuminate\Support\Facades\Storage;
 
 class TugasSiswaKeterampilanController extends Controller
 {
@@ -39,9 +41,7 @@ class TugasSiswaKeterampilanController extends Controller
           $file = $request->file('file');
         $filename = time().'.'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
-        
         $file->move('tugas/keterampilan', $file_formatted);
-       
          TugasSiswaKeterampilan::create([
             'user_id' => $request->user()->id,
             'filename_path' => $file_formatted,
@@ -98,5 +98,18 @@ class TugasSiswaKeterampilanController extends Controller
     public function destroy($id)
     {
         //
+
+        $data = TugasSiswaKeterampilan::findOrFail($id);
+        $filename_path = public_path() .'/tugas/keterampilan/'.$data->filename_path;
+
+        File::delete($filename_path);
+        // dd($filename_path);
+        
+
+        $data->delete();
+
+        return redirect('kelas_mapel');
+
+
     }
 }
