@@ -247,9 +247,9 @@
                 
                 <th>Remedial</th>
                 <th>
-                  Tugas
+                  Feedback
                 </th>
-                <th>Feedback</th>
+                <th>Tugas</th>
               </tr>
             </thead>
             <tbody>
@@ -262,22 +262,79 @@
                   <td>{{$siswa->user_detail->nisn_or_nip}}</td>
                   <td>{{$siswa->user_detail->name}}</td>
                   <td>{{$siswa->user_detail->jenis_kelamin}}</td>
-                  <td>
-                    <input type="number" value="" onchange="nilai(this,'{{$key}}')" class="form-control">
-                  </td>
-                  <td>
-                    status
-                  </td>
-                  <td>
-                    <input type="number" value="" class="form-control">
-                  
-                  </td>
-                   
-                    
+                 
+
+
+
+
 
                     @foreach($siswa->kelas->jadwal_pelajaran[0]->penilaian_keterampilan as $keterampilan) 
 
+
                       @if($keterampilan->id === $data->id)
+
+                      <input type="text" id="keterampilan_id" hidden="true" value="{{$data->id}}" >
+
+                       @if($keterampilan->tugas_keterampilan->count() != 0)
+
+                        @foreach($keterampilan->tugas_keterampilan as $tugas)
+
+                          @if($tugas->user_id !== $siswa->user_detail->id && $tugas->nilai_keterampilan == null)
+
+                              <td>
+                                <input type="number" name="nilai" min="0" value="0" onchange="UpdateNilai(this,'{{$key}}')" class="form-control">
+                              </td>
+                              <td>
+                                status
+                              </td>
+                              <td>
+                                <input type="number" name="remedial" min="0" value="10" class="form-control">
+                              
+                              </td>
+                               
+                                 <td class=" ">
+                                  <textarea name="" class="form-control" id="" rows="3"></textarea>
+                                </td>
+
+                          @else
+
+
+                            <td>
+                          <input type="number" min="0" value="{{$tugas->nilai_keterampilan->nilai}}" onchange="nilai(this,'{{$data->id}}')" name="nilai" class="form-control">
+                        </td>
+                        <td>
+                          status
+                        </td>
+                        <td>
+                          <input type="number" value="{{$tugas->nilai_keterampilan->remedial}}" class="form-control">
+                        
+                        </td>
+                         
+                           <td class=" ">
+                            <textarea name="{{$tugas->nilai_keterampilan->feedback}}" class="form-control" id="" rows="3"></textarea>
+                          </td>
+                          @endif
+                        @endforeach
+
+                       @endif
+                     
+                            <td>
+                          <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$key}}')" class="form-control">
+                        </td>
+                        <td>
+                          status
+                        </td>
+                        <td>
+                          <input type="number" value="0" min="0" class="form-control">
+                        
+                        </td>
+                         
+                           <td class=" ">
+                            <textarea name="" class="form-control" id="" rows="3"></textarea>
+                          </td>
+
+
+
                         <td>
                             @if($keterampilan->tugas_keterampilan)
 
@@ -317,10 +374,7 @@
                     @endif
                     @endforeach
                 
-                  <td class=" ">
-                      <textarea name="" class="form-control" id="" rows="3"></textarea>
-                    </td>
-
+                 
                 </tr>
 
                 @endforeach
@@ -335,11 +389,27 @@
    @endforeach
 <script>
 
-function nilai(event, id) {
-  console.log(event.value);
+function UpdateNilai(event, id) {
+  console.log(id);
 
-  axios.post("");
+  axios.post("").then((res) => {
+    console.log(res)
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+  
 }
+
+function UpdateRemedial(event, id) {
+
+}
+
+function UpdateFeedback(event, id) {
+
+}
+
+
 function fetchDataPenilaian(index){
 
   const dataList = document.querySelectorAll('[data-ref="penilaian"]');

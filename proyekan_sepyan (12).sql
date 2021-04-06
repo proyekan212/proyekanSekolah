@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Mar 28, 2021 at 12:22 PM
+-- Generation Time: Apr 06, 2021 at 09:07 PM
 -- Server version: 10.5.9-MariaDB
 -- PHP Version: 8.0.3
 
@@ -42,8 +42,13 @@ CREATE TABLE `absens` (
 --
 
 INSERT INTO `absens` (`id`, `kelas_mapel_id`, `user_detail_id`, `status`, `absen_at`, `created_at`, `updated_at`) VALUES
-(1, 1, 2, 'hadir', '2021-03-26 06:15:19', '2021-03-26 06:15:19', '2021-03-26 06:15:19'),
-(2, 2, 3, 'hadir', '2021-03-26 07:02:46', '2021-03-26 07:02:46', '2021-03-26 07:02:46');
+(1, 1, 2, 'hadir', '2021-03-30 07:20:40', '2021-03-30 07:20:40', '2021-03-30 07:20:40'),
+(2, 1, 2, 'hadir', '2021-03-30 07:26:21', '2021-03-30 07:26:21', '2021-03-30 07:26:21'),
+(3, 1, 2, 'hadir', '2021-03-30 07:59:14', '2021-03-30 07:59:14', '2021-03-30 07:59:14'),
+(4, 1, 2, 'hadir', '2021-03-30 07:59:26', '2021-03-30 07:59:26', '2021-03-30 07:59:26'),
+(5, 1, 2, 'hadir', '2021-04-05 00:42:11', '2021-04-05 00:42:11', '2021-04-05 00:42:11'),
+(6, 1, 2, 'hadir', '2021-04-05 01:02:53', '2021-04-05 01:02:53', '2021-04-05 01:02:53'),
+(7, 1, 2, 'hadir', '2021-04-05 01:10:33', '2021-04-05 01:10:33', '2021-04-05 01:10:33');
 
 -- --------------------------------------------------------
 
@@ -91,7 +96,8 @@ CREATE TABLE `daftar_kelas` (
 
 INSERT INTO `daftar_kelas` (`id`, `user_id`, `kelas_id`, `rombel_id`, `created_at`, `updated_at`) VALUES
 (1, 3, 2, 1, NULL, NULL),
-(2, 2, 1, 1, NULL, NULL);
+(2, 2, 1, 1, NULL, NULL),
+(3, 5, 1, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -379,6 +385,38 @@ INSERT INTO `master_mapels` (`id`, `nama_mapel`, `jurusan_id`, `kkm_id`, `hapus`
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `master_nilai_keterampilans`
+--
+
+CREATE TABLE `master_nilai_keterampilans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penilaian_keterampilan_id` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL DEFAULT 0,
+  `remidi` int(11) DEFAULT NULL,
+  `feedback` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `master_nilai_pengetahuans`
+--
+
+CREATE TABLE `master_nilai_pengetahuans` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penilaian_pengetahuan_id` int(11) NOT NULL,
+  `nilai` int(11) NOT NULL DEFAULT 0,
+  `remidi` int(11) DEFAULT NULL,
+  `feedback` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `master_penilaian_keterampilans`
 --
 
@@ -403,7 +441,8 @@ CREATE TABLE `master_penilaian_keterampilans` (
 INSERT INTO `master_penilaian_keterampilans` (`id`, `skema`, `nama_penilaian`, `kompetensi_dasar`, `keterangan`, `kelas_mapel_id`, `hapus`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
 (1, 'tes lisan', 'sqdqw', '5,', 'oke', 1, 0, NULL, NULL, '2021-03-21 01:36:09', '2021-03-21 01:36:09'),
 (2, 'tes tulis', 'hilih', '5,', 'eqwewq', 2, 0, NULL, NULL, '2021-03-23 05:20:36', '2021-03-23 05:20:36'),
-(3, 'penugasan', 'apaseh', '5,', 'apa cok', 2, 0, NULL, '2021-03-17', '2021-03-23 05:37:08', '2021-03-23 05:37:08');
+(3, 'penugasan', 'apaseh', '5,', 'apa cok', 2, 0, NULL, '2021-03-17', '2021-03-23 05:37:08', '2021-03-23 05:37:08'),
+(4, 'tes tulis', 'coba', '5,', 'coba lah saja', 1, 0, NULL, NULL, '2021-04-05 00:45:24', '2021-04-05 00:45:24');
 
 -- --------------------------------------------------------
 
@@ -807,7 +846,10 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (86, '2021_03_23_113936_create_tugas_siswa_pengetahuans_table', 43),
 (87, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 44),
 (88, '2021_02_13_095112_create_master_kejadian_jurnals_table', 45),
-(92, '2021_03_26_124141_create_absens_table', 46);
+(92, '2021_03_26_124141_create_absens_table', 46),
+(95, '2021_03_30_025504_create_absens_table', 47),
+(97, '2021_04_04_132757_create_master_nilai_pengetahuans_table', 48),
+(98, '2021_04_04_132749_create_master_nilai_keterampilans_table', 49);
 
 -- --------------------------------------------------------
 
@@ -928,13 +970,6 @@ CREATE TABLE `tugas_siswa_keterampilans` (
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `tugas_siswa_keterampilans`
---
-
-INSERT INTO `tugas_siswa_keterampilans` (`id`, `penilaian_keterampilan_id`, `user_id`, `filename_path`, `created_at`, `updated_at`) VALUES
-(1, 2, 4, 'warukatadq', NULL, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -983,7 +1018,12 @@ INSERT INTO `users` (`id`, `username`, `password`, `token`, `role_id`, `verify_t
 (2, 'user@gmail.com', '$2y$10$Njh0dC3V0gLxrbpX5j6oEeXr1uBYqwGM0.Z705LzCwWx8/QZkIU1e', NULL, 2, NULL, NULL, NULL),
 (3, 'WXX5IZqkdx@gmail.com', '$2y$10$ROopXxnt8PcBqJBy5nJEre0krSle26kolE9gCuEF.985dPd6CAo0i', NULL, 3, NULL, NULL, NULL),
 (4, '1DI3n4JBM6@gmail.com', '$2y$10$P/h5kYYaQodj2INejtoWCu0ltNnlZ.B2SzgNwzTDvrf4oFNblmrrW', NULL, 4, NULL, NULL, NULL),
-(5, 'guru@gmail.com', '$2y$10$ysnP/.0sTmkNGmtcKesBcOSTWMljDPagnCnbY9veeFbm6W23e4VeS', NULL, 5, NULL, NULL, NULL);
+(5, 'guru@gmail.com', '$2y$10$ysnP/.0sTmkNGmtcKesBcOSTWMljDPagnCnbY9veeFbm6W23e4VeS', NULL, 5, NULL, NULL, NULL),
+(6, 'uc4mMfGEqU@gmail.com', '$2y$10$H3kMxDOJn0D00n2RgCrkjOaPL6vI50KKlBkWO4qKkYoCV.KUvkULG', NULL, 1, NULL, NULL, NULL),
+(7, 'sVCRIvMKdZ@gmail.com', '$2y$10$TKr/KGI1VVClTm0TEAe0VedvCjPIaGGVxYZIGIB.19CZ1aG4jp35G', NULL, 2, NULL, NULL, NULL),
+(8, 'BFLVgNeRys@gmail.com', '$2y$10$ye99aF/3Zh2IS04nlNrdo.upxGnW1ZkGfVMIMQ1ShkdNsI1i29K3G', NULL, 3, NULL, NULL, NULL),
+(9, 'IWnE9DmUer@gmail.com', '$2y$10$7uQsnD98YMiUG/O2s7u5oefxlnx4zoTAPyAnJtR/40.BUipeGfxC6', NULL, 4, NULL, NULL, NULL),
+(10, 'P43SZ3NtIY@gmail.com', '$2y$10$o0ryiLJ8tG.t5E9ysN8EmessphLwYTnKeE0FmvDfNXgy.eIC41AGC', NULL, 5, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1019,7 +1059,8 @@ INSERT INTO `user_details` (`id`, `photo`, `name`, `jenis_kelamin`, `tempat_lahi
 (1, 'a', 'a', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 5, 2, '2021-03-04 15:51:36', 1, '0812412214', 'jl', 0, NULL, NULL),
 (2, 'caca', 'caca marica ee', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 2, 3, '2021-03-04 15:51:56', 1, '0812412214', 'jl qwdqwd', 0, NULL, NULL),
 (3, 'a', 'a', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 4, 3, '2021-03-21 07:44:08', 1, '0812412214', 'jl', 0, NULL, NULL),
-(4, 'a', 'a', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 1, 1, '2021-03-04 15:23:17', 1, '0812412214', 'jl', 0, NULL, NULL);
+(4, 'a', 'a', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 1, 1, '2021-03-04 15:23:17', 1, '0812412214', 'jl', 0, NULL, NULL),
+(5, 'asw', 'asw', 'L', 'banyuwangi', '2021-02-17', '2313141212', 'v@gmail.com', 6, 3, '2021-03-04 15:23:17', 1, '0812412214', 'jl', 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -1114,6 +1155,18 @@ ALTER TABLE `master_k_k_m_s`
 -- Indexes for table `master_mapels`
 --
 ALTER TABLE `master_mapels`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `master_nilai_keterampilans`
+--
+ALTER TABLE `master_nilai_keterampilans`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `master_nilai_pengetahuans`
+--
+ALTER TABLE `master_nilai_pengetahuans`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1249,7 +1302,7 @@ ALTER TABLE `user_details`
 -- AUTO_INCREMENT for table `absens`
 --
 ALTER TABLE `absens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `config`
@@ -1261,7 +1314,7 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `daftar_kelas`
 --
 ALTER TABLE `daftar_kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1336,10 +1389,22 @@ ALTER TABLE `master_mapels`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `master_nilai_keterampilans`
+--
+ALTER TABLE `master_nilai_keterampilans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `master_nilai_pengetahuans`
+--
+ALTER TABLE `master_nilai_pengetahuans`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `master_penilaian_keterampilans`
 --
 ALTER TABLE `master_penilaian_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `master_penilaian_pengetahuans`
@@ -1393,13 +1458,13 @@ ALTER TABLE `menu_role_kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=93;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
 
 --
 -- AUTO_INCREMENT for table `roles`
 --
 ALTER TABLE `roles`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `rombel_kelas`
@@ -1435,13 +1500,13 @@ ALTER TABLE `tugas_siswa_pengetahuans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
