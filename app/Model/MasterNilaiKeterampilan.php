@@ -17,14 +17,20 @@ class MasterNilaiKeterampilan extends Model
     	'id',
     	'nilai',
     	'remidi',
+      'user_detail_id',
     	'feedback',
     	'penilaian_keterampilan_id'
     ];
 
 
-    public function tugas_siswa_keterampilan() {
+    public function penilaian_keterampilan() {
 
-    	return $this->belongsTo('App\Model\TugasSiswaKeterampilan', 'penilaian_keterampilan_id', 'id' );
+    	return $this->belongsTo('App\Model\MasterPenilaianKeterampilan', 'penilaian_keterampilan_id', 'id' );
+    }
+
+    public function user_detail(){
+      return $this->belongsTo('App\Model\UserDetail', '
+        user_detail_id', 'id');
     }
 
 }

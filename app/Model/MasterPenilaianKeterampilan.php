@@ -43,5 +43,7 @@ class MasterPenilaianKeterampilan extends Model
         return $this->hasMany('App\Model\TugasSiswaKeterampilan', 'penilaian_keterampilan_id', 'id');
     }
 
-
+    public function nilai() {
+        return $this->hasMany('App\Model\MasterNilaiKeterampilan', 'penilaian_keterampilan_id', 'id');
+    }
 }

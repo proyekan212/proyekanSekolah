@@ -273,67 +273,69 @@
 
                       @if($keterampilan->id === $data->id)
 
-                      <input type="text" id="keterampilan_id" hidden="true" value="{{$data->id}}" >
+                      @if($keterampilan->nilai)
 
-                       @if($keterampilan->tugas_keterampilan->count() != 0)
-
-                        @foreach($keterampilan->tugas_keterampilan as $tugas)
-
-                          @if($tugas->user_id !== $siswa->user_detail->id && $tugas->nilai_keterampilan == null)
-
-                              <td>
-                                <input type="number" name="nilai" min="0" value="0" onchange="UpdateNilai(this,'{{$key}}')" class="form-control">
-                              </td>
-                              <td>
-                                status
-                              </td>
-                              <td>
-                                <input type="number" name="remedial" min="0" value="10" class="form-control">
-                              
-                              </td>
+                         @if($keterampilan->nilai->count() > 0)
+                            @foreach($keterampilan->nilai as $nilai)
+                              @if($nilai->user_detail_id != $siswa->user_detail->id )
+                                 <td>
+                                  belum
+                                    <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control">
+                                  </td>
+                                    <td>
+                                    status
+                                  </td>
+                                  <td>
+                                    <input type="number" onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" value="0" min="0" class="form-control">
+                                  
+                                  </td>
+                                 
+                                   <td class=" ">
+                                    <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control" id="" rows="3"></textarea>
+                                  </td>
+                             @else
+                               <td>
+                                    belum
+                                      <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control">
+                                    </td>
+                                      <td>
+                                      status
+                                    </td>
+                                    <td>
+                                      <input type="number" onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" value="0" min="0" class="form-control">
+                                    
+                                    </td>
+                                   
+                                     <td class=" ">
+                                      <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')"  class="form-control" id="" rows="3"></textarea>
+                                   </td>
                                
-                                 <td class=" ">
-                                  <textarea name="" class="form-control" id="" rows="3"></textarea>
-                                </td>
+                              @endif
 
-                          @else
+                           
 
 
+                            @endforeach
+
+                            @else
                             <td>
-                          <input type="number" min="0" value="{{$tugas->nilai_keterampilan->nilai}}" onchange="nilai(this,'{{$data->id}}')" name="nilai" class="form-control">
-                        </td>
-                        <td>
-                          status
-                        </td>
-                        <td>
-                          <input type="number" value="{{$tugas->nilai_keterampilan->remedial}}" class="form-control">
-                        
-                        </td>
-                         
-                           <td class=" ">
-                            <textarea name="{{$tugas->nilai_keterampilan->feedback}}" class="form-control" id="" rows="3"></textarea>
-                          </td>
-                          @endif
-                        @endforeach
+                                    belum
+                                      <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control">
+                                    </td>
+                                      <td>
+                                      status
+                                    </td>
+                                    <td>
+                                      <input onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" type="number" value="0" min="0" class="form-control">
+                                    
+                                    </td>
+                                   
+                                     <td class=" ">
+                                      <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control" id="" rows="3"></textarea>
+                                   </td>
 
-                       @endif
-                     
-                            <td>
-                          <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$key}}')" class="form-control">
-                        </td>
-                        <td>
-                          status
-                        </td>
-                        <td>
-                          <input type="number" value="0" min="0" class="form-control">
-                        
-                        </td>
-                         
-                           <td class=" ">
-                            <textarea name="" class="form-control" id="" rows="3"></textarea>
-                          </td>
-
-
+                         @endif
+                        @endif
 
                         <td>
                             @if($keterampilan->tugas_keterampilan)
@@ -389,24 +391,53 @@
    @endforeach
 <script>
 
-function UpdateNilai(event, id) {
-  console.log(id);
+function UpdateNilai(event,user_id=null, keterampilan_id) {
 
-  axios.post("").then((res) => {
-    console.log(res)
-  })
-  .catch((err) => {
-    console.log(err)
-  });
+  const data = {};
+
+  data['nilai'] = event.value;
+  data['user_detail_id'] = user_id;
+  data['penilaian_keterampilan_id'] = keterampilan_id;
+  axios.post("/penilaian_siswa_keterampilan", data).then((res) => {
+    console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });  
+
+
+ 
   
 }
 
-function UpdateRemedial(event, id) {
+function UpdateRemedial(event,user_id=null, keterampilan_id) {
 
+  const data = {};
+
+  data['remidi'] = event.value;
+  data['user_detail_id'] = user_id;
+  data['penilaian_keterampilan_id'] = keterampilan_id;
+  axios.post("/penilaian_siswa_keterampilan", data).then((res) => {
+    console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });  
 }
 
-function UpdateFeedback(event, id) {
+function UpdateFeedback(event,user_id=null, keterampilan_id) {
 
+  const data = {};
+
+  data['feedback'] = event.value;
+  data['user_detail_id'] = user_id;
+  data['penilaian_keterampilan_id'] = keterampilan_id;
+  axios.post("/penilaian_siswa_keterampilan", data).then((res) => {
+    console.log(res);
+    })
+    .catch((err) => {
+      console.log(err.response);
+    });  
 }
 
 

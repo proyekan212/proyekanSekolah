@@ -136,6 +136,10 @@ Route::group(['middleware' => ['auth']], function () {
     //tugas siswa
     Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');
 
+
+    // penilaian siswa
+
+    Route::resource('penilaian_siswa_keterampilan', 'Kelas\PenilaianSiswaKeterampilanController');
     
     //Download Excel
     Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');

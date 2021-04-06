@@ -15,10 +15,11 @@ class CreateMasterNilaiKeterampilansTable extends Migration
     {
         Schema::create('master_nilai_keterampilans', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_detail_id');
             $table->integer('penilaian_keterampilan_id');
             $table->integer('nilai')->default(0);
             $table->integer('remidi')->nullable(true);
-            $table->text('feedback')->blank(true);
+            $table->text('feedback')->nullable(true);
 
             $table->timestamps();
         });
