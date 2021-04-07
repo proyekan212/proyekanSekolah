@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Apr 06, 2021 at 09:07 PM
+-- Generation Time: Apr 07, 2021 at 07:23 PM
 -- Server version: 10.5.9-MariaDB
 -- PHP Version: 8.0.3
 
@@ -390,13 +390,22 @@ INSERT INTO `master_mapels` (`id`, `nama_mapel`, `jurusan_id`, `kkm_id`, `hapus`
 
 CREATE TABLE `master_nilai_keterampilans` (
   `id` bigint(20) UNSIGNED NOT NULL,
+  `user_detail_id` int(11) NOT NULL,
   `penilaian_keterampilan_id` int(11) NOT NULL,
   `nilai` int(11) NOT NULL DEFAULT 0,
   `remidi` int(11) DEFAULT NULL,
-  `feedback` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `feedback` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `master_nilai_keterampilans`
+--
+
+INSERT INTO `master_nilai_keterampilans` (`id`, `user_detail_id`, `penilaian_keterampilan_id`, `nilai`, `remidi`, `feedback`, `created_at`, `updated_at`) VALUES
+(1, 2, 4, 40, NULL, NULL, '2021-04-06 09:46:53', '2021-04-06 09:47:21'),
+(2, 2, 1, 20, 30, NULL, '2021-04-06 09:51:00', '2021-04-06 09:52:59');
 
 -- --------------------------------------------------------
 
@@ -844,12 +853,12 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (79, '2021_03_20_132144_create_tugas_siswas_table', 41),
 (82, '2021_02_11_133337_create_master_jadwal_pelajarans_table', 42),
 (86, '2021_03_23_113936_create_tugas_siswa_pengetahuans_table', 43),
-(87, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 44),
 (88, '2021_02_13_095112_create_master_kejadian_jurnals_table', 45),
 (92, '2021_03_26_124141_create_absens_table', 46),
 (95, '2021_03_30_025504_create_absens_table', 47),
 (97, '2021_04_04_132757_create_master_nilai_pengetahuans_table', 48),
-(98, '2021_04_04_132749_create_master_nilai_keterampilans_table', 49);
+(100, '2021_03_23_113950_create_tugas_siswa_keterampilans_table', 50),
+(103, '2021_04_04_132749_create_master_nilai_keterampilans_table', 51);
 
 -- --------------------------------------------------------
 
@@ -1392,7 +1401,7 @@ ALTER TABLE `master_mapels`
 -- AUTO_INCREMENT for table `master_nilai_keterampilans`
 --
 ALTER TABLE `master_nilai_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `master_nilai_pengetahuans`
@@ -1458,7 +1467,7 @@ ALTER TABLE `menu_role_kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=99;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=104;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1488,7 +1497,7 @@ ALTER TABLE `tugas_siswas`
 -- AUTO_INCREMENT for table `tugas_siswa_keterampilans`
 --
 ALTER TABLE `tugas_siswa_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `tugas_siswa_pengetahuans`
