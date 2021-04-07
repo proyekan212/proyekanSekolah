@@ -46,26 +46,53 @@
                   @endif
                 </div>
 
-                <div id="collapse{{$row->id}}" class="collapse show" aria-labelledby="heading{{$row->id}}" data-parent="#accordion">
+             <div id="collapse{{$row->id}}" class="collapse show" aria-labelledby="heading{{$row->id}}" data-parent="#accordion">
                 <div class="card-body">
                     <div>
-                        <p>Tugas:</p> {{$row->instruksi}}
-                    </div>
+                        <p>Tugas:</p> {{$row->keterangan}}
 
+
+                    </div>  
                     <div class="mt-4">
-                         @if($row->tugas_pengetahuan->count() > 0) 
-                         <a href="">
-
-                            {{$row->tugas_pengetahuan[0]->filename_path}}
-                           <i class="fas fa-download"></i>
+                       @if($row->tugas_pengetahuan->count() > 0) 
+                        <div class="flex ">
+                           <a href="{{url('/tugas/pengetahuan/', $row->tugas_pengetahuan[0]->filename_path)}}">
+                            check
+                           <i class="fas fa-eye"></i>
                          </a>
+  
+
+
+                          <form method="post" onclick="deleteData('{{$row->id}}', this)" class="pl-16" action="{{url('tugas_siswa_pengetahuan', $row->tugas_pengetahuan[0]->id)}}" >
+                            @csrf
+                        {{ method_field('DELETE') }}
+
+                            <button type="button" style="font-size: 20px;" class="text-red-400" >
+                              <i class="fas fa-trash ">
+                                
+                              </i>
+                            </button>
+                            
+                          </form>
+                        </div>
                          @else
-                          <div class="flex flex-col"> 
-                            belum mengumpulkan tugas
-                            <input type="file">
-                          </div>
+
+                         <form enctype="multipart/form-data" action="{{ URL ('tugas_siswa_pengetahuan')}}" method="post" >
+                          @csrf
+                          <input type="hidden" name=" penilaian_pengetahuan" value="{{$row->id}}">
+                            <div class="flex flex-col"> 
+                              belum mengumpulkan tugas
+                              <input type="file" name="file">
+                           </div>
+
+                           <button type="submit" class="px-4 py-2 rounded-lg bg-blue-400 text-white ">
+                             Kirim
+                           </button>
+                         </form>
+                        
                       @endif
                     </div>
+                      
                 </div>
                 </div>
          </div>

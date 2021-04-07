@@ -9,6 +9,7 @@ class TugasSiswaKeterampilan extends Model
   
 
     protected $fillable = [
+        'id',
     	'penilaian_keterampilan_id',
     	'user_id',
     	'filename_path'

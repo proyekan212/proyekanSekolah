@@ -18,18 +18,37 @@ class PenilaianPengetahuanController extends Controller
      */
     public function index(Request $request)
     {   
-        $kompetensi_dasars = KompetensiDasar::all();
-        $daftarKelas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'));
+          $DaftarKelas = DaftarKelas::with('kelas.jadwal_pelajaran.penilaian_pengetahuan.tugas_pengetahuan')
+        ->
+        where([
+            ['kelas_id', '=', $request->session()->get('kelas_id')],
+        ])
+        ->whereHas('kelas.jadwal_pelajaran', function($q ) use ($request) {
+            $q->where('id', $request->session()->get('kelas_mapel'));
+         })
+        ->get();
+        $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
 
-        $data = MasterPenilaianPengetahuan::where([
-            ['hapus', '=', 0],
-            ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
-        ])->get();
+        $datas = MasterPenilaianPengetahuan::with(['jadwal_pelajaran.kelas.daftar_kelas'])->where('kelas_mapel_id', $request->session()->get('kelas_mapel'))->get();
+        
         return view('pages.kelas.PenilaianKd3', [
-            'kompetensi_dasars'=> $kompetensi_dasars,
-            'data'=> $data,
-
+            'kompetensi_dasar'=> $kompetensi_dasar,
+            'datas'=> $datas,
+            'daftar_kelas' => $DaftarKelas
         ]);
+
+        // $kompetensi_dasars = KompetensiDasar::all();
+        // $daftarKelas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'));
+
+        // $data = MasterPenilaianPengetahuan::where([
+        //     ['hapus', '=', 0],
+        //     ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
+        // ])->get();
+        // return view('pages.kelas.PenilaianKd3', [
+        //     'kompetensi_dasars'=> $kompetensi_dasars,
+        //     'data'=> $data,
+
+        // ]);
     }
 
     /**

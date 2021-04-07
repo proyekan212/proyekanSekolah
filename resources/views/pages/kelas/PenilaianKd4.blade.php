@@ -280,7 +280,7 @@
                               @if($nilai->user_detail_id != $siswa->user_detail->id )
                                  <td>
                                   belum
-                                    <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control">
+                                    <input type="number" value="{{$nilai->nilai}}" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$keterampilan->id}}')" class="form-control">
                                   </td>
                                     <td>
                                     status

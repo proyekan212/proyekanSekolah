@@ -18,4 +18,7 @@ class TugasSiswaPengetahuan extends Model
     public function master_pengetahuan() {
     	return $this->belongsTo('App\Model\MasterPenilaianPengetahuan', 'penilaian_pengetahuan_id', 'id');
     }
+     public function nilai_pengetahuan() {
+        return $this->hasOne('App\Model\MasterPenilaianPengetahuan', 'penilaian_pengetahuan_id', 'id');
+    }
 }

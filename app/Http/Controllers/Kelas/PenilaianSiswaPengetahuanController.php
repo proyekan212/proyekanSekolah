@@ -1,10 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Kelas;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\MasterNilaiPengetahuan;
 
-class PenilaianSiswaKeterampilan extends Controller
+
+class PenilaianSiswaPengetahuanController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,8 +37,25 @@ class PenilaianSiswaKeterampilan extends Controller
      */
     public function store(Request $request)
     {
-        
-        
+        $data = $request->all();
+
+        $nilai =MasterNilaiPengetahuan::where([
+                    ['penilaian_pengetahuan_id', '=', $request->input('penilaian_pengetahuan_id')],
+                    ['user_detail_id', '=', $request->input('user_detail_id')]
+                ]);
+        if($nilai->count() > 0){
+            $nilai->update($data);
+        }
+        else {
+             $nilai = MasterNilaiPengetahuan::create(
+                $data
+             );
+        }
+       
+dd($data);
+        return response()->json([
+            'data' => $nilai
+        ]);
     }
 
     /**
