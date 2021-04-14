@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\KompetensiDasar;
+use App\Model\MasterKompetensiInti;
+use App\Model\MasterSemester;
 use Illuminate\Http\Request;
 use DB;
 class KompetensiDasarController extends Controller
@@ -13,9 +16,14 @@ class KompetensiDasarController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
+    {   
+        $kompetensi_dasar = KompetensiDasar::get();
+        $semester = MasterSemester::get();
+        $kompetensi_inti = MasterKompetensiInti::get();
         return view('pages.admin.kompetensidasar', [
-        'datas' => DB::table('kompetensi_dasars')->get(),
+        'datas' => $kompetensi_dasar,
+        'semester' => $semester,
+        "kompetensi_inti" => $kompetensi_inti,
             // 'kompetensi_inti' => MasterKompetensiInti::all(),
         ]);
     }
@@ -38,7 +46,14 @@ class KompetensiDasarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();      
+        KompetensiDasar::create([
+            'nama_kompetensi_dasar' => $data['kompetensi_dasar'],
+            'kompetensi_inti_id' => $data['kompetensi_inti'],
+            'semester_id' =>$data['semester'],
+        ]);
+        
+        return redirect('Kompetensi_Dasar');
     }
 
     /**

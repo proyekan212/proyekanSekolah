@@ -63,32 +63,52 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <div class="modal-body">
-        <div class="table-responsive">
-            <table id="dataTableExample" class="table">
-                <thead>
-                <tr>
-                  <th>No</th> 
-                  <th>Nama Kompetensi Dasar</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($datas as $key => $row) 
-                  <tr>
-                    <td>
-                      {{$key+1}}
-                    </td>
-                    <td>{{$row->nama_kompetensi_dasar}}</td>              
-                  </tr>
-                @endforeach
-              </tbody>
-            </table>
+      <form action="{{url('Kompetensi_Dasar')}}" method="post">
+        @csrf
+        <div class="modal-body">
+      
+            
+                <div class="form-group row">
+                  <div class="col-lg-3">
+                    <label class="col-form-label">Kompetensi Inti</label>
+                  </div>
+                  <div class="col-lg-8">
+                  <select name="kompetensi_inti" id="">
+                        @foreach($kompetensi_inti as $row)
+                        <option value="{{$row->id}}">{{$row->name}}</option>
+                        @endforeach
+                  </select>
+                  </div>
+                </div>
+                  <div class="form-group row">
+                    <div class="col-lg-3">
+                      <label class="col-form-label">Semester</label>
+                    </div>
+                    <div class="col-lg-8">
+                      <select name="semester" id="">
+                        @foreach($semester as $semester)
+                        <option value="{{$semester->id}}">{{$semester->nama_semester}}</option>
+                        @endforeach
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group row">
+                  <div class="col-lg-3">
+                    <label class="col-form-label">Kompetensi Dasar</label>
+                  </div>
+                  <div class="col-lg-8">
+                    <input type="text" class="form-control" name="kompetensi_dasar">
+                  </div>
+                </div>
+              
           </div>
-        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-primary">Sinkronkan</button>
+        <button type="submit" class="btn btn-primary">add</button>
       </div>
+
+      </form>
     </div>
   </div>
 </div>

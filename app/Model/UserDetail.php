@@ -11,8 +11,13 @@ class UserDetail extends Model
         'id',
         'photo',
         'name',
+        'mapel_id',
         'nisn_or_nip',
         'email',
+        'tanggal_lahir',
+        'tahun_masuk',
+        'tempat_lahir',
+        'jenis_kelamin',
         'user_id',
         'role_id',
         'last_login',
@@ -31,6 +36,10 @@ class UserDetail extends Model
 
     public function user() {
         return $this->belongsTo('App\Model\User', 'user_id', 'id');
+    }
+
+    public function mapel() {
+        return $this->belongsTo('App\Model\MasterMapel', 'mapel_id', 'id');
     }
 
 }

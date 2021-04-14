@@ -33,8 +33,8 @@
               @endif
               <form class="forms-sample" method="POST" action="{{ route('loginPost') }}">
                 <div class="form-group">
-                  <label for="exampleInputEmail1">Email address</label>
-                  <input type="email" class="form-control" autofocus autocomplete="off" name="username" id="exampleInputEmail1" placeholder="Email">
+                  <label for="exampleInputEmail1">Nik or Nip</label>
+                  <input type="text" class="form-control" autofocus autocomplete="off" name="username" id="exampleInputEmail1" placeholder="Email">
                 </div>
                 <div class="form-group">
                   <label for="exampleInputPassword1">Password</label>

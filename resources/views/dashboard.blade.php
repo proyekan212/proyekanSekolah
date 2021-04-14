@@ -54,7 +54,7 @@
       </h1>
       
       <span class="text-gray text-xs">
-      {{$row->user->user_detail->name}}
+      {{$row->user_detail}}
       </span>
       <form action="{{ url('kelas_mapel') }}" method="post" class="mt-2">
       @csrf

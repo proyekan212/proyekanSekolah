@@ -31,9 +31,7 @@ class DashboardController extends Controller
         $user = User::where('id', $request->user()->id)->first();
         $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
         $daftarKelas = DaftarKelas::with(['kelas', 'user_detail'])
-        ->whereHas('user_detail', function($q) use($user_detail) {
-            $q->where('id','=', $user_detail->id);
-        })->first();
+        ->where('user_id', $user_detail->id)->first();
         // dd($daftarKelas);
 
 

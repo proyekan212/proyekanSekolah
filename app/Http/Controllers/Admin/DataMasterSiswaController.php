@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\User ;
+use App\Model\UserDetail;
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Hash;
+
 class DataMasterSiswaController extends Controller
 {
     /**
@@ -14,8 +18,11 @@ class DataMasterSiswaController extends Controller
      */
     public function index()
     {
+
+        $siswa = UserDetail::where('role_id', 3)->get();
         return view('pages.admin.datamastersiswa', [
           // 'datas' => DB::table('master_kelas')->get(),
+          'siswa' => $siswa,
         ]);
     }
 
@@ -36,8 +43,28 @@ class DataMasterSiswaController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+
+        $data= $request->all();
+     
+        $user = User::create([
+            'username' => $data['nisn'],
+            'password' => Hash::make($data['nisn']),
+        ]);
+
+        UserDetail::create([
+            'name' => $data['nama'],
+            'user_id'=> $user->id,
+            'jenis_kelamin' => $data['jenis_kelamin'],
+            'tanggal_lahir' => $data['tanggal_lahir'],
+            'tempat_lahir' => $data['tempat_lahir'],
+            'tahun_masuk' => $data['tahun_masuk'],
+            'email' => $data['email'],
+            'nisn_or_nip' => $data['nisn'],
+            'role_id' => 3
+        ]);
+
+        return redirect('Data_Master_Siswa');
     }
 
     /**
