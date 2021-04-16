@@ -1,13 +1,12 @@
-import Vue from "vue";
-// import axios from 'axios';
-import dt from 'datatables.net';
-import { VuejsDatatableFactory } from 'vuejs-datatable';
+// import Vue from "vue";
+// // import axios from 'axios';
+// import dt from 'datatables.net';
+// import { VuejsDatatableFactory } from 'vuejs-datatable';
 
-window.$ = window.jQuery = require('jquery');
-window.axios = require('axios');
+// window.$ = window.jQuery = require('jquery');
+// window.axios = require('axios');
 
-Vue.use(VuejsDatatableFactory);
-
+// Vue.use(VuejsDatatableFactory);
 
 // import Penilaian from './src/components/Penilaian';
 // new Vue({

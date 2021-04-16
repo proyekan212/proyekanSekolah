@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\DaftarKelas;
 use App\Model\Kelas;
 use App\Model\MasterKelas;
 use App\Model\RombelKelas;
 use App\Model\TahunAkademik;
+use App\Model\UserDetail;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class DataKelasController extends Controller
@@ -21,12 +24,18 @@ class DataKelasController extends Controller
         $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
         $rombel = RombelKelas::where('hapus', 0)->get();
         $master_kelas = MasterKelas::where('hapus', 0)->get();
-        $datas = Kelas::where('hapus', 0)->get();
+        $datas = Kelas::where('hapus', 0)
+        ->with(['daftar_kelas' => function($q) {
+            $q->has('user_detail');
+        }])
+        ->get();
+      
+        
         return view('pages.admin.datakelas', [
             'datas' => $datas,
             'tahun_akademik' => $tahun_akademik,
             'rombel' => $rombel,
-            'master_kelas' => $master_kelas
+            'master_kelas' => $master_kelas,
         ]);
     }
 
@@ -63,9 +72,27 @@ class DataKelasController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show($id, Request $request)
+    {   
+        
+        
+        $data = UserDetail::where([
+            ['role_id', '=', 3],
+            ])
+            ->with(['daftar_kelas.kelas' => function($q) use($id) {
+                $q->where([
+
+                    ['id', '!=', $id],
+                    ['id', '=', null]
+                ]);
+            }])
+            ->doesntHave('daftar_kelas')
+            ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
+            ->get();
+
+        return response()->json([
+            'data' => $data
+        ]);
     }
 
     /**
@@ -75,8 +102,11 @@ class DataKelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    {
-        //
+    {   
+        // $data = UserDetail::where('role_id', 3)->get();
+        // return response()->json([
+        //     'data' => $data
+        // ]);
     }
 
     /**
@@ -100,5 +130,18 @@ class DataKelasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function storeSiswaKelas(Request $request) {
+        $data = $request->all();
+        foreach($data['user_id'] as $value) {
+            DaftarKelas::create([
+                'kelas_id' => $data['kelas_id'],
+                'user_id' => $value,
+                'rombel_id' => 1
+            ]);
+
+        }
+        return redirect('data_kelas');
     }
 }

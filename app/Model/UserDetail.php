@@ -42,4 +42,8 @@ class UserDetail extends Model
         return $this->belongsTo('App\Model\MasterMapel', 'mapel_id', 'id');
     }
 
+    public function daftar_kelas () {
+        return $this->hasMany('App\Model\DaftarKelas', 'user_id', 'id');
+    }
+
 }

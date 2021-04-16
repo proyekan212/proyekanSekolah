@@ -44,7 +44,13 @@ class DaftarSiswaKelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
+        $data = $request->all();
+
+        foreach($data['user_id'] as $value) {
+
+
+        }
     }
 
     /**

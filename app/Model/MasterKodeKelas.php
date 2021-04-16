@@ -9,6 +9,7 @@ class MasterKodeKelas extends Model
     protected $fillable = [
         'id',
         'kode',
-        'name'
+        'name',
+        'numerik',
     ];
 }
