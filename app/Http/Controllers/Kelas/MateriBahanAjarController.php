@@ -18,7 +18,8 @@ class MateriBahanAjarController extends BaseController
         ])->get();
         
         return view('pages.kelas.teacher.materi', [
-            'materi' => $materi
+            'materi' => $materi,
+            'kelas_mapel' => $request->session()->get('kelas_mapel'),
         ]);
     }
 
@@ -36,14 +37,34 @@ class MateriBahanAjarController extends BaseController
     }
 
     public function store(Request $request) {
-        MateriBahanBelajar::create([
-            'link' => $request->input('link'),
-            'name' => $request->input('name'),
-            'sender_id' => $request->user()->id,
-            'kelas_id' => 1,
-            'created_at' => time(),
-        ]);
 
+        if($request->input('type') == 'file'){
+            $file = $request->file('link');
+            $filename = time().'.'.$file->getClientOriginalName();
+            $file_formatted = str_replace(' ', '_', $filename);
+            
+            $file->move('materi_bahan_ajar/'.$request->session()->get('kelas_mapel'), $file_formatted);
+           
+            MateriBahanBelajar::create([
+                'link' => $file_formatted,
+                'name' => $request->input('name'),
+                'sender_id' => $request->user()->id,
+                'type' => $request->input('type'),
+                'kelas_id' => 1,
+                'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+                'created_at' => time(),
+            ]);
+        }
+        else {
+            MateriBahanBelajar::create([
+                'link' => $request->input('link'),
+                'name' => $request->input('name'),
+                'sender_id' => $request->user()->id,
+                'kelas_id' => 1,
+                'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+                'created_at' => time(),
+            ]);
+        }        
         return redirect('kelas/materi_bahan_ajar');
     }
     public function show($id) {

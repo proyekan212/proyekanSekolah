@@ -132,8 +132,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Data Master Mata Pelajaran
     Route::resource('/data_master_mapel', 'Admin\MasterMapelController');
 
-    Route::resource('/kelas_mapel', 'Student\KelasMapelController');
 
+    // Student
+    Route::resource('/kelas_mapel', 'Student\KelasMapelController');
+    Route::resource('/materi_kelas_student', 'Student\MateriKelasStudentController');
     //tugas siswa
     Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');
     Route::resource('tugas_siswa_pengetahuan', 'Kelas\TugasSiswaPengetahuanController');
@@ -150,6 +152,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('rekap_absen_excel/', 'Kelas\ExportExcelController@rekap_absen');
     
 
+
+    
 });
 
 

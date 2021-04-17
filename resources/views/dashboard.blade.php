@@ -43,11 +43,13 @@
     </div>
   </div>
 <div class="w-full mt-8">
-  <h1 class="text-lg  text-gray-800 font-bold ">
+  <h1 class="text-lg mb-6  text-gray-800 font-bold ">
     Mata Pelajaran
   </h1>
-  <div class="mt-4  grid  lg:grid-cols-4   gap-6">
+ 
+    @if($daftarKelas != null)
     @foreach($daftarKelas->kelas->jadwal_pelajaran as $row)
+    <div class="mt-4  grid  lg:grid-cols-4   gap-6">
     <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
       <h1 class="capitalize text-gray-700 mb-2 text-base">
         Kelas {{$row->master_mapel->nama_mapel}}
@@ -65,10 +67,17 @@
       </form>
      
     </div>
-    @endforeach
-    
-     
     </div>
+    @endforeach
+     
+    @else
+    <h1 class="text-gray-600 text-sm font-semibold">
+      Belum ada mata pelajaran
+     </h1>
+
+    @endif
+     
+   
     
   </div>
   

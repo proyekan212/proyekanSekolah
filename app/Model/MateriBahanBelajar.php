@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class MateriBahanBelajar extends Model
@@ -23,7 +24,10 @@ class MateriBahanBelajar extends Model
         'rating_id',
         'sender_id',
         'kelas_id',
-        'rating_id'
+        'rating_id',
+        'created_at',
+        'kelas_mapel_id',
+        'type'
     ];
 
     public function user() {
@@ -32,5 +36,9 @@ class MateriBahanBelajar extends Model
 
     public function kelas() {
         return $this->belongsTo('App\Model\MasterKelas', 'kelas_id', 'id');
+    }
+
+    public function created_at_FullDate() {
+        return Carbon::parse($this->created_at)->format('d F Y');
     }
 }

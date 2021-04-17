@@ -14,11 +14,12 @@ class UserSeeder extends Seeder
      * @return void
      */
     public function run()
-    {   
+
+    
+    {   $faker = Faker\Factory::create();   
         for ($i=1; $i <= 5; $i++) { 
-            DB::table('users')->insert([
-                'username' => Str::random(10).'@gmail.com',
-                'role_id' => $i,
+            $user = DB::table('users')->insert([
+                'username' => $faker->unique()->numerify('##########'),
                 'password' => Hash::make('password'),
             ]);
         }

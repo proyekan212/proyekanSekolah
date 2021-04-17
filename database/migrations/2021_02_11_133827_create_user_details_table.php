@@ -20,7 +20,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('jenis_kelamin')->nullable(true);
             $table->string('tempat_lahir')->nullable(true);
             $table->date('tanggal_lahir')->nullable(true);
-            $table->string('nisn_or_nip');
+            $table->string('nisn_or_nip')->unique(true);
             $table->string('tahun_masuk')->nullable(true);
             $table->string('email')->nullable(true);
             $table->unsignedBigInteger('user_id');
