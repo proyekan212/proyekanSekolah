@@ -33,5 +33,7 @@ class Kelas extends Model
         return $this->hasMany('App\Model\MasterJadwalPelajaran', 'kelas_id', 'id');
     }
 
-    
+    public function jadwal_pelajaran_first() {
+        return $this->jadwal_pelajaran();
+    }
 }

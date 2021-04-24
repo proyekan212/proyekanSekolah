@@ -34,7 +34,12 @@
                 <thead>
                 <tr>
                   <th>No</th> 
+                  
+                  <th>Kompetensi Inti</th>
                   <th>Nama Kompetensi Dasar</th>
+                  <th>
+                    semester
+                  </th>
                 </tr>
               </thead>
               <tbody>
@@ -43,7 +48,14 @@
                     <td>
                       {{$key+1}}
                     </td>
-                    <td>{{$row->nama_kompetensi_dasar}}</td>              
+                   
+                    <td class="capitalize">
+                      {{$row->kompetensi_inti->name}}
+                    </td>
+                    <td>{{$row->nama_kompetensi_dasar}}</td>     
+                    <td class="capitalize">
+                      {{$row->semester->nama_semester}}
+                    </td >         
                   </tr>
                 @endforeach
               </tbody>

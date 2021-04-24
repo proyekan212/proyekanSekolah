@@ -4,21 +4,31 @@ namespace App\Model;
 
 use Hamcrest\Type\IsNumeric;
 use Illuminate\Database\Eloquent\Model;
-
+use Illuminate\Support\Facades\DB;
 
 class MasterPenilaianKeterampilan extends Model
 {
     protected $fillable = [
         'id',
         'nama_penilaian',
-        'skema',
+        'skema_id',
         'kompetensi_dasar',
         'keterangan',
         'kelas_mapel_id',
         'hapus',
         'mulai_pengerjaan',
+        'finish_pengerjaan',
+       
+    ];
+
+    protected $dates = [
+        'mulai_pengerjaan',
         'finish_pengerjaan'
     ];
+
+    public function skema() {
+        return $this->belongsTo('App\Model\MasterSkemaKeterampilan', 'skema_id', 'id');
+    }
 
     public function kd () {
         $data = explode(',',strval($this->kompetensi_dasar));
@@ -46,4 +56,23 @@ class MasterPenilaianKeterampilan extends Model
     public function nilai() {
         return $this->hasMany('App\Model\MasterNilaiKeterampilan', 'penilaian_keterampilan_id', 'id');
     }
+
+    public function total() {
+        return $this->nilai()->select(DB::raw('sum(nilai)'));
+    }
+
+    public function nilai_siswa($user_id) {
+        
+        return $this->nilai()->where('user_detail_id', $user_id)->first();
+    }
+
+    public function tugas_siswa($user_id){
+        return $this->tugas_keterampilan()->where('user_id', $user_id)->first();
+    }
+
+ 
+
+
+
+    
 }

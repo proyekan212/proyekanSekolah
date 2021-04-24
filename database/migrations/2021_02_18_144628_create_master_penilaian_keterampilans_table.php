@@ -15,7 +15,7 @@ class CreateMasterPenilaianKeterampilansTable extends Migration
     {
         Schema::create('master_penilaian_keterampilans', function (Blueprint $table) {
             $table->id();
-            $table->string('skema');
+            $table->integer('skema_id');
             $table->string('nama_penilaian');
             $table->text('kompetensi_dasar');
             $table->text('keterangan');

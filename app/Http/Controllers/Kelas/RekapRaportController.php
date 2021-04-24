@@ -1,20 +1,14 @@
 <?php
 
-namespace App\Http\Controllers\Dashboard;
+namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
-use App\Model\Kelas;
-use App\Model\MasterJadwalPelajaran;
-use App\Model\MasterKelas;
-use App\Model\MasterSemester;
+use App\Model\MasterPenilaianKeterampilan;
+use App\Model\MasterSkemaKeterampilan;
 use Illuminate\Http\Request;
-use App\Model\Menu;
-use App\Model\User;
-use App\Model\UserDetail;
-use Carbon\Carbon;
 
-class DashboardController extends Controller
+class RekapRaportController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -22,41 +16,27 @@ class DashboardController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        // dd($request->session()->get('kelas_mapel'));
+        $siswa = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))
+        ->with(['kelas.jadwal_pelajaran' => function($q) use($request) {
+            $q->where('id', $request->session()->get('kelas_mapel'));
+        }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
+        ->get();
 
-        // $menu = Menu::all();
+        $skema_keterampilan = MasterSkemaKeterampilan::get();
 
-        // untuk siswa
-        $mapel = MasterJadwalPelajaran::all();
-        $semester = MasterSemester::all();
-        $user = User::where('id', $request->user()->id)->first();
-      
-        // $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
-        // dd($user_detail);
-        $daftarKelas = DaftarKelas::with(['kelas', 'user_detail'])
-        ->where('user_id', $user->user_detail->id )
-        ->whereHas('kelas', function($q) {
-            $q->whereRaw('EXTRACT(YEAR FROM created_at) = '.Carbon::now()->format('Y'));
-        })
-        ->first();
-     
-
-
-        // dd($daftarKelas);
-
-
-        // untuk guru
-        $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request) {
-            $q->where('user_id', '=', $request->user()->id);
-        }])->get();
-        return view('dashboard', [
-            'showSemester'      => $semester,
-            'showMataPelajaran' => $mapel,
-            'daftarKelas' => $daftarKelas,
-            'kelas' => $kelas,
-            'user' => $user,
-            // 'menu' => $menu
-        ]);
+        $keterampilan = MasterPenilaianKeterampilan::where('kelas_mapel_id', $request->session()->get('kelas_mapel') )
+        ->get();
+        
+        // dd($keterampilan);s
+        return view('pages.kelas.rekap_raport', 
+            [
+                'siswa' => $siswa,
+                'keterampilan' => $keterampilan,
+                'skema_keterampilan' => $skema_keterampilan
+            ]
+        );
     }
 
     /**

@@ -159,10 +159,13 @@
                 <option selected>- Pilih Kompetensi Inti (KI) -</option>
                     @foreach($kompetensi_dasar as $index => $row) 
 
-                      @if($row->kompetensi_inti->name == 'pengetahuan')
-                      <option value="{{$row->id}}">
-                        {{$row->kompetensi_inti->kode}}.{{$index+1}} {{$row->nama_kompetensi_dasar}}
-                      </option>
+                      @if($row->name == 'pengetahuan')
+                        @foreach($row->kompetensi_dasar as $kd)
+                          <option value="{{$kd->id}}">
+                           {{$row->kode}}.{{$kd->id}} {{$kd->nama_kompetensi_dasar}}
+                          </option>
+                        @endforeach
+                  
                       @endif
                     @endforeach
               </select>
@@ -252,134 +255,113 @@
               </tr>
             </thead>
             <tbody>
-                @foreach($data->jadwal_pelajaran->kelas->daftar_kelas as $index => $siswa)
-                <tr>
-                  <td>
-                    {{$index+1}}
+                   @foreach($daftar_kelas as $index => $siswa)
+                    <tr>
+                      <td>
+                        {{$index + 1}}
+                      </td>
+                      <td>
+                        {{$siswa->user_detail->nisn_or_nip}}
+                      </td>
+                      <td>
+                        {{$siswa->user_detail->name}}
+                      </td>
+                      <td>
+                        {{$siswa->user_detail->jenis_kelamin}}
+                      </td>
 
-                  </td>
-                  <td>{{$siswa->user_detail->nisn_or_nip}}</td>
-                  <td>{{$siswa->user_detail->name}}</td>
-                  <td>{{$siswa->user_detail->jenis_kelamin}}</td>
-                 
+                      @if($data->nilai->count() > 0)
+                        @if($data->nilai_siswa($siswa->user_id))
 
-
-
-
-
-                    @foreach($siswa->kelas->jadwal_pelajaran[0]->penilaian_pengetahuan as $pengetahuan) 
-
-
-                      @if($pengetahuan->id === $data->id)
-
-                      @if($pengetahuan->nilai)
-
-                         @if($pengetahuan->nilai->count() > 0)
-                            @foreach($pengetahuan->nilai as $nilai)
-                              @if($nilai->user_detail_id != $siswa->user_detail->id )
+                          <td>
+                            
+                            <input type="number" value="{{$data->nilai_siswa($siswa->user_id)->nilai}}" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control">
+                          </td>
+                            <td>
+                            status
+                          </td>
+                          <td>
+                            <input onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" type="number" value="$data->nilai_siswa($siswa->user_id)->remidi" min="0" class="form-control">
+                          
+                          </td>
+                          
+                            <td class=" ">
+                            <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control" id="" rows="3">
+                              {{$data->nilai_siswa($siswa->user_id)->feedback}}
+                            </textarea>
+                          </td>
+                        @else
+                        <td>
+                                   
+                                   <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control">
+                                 </td>
+                                   <td>
+                                   status
+                                 </td>
                                  <td>
-                                  belum
-                                    <input type="number" value="{{$nilai->nilai}}" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" class="form-control">
-                                  </td>
-                                    <td>
-                                    status
-                                  </td>
-                                  <td>
-                                    <input type="number" onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" value="0" min="0" class="form-control">
-                                  
-                                  </td>
+                                   <input onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" type="number" value="0" min="0" class="form-control">
+                                 
+                                 </td>
                                  
                                    <td class=" ">
-                                    <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" class="form-control" id="" rows="3"></textarea>
-                                  </td>
-                             @else
-                               <td>
-                                    belum
-                                      <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" class="form-control">
-                                    </td>
-                                      <td>
-                                      status
-                                    </td>
-                                    <td>
-                                      <input type="number" onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" value="0" min="0" class="form-control">
-                                    
-                                    </td>
-                                   
-                                     <td class=" ">
-                                      <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')"  class="form-control" id="" rows="3"></textarea>
-                                   </td>
-                               
-                              @endif
-
-                           
-
-
-                            @endforeach
-
-                            @else
-                            <td>
-                                    belum
-                                      <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" class="form-control">
-                                    </td>
-                                      <td>
-                                      status
-                                    </td>
-                                    <td>
-                                      <input onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" type="number" value="0" min="0" class="form-control">
-                                    
-                                    </td>
-                                   
-                                     <td class=" ">
-                                      <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$pengetahuan->id}}')" class="form-control" id="" rows="3"></textarea>
-                                   </td>
-
-                         @endif
+                                   <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control" id="" rows="3"></textarea>
+                                 </td>
+              
+                             </tr>
                         @endif
+                      @else
 
                         <td>
-                            @if($pengetahuan->tugas_pengetahuan)
-
-                                @if($pengetahuan->tugas_pengetahuan->count() != 0)
-                                    @foreach($pengetahuan->tugas_pengetahuan as $tugas)
-                                        @if($tugas->user_id !== $siswa->user_detail->id)
-                                          
-                                             <span class="
-                                            py-2 px-3 bg-red-400 text-white text-xs">
-                                              belum mengumpulkan
-                                           </span>
-
-                                            @else
-
-                                            <a href="{{ url('/tugas/pengetahuan/'.$tugas->filename_path)}}">
-                                              <i class="fas fa-eye"></i>
-                                              <span>
-                                                cek
-                                              </span>
-                                            </a>
-                                          @endif
-
-
-
-                                    @endforeach
-                                @else
-                                  <span class="
-                                          py-2 px-3 bg-red-400 text-white text-xs">
-                                            belum mengumpulkan
-                                    </span>
-                                @endif
-                           
-                            @endif  
-                          @else 
+                                   
+                          <input type="number" value="0" min="0" onchange="UpdateNilai(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control">
+                        </td>
+                          <td>
+                          status
+                        </td>
+                        <td>
+                          <input onchange="UpdateRemedial(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" type="number" value="0" min="0" class="form-control">
                         
-                        </td >                
-                    @endif
-                    @endforeach
-                
-                 
-                </tr>
+                        </td>
+                        
+                          <td class=" ">
+                          <textarea name="" onchange="UpdateFeedback(this,'{{$siswa->user_detail->id}}', '{{$data->id}}')" class="form-control" id="" rows="3"></textarea>
+                        </td>
+     
+                      
 
-                @endforeach
-           
+                      @endif
+
+                      @if($data->tugas_pengetahuan->count() > 0)
+                        
+                        @if($data->tugas_siswa($siswa->user_detail->id))
+                         <td>
+                            
+                          <a class="flex text-green-400 items-center" href="{{ url('/tugas/pengetahuan/'.$data->tugas_siswa($siswa->user_detail->id)->filename_path)}}" class="text-blue-400 text-sm">
+                              <span class="capitalize">
+                              lihat tugas
+                              </span>
+                              
+                              <span class="pl-2 material-icons">
+                                visibility
+                              </span>
+                          </a>
+                         </td>
+                        @else
+                        <td>
+                          <span class="rounded-full text-white bg-red-400 px-6 py-2 text-sm capitalize">
+                            Belum mengumpulkan
+                          </span>
+                        </td>
+                        @endif
+                      @else
+                        <td>
+                          <span class="rounded-full text-white bg-red-400  px-6 py-2 text-sm capitalize">
+                            Belum mengumpulkan
+                          </span>
+                        </td>
+                      @endif
+                    </tr>
+                   @endforeach
             </tbody>
           </table>
         </div>

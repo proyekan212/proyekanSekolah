@@ -17,6 +17,9 @@ class CreateMasterNilaiKeterampilansTable extends Migration
             $table->id();
             $table->integer('user_detail_id');
             $table->integer('penilaian_keterampilan_id');
+            $table->integer('materi')->default(0);
+            $table->integer('jumlah_skor')->default(0);
+            $table->integer('tugas')->default(0);
             $table->integer('nilai')->default(0);
             $table->integer('remidi')->nullable(true);
             $table->text('feedback')->nullable(true);

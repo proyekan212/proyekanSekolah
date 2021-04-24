@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class MasterNilaiKeterampilan extends Model
@@ -15,7 +16,10 @@ class MasterNilaiKeterampilan extends Model
 
     protected $fillable = [
     	'id',
-    	'nilai',
+      'nilai',
+      'jumlah_skor',
+      'tugas',
+      'materi',
     	'remidi',
       'user_detail_id',
     	'feedback',
@@ -31,6 +35,13 @@ class MasterNilaiKeterampilan extends Model
     public function user_detail(){
       return $this->belongsTo('App\Model\UserDetail', '
         user_detail_id', 'id');
+    } 
+
+    public function total_nilai() {
+      
     }
+
+    
+    
 
 }

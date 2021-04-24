@@ -94,6 +94,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/kelas/pengaturan_kelas', 'Kelas\PengaturanKelasController');
 
 
+    // Raport 
+    Route::resource('kelas/rekap_raport', 'Kelas\RekapRaportController');
+
     //Admnistrator
     //SettingSemester
     Route::resource('/Setting_Semester', 'Admin\SettingSemesterController');

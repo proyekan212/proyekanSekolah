@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class MasterPenilaianPengetahuan extends Model
@@ -18,7 +19,12 @@ class MasterPenilaianPengetahuan extends Model
         'penilaian_harian',
         'instruksi',
         'mulai_pengerjaan',
-        'finish_pengerjaan'
+        'finish_pengerjaan',
+        'created_at'
+    ];
+
+    protected $dates = [
+        'created_at'
     ];
 
     public function kompetensi_dasar () {
@@ -38,5 +44,18 @@ class MasterPenilaianPengetahuan extends Model
     }
        public function nilai() {
         return $this->hasMany('App\Model\MasterNilaiPengetahuan', 'penilaian_pengetahuan_id', 'id');
+    }
+
+    public function nilai_siswa($user_id){
+        return $this->nilai()->where('user_detail_id', $user_id)->first();
+    }
+
+    public function tugas_siswa($user_id){
+       
+        return $this->tugas_pengetahuan()->where('user_id', $user_id)->first();
+    }
+
+    public function dateCreated() {
+        return $this->created_at;
     }
 }

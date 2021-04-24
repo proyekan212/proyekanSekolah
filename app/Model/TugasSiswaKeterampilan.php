@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 class TugasSiswaKeterampilan extends Model
@@ -22,4 +23,8 @@ class TugasSiswaKeterampilan extends Model
     public function nilai_keterampilan() {
     	return $this->hasOne('App\Model\MasterNilaiKeterampilan', 'penilaian_keterampilan_id', 'id');
     }
+
+    // public function nilai_by_siswa_id(Builder $query, $user_id) {
+    //     return $query->where('user_id', $user_id );
+    // }
 }

@@ -28,4 +28,6 @@ class KompetensiDasar extends Model
     public function semester() {
         return $this->belongsTo('App\Model\MasterSemester', 'semester_id', 'id');
     }
+
+
 }

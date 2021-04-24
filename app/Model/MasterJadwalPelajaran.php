@@ -27,7 +27,7 @@ class MasterJadwalPelajaran extends Model
     }
 
     public function user() {
-        return $this->belongsTo('App\Model\User');
+        return $this->belongsTo('App\Model\User', 'user_id', 'id');
 
     }
 

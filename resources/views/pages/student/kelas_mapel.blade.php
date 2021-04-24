@@ -7,14 +7,14 @@
 @endpush
 
 @section('content')
-<div class="row">
-  <div class="col-3">
-    <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+<div class="flex flex-col p-4 justify-center">
+  <div class=" bg-white p-2 flex justify-around ">
+    <div class="nav flex flex-row nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
       <a class="nav-link active text-lg" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Penilaian Pengetahuan</a>
       <a class="nav-link text-lg" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Penialain Keterampilan</a>
     </div>
   </div>
-  <div class="col-9">
+  <div class="mt-4">
     <div class="tab-content" id="v-pills-tabContent">
       <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
         <div class="flex w-full px-4 flex row">
@@ -109,6 +109,9 @@
                   <h5 class="mb-0">
                       <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapse{{$row->id}}">
                          Pertemuan {{$index + 1}}
+                         <p class="text-gray-700">
+                         dibuat: {{$row->created_at->format('j-F-Y')}}
+                         </p>
                       </button>
                   </h5>
 
@@ -139,18 +142,26 @@
                     <div class="mt-4">
                        @if($row->tugas_keterampilan->count() > 0) 
                         <div class="flex ">
+                           <div class="flex flex-col">
                            <a href="{{url('/tugas/keterampilan/', $row->tugas_keterampilan[0]->filename_path)}}">
-                            check
-                           <i class="fas fa-eye"></i>
-                         </a>
+                            <span class="capitalize">
+                            lihat tugas 
+                            </span>
+                           <i class="fas fa-eye pl-2"></i>
+                          </a>
+
+                          <p class="text-xs text-gray-600">
+                           mengumpulkan pada tanggal : {{$row->tugas_keterampilan->first()->created_at->format('j-F-Y')}}
+                          </p>
+                           </div>
   
 
 
-                          <form method="post" onclick="deleteData('{{$row->id}}', this)" class="pl-16" action="{{url('tugas_siswa_keterampilan', $row->tugas_keterampilan[0]->id)}}" >
+                          <form method="post" onclick="deleteData('{{$row->id}}', this)" class="pl-" action="{{url('tugas_siswa_keterampilan', $row->tugas_keterampilan[0]->id)}}" >
                             @csrf
                         {{ method_field('DELETE') }}
 
-                            <button type="button" style="font-size: 20px;" class="text-red-400" >
+                            <button type="button" style="font-size: 14px;" class="text-red-400" >
                               <i class="fas fa-trash ">
                                 
                               </i>
@@ -182,7 +193,6 @@
   
             @endforeach
           </div>
-  </div></div>
     </div>
     
 </div>

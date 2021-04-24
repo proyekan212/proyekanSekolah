@@ -8,6 +8,7 @@ use App\Auth;
 use App\Model\Kelas;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterKelas;
+use App\Model\User;
 use DB;
 class KelasController extends BaseController
 {
@@ -21,8 +22,10 @@ class KelasController extends BaseController
         
         $request->session()->put('kelas_id', $request->input('kelas_id'));
         $kelas = Kelas::where('id', $request->session()->get('kelas_id'))->first();
+        $user = User::where('id', $request->user()->id)->first();
         return view('pages.kelas.dashboard', [
-            'kelas' => $kelas
+            'kelas' => $kelas,
+            'user' => $user
         ]);
     }
 

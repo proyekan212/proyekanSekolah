@@ -101,7 +101,7 @@
               </div>
             </div>
             <div class="card-body">
-              <p class="mb-3 tx-14">Erni Wiyanti, S.Pd., M.M.</p>
+              <p class="mb-3 tx-14 capitalize" >{{$user->user_detail->name}}</p>
               <p class="mb-3 tx-14">Mata Pelajaran MIPA Biologi Kelas Kelas X 8 Pertemuan</p>
               <p class="mb-3 tx-14">{{$kelas->daftar_kelas->count()}} Siswa | Max KD : 9 | KKM : 75</p>
             </div>

@@ -48,15 +48,16 @@
   </h1>
  
     @if($daftarKelas != null)
-    @foreach($daftarKelas->kelas->jadwal_pelajaran as $row)
     <div class="mt-4  grid  lg:grid-cols-4   gap-6">
+    @foreach($daftarKelas->kelas->jadwal_pelajaran as $row)
+    
     <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
       <h1 class="capitalize text-gray-700 mb-2 text-base">
         Kelas {{$row->master_mapel->nama_mapel}}
       </h1>
       
       <span class="text-gray text-xs">
-      {{$row->user_detail}}
+      {{$row->user->user_detail->name}}
       </span>
       <form action="{{ url('kelas_mapel') }}" method="post" class="mt-2">
       @csrf
@@ -66,10 +67,10 @@
         </button>
       </form>
      
-    </div>
+    
     </div>
     @endforeach
-     
+    </div>
     @else
     <h1 class="text-gray-600 text-sm font-semibold">
       Belum ada mata pelajaran
