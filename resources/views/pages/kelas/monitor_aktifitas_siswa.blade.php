@@ -31,28 +31,24 @@
               <tr>
                 <th>No</th>
                 <th>Nama Siswa</th>
-                <th>NIP</th>
-                <th>Jurusan</th>
+                <th>NISN</th>
                <th>Status</th>
               </tr>
             </thead>
             <tbody>
-                  @foreach($user_detail as $index => $row) 
+                  @foreach($daftar_kelas as $index => $row) 
                     <tr>
                       <td>
                         {{$index + 1}}
                       </td>
 
                       <td>
-                        {{$row->name}}
+                        {{$row->user_detail->name}}
                       </td>
-                       <td>
-                        {{$row->nisn_or_nip}}
+                         <td>
+                        {{$row->user_detail->nisn_or_nip}}
                       </td>
-                      <th>
-                        {{$row->mapel->jurusan->jurusan}} ( {{$row->mapel->nama_mapel}} )
-                      </th>
-                     @if($row->user->active)
+                     @if($row->user_detail->user->active)
                          <td class="text-xs text-green-600 capitalize">  
                             online
                         </td>

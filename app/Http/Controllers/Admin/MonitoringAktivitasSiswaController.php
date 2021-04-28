@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\UserDetail;
+use App\Model\DaftarKelas;
 
 class MonitoringAktivitasSiswaController extends Controller
 {
@@ -12,11 +14,17 @@ class MonitoringAktivitasSiswaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        
+        $user_detail = UserDetail::where('role_id', 3)->get();
+ 
+
        return view('pages.admin.monitoringaktivitassiswa', [
-            // 'kompetensi_inti' => MasterKompetensiInti::all(),
-        ]);
+    
+          'user_detail'   => $user_detail
+      ]);
+    
     }
 
     /**

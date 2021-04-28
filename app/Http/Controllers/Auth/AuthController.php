@@ -26,8 +26,12 @@ class AuthController extends BaseController
 
     public function login(Request $request)
     {
+
         try {
             if (Auth::guard()->attempt($request->only('username', 'password'),  $request->filled('remember'))) {
+                User::where('id', $request->user()->id)->update([
+                    'active' => 1
+                ]);
                 return redirect()->intended('/dashboard');
             }
             return redirect()->route('login')->with('error', 'Login Fail, Invalid Email/Password');
@@ -48,9 +52,12 @@ class AuthController extends BaseController
         return redirect()->route('login')->with('error', 'Login Fail, Invalid Email/Password');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Session::flush();
+         User::where('id', $request->user()->id)->update([
+                    'active' => 0
+                ]);
         return redirect()->route('login');
     }
     

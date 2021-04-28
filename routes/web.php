@@ -93,6 +93,8 @@ Route::group(['middleware' => ['auth']], function () {
 
     // settings kelas
     Route::resource('/kelas/pengaturan_kelas', 'Kelas\PengaturanKelasController');
+    //Monitor Aktivitas Siswa
+    Route::get('/kelas/monitor_aktifitas', 'Kelas\AbsensiKelasController@monitor_aktifitas_siswa');
 
 
     // Raport 

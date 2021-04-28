@@ -29,4 +29,19 @@ class AbsensiKelasController extends BaseController
     {
         $this->middleware('auth');
     }
+
+    public function monitor_aktifitas_siswa(Request $request)
+    {
+         $daftarKelas = DaftarKelas::with(['kelas.jadwal_pelajaran.absen', 'user_detail'])
+        ->whereHas('kelas.jadwal_pelajaran', function($query) use($request) {
+            $query->where('id', '=', $request->session()->get('kelas_mapel'));
+        })
+        ->where('kelas_id', $request->session()->get('kelas_id'))->get();
+        
+        
+
+         return view('pages.kelas.monitor_aktifitas_siswa', [
+          'daftar_kelas'   => $daftarKelas
+        ]);
+    }
 }
