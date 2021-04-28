@@ -31,7 +31,7 @@ class DashboardController extends Controller
         $semester = MasterSemester::all();
         $user = User::where('id', $request->user()->id)->first();
       
-        // $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
+        $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
         // dd($user_detail);
         $daftarKelas = DaftarKelas::with(['kelas', 'user_detail'])
         ->where('user_id', $user->user_detail->id )
@@ -42,7 +42,7 @@ class DashboardController extends Controller
      
 
 
-        // dd($daftarKelas);
+        // dd($user->user_detail->name);
 
 
         // untuk guru
@@ -55,6 +55,7 @@ class DashboardController extends Controller
             'daftarKelas' => $daftarKelas,
             'kelas' => $kelas,
             'user' => $user,
+            'user_detail' => $user_detail,
             // 'menu' => $menu
         ]);
     }

@@ -6,7 +6,10 @@
     <ul class="navbar-nav">
       <li class="nav-item dropdown nav-profile">
         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <img src="{{ url('https://via.placeholder.com/30x30') }}" alt="profile">
+           <a href="{{ url('/logout')}}" class="p-2 flex items-center">
+                  <span class="p-0 pr-1 pt-1 text-muted">LOGOUT</span>
+                  <i class="fas fa-sign-out-alt fa-2x"></i>
+                </a>
         </a>
         <div class="dropdown-menu" aria-labelledby="profileDropdown">
           <div class="dropdown-header d-flex flex-column align-items-center">

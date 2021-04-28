@@ -98,7 +98,19 @@ class DataMasterSiswaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         $data = $request->all();
+        
+          UserDetail::where('id', $id)->update([
+            'name' => $data['nama'],
+            'nisn_or_nip' => $data['nip'],
+            'tempat_lahir' => $data['tempat_lahir'],
+            'email' => $data['email'],
+            "jenis_kelamin" => $data['jenis_kelamin'],
+            "tahun_masuk" => $data['tahun_masuk'],
+            'role_id' => $data['role_id'],
+        ]);
+
+        return redirect('dashboard');
     }
 
     /**

@@ -87,7 +87,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/kelas/jurnal_guru/update/{id}', 'Kelas\JurnalGuruController@update');
 
     //PROFILE
-    Route::get('/profile', 'Profile\ProfileController@ProfileGet');
+    // Route::get('/profile', 'Profile\ProfileController@ProfileGet');
+    Route::get('/edit_profile/{id}', 'Profile\ProfileController@ProfileGet');
 
 
     // settings kelas

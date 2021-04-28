@@ -69,8 +69,10 @@ class AppServiceProvider extends ServiceProvider
         });
 
         
-        View::composer('profile', function ($view) {
-            $menu = Menu::all();
+        View::composer('pages/profile.*', function ($view) {
+           // dd($this->app->request->user()->id);
+            $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
+            $menu = MenuRole::where('role_id', $role->role_id)->get();
             $view->with('menu', $menu);
         });
     }

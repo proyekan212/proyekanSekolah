@@ -35,10 +35,21 @@
       <div class="mt-4 w-full rounded-xl shadow-md bg-white p-4">
         calendar
       </div>
+
     </div>
     <div id="tugas-terbaru" class="col-span-8">
       <div class="bg-white shadow-md p-4 rounded-xl">
         jadwal pelajaran
+      </div> 
+    </div>
+
+    <div class="col-span-8">
+      <div class="bg-white shadow-md p-4 rounded-xl">
+       <a href="{{ url('/edit_profile', $user_detail->user_id)}}">
+            <button class=" text-xs py-2  md:py-1 md:text-sm w-full  bg-red-400 rounded-lg capitalize font-semibold  text-white">
+              Edit Profile 
+            </button>
+      </a>
       </div> 
     </div>
   </div>
@@ -57,7 +68,7 @@
       </h1>
       
       <span class="text-gray text-xs">
-      {{$row->user->user_detail->name}}
+      {{$user->user_detail->name}}
       </span>
       <form action="{{ url('kelas_mapel') }}" method="post" class="mt-2">
       @csrf
@@ -103,9 +114,11 @@
               <span class="profile-name">Amiah Burton</span>
             </div>
             <div class="d-none d-md-block">
+             <a href="{{ url('/edit_profile', $user_detail->user_id)}}">
               <button class="btn btn-primary btn-icon-text btn-edit-profile">
-                <i data-feather="eye" class="btn-icon-prepend"></i> Edit profile
+                <i data-feather="eye" class="btn-icon-prepend"></i> Edit profile 
               </button>
+            </a>
             </div>
           </div>
         </div>
