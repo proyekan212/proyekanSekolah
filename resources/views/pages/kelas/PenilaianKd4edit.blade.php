@@ -49,27 +49,13 @@
             </div>
             <div class="col-lg-8">
               <select name="skema_penilaian" class="form-control form-control-sm mb-3">
-                  @if($datas->skema == 'tes tulis')
-                  <option  value="">- Pilih Skema</option>
-                  <option selected value="tes tulis">Tes Tulis</option>
-                  <option  value="tes lisan">Tes Lisan</option>
-                  <option  value="penugasan">Penugasan</option>
-                  @elseif($datas->skema == 'tes lisan')
-                  <option  value="">- Pilih Skema</option>
-                  <option  value="tes tulis">Tes Tulis</option>
-                  <option selected value="tes lisan">Tes Lisan</option>
-                  <option  value="penugasan">Penugasan</option>
-                   @elseif($datas->skema == 'penugasan')
-                  <option  value="">- Pilih Skema</option>
-                  <option  value="tes tulis">Tes Tulis</option>
-                  <option  value="tes lisan">Tes Lisan</option>
-                  <option selected value="penugasan">Penugasan</option>
-                   @else
-                  <option selected value="">- Pilih Skema</option>
-                  <option  value="tes tulis">Tes Tulis</option>
-                  <option  value="tes lisan">Tes Lisan</option>
-                  <option  value="penugasan">Penugasan</option>
-                  @endif                  
+                 @foreach($skema as $ske)
+
+                  <option value="{{$ske->id}}">
+                    {{$ske->name}}
+                  </option>
+
+                 @endforeach                
                 </select>
             </div>
           </div>

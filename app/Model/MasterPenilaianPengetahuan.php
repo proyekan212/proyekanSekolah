@@ -14,7 +14,7 @@ class MasterPenilaianPengetahuan extends Model
         'hapus',
         'pertemuan',
         'kelas_mapel_id',
-        'skema_penilaian',
+        'skema_id',
         'kompetensi_dasar_id',
         'penilaian_harian',
         'instruksi',
@@ -57,5 +57,9 @@ class MasterPenilaianPengetahuan extends Model
 
     public function dateCreated() {
         return $this->created_at;
+    }
+
+    public function skema() {
+        return $this->belongsTo(MasterSkemaPengetahuan::class, 'skema_id', 'id');
     }
 }

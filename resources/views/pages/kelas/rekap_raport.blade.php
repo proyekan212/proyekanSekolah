@@ -25,15 +25,15 @@
           </div> -->
         </div>
         <div class="nav flex py-4 nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active text-sm" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Penilaian Pengetahuan</a>
-            <a class="nav-link text-sm" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Penialain Keterampilan</a>
+            <a class="nav-link active text-sm" id="v-pills-keterampilan-tab" data-toggle="pill" href="#v-pills-keterampilan" role="tab" aria-controls="v-pills-keterampilan" aria-selected="true">Penilaian Keterampilan</a>
+            <a class="nav-link text-sm" id="v-pills-pengetahuan-tab" data-toggle="pill" href="#v-pills-pengetahuan" role="tab" aria-controls="v-pills-pengetahuan" aria-selected="false">Penilaian Pengetahuan</a>
        </div>
         <div>
           <div class="tab-content" id="v-pills-tabContent">
-            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+            <div class="tab-pane fade show active" id="v-pills-keterampilan" role="tabpanel" aria-labelledby="v-pills-keterampilan-tab">
               <div class="table-responsive">
-                <table id="table-raport" class="table table-bordered">
-                  <thead>
+                <table id="table-raport-keterampilan" class="table table-bordered ">
+                  <thead class="thead-dark">
                     <tr>
                       <td rowspan="2">No</td>
                       <td rowspan="2">nama siswa</td>
@@ -44,42 +44,103 @@
                       </td>
                     </tr>
                     <tr>
-                      <td>tes tulis</td>
-                      <td>tes lisan</td>
-                      <td>penugasan</td>
+                      @foreach($skema_keterampilan as $ske)
+                        <td>
+                          {{$ske->name}}
+                        </td>
+                      @endforeach
                     </tr>
                   </thead>
 
                   <tbody>
                 
-                   @foreach($siswa as $index => $siswa)
+                  @foreach($siswa as $index => $row)
                     <tr>
-                      <td>{{$index+1}}</td>
-                      <td>
-                        {{$siswa->user_detail->name}}
+                      <td rowspan="{{$kompetensi_dasar_keterampilan->count()+2}}">{{$index+1}}</td>
+                      <td rowspan="{{$kompetensi_dasar_keterampilan->count()+2}} ">
+                        {{$row->user_detail->name}}
                       </td>
-                      <td>
-                        kd
-                      </td>
-                      <?php
-                        $nilai_akhir = 0;
-                     ?>
-                     @foreach($skema_keterampilan as $ske)
-                        <?php 
-                          $nilai_akhir =  $nilai_akhir + (int) $ske->by_siswa($siswa->user_detail->id);
-                          
+                    </tr>
+                    @if($kompetensi_dasar_keterampilan->count()>1)
+                    <?php
+                      $total_nilai = 0;
+                    ?>
+                    @foreach($kompetensi_dasar_keterampilan as $kd_keterampilan)
+                      <tr>
+                          <td>
+                            {{$kd_keterampilan->kompetensi_inti->kode}}.{{$kd_keterampilan->id}}
+                          </td>
+                          <?php
+                            $nilai_akhir = 0;
                         ?>
-                        <td>
-                          {{$ske->by_siswa($siswa->user_detail->id)}}
-                        </td>
-                     @endforeach
+                        @foreach($skema_keterampilan as $ske)
+                            <?php 
+                              $nilai_akhir =  $nilai_akhir + (int) $ske->by_siswa($row->user_detail->id, $kd_keterampilan->id);
+                              
+                            ?>
+                            <td>
+                              {{$ske->by_siswa($row->user_detail->id, $kd_keterampilan->id)}}
+                            </td>
+                        @endforeach
 
-                     <td>
-                      <?php
-                          echo $nilai_akhir/3;
-                      ?>
-                     </td>
+                        <td>
+                          <?php
+                              echo $nilai_akhir/$skema_keterampilan->count();
+                              $total_nilai += (int) $nilai_akhir/$skema_keterampilan->count();
+                          ?>
+                        </td>
+                      </tr>
                     
+                    @endforeach
+                    <tr>
+                      <td colspan="{{$skema_keterampilan->count()+1}}">
+                        <span class="text-sm font-bold">
+                          Total Nilai
+                        </span>
+                      </td>
+
+                      <td>
+                        <?php
+                          echo $total_nilai;
+                        ?>
+                      </td>
+                    </tr>
+                    @else
+                    <tr>
+                          <td>
+                            {{$kompetensi_dasar_keterampilan->first()->kompetensi_inti->kode}}.{{$kompetensi_dasar_keterampilan->first()->id}}
+                          </td>
+                          <?php
+                          
+                            $nilai_akhir = 0;
+                        ?>
+                        @foreach($skema_keterampilan as $ske)
+                            <?php 
+                              $nilai_akhir =  $nilai_akhir + (int) $ske->by_siswa($row->user_detail->id);
+                              
+                            ?>
+                            <td>
+                              {{$ske->by_siswa($row->user_detail->id)}}
+                            </td>
+                        @endforeach
+
+                        <td>
+                          <?php
+                              echo $nilai_akhir/3;
+                          ?>
+                        </td>
+                        <tr>
+                          <td colspan="{{$skema_keterampilan->count() +1}}">
+                            Total Nilai
+                          </td>
+                          <td>
+                            <?php 
+                              echo (int)  $nilai_akhir/3;
+                            ?>
+                          </td>
+                        </tr>
+                    @endif
+                      
                    @endforeach
 
                    
@@ -88,18 +149,137 @@
                 </table>
               </div>
             </div>
-            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab"><div id="accordion">
-            <div class="table-responsive">
+            <div class="tab-pane fade" id="v-pills-pengetahuan" role="tabpanel" aria-labelledby="v-pills-pengetahuan-tab"><div id="accordion">
+            <div class="table-responsive table-bordered">
               <table id="dataTableExample" class="table">
                 <thead>
-                  <tr>
-                    <th>No</th>
-                    <th>Name</th>
-                    <th>File</th>
-                    <th>Aksi</th>
-                  </tr>
+                <thead class="text-black font-bold capitalize">
+                    <tr>
+                      <td rowspan="2">No</td>
+                      <td rowspan="2">nama siswa</td>
+                      <td rowspan="2">kd</td>
+                      <td colspan="{{$skema_pengetahuan->count() }}" class="text-center">penilaian pengetahuan</td>
+                      <td rowspan="2">
+                        Nilai Akhir
+                      </td>
+                    </tr>
+                    <tr>
+                     @foreach($skema_pengetahuan  as $ske)
+                        <td>
+                          {{$ske->name}}
+                        </td>
+                     @endforeach
+                    </tr>
+                  </thead>
+
                 </thead>
             
+              <tbody>
+              @foreach($siswa as $index => $row) 
+                @if($kompetensi_dasar_pengetahuan->count() > 1)
+                  <tr>
+                    <td rowspan="{{$kompetensi_dasar_pengetahuan->count()+2}}">
+                      {{$index + 1}}
+                    </td>
+
+                    <td rowspan="{{$kompetensi_dasar_pengetahuan->count()+2}}">
+                     <span class="text-lg capitalize font-bold">
+                     {{$row->user_detail->name}}
+                     </span>
+                    </td>
+                    <?php $total_nilai_k = 0; ?>
+                  </tr>
+                  @foreach($kompetensi_dasar_pengetahuan as $kd)
+
+                    <?php 
+                    
+                      $nilai_akhir_k = 0;
+                    ?>
+                      <tr>
+                        <td>
+                          {{$kd->kompetensi_inti->kode}}.{{$kd->id}}
+                        </td>
+
+                        @foreach($skema_pengetahuan as $ske)
+                        <?php
+                        
+                          $nilai_akhir_k += (int) $ske->by_siswa($row->user_detail->id, $kd->id);
+                          
+                        ?>
+                          <td>
+                            {{$ske->by_siswa($row->user_detail->id, $kd->id)}}
+                          </td>
+                        @endforeach
+                        <td>
+                          <?php 
+                          
+                            echo $nilai_akhir_k/$skema_pengetahuan->count();
+                            $total_nilai_k += (int) ($nilai_akhir_k/$skema_pengetahuan->count());
+                           
+                          ?>
+                          
+                        </td>
+                      </tr>
+                  @endforeach
+                  <tr>
+                    <td colspan="{{$skema_pengetahuan->count()+1}}">
+                     <span class="font-bold text-sm">
+                      Total Nilai
+                     </span>
+                    </td>
+                    <td>
+                      <?php 
+                      
+                        echo $total_nilai_k;
+                        ?>
+                    </td>
+                  </tr>
+                @else
+                  <tr>
+                    <td colspan="3">
+                      {{$index+1}}
+                    </td>
+                    <td colspan="3">
+                      {{$row->user_detail->name}}
+                    </td>
+
+                    <td>
+                      {{$kompetensi_dasar_pengetahuan->first()->kompetensi_inti_id}}.{{$kompetensi_dasar_pengetahuan->first()->id}}
+                    </td>
+                      <?php 
+                        $nilai_akhir_k = 0;
+                      ?>
+                    @foreach($skema_pengetahuan as $ske)
+                      <?php 
+                        $nilai_akhir_k += (int)  $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->id);
+                      ?>
+                      <td>
+                        $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->id)
+                      </td>
+                    @endforeach
+                    <td>
+                      <?php 
+                      
+                        echo (int) $nilai_akhir_k/$skema_pengetahuan->count();
+                      ?>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td colspan="{{$skema_pengetahuan->count() +1}}">
+                          <span class="text-sm font-bold">
+
+                            Total Nilai
+                          </span>
+                      </td>
+                      <td>
+                        <?php 
+                          echo $nilai_akhir_k;
+                        ?>
+                      </td>
+                  </tr>
+                @endif  
+              @endforeach
+              </tbody>
             </table>
         </div>
             </div>
@@ -160,7 +340,7 @@
 
 $(document).ready(function() {
 
-  $('#table-raport').DataTable();
+  $('#table-raport-keterampilan').DataTable();
 })
   function editData(id){
     console.log(id);

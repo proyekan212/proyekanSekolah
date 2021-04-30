@@ -37,10 +37,7 @@ class MasterNilaiKeterampilan extends Model
         user_detail_id', 'id');
     } 
 
-    public function total_nilai() {
-      
-    }
-
+ 
     
     
 

@@ -25,4 +25,5 @@ class MasterNilaiPengetahuan extends Model
       return $this->belongsTo('App\Model\UserDetail', '
         user_detail_id', 'id');
     }
+
 }

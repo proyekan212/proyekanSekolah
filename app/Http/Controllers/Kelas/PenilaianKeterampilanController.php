@@ -7,6 +7,7 @@ use App\Model\KompetensiDasar;
 use App\Model\MasterPenilaianKeterampilan;
 use Illuminate\Http\Request;
 use App\Model\DaftarKelas;
+use App\Model\KeterampilanKompetensiDasar;
 use App\Model\MasterSkemaKeterampilan;
 
 class PenilaianKeterampilanController extends Controller
@@ -78,21 +79,26 @@ class PenilaianKeterampilanController extends Controller
 
        
 
-        foreach($request->kompetensi_dasar as $row) {
-
-            $kompetensi_dasar  .=  strval($row).',' ;
-        }
+        
 
         // dd($request->all());
-        MasterPenilaianKeterampilan::create([
+        $keterampilan = MasterPenilaianKeterampilan::create([
             'nama_penilaian'=> $request->input('nama_penilaian'),
             'skema_id' => $request->skema_penilaian,
             'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
-            'kompetensi_dasar'=>$kompetensi_dasar,
             'keterangan' => $request->keterangan,
             'mulai_pengerjaan' => $request->mulai_pengerjaan,
             'finish_pengerjaan' => $request->finish_pengerjaan
         ]);
+        // dd($keterampilan);
+
+        foreach($request->kompetensi_dasar as $row) {
+
+            KeterampilanKompetensiDasar::create([
+                'kd_id' => $row,
+                'keterampilan_id' => $keterampilan->id
+            ]);
+        }
 
         return redirect('kelas/penilaian_keterampilan');
 
@@ -119,7 +125,7 @@ class PenilaianKeterampilanController extends Controller
     {
         $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
         $data = MasterPenilaianKeterampilan::findOrFail($id);
-        
+        $skema = MasterSkemaKeterampilan::get();
         return view('pages.kelas.PenilaianKd4edit', [
             'kompetensi_dasar'=> $kompetensi_dasar,
             'datas'=> $data
@@ -145,7 +151,7 @@ class PenilaianKeterampilanController extends Controller
        
         $input = MasterPenilaianKeterampilan::where('id', $id)->update([
              'nama_penilaian'=> $request->nama_penilaian,
-            'skema' => $request->skema_penilaian,
+            'skema_id' => $request->skema_penilaian,
             'kompetensi_dasar'=>$kompetensi_dasar,
             'keterangan' => $request->keterangan,
             'mulai_pengerjaan' => $request->mulai_pengerjaan,

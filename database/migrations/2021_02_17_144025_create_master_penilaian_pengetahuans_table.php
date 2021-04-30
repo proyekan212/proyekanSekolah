@@ -16,7 +16,7 @@ class CreateMasterPenilaianPengetahuansTable extends Migration
         Schema::create('master_penilaian_pengetahuans', function (Blueprint $table) {
             $table->id();
             $table->string('pertemuan');
-            $table->string('skema_penilaian');
+            $table->integer('skema_id');
             $table->integer('kompetensi_dasar_id');
             $table->integer('penilaian_harian');
             $table->text('instruksi');

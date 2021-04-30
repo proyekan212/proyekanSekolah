@@ -70,6 +70,9 @@ class MasterPenilaianKeterampilan extends Model
         return $this->tugas_keterampilan()->where('user_id', $user_id)->first();
     }
 
+    public function kd_keterampilan() {
+        return $this->hasMany(KeterampilanKompetensiDasar::class, 'keterampilan_id', 'id');
+    }
  
 
 

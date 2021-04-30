@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 
 use App\Model\DaftarKelas;
 use App\Model\MasterKompetensiInti;
+use App\Model\MasterSkemaKeterampilan;
+use App\Model\MasterSkemaPengetahuan;
 
 class PenilaianPengetahuanController extends Controller
 {
@@ -27,13 +29,15 @@ class PenilaianPengetahuanController extends Controller
         }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
         ->get();
         $datas = MasterPenilaianPengetahuan::where('kelas_mapel_id', $request->session()->get('kelas_mapel'))
-        
         ->get();
+
+        $skema = MasterSkemaKeterampilan::get();
         
         return view('pages.kelas.PenilaianKd3', [
             'kompetensi_dasar'=> $kompetensi_dasar,
             'datas'=> $datas,
-            'daftar_kelas'=> $DaftarKelas
+            'daftar_kelas'=> $DaftarKelas,
+            'skema' => $skema
         ]);
 
         // $kompetensi_dasars = KompetensiDasar::all();
@@ -75,7 +79,7 @@ class PenilaianPengetahuanController extends Controller
            MasterPenilaianPengetahuan::create([
             'pertemuan' => $request->pertemuan,
             'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
-            'skema_penilaian' => $request->skema_penilaian,
+            'skema_id' => $request->skema_penilaian,
             'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
             'penilaian_harian' => $request->penilaian_harian,
             'instruksi' => $request->instruksi,
@@ -107,9 +111,11 @@ class PenilaianPengetahuanController extends Controller
     {
          $kompetensi_dasars = KompetensiDasar::all();
         $data = MasterPenilaianPengetahuan::findOrFail($id);
+        $skema = MasterSkemaPengetahuan::get();
         return view('pages.kelas.PenilaianKd3edit', [
             'kompetensi_dasars'=> $kompetensi_dasars,
             'datas'=> $data,
+            'skema' => $skema
         ]);
     }
 
@@ -128,7 +134,7 @@ class PenilaianPengetahuanController extends Controller
            
            MasterPenilaianPengetahuan::where('id', $id)->update([
               'pertemuan' => $request->pertemuan,
-        'skema_penilaian' => $request->skema_penilaian,
+        'skema_id' => $request->skema_penilaian,
         'kompetensi_dasar_id' => $request->kompetensi_dasar_id,
         'penilaian_harian' => $request->penilaian_harian,
         'instruksi' => $request->instruksi,

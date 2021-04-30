@@ -2,9 +2,9 @@
 -- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 28, 2021 at 11:08 AM
--- Server version: 10.4.18-MariaDB
+-- Host: localhost
+-- Generation Time: Apr 30, 2021 at 03:48 PM
+-- Server version: 10.5.9-MariaDB
 -- PHP Version: 8.0.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -105,8 +105,7 @@ CREATE TABLE `daftar_kelas` (
 
 INSERT INTO `daftar_kelas` (`id`, `user_id`, `kelas_id`, `rombel_id`, `created_at`, `updated_at`) VALUES
 (1, 4, 2, 1, '2021-04-19 08:46:59', '2021-04-19 08:46:59'),
-(2, 6, 2, 1, '2021-04-21 00:34:51', '2021-04-21 00:34:51'),
-(3, 2, 2, 1, '2021-04-21 00:34:51', '2021-04-21 00:34:51');
+(2, 6, 2, 1, '2021-04-21 00:34:51', '2021-04-21 00:34:51');
 
 -- --------------------------------------------------------
 
@@ -176,6 +175,32 @@ INSERT INTO `kelas` (`id`, `hapus`, `master_kelas_id`, `tahun_akademik_id`, `rom
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `keterampilan_kompetensi_dasars`
+--
+
+CREATE TABLE `keterampilan_kompetensi_dasars` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `kd_id` int(11) NOT NULL,
+  `keterampilan_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `keterampilan_kompetensi_dasars`
+--
+
+INSERT INTO `keterampilan_kompetensi_dasars` (`id`, `kd_id`, `keterampilan_id`, `created_at`, `updated_at`) VALUES
+(1, 5, 7, '2021-04-29 00:15:00', '2021-04-29 00:15:00'),
+(2, 7, 7, '2021-04-29 00:15:00', '2021-04-29 00:15:00'),
+(3, 5, 1, '2021-04-29 00:34:56', '2021-04-29 00:34:56'),
+(4, 7, 1, '2021-04-29 00:34:56', '2021-04-29 00:34:56'),
+(5, 5, 2, '2021-04-29 00:47:35', '2021-04-29 00:47:35'),
+(6, 7, 3, '2021-04-30 01:35:56', '2021-04-30 01:35:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `kompetensi_dasars`
 --
 
@@ -198,7 +223,8 @@ INSERT INTO `kompetensi_dasars` (`id`, `nama_kompetensi_dasar`, `kompetensi_inti
 (3, 'Menganalisis interaksi pada gaya serta hubungan antara gaya, massa dan gerak lurus benda serta penerapannya dalam kehidupan sehari-hari', 1, 2, NULL, NULL),
 (4, 'Menganalisis konsep energi, usaha (kerja), hubungan usaha (kerja) dan perubahan energi, hukum kekekalan energi, serta penerapannya dalam peristiwa sehari-hari', 1, 2, NULL, NULL),
 (5, 'Menyajikan hasil pengukuran besaran fisis berikut ketelitiannya dengan menggunakan peralatan dan teknik yang tepat serta mengikuti kaidah angka penting untuk suatu penyelidikan ilmiah', 2, 1, NULL, NULL),
-(6, 'adding', 1, 1, '2021-04-14 03:55:59', '2021-04-14 03:55:59');
+(6, 'adding', 1, 1, '2021-04-14 03:55:59', '2021-04-14 03:55:59'),
+(7, 'Menyajikan hasil pengukuran', 2, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -227,8 +253,7 @@ INSERT INTO `master_jadwal_pelajarans` (`id`, `kelas_id`, `mapel_id`, `pertemuan
 (2, 1, 2, 16, 0, 75, 6, '2021-04-13 01:49:53', '2021-04-13 01:49:53'),
 (3, 1, 1, 16, 0, 75, 2, '2021-04-17 02:28:46', '2021-04-17 02:28:46'),
 (4, 2, 1, 16, 0, 75, 7, '2021-04-19 08:19:59', '2021-04-19 08:19:59'),
-(5, 2, 1, 16, 0, 75, 2, '2021-04-21 00:35:14', '2021-04-21 00:35:14'),
-(6, 1, 1, 16, 0, 75, 11, '2021-04-27 23:45:24', '2021-04-27 23:45:24');
+(5, 2, 1, 16, 0, 75, 2, '2021-04-21 00:35:14', '2021-04-21 00:35:14');
 
 -- --------------------------------------------------------
 
@@ -422,14 +447,12 @@ CREATE TABLE `master_nilai_keterampilans` (
 --
 
 INSERT INTO `master_nilai_keterampilans` (`id`, `user_detail_id`, `penilaian_keterampilan_id`, `materi`, `jumlah_skor`, `tugas`, `nilai`, `remidi`, `feedback`, `created_at`, `updated_at`) VALUES
-(1, 4, 2, 0, 0, 0, 10, NULL, NULL, '2021-04-23 08:33:23', '2021-04-23 08:33:23'),
-(2, 6, 2, 0, 0, 0, 30, NULL, NULL, '2021-04-23 08:33:26', '2021-04-23 08:33:26'),
-(3, 4, 3, 0, 0, 0, 20, NULL, NULL, '2021-04-23 08:36:08', '2021-04-23 08:36:08'),
-(4, 6, 3, 0, 0, 0, 40, NULL, NULL, '2021-04-23 08:36:12', '2021-04-23 08:36:12'),
-(5, 4, 1, 0, 0, 0, 100, NULL, NULL, '2021-04-23 09:05:47', '2021-04-23 09:05:47'),
-(6, 6, 1, 0, 0, 0, 30, NULL, NULL, '2021-04-23 09:05:52', '2021-04-23 09:05:52'),
-(7, 4, 4, 0, 0, 0, 100, NULL, 'cobalah mengerti', '2021-04-23 09:08:26', '2021-04-23 09:08:40'),
-(8, 6, 4, 0, 0, 0, 40, NULL, NULL, '2021-04-23 09:08:30', '2021-04-23 09:08:30');
+(1, 4, 1, 0, 0, 0, 100, NULL, NULL, '2021-04-29 00:35:10', '2021-04-30 01:36:40'),
+(2, 6, 1, 0, 0, 0, 61, NULL, NULL, '2021-04-29 00:35:16', '2021-04-30 01:36:47'),
+(3, 4, 2, 0, 0, 0, 80, NULL, NULL, '2021-04-29 00:47:45', '2021-04-29 00:47:45'),
+(4, 6, 2, 0, 0, 0, 60, NULL, NULL, '2021-04-29 00:47:48', '2021-04-29 00:47:48'),
+(5, 4, 3, 0, 0, 0, 100, NULL, NULL, '2021-04-30 01:36:04', '2021-04-30 01:36:04'),
+(6, 6, 3, 0, 0, 0, 70, NULL, NULL, '2021-04-30 01:36:06', '2021-04-30 01:36:06');
 
 -- --------------------------------------------------------
 
@@ -453,14 +476,10 @@ CREATE TABLE `master_nilai_pengetahuans` (
 --
 
 INSERT INTO `master_nilai_pengetahuans` (`id`, `user_detail_id`, `penilaian_pengetahuan_id`, `nilai`, `remidi`, `feedback`, `created_at`, `updated_at`) VALUES
-(1, 4, 4, 20, NULL, NULL, '2021-04-22 02:24:32', '2021-04-22 02:34:02'),
+(1, 4, 4, 22, NULL, NULL, '2021-04-22 02:24:32', '2021-04-29 07:05:10'),
 (2, 6, 4, 100, NULL, 'wqe', '2021-04-22 02:25:38', '2021-04-22 02:32:47'),
-(3, 4, 1, 100, NULL, NULL, '2021-04-25 00:41:16', '2021-04-25 00:41:16'),
-(4, 6, 1, 80, NULL, NULL, '2021-04-25 00:41:19', '2021-04-25 00:41:19'),
-(5, 4, 2, 30, NULL, NULL, '2021-04-25 04:36:22', '2021-04-25 04:36:22'),
-(6, 6, 2, 20, NULL, NULL, '2021-04-25 04:36:26', '2021-04-25 04:36:26'),
-(7, 6, 3, 20, NULL, NULL, '2021-04-25 04:43:37', '2021-04-25 04:43:37'),
-(8, 4, 3, 20, NULL, NULL, '2021-04-25 04:43:39', '2021-04-25 04:43:39');
+(3, 4, 2, 70, NULL, NULL, '2021-04-29 09:09:22', '2021-04-29 09:09:22'),
+(4, 6, 2, 80, NULL, NULL, '2021-04-29 09:09:26', '2021-04-29 09:09:26');
 
 -- --------------------------------------------------------
 
@@ -472,7 +491,7 @@ CREATE TABLE `master_penilaian_keterampilans` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `skema_id` int(11) NOT NULL,
   `nama_penilaian` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `kompetensi_dasar_id` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `kompetensi_dasar` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `keterangan` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kelas_mapel_id` int(11) NOT NULL,
   `hapus` int(11) NOT NULL DEFAULT 0,
@@ -486,12 +505,10 @@ CREATE TABLE `master_penilaian_keterampilans` (
 -- Dumping data for table `master_penilaian_keterampilans`
 --
 
-INSERT INTO `master_penilaian_keterampilans` (`id`, `skema_id`, `nama_penilaian`, `kompetensi_dasar_id`, `keterangan`, `kelas_mapel_id`, `hapus`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
-(1, 3, 'nilai', '5,', 'hohoww', 5, 0, '2021-04-09', '2021-04-10', '2021-04-23 05:38:11', '2021-04-23 05:38:11'),
-(2, 1, 'ewqeqeqw', '5,', 'ewqeqe', 5, 0, '2021-04-15', '2021-04-17', '2021-04-23 06:35:37', '2021-04-23 06:35:37'),
-(3, 1, 'weqeqwe', '5,', 'ww', 5, 0, '2021-04-02', '2021-04-12', '2021-04-23 06:49:32', '2021-04-23 06:49:32'),
-(4, 2, 'nilai', '5,', 'mampus lah kau', 5, 0, '2021-04-10', '2021-04-10', '2021-04-23 09:08:17', '2021-04-23 09:08:17'),
-(5, 2, 'Penilaian Opo Ae Wes', '5,', 'Au ah gelap', 3, 0, '2021-04-25', '2021-04-25', '2021-04-24 23:36:48', '2021-04-24 23:36:48');
+INSERT INTO `master_penilaian_keterampilans` (`id`, `skema_id`, `nama_penilaian`, `kompetensi_dasar`, `keterangan`, `kelas_mapel_id`, `hapus`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
+(1, 2, 'nilai', NULL, 'mantap pak', 5, 0, '2021-04-16', '2021-04-14', '2021-04-29 00:34:56', '2021-04-29 00:34:56'),
+(2, 3, 'penlawawqwd', NULL, 'lala', 5, 0, '2021-04-03', '2021-04-17', '2021-04-29 00:47:35', '2021-04-29 00:47:35'),
+(3, 3, 'lololowqeq', NULL, 'ww', 5, 0, '2021-04-15', '2021-05-01', '2021-04-30 01:35:56', '2021-04-30 01:35:56');
 
 -- --------------------------------------------------------
 
@@ -502,12 +519,12 @@ INSERT INTO `master_penilaian_keterampilans` (`id`, `skema_id`, `nama_penilaian`
 CREATE TABLE `master_penilaian_pengetahuans` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `pertemuan` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `skema_id` int(11) NOT NULL,
   `kompetensi_dasar_id` int(11) NOT NULL,
   `penilaian_harian` int(11) NOT NULL,
   `instruksi` text COLLATE utf8mb4_unicode_ci NOT NULL,
   `kelas_mapel_id` int(11) NOT NULL,
   `hapus` smallint(6) NOT NULL DEFAULT 0,
+  `skema_id` int(11) NOT NULL,
   `mulai_pengerjaan` timestamp NULL DEFAULT NULL,
   `finish_pengerjaan` timestamp NULL DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
@@ -518,10 +535,9 @@ CREATE TABLE `master_penilaian_pengetahuans` (
 -- Dumping data for table `master_penilaian_pengetahuans`
 --
 
-INSERT INTO `master_penilaian_pengetahuans` (`id`, `pertemuan`, `skema_id`, `kompetensi_dasar_id`, `penilaian_harian`, `instruksi`, `kelas_mapel_id`, `hapus`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
-(1, 'pertermuan 1', 1, 1, 80, 'Au ah gelap', 5, 0, '2021-04-24 17:00:00', '2021-04-24 17:00:00', '2021-04-25 00:40:55', '2021-04-25 00:40:55'),
-(2, 'pertermuan 2', 2, 2, 90, 'a', 5, 0, '2021-04-24 17:00:00', '2021-04-25 17:00:00', '2021-04-25 04:36:08', '2021-04-25 04:36:08'),
-(3, 'pertermuan 3', 2, 3, 90, '**a**', 5, 0, NULL, NULL, '2021-04-25 04:43:23', '2021-04-25 04:43:23');
+INSERT INTO `master_penilaian_pengetahuans` (`id`, `pertemuan`, `kompetensi_dasar_id`, `penilaian_harian`, `instruksi`, `kelas_mapel_id`, `hapus`, `skema_id`, `mulai_pengerjaan`, `finish_pengerjaan`, `created_at`, `updated_at`) VALUES
+(1, 'pertermuan 1', 1, 3, 'wwww', 5, 1, 2, '2021-04-15 17:00:00', '2021-04-10 17:00:00', '2021-04-29 07:29:11', '2021-04-29 09:54:07'),
+(2, 'pertermuan 2', 2, 22, 'lololo', 5, 0, 3, NULL, NULL, '2021-04-29 09:09:08', '2021-04-29 09:09:08');
 
 -- --------------------------------------------------------
 
@@ -609,9 +625,9 @@ CREATE TABLE `master_skema_pengetahuans` (
 --
 
 INSERT INTO `master_skema_pengetahuans` (`id`, `name`, `created_at`, `updated_at`) VALUES
-(1, 'Tes Tulis', NULL, NULL),
-(2, 'Tes Lisan', NULL, NULL),
-(3, 'Penugasan', NULL, NULL);
+(1, 'tes tulis', NULL, NULL),
+(2, 'tes lisan', NULL, NULL),
+(3, 'penugasan', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -687,8 +703,8 @@ INSERT INTO `menus` (`id`, `parent_code`, `code`, `name`, `status`, `icon`, `reo
 (21, 'Monitoring_Aktivitas_Siswa', 'Monitoring_Aktivitas_Siswa', 'Monitoring Aktivitas Siswa', 1, NULL, 1, '2021-03-06 12:43:41', '2021-03-06 12:43:41', NULL),
 (22, 'Setting_Kelas_Ajar', 'Setting_Kelas_Ajar', 'Setting Kelas Ajar', 1, NULL, 1, '2021-03-06 12:44:13', '2021-03-06 12:44:13', NULL),
 (23, 'Master_KKM', 'Master_KKM', 'Master KKM', 1, NULL, 1, '2021-03-06 12:45:04', '2021-03-06 12:45:04', NULL),
-(24, 'Laporan', 'Laporan', 'Laporan', 0, NULL, 1, '2021-03-06 12:45:53', '2021-04-28 08:06:02', NULL),
-(25, 'Laporan', 'Laporan_Kehadiran_Siswa', 'Laporan Kehadiran Siswa', 0, NULL, 1, '2021-03-06 12:46:43', '2021-04-28 08:05:57', NULL),
+(24, 'Laporan', 'Laporan', 'Laporan', 1, NULL, 1, '2021-03-06 12:45:53', '2021-03-06 12:45:53', NULL),
+(25, 'Laporan', 'Laporan_Kehadiran_Siswa', 'Laporan Kehadiran Siswa', 1, NULL, 1, '2021-03-06 12:46:43', '2021-03-09 15:31:09', NULL),
 (26, 'Laporan', 'Laporan_Kehadiran_Guru', 'Laporan Kehadiran Guru', 2, NULL, 1, '2021-03-06 12:47:10', '2021-03-06 12:47:10', NULL),
 (27, 'Laporan', 'Cetak_Penilaian', 'Cetak Penilaian', 2, NULL, 1, '2021-03-06 12:47:37', '2021-03-06 12:47:37', NULL),
 (28, 'Tahun_Akademik', 'Tahun_Akademik', 'Tahun Akademik', 1, NULL, 1, '2021-03-06 13:22:17', '2021-03-06 13:27:58', NULL),
@@ -929,6 +945,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (65, '2021_02_21_080256_create_rombel_kelas_table', 34),
 (66, '2021_02_11_133658_create_master_kelas_table', 35),
 (67, '2021_03_18_133827_create_kelas_table', 36),
+(74, '2021_02_17_144025_create_master_penilaian_pengetahuans_table', 38),
 (79, '2021_03_20_132144_create_tugas_siswas_table', 41),
 (82, '2021_02_11_133337_create_master_jadwal_pelajarans_table', 42),
 (86, '2021_03_23_113936_create_tugas_siswa_pengetahuans_table', 43),
@@ -942,8 +959,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (109, '2021_04_04_132749_create_master_nilai_keterampilans_table', 55),
 (110, '2021_04_23_115629_create_master_skema_keterampilans_table', 56),
 (111, '2021_02_18_144628_create_master_penilaian_keterampilans_table', 57),
-(112, '2021_04_25_071629_create_master_skema_pengetahuans_table', 58),
-(114, '2021_02_17_144025_create_master_penilaian_pengetahuans_table', 59);
+(112, '2021_04_29_062007_create_penilaian_kompetensi_dasars_table', 58),
+(113, '2021_04_29_070438_create_keterampilan_kompetensi_dasars_table', 59),
+(115, '2021_04_29_134822_create_master_skema_pengetahuans_table', 60);
 
 -- --------------------------------------------------------
 
@@ -955,6 +973,20 @@ CREATE TABLE `password_resets` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `penilaian_kompetensi_dasars`
+--
+
+CREATE TABLE `penilaian_kompetensi_dasars` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `penilaian_id` int(11) NOT NULL,
+  `kompetensi_dasar_id` int(11) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -1107,7 +1139,6 @@ CREATE TABLE `users` (
   `username` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `password` varchar(191) COLLATE utf8mb4_unicode_ci NOT NULL,
   `token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `active` int(11) NOT NULL,
   `verify_token` varchar(191) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -1117,18 +1148,15 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `token`, `active`, `verify_token`, `created_at`, `updated_at`) VALUES
-(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, 1, NULL, NULL, '2021-04-28 01:04:23'),
-(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, 0, NULL, NULL, '2021-04-28 01:04:16'),
-(3, '9820460350', '$2y$10$GT8DC/RyTOe3PvIevhLs3u.PApaxbdtu/ok3tWxqLeJaMv24wDqW.', NULL, 0, NULL, NULL, NULL),
-(4, '2766170294', '$2y$10$8W5XSqBNaGdcUkSSoKTtMeC4bSGL1A9I5sSC0wFjO7fzF630GJyku', NULL, 0, NULL, NULL, NULL),
-(5, '7724909893', '$2y$10$iZGAwJi3uNiV7d04AoRC3.wqIdXVDITpcVoBSIVLzVjd9nKlGigM.', NULL, 0, NULL, NULL, NULL),
-(6, '901247874124', '$2y$10$zDiaF3oRkHe4/NUyXIb8pe8bpkhoYlDKW4YhjYYOq7NMkZ3gu3w2m', NULL, 0, NULL, '2021-04-19 08:17:36', '2021-04-19 08:17:36'),
-(7, '2222223', '$2y$10$JWFeuBSaWGMckKr4l3oqee36fXI0DH2BCTudQy8EGMnY5sRIgLsh6', NULL, 0, NULL, '2021-04-19 08:19:29', '2021-04-19 08:19:29'),
-(8, '3123124124', '$2y$10$PAyngHaRebsHcTAiH9Ey5O8mttoT8NoY3p/9G5tFn6c2F5QC08asm', NULL, 0, NULL, '2021-04-19 09:00:06', '2021-04-28 01:00:24'),
-(9, '9630159739000', '$2y$10$b52OKCGk../nQENxk2xRVuu8QrD9F1TN.HskiYF4vFHC3RL9bOKY6', NULL, 0, NULL, '2021-04-27 04:19:55', '2021-04-27 04:19:55'),
-(10, '2222224', '$2y$10$Halmj/wCWEw5IFY8OtypI.2dOBgcaWliXAEPt5rYfx7T7gQk9D6sm', NULL, 0, NULL, '2021-04-27 19:41:00', '2021-04-27 19:41:00'),
-(11, '222222', '$2y$10$wL7/6kTOoo87l2uKP1k2E.IcRL2ZtXn3UqQzCmtuO9RCLTl6xgPO.', NULL, 0, NULL, '2021-04-27 19:43:48', '2021-04-27 19:43:48');
+INSERT INTO `users` (`id`, `username`, `password`, `token`, `verify_token`, `created_at`, `updated_at`) VALUES
+(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, NULL, NULL, NULL),
+(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, NULL, NULL, NULL),
+(3, '9820460350', '$2y$10$GT8DC/RyTOe3PvIevhLs3u.PApaxbdtu/ok3tWxqLeJaMv24wDqW.', NULL, NULL, NULL, NULL),
+(4, '2766170294', '$2y$10$8W5XSqBNaGdcUkSSoKTtMeC4bSGL1A9I5sSC0wFjO7fzF630GJyku', NULL, NULL, NULL, NULL),
+(5, '7724909893', '$2y$10$iZGAwJi3uNiV7d04AoRC3.wqIdXVDITpcVoBSIVLzVjd9nKlGigM.', NULL, NULL, NULL, NULL),
+(6, '901247874124', '$2y$10$zDiaF3oRkHe4/NUyXIb8pe8bpkhoYlDKW4YhjYYOq7NMkZ3gu3w2m', NULL, NULL, '2021-04-19 08:17:36', '2021-04-19 08:17:36'),
+(7, '222222', '$2y$10$JWFeuBSaWGMckKr4l3oqee36fXI0DH2BCTudQy8EGMnY5sRIgLsh6', NULL, NULL, '2021-04-19 08:19:29', '2021-04-19 08:19:29'),
+(8, '3123124124', '$2y$10$PAyngHaRebsHcTAiH9Ey5O8mttoT8NoY3p/9G5tFn6c2F5QC08asm', NULL, NULL, '2021-04-19 09:00:06', '2021-04-19 09:00:06');
 
 -- --------------------------------------------------------
 
@@ -1164,11 +1192,11 @@ CREATE TABLE `user_details` (
 
 INSERT INTO `user_details` (`id`, `photo`, `name`, `jenis_kelamin`, `tempat_lahir`, `tanggal_lahir`, `nisn_or_nip`, `tahun_masuk`, `email`, `user_id`, `role_id`, `last_login`, `kelas_id`, `mobile_phone`, `full_address`, `mapel_id`, `status`, `created_at`, `updated_at`) VALUES
 (1, NULL, 'w', NULL, NULL, NULL, '4892118481', NULL, NULL, 1, 1, '2021-04-17 09:27:20', NULL, NULL, NULL, NULL, 0, NULL, NULL),
-(2, NULL, 'k', 'laki-laki', 'banyuwangi', '2021-04-09', '9630159739', '2017', 'm2@gmail.com', 2, 2, '2021-04-28 06:46:54', NULL, NULL, NULL, 1, 0, NULL, '2021-04-27 04:19:55'),
+(2, NULL, 'k', NULL, NULL, NULL, '9630159739', NULL, NULL, 2, 2, '2021-04-19 14:15:13', NULL, NULL, NULL, 2, 0, NULL, NULL),
 (3, NULL, 'q', NULL, NULL, NULL, '9820460350', NULL, NULL, 3, 3, '2021-04-17 09:28:06', NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (4, NULL, 'coklah', 'perempuan', 'banyuwangi', '2021-04-09', '901247874124', '2019', 'verrnayb@gmail.com', 6, 3, '2021-04-19 15:17:36', NULL, NULL, NULL, NULL, 0, '2021-04-19 08:17:36', '2021-04-19 08:17:36'),
-(5, NULL, 'coklahhah', 'laki-laki', 'banyuwangi', NULL, '222222', '2018', 'm234@gmail.com', 11, 2, '2021-04-28 03:29:22', NULL, NULL, NULL, 1, 0, '2021-04-19 08:19:29', '2021-04-27 20:29:22'),
-(6, NULL, 'aku bagus cok asu', 'laki-laki', 'banyuwangi', '2021-04-01', '3123124124', '2020', 'm@gmail.com', 8, 3, '2021-04-28 03:51:22', NULL, NULL, NULL, NULL, 0, '2021-04-19 09:00:06', '2021-04-27 20:51:22');
+(5, NULL, 'coklah', 'laki-laki', 'banyuwangi', NULL, '222222', '2018', 'm@gmail.com', 7, 2, '2021-04-19 15:19:29', NULL, NULL, NULL, 3, 0, '2021-04-19 08:19:29', '2021-04-19 08:19:29'),
+(6, NULL, 'aku bagus', 'perempuan', 'banyuwangi', '2021-04-01', '3123124124', '2020', 'm@gmail.com', 8, 3, '2021-04-19 16:01:53', NULL, NULL, NULL, NULL, 0, '2021-04-19 09:00:06', '2021-04-19 09:00:06');
 
 --
 -- Indexes for dumped tables
@@ -1209,6 +1237,12 @@ ALTER TABLE `jurnal_gurus`
 -- Indexes for table `kelas`
 --
 ALTER TABLE `kelas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `keterampilan_kompetensi_dasars`
+--
+ALTER TABLE `keterampilan_kompetensi_dasars`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -1366,6 +1400,12 @@ ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
+-- Indexes for table `penilaian_kompetensi_dasars`
+--
+ALTER TABLE `penilaian_kompetensi_dasars`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `roles`
 --
 ALTER TABLE `roles`
@@ -1435,7 +1475,7 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `daftar_kelas`
 --
 ALTER TABLE `daftar_kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1456,16 +1496,22 @@ ALTER TABLE `kelas`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
+-- AUTO_INCREMENT for table `keterampilan_kompetensi_dasars`
+--
+ALTER TABLE `keterampilan_kompetensi_dasars`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `kompetensi_dasars`
 --
 ALTER TABLE `kompetensi_dasars`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `master_jadwal_pelajarans`
 --
 ALTER TABLE `master_jadwal_pelajarans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `master_jurusans`
@@ -1513,25 +1559,25 @@ ALTER TABLE `master_mapels`
 -- AUTO_INCREMENT for table `master_nilai_keterampilans`
 --
 ALTER TABLE `master_nilai_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `master_nilai_pengetahuans`
 --
 ALTER TABLE `master_nilai_pengetahuans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `master_penilaian_keterampilans`
 --
 ALTER TABLE `master_penilaian_keterampilans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `master_penilaian_pengetahuans`
 --
 ALTER TABLE `master_penilaian_pengetahuans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `master_rpps`
@@ -1567,7 +1613,7 @@ ALTER TABLE `materi_bahan_belajars`
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `menu_kelas`
@@ -1579,7 +1625,7 @@ ALTER TABLE `menu_kelas`
 -- AUTO_INCREMENT for table `menu_roles`
 --
 ALTER TABLE `menu_roles`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `menu_role_kelas`
@@ -1591,7 +1637,13 @@ ALTER TABLE `menu_role_kelas`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=116;
+
+--
+-- AUTO_INCREMENT for table `penilaian_kompetensi_dasars`
+--
+ALTER TABLE `penilaian_kompetensi_dasars`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -1633,7 +1685,7 @@ ALTER TABLE `tugas_siswa_pengetahuans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `user_details`

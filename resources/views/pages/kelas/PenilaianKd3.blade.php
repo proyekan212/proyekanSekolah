@@ -47,7 +47,7 @@
                   </td>
             <td>{{$data->pertemuan}}</td>
             <td><b>{{$data->kompetensi_dasar->kompetensi_inti->kode}}.{{$data->kompetensi_dasar->id}}</b> {{$data->kompetensi_dasar->nama_kompetensi_dasar}}</td>
-            <td>{{$data->skema_penilaian}}</td>
+            <td>{{$data->skema->name}}</td>
             <td>{{$data->instruksi}}</td>
             <td>{{$data->mulai_pengerjaan}} - {{$data->finish_pengerjaan}}</td>
             <td>
@@ -133,11 +133,11 @@
             </div>
             <div class="col-lg-8">
               <select name="skema_penilaian" class="form-control form-control-sm mb-3">
-                  <option selected value="">- Pilih Skema</option>
-                  <option selected value="tes tulis">Tes Tulis</option>
-                  <option selected value="tes lisan">Tes Lisan</option>
-                  <option selected value="penugasan">Penugasan</option>
-                  
+                    @foreach($skema as $skema)
+                    <option value="{{$skema->id}}">
+                      {{$skema->name}}
+                    </option>
+                    @endforeach
                   
                 </select>
             </div>
@@ -156,7 +156,7 @@
             </div>
             <div class="col-lg-8">
               <select name="kompetensi_dasar_id" class="form-control form-control-sm mb-3">
-                <option selected>- Pilih Kompetensi Inti (KI) -</option>
+         
                     @foreach($kompetensi_dasar as $index => $row) 
 
                       @if($row->name == 'pengetahuan')

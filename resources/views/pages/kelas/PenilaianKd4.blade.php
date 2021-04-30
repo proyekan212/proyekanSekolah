@@ -62,11 +62,11 @@
                   <td>{{$data->skema->name}}</td>
                   <td>{{$data->nama_penilaian}}</td>
                   <td>
-                  @foreach($data->kd() as $row)
-                        <p>
-                       -  {{$row->nama_kompetensi_dasar}}
-                        </p>
+                  <ul>
+                      @foreach($data->kd_keterampilan as $row)
+                        <li>- {{$row->kompetensi_dasar->nama_kompetensi_dasar}}</li>  
                       @endforeach
+                  </ul>
                   </td>
                   <td>
                     {{$data->keterangan}}
@@ -173,7 +173,7 @@
             <div class="col-lg-8">
                 @foreach($kompetensi_dasar as $data) 
                     <p class="flex items-center mb-1 md:mb-2">
-                      <input type="checkbox" required name="kompetensi_dasar[]" value="{{$data->id}}">
+                      <input type="checkbox" name="kompetensi_dasar[]" value="{{$data->id}}">
                       <span class=" capitalize pl-2 text-xs lg:text-sm">
                       {{$data->nama_kompetensi_dasar}}
                       </span>
