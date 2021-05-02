@@ -6,7 +6,7 @@
  <div>
  <div class="w-full  flex flex-col mb-4  bg-white rounded-xl p-4">
     <span class="text-sm mb-2 text-blue-400">
-    Tahun Ajaran 2020/2021
+    Tahun Ajaran {{$setting_semester->tahun_akademik->tahun_akademik}}
     </span>
     <span class="text-gray-800 text-sm font-semibold">
       Kelas XI IPA
@@ -133,8 +133,8 @@
 <div id="kelas" class="md:p-6 w-full lg:p-8 p-4">
 @if(Auth::user()->id != '1')
 
-    <h2 class="lg:text-lg text-base font-semibold text-blue-600">
-    Tahun Ajaran 2020/2021 - Semester Genap
+    <h2 class="lg:text-lg text-base capitalize font-semibold text-blue-600">
+    Tahun Ajaran {{$setting_semester->tahun_akademik->tahun_akademik}} - semester {{$setting_semester->semester->nama_semester}}
     </h2>
     @else
     @endif
@@ -143,11 +143,11 @@
        @if($row->jadwal_pelajaran->count() == 0) 
             <div id="card" class="w-full bg-blue-50 md:p-6 p-4  rounded-md shadow-md">
               <div id="card-content" class="flex flex-col items-center">
-                  <h3 class="capitalize text-blue-500 mb-1 md:mb-2 md:text-base text-sm">
+                  <h3 class="capitalize text-blue-500 mb-1 uppercase md:mb-2 md:text-base text-sm">
                   {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
                   </h3>
                   <p class="capitalize text-gray-400 mb-2 md:mb-4 lg:mb-6 ">
-                  tahun akademik {{$row->tahun_akademik->tahun_akademik}}
+                  tahun akademik {{$setting_semester->tahun_akademik->tahun_akademik}}
                   </p>
                   <div class="mb-2 md:mb-4 lg:mb-6">
                     <table class="w-full text-gray-600">
@@ -172,11 +172,11 @@
             @foreach($row->jadwal_pelajaran as $jadwal) 
             <div id="card" class="w-full bg-blue-50 md:p-6 p-4  rounded-md shadow-md">
               <div id="card-content" class="flex flex-col items-center">
-                  <h3 class="capitalize text-blue-500 mb-1 md:mb-2 md:text-base text-sm">
+                  <h3 class=" text-blue-500 mb-1 uppercase md:mb-2 md:text-base text-sm">
                   {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
                   </h3>
                   <p class="capitalize text-gray-400 mb-2 md:mb-4 lg:mb-6 ">
-                  tahun akademik {{$row->tahun_akademik->tahun_akademik}}
+                  tahun akademik {{$setting_semester->tahun_akademik->tahun_akademik}}
                   </p>
                   <div class="mb-2 md:mb-4 lg:mb-6">
                     <table class="w-full text-gray-600">

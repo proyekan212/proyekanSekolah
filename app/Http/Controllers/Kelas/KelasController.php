@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\Model\Kelas;
+use App\Model\KompetensiDasar;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterKelas;
 use App\Model\User;
@@ -19,13 +20,23 @@ class KelasController extends BaseController
         $kelasMapel = MasterJadwalPelajaran::where('user_id', $request->user()->id)->first();
         // $request->session()->put('kelas_mapel', $kelasMapel->id);
         $request->session()->put('kelas_mapel', $request->input('kelas_mapel'));
-        
+        $kompetensi_dasar = KompetensiDasar::
+        with(['penilaian_pengetahuan' => function($q) use($request) {
+            $q->where('kelas_mapel_id', $request->session()->get('kelas_mapel'));
+        }, 'penilaian_keterampilan' => function($q) use($request) {
+            $q->whereHas('penilaian_keterampilan', function($q1) use($request) {
+                $q1->where('kelas_mapel_id', $request->session()->get('kelas_mapel'));
+            });
+        }])
+        ->get();
         $request->session()->put('kelas_id', $request->input('kelas_id'));
         $kelas = Kelas::where('id', $request->session()->get('kelas_id'))->first();
         $user = User::where('id', $request->user()->id)->first();
         return view('pages.kelas.dashboard', [
             'kelas' => $kelas,
-            'user' => $user
+            'user' => $user,
+            'kelas_mapel' =>$kelasMapel,
+            'kompetensi_dasar' => $kompetensi_dasar
         ]);
     }
 

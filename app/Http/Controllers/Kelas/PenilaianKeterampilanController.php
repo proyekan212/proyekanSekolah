@@ -128,7 +128,8 @@ class PenilaianKeterampilanController extends Controller
         $skema = MasterSkemaKeterampilan::get();
         return view('pages.kelas.PenilaianKd4edit', [
             'kompetensi_dasar'=> $kompetensi_dasar,
-            'datas'=> $data
+            'datas'=> $data,
+            'skema' => $skema
         ]);
     }
 

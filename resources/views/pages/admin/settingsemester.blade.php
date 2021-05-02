@@ -29,119 +29,66 @@
             <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
           </div>
         </div>
-        <div class="table-responsive">
-          <table id="dataTableExample" class="table">
-            <thead>
-              <tr>
-                <th>No</th>
-                <th>FOTO</th>
-                <th>NISN</th>
-                <th>NAMA</th>
-                <th>L/P</th>
-                <th>TTL</th>
-                <th>KELAS</th>
-                <th>STATUS</th>
-                <th>TERAKHIR AKTIF</th>
-              </tr>
-            </thead>
-            <tbody>
-              @foreach($siswa as $index => $row)
-                <tr>
-                  <td>{{$index+1}}</td>
-                  <td>{{$row->user->photo}}</td>
-                  <td>{{$row->user->nisn_or_nip}}</td>
-                  <td>{{$row->user->name}}</td>
-                  <td class="capitalize">{{$row->user->jenis_kelamin}}</td>
-                  <td class=  "capitalize">{{$row->user->tempat_lahir}}, {{$row->user->tanggal_lahir}}</td>
+        <div class="p-4"> 
+          <form method="post" action="{{ url('Setting_Semester', $setting->id)}}">
+          {{method_field('PATCH')}}
+          @csrf
+            <div class="py-2 w-full">
+              
+                <label class=" col-span-full md:col-span-4" for="">
+                  Semester
+                </label>
+                <select class=""  name="semester_id" class="form-control" id="">
+                  @foreach($semester as $row)
+                    @if($setting->semester_id == $row->id)
+                      <option selected value="{{$row->id}}">
+                        {{$row->nama_semester}}
+                      </option>
 
-                  <td>{{$row->kelas->kelas}} {{$row->rombel->name}}</td>
-                  <td>@if($row->user->status == 0)
-                        <span class="text-red-400 capitalize">
-                          offline
-                        </span>
-                      @else
+                    @else
+                      <option value="{{$row->id}}">
+                        {{$row->nama_semester}}
+                      </option>
+                    @endif
+                  @endforeach
+                </select>
+              
+            </div>
 
-                        <span class="text-green-600 capitalize">
-                          online
-                        </span>
-                      @endif
-                  </td>
-                  
-                <td></td>
-                  
-                </tr>
-              @endforeach
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title capitalize" id="exampleModalLabel">sinkronkan siswa ke dalam kelas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="table-responsive">
-            <table id="dataTableExample" class="table">
-              <thead>
-                <tr>
-                  <th>No</th>
-                  <th>NISN</th>
-                  <th>NAMA</th>
-                  <th>L/P</th>
-                  <th>KELAS</th>
-                  <th>ROMBEL</th>
-                  <th>AKSI</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach($siswa as $key => $row) 
-                  <tr>
-                    <td>
-                      {{$key+1}}
-                    </td>
-                    <td>{{$row->user->nisn_or_nip}}</td>
-                    <td>{{$row->user->name}}</td>
-                    <td class="capitalize">
-                      {{$row->user->jenis_kelamin}}
-                    </td>
-                    <td>
-                      {{$row->kelas->kelas}}
-                    </td>
-                    <td>
-                      {{$row->rombel->jurusan->jurusan}} {{$row->kelas->kode}} {{$row->rombel->name}} 
-                    </td>
-                    <td>
-                      <span class="bg-green-500 text-white text-xs px-6 py-2 rounded-2xl"> 
-                        <i class="fas fa-check">
-                        </i>
-
-                        <span class="capitalize">
-                          tergabung
-                        </span>
-                      </span> 
-                    </td>                 
-                  </tr>
+            <div class="py-2 w-full">
+              
+              <label class=" col-span-full md:col-span-4" for="">
+                Tahun Akademik
+              </label>
+              <select class=""  name="tahun_akademik_id" class="rounded-xl border-gray-200" id="">
+                @foreach($tahun_akademik as $row)
+                  @if($setting->tahun_akademik_id == $row->id)
+                    <option value="{{$row->id}}" selected>
+                      {{$row->tahun_akademik}}
+                    </option>
+                  @else
+                    <option value="{{$row->id}}">
+                      {{$row->tahun_akademik}}
+                    </option>
+                  @endif
                 @endforeach
-              </tbody>
-            </table>
-          </div>
+              </select>
+            
+            </div>
+            <div class="mt-4 flex justify-end">
+
+              <button type="submit" class="px-4 py-2 rounded-xl bg-blue-400 text-white text-sm">
+                Change Setting
+              </button>
+            </div>
+
+          </form>
         </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="button" class="btn btn-primary">Sinkronkan</button>
       </div>
     </div>
   </div>
 </div>
+
 @endsection
 
 @push('plugin-scripts')

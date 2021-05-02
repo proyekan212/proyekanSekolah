@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterSemester;
+use App\Model\SettingSemester;
+use App\Model\TahunAkademik;
 use Illuminate\Http\Request;
 
 class SettingSemesterController extends Controller
@@ -14,8 +17,14 @@ class SettingSemesterController extends Controller
      */
     public function index()
     {
+        $semester = MasterSemester::get();
+        $tahun_akademik = TahunAkademik::get();
+        $setting = SettingSemester::first();
        return view('pages.admin.settingsemester', [
             // 'kompetensi_inti' => MasterKompetensiInti::all(),
+            'semester' => $semester,
+            'tahun_akademik' => $tahun_akademik,
+            'setting' => $setting,
         ]);
     }
 
@@ -71,7 +80,15 @@ class SettingSemesterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $setting = SettingSemester::findOrFail($id);
+        $data = $request->all();
+
+        $setting->update([
+            'tahun_akademik_id'=> $data['tahun_akademik_id'],
+            'semester_id' => $data['semester_id']
+        ]);
+
+        return redirect('Setting_Semester');
     }
 
     /**

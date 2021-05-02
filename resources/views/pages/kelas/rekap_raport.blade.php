@@ -85,8 +85,8 @@
 
                         <td>
                           <?php
-                              echo $nilai_akhir/$skema_keterampilan->count();
-                              $total_nilai += (int) $nilai_akhir/$skema_keterampilan->count();
+                              echo (int) $nilai_akhir/$skema_keterampilan->count();
+                              $total_nilai += (int) ($nilai_akhir/$skema_keterampilan->count());
                           ?>
                         </td>
                       </tr>
@@ -126,7 +126,7 @@
 
                         <td>
                           <?php
-                              echo $nilai_akhir/3;
+                              echo (int) $nilai_akhir/3;
                           ?>
                         </td>
                         <tr>

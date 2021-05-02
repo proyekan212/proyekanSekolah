@@ -24,60 +24,15 @@
                 </tr>
               </thead>
               <tbody class="text-center">
+                @foreach($kompetensi_dasar as $kd)
                 <tr>
-                  <td>KD 1</td>
+                  <td>KD {{$kd->id}}</td>
                   <td>2</td>
-                  <td>0</td>
-                  <td>0</td>
+                  <td>{{$kd->penilaian_pengetahuan->count()}}</td>
+                  <td>{{$kd->penilaian_keterampilan->count()}}</td>
                 </tr>
-                <tr>
-                  <td>KD 2</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 3</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 4</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 5</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 6</td>
-                  <td>6</td>
-                  <td>1</td>
-                  <td>1</td>
-                </tr>
-                <tr>
-                  <td>KD 7</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 8</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
-                <tr>
-                  <td>KD 9</td>
-                  <td>0</td>
-                  <td>0</td>
-                  <td>0</td>
-                </tr>
+                @endforeach
+                
               </tbody>
             </table>
           </div>
@@ -94,21 +49,21 @@
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                   <div class="ml-2">
-                    <p>{{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
-                    <p class="tx-11 text-muted">Mata Pelajaran IPS Biologi Kelas Kelas X</p>
+                    <p class="capitalize">{{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
+                    <p class="tx-11 text-muted capitalize">Mata Pelajaran {{$kelas_mapel->master_mapel->nama_mapel}} {{$kelas->rombel->jurusan->jurusan}} Kelas {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <p class="mb-3 tx-14 capitalize" >{{$user->user_detail->name}}</p>
-              <p class="mb-3 tx-14">Mata Pelajaran MIPA Biologi Kelas Kelas X 8 Pertemuan</p>
+              <p class="mb-3 tx-14 capitalize ">Mata Pelajaran {{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas_mapel->pertemuan}} Pertemuan</p>
               <p class="mb-3 tx-14">{{$kelas->daftar_kelas->count()}} Siswa | Max KD : 9 | KKM : 75</p>
             </div>
             <div class="card-footer">
               <div class="d-flex post-actions">
                   <i class="icon-md" data-feather="inbox"></i>
-                  <p class="d-none d-md-block ml-2">Kelas dibuat pada 08 Januari 2021 Pukul 09:25:05</p>
+                  <p class="d-none d-md-block ml-2">Kelas dibuat pada {{$kelas_mapel->created_at->format('d F Y')}}</p>
               </div>
             </div>
           </div>

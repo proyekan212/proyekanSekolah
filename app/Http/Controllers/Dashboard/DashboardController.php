@@ -10,6 +10,7 @@ use App\Model\MasterKelas;
 use App\Model\MasterSemester;
 use Illuminate\Http\Request;
 use App\Model\Menu;
+use App\Model\SettingSemester;
 use App\Model\User;
 use App\Model\UserDetail;
 use Carbon\Carbon;
@@ -30,28 +31,39 @@ class DashboardController extends Controller
         $mapel = MasterJadwalPelajaran::all();
         $semester = MasterSemester::all();
         $user = User::where('id', $request->user()->id)->first();
-      
+        $setting_semester = SettingSemester::first();
         $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
         // dd($user_detail);
-        $daftarKelas = DaftarKelas::with(['kelas', 'user_detail'])
+        $daftarKelas = DaftarKelas::with(['kelas' => function($q) {
+
+        }, 'user_detail'])
         ->where('user_id', $user->user_detail->id )
-        ->whereHas('kelas', function($q) {
-            $q->whereRaw('EXTRACT(YEAR FROM created_at) = '.Carbon::now()->format('Y'));
+        ->whereHas('kelas.tahun_akademik', function($q) use($setting_semester) {
+            $q->where('id', $setting_semester->tahun_akademik->id);
         })
         ->first();
      
 
-
+        
         // dd($user->user_detail->name);
 
 
         // untuk guru
         $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request) {
             $q->where('user_id', '=', $request->user()->id);
-        }])->get();
+            
+        }])
+        // ->whereHas('jadwal_pelajaran', function($q) use($setting_semester) {
+        //     $q->where('semester_id', $setting_semester->semester_id);
+        // })
+        // ->where([
+        //     ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
+        // ])
+        ->get();
         return view('dashboard', [
             'showSemester'      => $semester,
             'showMataPelajaran' => $mapel,
+            'setting_semester' => $setting_semester,
             'daftarKelas' => $daftarKelas,
             'kelas' => $kelas,
             'user' => $user,

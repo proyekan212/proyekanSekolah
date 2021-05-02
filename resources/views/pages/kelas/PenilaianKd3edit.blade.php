@@ -25,13 +25,13 @@
               <label class="col-form-label">Mulai Pengerjaan</label>
             </div>
             <div class="col-lg-3">
-              <input type="date" value="{{$datas->mulai_pengerjaan}}" name="mulai_pengerjaan" class="form-control"  />
+              <input type="date" required value="{{$datas->mulai_pengerjaan}}" name="mulai_pengerjaan" class="form-control"  />
             </div>
             <div class="col-lg-2">
               <label class="col-form-label">Finish Pengerjaan</label>
             </div>
             <div class="col-lg-3">
-              <input type="date"  value="{{$datas->finish_pengerjaan}}" name="finish_pengerjaan" class="form-control"   />
+              <input type="date"  required value="{{$datas->finish_pengerjaan}}" name="finish_pengerjaan" class="form-control"   />
               
             </div>
           </div>

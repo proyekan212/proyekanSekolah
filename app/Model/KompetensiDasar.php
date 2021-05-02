@@ -29,5 +29,12 @@ class KompetensiDasar extends Model
         return $this->belongsTo('App\Model\MasterSemester', 'semester_id', 'id');
     }
 
+    public function penilaian_pengetahuan() {
+        return $this->hasMany(MasterPenilaianPengetahuan::class, 'kompetensi_dasar_id', 'id');
+    }
+
+    public function penilaian_keterampilan () {
+        return $this->hasMany(KeterampilanKompetensiDasar::class, 'kd_id', 'id');
+    }
 
 }
