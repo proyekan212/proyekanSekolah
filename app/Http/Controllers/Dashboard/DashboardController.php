@@ -53,12 +53,12 @@ class DashboardController extends Controller
             $q->where('user_id', '=', $request->user()->id);
             
         }])
-        // ->whereHas('jadwal_pelajaran', function($q) use($setting_semester) {
-        //     $q->where('semester_id', $setting_semester->semester_id);
-        // })
-        // ->where([
-        //     ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
-        // ])
+        ->whereHas('jadwal_pelajaran', function($q) use($setting_semester) {
+            $q->where('semester_id', $setting_semester->semester_id);
+        })
+        ->where([
+            ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
+        ])
         ->get();
         return view('dashboard', [
             'showSemester'      => $semester,
