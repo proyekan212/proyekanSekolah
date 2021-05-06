@@ -8,8 +8,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar siswa kelas</li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >Data Master Mata Pelajaran</li>
   </ol>
 </nav>
 
@@ -26,7 +26,6 @@
           <h6 class="card-title mb-0">Daftar Mata Pelajaran</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Mapel</button>
-            <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -152,7 +151,7 @@
    </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">add mapel</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
   </form>
   </div>

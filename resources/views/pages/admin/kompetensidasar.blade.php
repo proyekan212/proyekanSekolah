@@ -8,8 +8,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar siswa kelas</li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >Daftar Kompetensi Dasar</li>
   </ol>
 </nav>
 
@@ -23,10 +23,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
+          <h6 class="card-title mb-0">Daftar Kompetensi Dasar</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Data</button>
-            <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Kompetensi Dasar</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -117,7 +116,7 @@
           </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">add</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 
       </form>

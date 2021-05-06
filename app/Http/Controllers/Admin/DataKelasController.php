@@ -103,10 +103,22 @@ class DataKelasController extends Controller
      */
     public function edit($id)
     {   
-        // $data = UserDetail::where('role_id', 3)->get();
-        // return response()->json([
-        //     'data' => $data
-        // ]);
+         $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
+        $rombel = RombelKelas::where('hapus', 0)->get();
+        $master_kelas = MasterKelas::where('hapus', 0)->get();
+        $datas = Kelas::where('hapus', 0)
+        ->with(['daftar_kelas' => function($q) {
+            $q->has('user_detail');
+        }])
+        ->get();
+      
+        
+        return view('pages.admin.datakelasedit', [
+            'datas' => $datas,
+            'tahun_akademik' => $tahun_akademik,
+            'rombel' => $rombel,
+            'master_kelas' => $master_kelas,
+        ]);
     }
 
     /**

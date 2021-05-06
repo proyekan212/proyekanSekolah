@@ -25,8 +25,7 @@
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Daftar KKM</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Add KKM</button>
-            <button type="button" class="btn btn-outline-primary">Cetak Excel</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah KKM</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -105,7 +104,7 @@
        
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Sinkronkan</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 
       </form>

@@ -8,8 +8,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar guru kelas</li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >Data Guru</li>
   </ol>
 </nav>
 
@@ -23,10 +23,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Master guru</h6>
+          <h6 class="card-title mb-0">Daftar Guru</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Add Master guru</button>
-            <button type="button" class="btn btn-outline-primary">import excel</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Guru</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -158,7 +157,7 @@
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Sinkronkan</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 
       </form>

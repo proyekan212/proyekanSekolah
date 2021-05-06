@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Model\MasterJadwalPelajaran;
+use App\Model\MasterMapel;
 use DB;
 class JadwalPelajaranController extends Controller
 {
@@ -14,9 +16,11 @@ class JadwalPelajaranController extends Controller
      */
     public function index()
     {
+        $datas = MasterJadwalPelajaran::all();
+        $datas = MasterMapel::all();
       return view('pages.admin.jadwalpelajaran', [
-            // 'kompetensi_inti' => MasterKompetensiInti::all(),
-        // 'datas' => DB::table('master_jadwal_pelajarans')->get(),
+            // 'kompetensi_inti' => MasterJadwalPelajaran::all(),
+        'datas' => $datas,
         ]);
     }
 
