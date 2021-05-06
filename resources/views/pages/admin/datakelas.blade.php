@@ -58,12 +58,12 @@
                         <td class="flex items-center ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
-                            <a href="{{ url('Master_KKM', $row->id)}}">
+                            <a href="{{ url('data_kelas/edit', $row->id)}}">
                             edit
                             </a>
                           </span>
                         </button>
-                      <form method="post" action="{{ url('Master_KKM', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                      <form method="post" action="{{ url('data_kelas', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
@@ -138,12 +138,18 @@
             
           </div>
 
-          <div class="form-group row">
+         <div class="form-group row">
               <div class="col-lg-3">
                 <label class="col-form-label">Rombel</label>
               </div>
               <div class="col-lg-8">
-                  <input type="text" required   placeholder="" name="rombel" required class="form-control">  
+                   <select name="rombel" id="">
+                    @foreach($rombel as $row)
+                      <option value="{{$row->id}}">
+                        {{$row->name}}
+                      </option>
+                    @endforeach
+                  </select>
                 </div>
 
           </div>
@@ -213,7 +219,7 @@
        
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Add Kelas
+        <button type="submit" class="btn btn-primary">Tambah
         </button>
       </div>
 
@@ -259,7 +265,7 @@
        
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Add Kelas
+        <button type="submit" class="btn btn-primary">Tambah
         </button>
       </div>
 

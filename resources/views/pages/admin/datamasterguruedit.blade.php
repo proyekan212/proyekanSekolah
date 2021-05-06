@@ -14,7 +14,7 @@
         </button>
       </div>
 
-        <form method="POST" action="{{ url('Data_Master_Guru', $datas->id)}}">
+        <form method="POST" action="{{ url('Data_Master_Guru', $guru->id)}}">
         {{ method_field('PATCH')}}
 
         @csrf
@@ -24,7 +24,7 @@
            <label class="col-form-label">Nip</label>
          </div>
          <div class="col-lg-8">
-           <input type="text" value="{{$datas->nip}}" class="form-control" name="nip">
+           <input type="text" value="{{$guru->nisn_or_nip}}" class="form-control" name="nip">
          </div>
        </div>
        <div class="form-group row">
@@ -32,7 +32,7 @@
            <label class="col-form-label">Nama</label>
          </div>
          <div class="col-lg-8">
-           <input type="text" value="{{$datas->name}}" class="form-control" name="nama">
+           <input type="text" value="{{$guru->name}}" class="form-control" name="nama">
          </div>
        </div>
        <div class="form-group row">
@@ -40,7 +40,7 @@
            <label class="col-form-label">Tempat Lahir</label>
          </div>
          <div class="col-lg-8">
-           <input type="text" value="{{$datas->tempat_lahir}}" class="form-control" name="tempat_lahir">
+           <input type="text" value="{{$guru->tempat_lahir}}" class="form-control" name="tempat_lahir">
          </div>
        </div>
        <div class="form-group row">
@@ -48,7 +48,7 @@
            <label class="col-form-label">Tanggal Lahir</label>
          </div>
          <div class="col-lg-8">
-           <input type="date" class="form-control" value="{{$datas->tanggal_lahir}}" name="tanggal_lahir">
+           <input type="date" class="form-control" value="{{$guru->tanggal_lahir}}" name="tanggal_lahir">
          </div>
        </div>
        <div class="form-group row">
@@ -56,7 +56,7 @@
            <label class="col-form-label">Email</label>
          </div>
          <div class="col-lg-8">
-           <input type="email" class="form-control" value="{{$datas->email}}" name="email">
+           <input type="email" class="form-control" value="{{$guru->email}}" name="email">
          </div>
        </div>
        <div class="form-group row">
@@ -64,7 +64,7 @@
            <label class="col-form-label">Jenis Kelamin</label>
          </div>
          <div class="col-lg-8">
-          <select name="jenis_kelamin" value="{{$datas->jenis_kelamin}}" class="form-control">
+          <select name="jenis_kelamin" value="{{$guru->jenis_kelamin}}" class="form-control">
             <option value="laki-laki">laki-laki</option>
             <option value="perempuan">perempuan</option>
           </select>
@@ -75,7 +75,7 @@
            <label class="col-form-label">Tahun Masuk</label>
          </div>
          <div class="col-lg-8">
-          <input type="text" value="{{$datas->tahun_masuk}}" name="tahun_masuk" class="form-control">
+          <input type="text" value="{{$guru->tahun_masuk}}" name="tahun_masuk" class="form-control">
          </div>
        </div>
 

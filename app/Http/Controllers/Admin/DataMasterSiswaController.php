@@ -75,8 +75,11 @@ class DataMasterSiswaController extends Controller
      */
     public function show($id)
     {
-        //
-    }
+         $siswa = UserDetail::where('id', $id)->first();
+        return view('pages.admin.datamastersiswaedit', [
+          // 'datas' => DB::table('master_kelas')->get(),
+          'siswa' => $siswa,
+        ]);    }
 
     /**
      * Show the form for editing the specified resource.
@@ -107,10 +110,11 @@ class DataMasterSiswaController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            'role_id' => $data['role_id'],
+            'role_id' => 3
+           
         ]);
 
-        return redirect('dashboard');
+        return redirect('Data_Master_Siswa');
     }
 
     /**

@@ -40,6 +40,7 @@
                   <th>email</th>
                   <th>jenis kelamin</th>
                   <th>tahun masuk</th>
+<th></th>
 
               </tr>
             </thead>
@@ -54,6 +55,25 @@
                     <td>{{$siswa->email}}</td>
                     <td>{{$siswa->jenis_kelamin}}</td>
                     <td>{{$siswa->tahun_masuk}}</td>
+                    <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('/Data_Master_Siswa', $siswa->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Data_Master_Siswa', $siswa->id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>
                 </tr>
              @endforeach
             </tbody>

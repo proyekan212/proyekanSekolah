@@ -59,7 +59,13 @@
                 <label class="col-form-label">Rombel</label>
               </div>
               <div class="col-lg-8">
-                  <input type="text" required  value="{{$datas->rombel}}" placeholder="" name="rombel" required class="form-control">  
+                   <select name="rombel" id="">
+                    @foreach($rombel as $row)
+                      <option value="{{$row->id}}">
+                        {{$row->name}}
+                      </option>
+                    @endforeach
+                  </select>
                 </div>
 
           </div>

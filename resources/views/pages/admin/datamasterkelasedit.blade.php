@@ -8,7 +8,7 @@
 @section('content')
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Form Kejadian Jurnal Siswa</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Edit Data Master Kelas</h5>
       </div>
       <form method="POST" action="{{ url('Data_Master_Kelas', $datas->id)}}">
         @csrf
@@ -59,7 +59,7 @@
     </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-          <button type="submit" class="btn btn-primary">add kelas</button>
+          <button type="submit" class="btn btn-primary">Tambah</button>
         </div>
 </form>
 

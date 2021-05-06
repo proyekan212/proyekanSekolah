@@ -50,7 +50,7 @@
                         <td class="flex ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
-                            <a href="{{ url('Master_KKM', $row->id)}}">
+                            <a href="{{ url('tahun_akademik', $row->id)}}">
                             edit
                             </a>
                           </span>

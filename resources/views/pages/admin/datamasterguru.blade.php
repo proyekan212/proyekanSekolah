@@ -56,7 +56,25 @@
                     <td>{{$guru->jenis_kelamin}}</td>
                     <td>{{$guru->tahun_masuk}}</td>
                     <td>{{$guru->mapel->nama_mapel}}</td>
-                    
+                    <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('/Data_Master_Guru', $guru->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Data_Master_Guru', $guru->id)}}" onclick="deleteData('{{$guru->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>
                 </tr>
              @endforeach
             </tbody>

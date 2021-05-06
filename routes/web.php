@@ -134,6 +134,7 @@ Route::group(['middleware' => ['auth']], function () {
      //TahunAkademik
     Route::resource('/tahun_akademik', 'Admin\TahunAkademikController');
     Route::resource('/data_kelas', 'Admin\DataKelasController');
+    Route::get('/data_kelas/edit/{id}', 'Admin\DataKelasController@edit');
     Route::post('/data_kelas/store_siswa', 'Admin\DataKelasController@storeSiswaKelas');
     // Data Master Mata Pelajaran
     Route::resource('/data_master_mapel', 'Admin\MasterMapelController');

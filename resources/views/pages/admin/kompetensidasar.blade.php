@@ -54,7 +54,26 @@
                     <td>{{$row->nama_kompetensi_dasar}}</td>     
                     <td class="capitalize">
                       {{$row->semester->nama_semester}}
-                    </td >         
+                    </td > 
+                      <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('/Kompetensi_Dasar', $row->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Kompetensi_Dasar', $row->id)}}" onclick="deleteData('{{$row->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>        
                   </tr>
                 @endforeach
               </tbody>
