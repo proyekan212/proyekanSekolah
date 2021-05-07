@@ -9,6 +9,7 @@ use App\Model\Kelas;
 use App\Model\KompetensiDasar;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterKelas;
+use App\Model\SettingSemester;
 use App\Model\User;
 use DB;
 class KelasController extends BaseController
@@ -51,9 +52,11 @@ class KelasController extends BaseController
     }
 
     public function store(Request $request) {
+        $setting_semester = SettingSemester::first();
         $jadwalMapel = MasterJadwalPelajaran::create([
             'kelas_id' => $request->input('kelas_id'),
             'mapel_id' => 1,
+            'semester_id' => $setting_semester->semester_id,
             'kkm' => 75,
             'user_id' => $request->user()->id,
             

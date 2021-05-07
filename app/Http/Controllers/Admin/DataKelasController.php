@@ -79,16 +79,19 @@ class DataKelasController extends Controller
         $data = UserDetail::where([
             ['role_id', '=', 3],
             ])
+            ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
             ->with(['daftar_kelas.kelas' => function($q) use($id) {
                 $q->where([
 
                     ['id', '!=', $id],
                     ['id', '=', null]
                 ]);
-            }])
-            ->doesntHave('daftar_kelas')
-            ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
+        
+            },])
+            
             ->get();
+
+        
 
         return response()->json([
             'data' => $data

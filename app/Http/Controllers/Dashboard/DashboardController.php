@@ -49,13 +49,11 @@ class DashboardController extends Controller
 
 
         // untuk guru
-        $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request) {
+        $kelas = Kelas::with(['jadwal_pelajaran'=> function($q) use($request, $setting_semester) {
             $q->where('user_id', '=', $request->user()->id);
+            $q->where('semester_id' ,'=', $setting_semester->semester_id);
             
         }])
-        ->whereHas('jadwal_pelajaran', function($q) use($setting_semester) {
-            $q->where('semester_id', $setting_semester->semester_id);
-        })
         ->where([
             ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
         ])

@@ -111,7 +111,7 @@
               <select name="kelas" id="">
               @foreach($master_kelas as $row)
                     <option value="{{$row->id}}">
-                      {{$row->kelas}}
+                      {{$row->kode_kelas->kode}} {{$row->kelas}}
                     </option>
                   @endforeach
               </select>
