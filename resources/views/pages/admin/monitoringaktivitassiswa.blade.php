@@ -8,10 +8,10 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas 
+    <li class="breadcrumb-item"><a href="#">Admin 
     
     </a></li>
-    <li class="breadcrumb-item active" aria-current="page">Absensi Kelas</li>
+    <li class="breadcrumb-item active" aria-current="page">Monitoring Aktivitas Siswa</li>
   </ol>
 </nav>
 
@@ -20,7 +20,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Absensi Kelas MIPA X-MIPA-1_MIPA Biologi</h6>
+          <h6 class="card-title mb-0">Monitoring Aktivitas Siswa</h6>
           <div class="dropdown mb-2">
             
           </div>

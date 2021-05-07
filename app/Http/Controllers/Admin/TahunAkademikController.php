@@ -55,7 +55,10 @@ class TahunAkademikController extends Controller
      */
     public function show($id)
     {
-        //
+         $tahunAkademik = TahunAkademik::where('id', $id)->first();
+         return view('pages.admin.tahunakademikedit', [
+            'datas' => $tahunAkademik
+        ]); 
     }
 
     /**
@@ -78,7 +81,11 @@ class TahunAkademikController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         TahunAkademik::where('id', $id)->update([
+            'tahun_akademik' => $request->input('tahun_akademik'),
+        ]);
+
+        return redirect('tahun_akademik');
     }
 
     /**

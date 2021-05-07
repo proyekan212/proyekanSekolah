@@ -79,7 +79,13 @@ class DataMasterGuruController extends Controller
      */
     public function show($id)
     {
-        //
+          $mapel = MasterMapel::where('hapus', 0)->get();
+        $guru = UserDetail::where('id', $id)->first();
+         return view('pages.admin.datamasterguruedit', [
+            // 'kompetensi_inti' => MasterKompetensiInti::all(),
+            'guru' => $guru,
+            'mapel'=> $mapel
+        ]);
     }
 
     /**
@@ -115,10 +121,10 @@ class DataMasterGuruController extends Controller
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
             "mapel_id" => $data['mapel_id'],
-            'role_id' => $data['role_id'],
+            'role_id' => 2,
         ]);
 
-        return redirect('dashboard');
+        return redirect('Data_Master_Guru');
     }
 
     /**

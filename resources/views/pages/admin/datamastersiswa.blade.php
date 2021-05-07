@@ -8,8 +8,8 @@
 @section('content')
 <nav class="page-breadcrumb">
   <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a href="#">Kelas</a></li>
-    <li class="breadcrumb-item active capitalize" aria-current="page" >daftar siswa kelas</li>
+    <li class="breadcrumb-item"><a href="#">Admin</a></li>
+    <li class="breadcrumb-item active capitalize" aria-current="page" >Data Siswa</li>
   </ol>
 </nav>
 
@@ -23,10 +23,9 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Master Siswa</h6>
+          <h6 class="card-title mb-0">Daftar Siswa</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Add Master Siswa</button>
-            <button type="button" class="btn btn-outline-primary">import excel</button>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
           </div>
         </div>
         <div class="table-responsive">
@@ -41,6 +40,7 @@
                   <th>email</th>
                   <th>jenis kelamin</th>
                   <th>tahun masuk</th>
+<th></th>
 
               </tr>
             </thead>
@@ -55,6 +55,25 @@
                     <td>{{$siswa->email}}</td>
                     <td>{{$siswa->jenis_kelamin}}</td>
                     <td>{{$siswa->tahun_masuk}}</td>
+                    <td class="flex ">
+                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                          <span class="material-icons">
+                            <a href="{{ url('/Data_Master_Siswa', $siswa->id)}}">
+                            edit
+                            </a>
+                          </span>
+                        </button>
+                
+                      <form method="post" action="{{ url('Data_Master_Siswa', $siswa->id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
+                        @csrf
+                        {{ method_field('DELETE') }}
+                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                          <span class="material-icons"> 
+                            delete_forever  
+                          </span>
+                        </button>
+                      </form>
+                    </td>
                 </tr>
              @endforeach
             </tbody>
@@ -140,7 +159,7 @@
        </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Sinkronkan</button>
+        <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 
       </form>

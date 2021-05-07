@@ -60,7 +60,8 @@ class DataKelasController extends Controller
         Kelas::create([
             'master_kelas_id' => $request->input('kelas'),
             'tahun_akademik_id' => $request->input('tahun_akademik'),
-            'rombel_id'=> 1
+            'rombel_id'=> $request->input('rombel'),
+           
         ]);
 
         return redirect('data_kelas');
@@ -106,10 +107,23 @@ class DataKelasController extends Controller
      */
     public function edit($id)
     {   
-        // $data = UserDetail::where('role_id', 3)->get();
-        // return response()->json([
-        //     'data' => $data
-        // ]);
+         $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
+        $master_kelas = MasterKelas::where('hapus', 0)->get();
+        $datas = Kelas::where('id', $id)
+        ->with(['daftar_kelas' => function($q) {
+            $q->has('user_detail');
+        }])
+        ->first();
+        $rombel = RombelKelas::where('hapus', 0)->get();
+       
+      
+        
+        return view('pages.admin.datakelasedit', [
+            'datas' => $datas,
+            'tahun_akademik' => $tahun_akademik,
+            'rombel' => $rombel,
+            'master_kelas' => $master_kelas,
+        ]);
     }
 
     /**
@@ -121,7 +135,13 @@ class DataKelasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+         Kelas::where('id', $id)->update([
+            'master_kelas_id' => $request->input('kelas'),
+            'tahun_akademik_id' => $request->input('tahun_akademik'),
+            'rombel_id'=> $request->input('rombel'),
+        ]);
+
+        return redirect('data_kelas');
     }
 
     /**
