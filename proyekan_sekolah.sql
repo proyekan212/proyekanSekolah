@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.0
+-- version 5.0.4deb2
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost
--- Generation Time: May 02, 2021 at 06:25 PM
--- Server version: 10.5.9-MariaDB
--- PHP Version: 8.0.3
+-- Host: localhost:3306
+-- Generation Time: May 07, 2021 at 05:29 AM
+-- Server version: 10.5.9-MariaDB-1
+-- PHP Version: 7.4.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `proyekan_sepyan`
+-- Database: `proyekan_sekolah`
 --
 
 -- --------------------------------------------------------
@@ -170,7 +170,9 @@ CREATE TABLE `kelas` (
 
 INSERT INTO `kelas` (`id`, `hapus`, `master_kelas_id`, `tahun_akademik_id`, `rombel_id`, `created_at`, `updated_at`) VALUES
 (1, 0, 1, 2, 1, '2021-03-18 07:29:05', '2021-03-18 07:29:05'),
-(2, 0, 2, 2, 1, '2021-03-18 03:54:21', '2021-03-19 03:54:21');
+(2, 0, 2, 2, 1, '2021-03-18 03:54:21', '2021-03-19 03:54:21'),
+(3, 0, 2, 3, 1, '2021-05-07 12:47:27', '2021-05-07 12:47:27'),
+(4, 0, 1, 3, 1, '2021-05-07 13:00:45', '2021-05-07 13:00:45');
 
 -- --------------------------------------------------------
 
@@ -257,7 +259,9 @@ INSERT INTO `master_jadwal_pelajarans` (`id`, `kelas_id`, `semester_id`, `mapel_
 (2, 1, 0, 2, 16, 0, 75, 6, '2021-04-13 01:49:53', '2021-04-13 01:49:53'),
 (3, 1, 0, 1, 16, 0, 75, 2, '2021-04-17 02:28:46', '2021-04-17 02:28:46'),
 (4, 2, 0, 1, 16, 0, 75, 7, '2021-04-19 08:19:59', '2021-04-19 08:19:59'),
-(5, 2, 0, 1, 16, 0, 75, 2, '2021-04-21 00:35:14', '2021-04-21 00:35:14');
+(5, 2, 0, 1, 16, 0, 75, 2, '2021-04-21 00:35:14', '2021-04-21 00:35:14'),
+(6, 3, 2, 1, 16, 0, 75, 2, '2021-05-07 12:54:04', '2021-05-07 12:54:04'),
+(7, 3, 1, 1, 16, 0, 75, 2, '2021-05-07 12:55:10', '2021-05-07 12:55:10');
 
 -- --------------------------------------------------------
 
@@ -1064,7 +1068,7 @@ CREATE TABLE `setting_semesters` (
 --
 
 INSERT INTO `setting_semesters` (`id`, `semester_id`, `tahun_akademik_id`, `created_at`, `updated_at`) VALUES
-(1, 2, 1, NULL, '2021-05-01 22:34:05');
+(1, 1, 3, NULL, '2021-05-07 12:54:26');
 
 -- --------------------------------------------------------
 
@@ -1086,7 +1090,8 @@ CREATE TABLE `tahun_akademiks` (
 
 INSERT INTO `tahun_akademiks` (`id`, `tahun_akademik`, `hapus`, `created_at`, `updated_at`) VALUES
 (1, '2020/2021', 1, '2021-03-18 01:11:54', '2021-03-18 01:16:19'),
-(2, '2018/2019', 0, '2021-03-18 07:01:04', '2021-03-18 07:01:04');
+(2, '2018/2019', 0, '2021-03-18 07:01:04', '2021-03-18 07:01:04'),
+(3, '2021/2022', 0, '2021-05-07 12:45:33', '2021-05-07 12:45:33');
 
 -- --------------------------------------------------------
 
@@ -1180,14 +1185,15 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `token`, `verify_token`, `created_at`, `updated_at`, `active`) VALUES
-(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, NULL, NULL, '2021-05-01 22:36:26', 0),
-(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, NULL, NULL, '2021-05-01 22:53:53', 1),
+(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, NULL, NULL, '2021-05-07 12:44:32', 1),
+(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, NULL, NULL, '2021-05-07 12:48:59', 1),
 (3, '9820460350', '$2y$10$GT8DC/RyTOe3PvIevhLs3u.PApaxbdtu/ok3tWxqLeJaMv24wDqW.', NULL, NULL, NULL, NULL, 0),
 (4, '2766170294', '$2y$10$8W5XSqBNaGdcUkSSoKTtMeC4bSGL1A9I5sSC0wFjO7fzF630GJyku', NULL, NULL, NULL, NULL, 0),
 (5, '7724909893', '$2y$10$iZGAwJi3uNiV7d04AoRC3.wqIdXVDITpcVoBSIVLzVjd9nKlGigM.', NULL, NULL, NULL, NULL, 0),
 (6, '901247874124', '$2y$10$zDiaF3oRkHe4/NUyXIb8pe8bpkhoYlDKW4YhjYYOq7NMkZ3gu3w2m', NULL, NULL, '2021-04-19 08:17:36', '2021-04-19 08:17:36', 0),
 (7, '222222', '$2y$10$JWFeuBSaWGMckKr4l3oqee36fXI0DH2BCTudQy8EGMnY5sRIgLsh6', NULL, NULL, '2021-04-19 08:19:29', '2021-04-19 08:19:29', 0),
-(8, '3123124124', '$2y$10$PAyngHaRebsHcTAiH9Ey5O8mttoT8NoY3p/9G5tFn6c2F5QC08asm', NULL, NULL, '2021-04-19 09:00:06', '2021-04-19 09:00:06', 0);
+(8, '3123124124', '$2y$10$PAyngHaRebsHcTAiH9Ey5O8mttoT8NoY3p/9G5tFn6c2F5QC08asm', NULL, NULL, '2021-04-19 09:00:06', '2021-04-19 09:00:06', 0),
+(9, 'bb', '$2y$10$l5UMlxUD/Iy3hRVprdUC5eaDWMTgoRjwNpnMUUzmRYVO.CZXTZhFu', NULL, NULL, '2021-05-07 12:59:57', '2021-05-07 12:59:57', 0);
 
 -- --------------------------------------------------------
 
@@ -1227,7 +1233,8 @@ INSERT INTO `user_details` (`id`, `photo`, `name`, `jenis_kelamin`, `tempat_lahi
 (3, NULL, 'q', NULL, NULL, NULL, '9820460350', NULL, NULL, 3, 3, '2021-04-17 09:28:06', NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (4, NULL, 'coklah', 'perempuan', 'banyuwangi', '2021-04-09', '901247874124', '2019', 'verrnayb@gmail.com', 6, 3, '2021-04-19 15:17:36', NULL, NULL, NULL, NULL, 0, '2021-04-19 08:17:36', '2021-04-19 08:17:36'),
 (5, NULL, 'coklah', 'laki-laki', 'banyuwangi', NULL, '222222', '2018', 'm@gmail.com', 7, 2, '2021-04-19 15:19:29', NULL, NULL, NULL, 3, 0, '2021-04-19 08:19:29', '2021-04-19 08:19:29'),
-(6, NULL, 'aku bagus', 'perempuan', 'banyuwangi', '2021-04-01', '3123124124', '2020', 'm@gmail.com', 8, 3, '2021-04-19 16:01:53', NULL, NULL, NULL, NULL, 0, '2021-04-19 09:00:06', '2021-04-19 09:00:06');
+(6, NULL, 'aku bagus', 'perempuan', 'banyuwangi', '2021-04-01', '3123124124', '2020', 'm@gmail.com', 8, 3, '2021-04-19 16:01:53', NULL, NULL, NULL, NULL, 0, '2021-04-19 09:00:06', '2021-04-19 09:00:06'),
+(7, NULL, '2213123213', 'laki-laki', 'wqe', '2021-05-11', 'bb', '2021', 'v@gmail.com', 9, 3, '2021-05-07 08:59:57', NULL, NULL, NULL, NULL, 0, '2021-05-07 12:59:57', '2021-05-07 12:59:57');
 
 --
 -- Indexes for dumped tables
@@ -1530,7 +1537,7 @@ ALTER TABLE `jurnal_gurus`
 -- AUTO_INCREMENT for table `kelas`
 --
 ALTER TABLE `kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `keterampilan_kompetensi_dasars`
@@ -1548,7 +1555,7 @@ ALTER TABLE `kompetensi_dasars`
 -- AUTO_INCREMENT for table `master_jadwal_pelajarans`
 --
 ALTER TABLE `master_jadwal_pelajarans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `master_jurusans`
@@ -1704,7 +1711,7 @@ ALTER TABLE `setting_semesters`
 -- AUTO_INCREMENT for table `tahun_akademiks`
 --
 ALTER TABLE `tahun_akademiks`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `tugas_siswas`
@@ -1728,13 +1735,13 @@ ALTER TABLE `tugas_siswa_pengetahuans`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

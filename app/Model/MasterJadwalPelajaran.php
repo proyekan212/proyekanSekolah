@@ -13,6 +13,7 @@ class MasterJadwalPelajaran extends Model
         'kelas_id',
         'mapel_id',
         'kkm',
+        'semester_id',
         'user_id',
         'created_at',
         'updated_at'
