@@ -15,8 +15,7 @@
 
 <div class="alert alert-primary " role="alert">
   <h4 class="alert-heading">Info!</h4>
-  <p>Jurnal oleh guru mata pelajaran dibuat untuk seluruh peserta didik yang mengikuti mata pelajarannya, setiap kejadian terhadap siswa di dalam kelas mata pelajaran yang Anda ampu dapat dicatat dalam jurnal guru agar dapat dimonitor Wali Kelas dan Guru BK</p>
-</div>
+ </div>
 
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
@@ -26,7 +25,7 @@
           <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Sinkron Siswa</button>
-            <button type="button" class="btn btn-outline-danger" onclick="showSwal('passing-parameter-execute-cancel')">Cetak Excel</button>
+         
           </div>
         </div>
         <div class="table-responsive">

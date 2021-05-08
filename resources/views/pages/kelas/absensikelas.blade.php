@@ -22,7 +22,6 @@
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Absensi Kelas MIPA X-MIPA-1_MIPA Biologi</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success">Rekap Konfirmasi Kehadiran Kelas Siswa</button>
                         <a href="{{url('rekap_absen_excel')}}">
                 
                      

@@ -44,7 +44,7 @@
                 <th>TTL</th>
                 <th>KELAS</th>
                 <th>STATUS</th>
-                <th>TERAKHIR AKTIF</th>
+                <!-- <th>TERAKHIR AKTIF</th> -->
               </tr>
             </thead>
             <tbody>
@@ -70,7 +70,7 @@
                   @endif
                 </td>
 
-                <td></td>
+                <!-- <td></td> -->
 
               </tr>
               @endforeach
