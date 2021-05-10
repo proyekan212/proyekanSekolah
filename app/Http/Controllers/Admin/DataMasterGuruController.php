@@ -124,7 +124,7 @@ class DataMasterGuruController extends Controller
             'role_id' => 2,
         ]);
 
-        return redirect('Data_Master_Guru');
+        return redirect('dashboard');
     }
 
     /**

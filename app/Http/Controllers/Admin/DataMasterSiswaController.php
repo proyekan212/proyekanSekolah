@@ -114,7 +114,7 @@ class DataMasterSiswaController extends Controller
            
         ]);
 
-        return redirect('Data_Master_Siswa');
+        return redirect('dashboard');
     }
 
     /**
