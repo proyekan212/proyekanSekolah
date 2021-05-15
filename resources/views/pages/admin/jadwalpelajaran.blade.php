@@ -33,9 +33,13 @@
               <thead>
                 <tr>
                   <th>No</th>
-                  <th>Nama Pelajaran</th>
+                  <th>Kelas</th>
                   <th>Jurusan</th>
-                  <th>KKM</th>
+                  <th>Tahun Akademik</th>
+                  <th>
+                    Jadwal Mapel
+                  </th>
+                  <!-- <th>KKM</th> -->
                   <!-- <th>Kelas</th>
                   <th>Mata Pelajaran</th>
                   <th>KKM</th> -->
@@ -45,11 +49,23 @@
                 @foreach($datas as $key => $row) 
                   <tr>
                     <td>
-                      {{$key+1}}
+                        {{$key+1}}
                     </td>
-                    <td>{{$row->nama_mapel}}</td>            
-                    <td>{{$row->jurusan->jurusan}}</td>                  
-                    <td>{{$row->kkm->kkm}}</td>                   
+                    <td>
+                     {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
+                    </td>  
+                    
+                    <td>
+                      {{$row->master_kelas->rombel->jurusan->jurusan}} 
+                    </td>     
+                    <td>
+                      {{$row->tahun_akademik->tahun_akademik}}
+                    </td> 
+                    <td>
+                      <button data-toggle="modal" data-target="#lihatMapel{{$row->id}}" class="px-4 bg-blue-400 py-2 rounded-2xl text-white text-xs capitalize font-semibold ">
+                        lihat mapel
+                      </button>
+                    </td>      
                   </tr>
                 @endforeach
               </tbody>
@@ -60,6 +76,68 @@
   </div>
 </div>
  
+
+ @foreach($datas as $key => $row)
+ <div class="modal fade" id="lihatMapel{{$row->id}}" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title capitalize" id="exampleModalLabel">Mapel Kelas {{$row->master_kelas->kode_kelas->kode}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+     
+     <div class="modal-body">
+        <div class="table-responsive">
+          <table class="table
+          ">
+            @if($row->jadwal_pelajaran->count() > 0)
+            <thead>
+              <tr>
+                <th>
+                  no
+                </th>
+                  <th>
+                  mapel
+                </th>
+                <th>
+                  guru
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              @foreach($row->jadwal_pelajaran as $key => $jadwal)
+                <tr>
+                  <td>
+                    {{$key+1}}
+                  </td>
+                  <td>
+                    {{$jadwal->master_mapel->nama_mapel}}
+                  </td>
+
+                  <td>
+                    @if($jadwal->user->user_detail)
+                      {{$jadwal->user->user_detail->name}}
+                    @else
+                      No name
+                    @endif
+                  </td>
+                </tr>
+              @endforeach
+            </tbody>
+            @else
+              belum ada jadwal
+            @endif
+          </table>
+        </div>
+     </div>
+    
+    </div>
+  </div>
+</div>
+ @endforeach
+
 <div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
