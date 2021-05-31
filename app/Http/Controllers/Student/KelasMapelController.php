@@ -7,7 +7,6 @@ use App\Model\MasterJadwalPelajaran;
 use Illuminate\Http\Request;
 use App\Model\Absen;
 use App\Model\UserDetail;
-
 class KelasMapelController extends Controller
 {
     /**
@@ -27,8 +26,11 @@ class KelasMapelController extends Controller
             ['hapus', '=', 0],
             ['id', '=', $request->session()->get('kelas_mapel')]
         ])->first();
+        // dd($request->session()->get('kelas_mapel'));
+        
         return view('pages.student.kelas_mapel', [
             'kelas_mapel' => $kelasMapel
+
         ]);
     }
 

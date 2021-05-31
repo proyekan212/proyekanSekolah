@@ -15,12 +15,14 @@
         
 
 
-      @foreach ($menu as $menu)
+      
+     
+        @foreach ($menu as $menu)
       <?php 
         $parent_menu =  '';
         $sub_menu = '';
       ?>
-        
+       @if($data_auth->role_id==2)
           @if ($menu->menu->status == 2 ) 
             
                 <?php 
@@ -43,7 +45,18 @@
                 </li>
         
           @endif
-      @endforeach
+  
+   
+          @elseif($data_auth->role_id==3)
+       
+           <li class="nav-item {{ active_class(['/materi_kelas_student']) }}">
+                  <a href="{{ url('materi_kelas_student') }}" class="nav-link">
+                    <span class="link-title">Materi / Bahan Ajar</span>
+                  </a>
+                </li>
+            @endif
+             @endforeach
+
     </ul>
   </div>
 </nav>

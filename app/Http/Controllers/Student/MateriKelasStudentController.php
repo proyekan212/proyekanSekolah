@@ -13,13 +13,18 @@ class MateriKelasStudentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         
-        $materi = MateriBahanBelajar::get();
+       
+        $materi = MateriBahanBelajar::where([
+            ['hapus', '=', '0'],
+            ['kelas_id', '=', $request->session()->get('kelas_id')]
+        ])->get();
 
         return view('pages.student.materi_kelas', [
-            'materi' => $materi
+            'materi' => $materi,
+            'kelas_mapel' => $request->session()->get('kelas_mapel'),
         ]);
     }
 
