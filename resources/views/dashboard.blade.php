@@ -32,8 +32,7 @@
         </div>
       </div>
 
-      <div class="mt-4 w-full rounded-xl shadow-md bg-white p-4">
-        calendar
+      <div id="calendar">
       </div>
 
     </div>
@@ -73,9 +72,18 @@
       <form action="{{ url('kelas_mapel') }}" method="post" class="mt-2">
       @csrf
         <input type="text"  hidden name="kelas_mapel_id" value="{{$row->id}}">
+        
+        @if($daftarKelas->block_from_mapel($row->id) == null) 
         <button type="submit" class="py-1 rounded-lg w-full bg-blue-400 text-white">
           Masuk
         </button>
+        @else
+        <button type="button" disabled class="py-1 rounded-lg w-full bg-red-400 text-white">
+          Terbanned
+        </button>
+
+        @endif
+
       </form>
      
     
@@ -206,7 +214,9 @@
       @endforeach
     </div>
 </div>
-
+<script>
+$('#calendar').pignoseCalendar();
+</script>
 <style lang="css">
   .mapel {
     transition: all;

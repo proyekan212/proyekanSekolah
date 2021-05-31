@@ -25,11 +25,71 @@
             <label class="col-form-label">Setting Pertemuan</label>
           </div>
           
-          <div class="col-lg-8">
+            <div class="col-lg-8">
               <input type="number" required value="{{$data->pertemuan}}"  placeholder="" name="pertemuan" class="form-control">  
             </div>
             
+        </div>
+
+        <div class="form-group row">
+          <div class="col-lg-3">
+            <label class="col-form-label">Block Siswa</label>
           </div>
+          
+            <div class="col-lg-8">
+              <div  class="overflow-y-auto">
+                <table class="table table-striped table-bordered">
+                  <tr class="text-green-600">
+                    <th>
+                      Block
+                    </th>
+                    <th>
+                    Nama Siswa
+                    </th>
+                  </tr>
+                  @foreach($siswa as $index => $sw)
+                  @if($sw->blocklist->count() == 0)
+                  <tr>
+                    <td>
+                      <input type="checkbox" value="{{$sw->id}}" name="siswa[]">
+                    </td>
+                    <td class="text-green-500">
+                      {{$sw->user_detail->name}}
+                    </td>
+                  </tr>
+                  @endif
+                  @endforeach
+                </table>
+
+                <table class="md:mt-8 mt-4">
+                <table class="table table-striped table-bordered">
+                  <tr class="text-red-600">
+                    <th>
+                      Ublock
+                    </th>
+                    <th>
+                    Nama Siswa
+                    </th>
+                  </tr>
+                  @foreach($siswa as $index => $sw)
+                  
+                    @if($sw->blocklist->first() != null)
+                    <tr>
+                      <td>
+                        <input type="checkbox" value="{{$sw->blocklist->first()->id}}" name="unblock_siswa[]">
+                      </td>
+                      <td class="text-red-500">
+                        {{$sw->user_detail->name}}
+                      </td>
+                   </tr>
+                    @endif
+                  @endforeach
+                </table>
+                </table>
+              </div> 
+            </div>
+            
+        </div>
           <button type="submit" class="px-4 rounded-xl py-2 text-white bg-blue-400 text-xs font-semibold">
            Change Settings
           </button>

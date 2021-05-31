@@ -20,3 +20,10 @@
 //     'penilaian' : Penilaian
 //   }
 // });
+
+
+import $ from 'jquery';
+window.$ = window.jQuery = $;
+import moment from 'moment';
+
+import 'jquery-ui/ui/widgets/datepicker.js';

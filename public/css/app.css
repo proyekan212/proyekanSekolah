@@ -1,3 +1,5 @@
+@import url('tailwind.css');
+
 @import url(https://fonts.googleapis.com/css?family=Overpass:300,400,600,700,800,900&display=swap);@-webkit-keyframes flash {
   0% {
     opacity: 1;

@@ -6,21 +6,26 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\Model\DaftarKelas;
+use App\Model\MasterJadwalPelajaran;
 use DB;
 class AbsensiKelasController extends BaseController
 {
     public function index(Request $request){
-
-        $daftarKelas = DaftarKelas::with(['kelas.jadwal_pelajaran.absen', 'user_detail'])
+        // dd($request->session()->get('kelas_mapel'));
+        $daftarKelas = DaftarKelas::with(['kelas.jadwal_pelajaran' => function($q) use ($request) {
+            $q->where('id', '=',  $request->session()->get('kelas_mapel'));
+        },'user_detail', 'absen'=> function($q) use($request) {
+            $q->where('kelas_mapel_id', '=', $request->session()->get('kelas_mapel'));
+        }])
         ->whereHas('kelas.jadwal_pelajaran', function($query) use($request) {
             $query->where('id', '=', $request->session()->get('kelas_mapel'));
         })
         ->where('kelas_id', $request->session()->get('kelas_id'))->get();
-        
-
-       
+        // dd($daftarKelas);
+        $kelas_mapel = MasterJadwalPelajaran::find($request->session()->get('kelas_mapel'));
         return view('pages.kelas.absensikelas', [
-            'daftar_kelas' => $daftarKelas
+            'daftar_kelas' => $daftarKelas,
+            'kelas_mapel' => $kelas_mapel
         ]);
         
     }

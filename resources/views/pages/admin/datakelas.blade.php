@@ -241,7 +241,7 @@
       <div class="modal-body">
       <form action=" {{ url('/data_kelas/store_siswa')}} " method="post">
 
-        <input type="text" hidden name="kelas_id" value="{{$row->id}}">
+        <input type="text" id="kelas_id" hidden name="kelas_id" value="">
       @csrf
       <div class="table-responsive">
           <table id="table-tambah-siswa" class="table">
@@ -282,6 +282,8 @@
   });
 
   function setKelas(kelas_id, kode_kelas) {
+    document.querySelector('#kelas_id').value = kelas_id
+    console.log(document.querySelector('#kelas_id'));
     const data = {
       'kode_kelas' : kode_kelas
     };

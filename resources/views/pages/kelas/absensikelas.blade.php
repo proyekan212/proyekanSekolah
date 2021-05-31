@@ -58,19 +58,23 @@
                       <td>
                         {{$row->user_detail->name}}
                       </td>
-                      @foreach($row->kelas->jadwal_pelajaran[0]->absen as $absen) 
-                       @if($absen->user_detail_id == $row->user_id)
-                         <td class="text-xs text-green-600 capitalize">  
-                            {{$absen->status}}
-                        </td>
+                      @for($pt = 1; $pt <= $kelas_mapel->pertemuan; $pt++) 
+                        <td>
+                        <!-- {{$row->kelas->jadwal_pelajaran}} -->
+                        <!-- {{$row->kelas->jadwal_pelajaran->first()->id}} -->
+                        <!-- {{$row->absen_by_pertemuan($row->kelas->jadwal_pelajaran->first()->id,$pt)}} -->
+                        @if($row->absen_by_pertemuan($pt))
+                          <span class="text-green-400">
+                            Hadir
+                          </span>
+                        @else
+                          <span>
+                            -
+                          </span>
+                        @endif
 
-                      @else 
-                         <td>  
-                           -
                         </td>
-
-                      @endif
-                      @endforeach
+                      @endfor
                     </tr>
                   @endforeach
             </tbody>

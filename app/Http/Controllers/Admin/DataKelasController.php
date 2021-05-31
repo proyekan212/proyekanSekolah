@@ -80,7 +80,6 @@ class DataKelasController extends Controller
         $data = UserDetail::where([
             ['role_id', '=', 3],
             ])
-            ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
             ->with(['daftar_kelas.kelas' => function($q) use($id) {
                 $q->where([
 
@@ -89,6 +88,12 @@ class DataKelasController extends Controller
                 ]);
         
             },])
+            // ->whereHas('daftar_kelas', function($q) use($id) {
+            //     $q->where('kelas_id', '!=', $id);
+            // })
+            // ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
+            
+            
             
             ->get();
 
