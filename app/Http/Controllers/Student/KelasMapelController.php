@@ -43,14 +43,14 @@ class KelasMapelController extends Controller
             ['hapus', '=', 0],
             ['id', '=', $request->session()->get('kelas_mapel')]
         ])->first();
-<<<<<<< HEAD
+// <<<<<<< HEAD
         // dd($request->session()->get('kelas_mapel'));
         
-        return view('pages.student.kelas_mapel', [
-            'kelas_mapel' => $kelasMapel
+//         return view('pages.student.kelas_mapel', [
+//             'kelas_mapel' => $kelasMapel
 
-=======
-        // dd($siswa_kelas);
+// =======
+//         // dd($siswa_kelas);
         $pertemuan = Absen::where([
             ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')],
             ['siswa_id', '=', $siswa_kelas->id]
@@ -60,7 +60,7 @@ class KelasMapelController extends Controller
         return view('pages.student.kelas_mapel', [
             'kelas_mapel' => $kelasMapel,
             'pertemuan' => $pertemuan
->>>>>>> c4e4f87815e47ce1ce18a79cc9008fc0b97f4750
+// >>>>>>> c4e4f87815e47ce1ce18a79cc9008fc0b97f4750
         ]);
     }
 

@@ -19,8 +19,9 @@ class MateriKelasStudentController extends Controller
        
         $materi = MateriBahanBelajar::where([
             ['hapus', '=', '0'],
-            ['kelas_id', '=', $request->session()->get('kelas_id')]
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
         ])->get();
+        // dd($request->session()->get('kelas_mapel'));
 
         return view('pages.student.materi_kelas', [
             'materi' => $materi,

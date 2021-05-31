@@ -9,7 +9,7 @@
     Tahun Ajaran {{$setting_semester->tahun_akademik->tahun_akademik}}
     </span>
     <span class="text-gray-800 text-sm font-semibold">
-      Kelas XI IPA
+      
     </span>
 
     
@@ -22,11 +22,11 @@
         </span>
         <div class="grid md:flex md:flex-col">
           <span class="text-sm capitalize font-semibold text-red-400">
-            Kamu belum absen
+            Nama  :  {{$user->user_detail->name}}
           </span>
-          <form action="">
+          <form action="{{ url('/edit_profile', $user_detail->user_id)}}">
             <button class=" text-xs py-2  md:py-1 md:text-sm w-full  bg-red-400 rounded-lg capitalize font-semibold  text-white">
-              absen 
+               Edit Profile 
             </button>
           </form>
         </div>
@@ -42,15 +42,7 @@
       </div> 
     </div>
 
-    <div class="col-span-8">
-      <div class="bg-white shadow-md p-4 rounded-xl">
-       <a href="{{ url('/edit_profile', $user_detail->user_id)}}">
-            <button class=" text-xs py-2  md:py-1 md:text-sm w-full  bg-red-400 rounded-lg capitalize font-semibold  text-white">
-              Edit Profile 
-            </button>
-      </a>
-      </div> 
-    </div>
+   
   </div>
 <div class="w-full mt-8">
   <h1 class="text-lg mb-6  text-gray-800 font-bold ">

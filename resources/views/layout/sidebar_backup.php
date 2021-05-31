@@ -16,15 +16,15 @@
 
 
       
-        
+     
         @foreach ($menu as $menu)
       <?php 
         $parent_menu =  '';
         $sub_menu = '';
       ?>
-       @if($menu->menu_id == 0 )
-        @else 
-       @if($data_auth->role_id!=3)
+      @if($menu->menu->status == null)
+      
+       @if($data_auth->role_id==2)
           @if ($menu->menu->status == 2 ) 
             
                 <?php 
@@ -48,7 +48,6 @@
         
           @endif
             @endif
-          @endif
 
              @endforeach
   

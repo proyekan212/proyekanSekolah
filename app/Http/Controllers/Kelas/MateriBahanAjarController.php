@@ -16,7 +16,7 @@ class MateriBahanAjarController extends BaseController
             ['hapus', '=', '0'],
             ['kelas_id', '=', $request->session()->get('kelas_id')]
         ])->get();
-        // dd(count($materi));
+        // dd(count($request->session()->get('kelas_id')));
         return view('pages.kelas.teacher.materi', [
             'materi' => $materi,
             'kelas_mapel' => $request->session()->get('kelas_mapel'),
