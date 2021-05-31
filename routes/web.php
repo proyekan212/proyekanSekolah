@@ -142,6 +142,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     // Student
     Route::resource('/kelas_mapel', 'Student\KelasMapelController');
+    Route::post('/kelas_mapel/absens', 'Student\KelasMapelController@absen');
     Route::resource('/materi_kelas_student', 'Student\MateriKelasStudentController');
     //tugas siswa
     Route::resource('tugas_siswa_keterampilan', 'Kelas\TugasSiswaKeterampilanController');

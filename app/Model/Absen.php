@@ -11,7 +11,8 @@ class Absen extends Model
 
     	'id',
     	'kelas_mapel_id',
-    	'user_detail_id',
+    	'pertemuan',
+		'siswa_id',
     	'absen_at',
     	'status'
     ];
@@ -26,4 +27,8 @@ class Absen extends Model
     	return $this->belongsTo('App\Model\UserDetail', 'user_detail_id', 'id');
 
     }
+
+	public function absen_by_pertemuan($pertemuan) {
+		return $this->pertemuan === $pertemuan;
+	}
 }

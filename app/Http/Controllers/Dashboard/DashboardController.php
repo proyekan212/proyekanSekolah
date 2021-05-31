@@ -36,7 +36,7 @@ class DashboardController extends Controller
         // dd($user_detail);
         $daftarKelas = DaftarKelas::with(['kelas' => function($q) {
 
-        }, 'user_detail'])
+        }, 'user_detail', 'blocklist'])
         ->where('user_id', $user->user_detail->id )
         ->whereHas('kelas.tahun_akademik', function($q) use($setting_semester) {
             $q->where('id', $setting_semester->tahun_akademik->id);

@@ -17,6 +17,7 @@ class CreateDaftarKelasTable extends Migration
             $table->id();
             $table->integer('user_id');
             $table->integer('kelas_id');
+            // $table->boolean('block_from_mapel')->default(false);
             $table->integer('rombel_id');
             $table->timestamps();
         });

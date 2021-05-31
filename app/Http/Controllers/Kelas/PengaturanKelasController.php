@@ -3,8 +3,12 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
+use App\Model\BlockKelasMapel;
+use App\Model\DaftarKelas;
 use App\Model\MasterJadwalPelajaran;
+use App\Model\UserDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class PengaturanKelasController extends Controller
 {
@@ -15,9 +19,21 @@ class PengaturanKelasController extends Controller
      */
     public function index(Request $request)
     {
-       $data = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+        $siswa = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))
+        ->whereHas('kelas.jadwal_pelajaran', function($q) use ($request) {
+            $q->where('id','=', $request->session()->get('kelas_mapel'));
+        })
+        ->with(['blocklist'])
+        ->get();
+
+        // dd($siswa);
+
+        // dd($siswa);
+        $data = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+       
         return view('pages.kelas.pengaturan_kelas',[
-            'data' => $data
+            'data' => $data,
+            'siswa' =>$siswa
         ]);
     }
 
@@ -39,7 +55,7 @@ class PengaturanKelasController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        
     }
 
     /**
@@ -53,7 +69,7 @@ class PengaturanKelasController extends Controller
         //
     }
 
-    /**
+    /**s
      * Show the form for editing the specified resource.
      *
      * @param  int  $id
@@ -72,7 +88,25 @@ class PengaturanKelasController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
-    {
+    {   
+        
+        $siswa = $request->input('siswa');
+        $unblock_siswa = $request->input('unblock_siswa');
+
+        if($siswa){
+           foreach($siswa  as $sw) {
+                BlockKelasMapel::create([
+                    'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+                    'daftar_kelas_id' => $sw
+                ]);
+           }
+        }
+
+        if($unblock_siswa) {
+            foreach($unblock_siswa as $sw) {
+            BlockKelasMapel::where('id', $sw)->delete();
+            }
+        }
         MasterJadwalPelajaran::where('id', $id)->update([
             'kkm' => $request->input('kkm'),
             'pertemuan' => $request->input('pertemuan')
@@ -90,5 +124,10 @@ class PengaturanKelasController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function absen(){
+
+        dd("teest");
     }
 }

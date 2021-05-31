@@ -15,6 +15,7 @@ class MasterJadwalPelajaran extends Model
         'kkm',
         'semester_id',
         'user_id',
+        'pertemuan',
         'created_at',
         'updated_at'
     ];
@@ -23,6 +24,9 @@ class MasterJadwalPelajaran extends Model
         return $this->belongsTo('App\Model\Kelas', 'kelas_id', 'id');
     }
 
+    public function block() {
+        return $this->hasMany(BlockKelasMapel::class, 'kelas_mapel_id', 'id');
+    }
     public function master_mapel() {
         return $this->belongsTo('App\Model\MasterMapel', 'mapel_id', 'id');
     }
