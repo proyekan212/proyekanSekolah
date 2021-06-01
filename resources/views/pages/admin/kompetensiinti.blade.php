@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Daftar Kompetensi Inti</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Kompetensi Inti</button>
+            <!--<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Kompetensi Inti</button>-->
           </div>
         </div>
         <div class="table-responsive">
@@ -96,7 +96,27 @@
   </div>
 </div>
 @endsection
+<script type="text/javascript">
+  function editData(id){
+    console.log(id);
+  }
+  function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+        event.submit();
 
+        }
+    })
+  }
+</script>
+@endsection
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>

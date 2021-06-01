@@ -17,7 +17,7 @@ class KompetensiDasarController extends Controller
      */
     public function index()
     {   
-        $kompetensi_dasar = KompetensiDasar::get();
+        $kompetensi_dasar = KompetensiDasar::where('hapus', 0)->get();
         $semester = MasterSemester::get();
         $kompetensi_inti = MasterKompetensiInti::get();
         return view('pages.admin.kompetensidasar', [
@@ -113,6 +113,11 @@ class KompetensiDasarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        KompetensiDasar::where('id', $id)->update([
+            'hapus'=> 1
+        ]);
+        
+        return redirect('Kompetensi_Dasar');
+    
     }
 }

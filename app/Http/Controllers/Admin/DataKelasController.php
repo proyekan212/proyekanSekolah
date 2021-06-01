@@ -157,7 +157,11 @@ class DataKelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+         Kelas::where('id', $id)->update([
+            'hapus'=> 1
+        ]);
+        
+        return redirect('data_kelas');
     }
 
     public function storeSiswaKelas(Request $request) {
