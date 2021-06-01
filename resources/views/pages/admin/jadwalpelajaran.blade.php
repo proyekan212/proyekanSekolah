@@ -25,7 +25,7 @@
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Daftar Mata Pelajaran</h6>
           <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Jadwal Pelajaran</button>
+           <!--  <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Jadwal Pelajaran</button> -->
           </div>
         </div>
         <div class="table-responsive">
