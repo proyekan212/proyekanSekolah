@@ -80,7 +80,9 @@
        </div>
 
       <div class="modal-footer">
+            <a href="{{url('dashboard')}}">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
+        </a>
         <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 

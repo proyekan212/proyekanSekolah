@@ -26,12 +26,13 @@ class KejadianJurnalController extends Controller
         // dd($request->session()->get('kelas_id'));
         $datas = MasterKejadianJurnal::where([
             ['hapus', '=', '0'],
-            ['kelas_mapel_id', '=', $request->session()->get('kelas_id')]
+            ['kelas_mapel_id', '=', $request->session()->get('kelas_mapel')]
         ])->get();
         return view('pages.kelas.kejadianjurnal', [
             "daftarKelas"=> $daftarKelas,
             "datas" => $datas
 ]);
+
         // $siswa = UserDetail::with(['role' => function($query) {
         //     $query->where('name_role', '=', 'siswa');
         // }])->get();

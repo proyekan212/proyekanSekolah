@@ -66,7 +66,7 @@ class ExportExcelController extends Controller
         // dd($export);
         return Excel::download( $export, 'Absensi Kelas'.' Tanggal '.$tanggal.' '.'.xlsx');  
     }
- 
+  
     public function create()
     {
         //

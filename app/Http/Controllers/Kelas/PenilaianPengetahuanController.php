@@ -28,7 +28,10 @@ class PenilaianPengetahuanController extends Controller
             $q->where('id', $request->session()->get('kelas_mapel'));
         }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
         ->get();
-        $datas = MasterPenilaianPengetahuan::where('kelas_mapel_id', $request->session()->get('kelas_mapel'))
+        $datas = MasterPenilaianPengetahuan::where([
+            ['hapus', '=', '0'],
+            ['kelas_mapel_id', $request->session()->get('kelas_mapel')]
+        ])
         ->get();
 
         $skema = MasterSkemaKeterampilan::get();

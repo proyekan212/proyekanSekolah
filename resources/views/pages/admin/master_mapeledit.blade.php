@@ -65,7 +65,9 @@
       
     </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
+              <a href="{{url('dashboard')}}">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
+        </a>
           <button type="submit" class="btn btn-primary">add kelas</button>
         </div>
 </form>

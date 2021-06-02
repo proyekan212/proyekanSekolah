@@ -1,8 +1,8 @@
 @extends('layout.master')
 
 @push('plugin-styles')
-  <link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
-  <link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/datatables-net/dataTables.bootstrap4.css') }}" rel="stylesheet" />
+<link href="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.css') }}" rel="stylesheet" />
 @endpush
 
 @section('content')
@@ -26,62 +26,73 @@
           <h6 class="card-title mb-0">Daftar Siswa</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
+            <form method="post" action="{{url('daftar_siswa_kelas_excel_import')}}" enctype="multipart/form-data">
+              @csrf
+              <div class="file-upload-wrapper">
+                <input type="file"  name="file" required="required" id="input-file-now" class="file-upload" />
+              </div>
+              <button type="submit" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+        <span class="material-icons"> 
+                            send  
+                          </span>
+
+            </form>
           </div>
         </div>
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>
               <tr>
-                 <th>No</th>
-                  <th>nisn</th>
-                  <th>nama</th>
-                  <th>tempat lahir</th>
-                  <th>tanggal lahir</th>
-                  <th>email</th>
-                  <th>jenis kelamin</th>
-                  <th>tahun masuk</th>
-<th></th>
+               <th>No</th>
+               <th>nisn</th>
+               <th>nama</th>
+               <th>tempat lahir</th>
+               <th>tanggal lahir</th>
+               <th>email</th>
+               <th>jenis kelamin</th>
+               <th>tahun masuk</th>
+               <th></th>
 
-              </tr>
-            </thead>
-            <tbody>
+             </tr>
+           </thead>
+           <tbody>
              @foreach($siswa as $key=> $siswa)
-                <tr>
-                    <td>{{$key+1}}</td>
-                    <td>{{$siswa->nisn_or_nip}}</td>
-                    <td>{{$siswa->name}}</td>
-                    <td>{{$siswa->tempat_lahir}}</td>
-                    <td>{{$siswa->tanggal_lahir}}</td>
-                    <td>{{$siswa->email}}</td>
-                    <td>{{$siswa->jenis_kelamin}}</td>
-                    <td>{{$siswa->tahun_masuk}}</td>
-                    <td class="flex ">
-                        <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
-                          <span class="material-icons">
-                            <a href="{{ url('/Data_Master_Siswa', $siswa->id)}}">
-                            edit
-                            </a>
-                          </span>
-                        </button>
+             <tr>
+              <td>{{$key+1}}</td>
+              <td>{{$siswa->nisn_or_nip}}</td>
+              <td>{{$siswa->name}}</td>
+              <td>{{$siswa->tempat_lahir}}</td>
+              <td>{{$siswa->tanggal_lahir}}</td>
+              <td>{{$siswa->email}}</td>
+              <td>{{$siswa->jenis_kelamin}}</td>
+              <td>{{$siswa->tahun_masuk}}</td>
+              <td class="flex ">
+                <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
+                  <span class="material-icons">
+                    <a href="{{ url('/Data_Master_Siswa', $siswa->id)}}">
+                      edit
+                    </a>
+                  </span>
+                </button>
                 
-                      <form method="post" action="{{ url('Data_Master_Siswa', $siswa->id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
-                        @csrf
-                        {{ method_field('DELETE') }}
-                        <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
-                          <span class="material-icons"> 
-                            delete_forever  
-                          </span>
-                        </button>
-                      </form>
-                    </td>
-                </tr>
-             @endforeach
-            </tbody>
-          </table>
-        </div>
+                <form method="post" action="{{ url('Data_Master_Siswa', $siswa->id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
+                  @csrf
+                  {{ method_field('DELETE') }}
+                  <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">
+                    <span class="material-icons"> 
+                      delete_forever  
+                    </span>
+                  </button>
+                </form>
+              </td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+</div>
 </div>
 
 <div class="modal fade" id="TambahData" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
@@ -95,76 +106,76 @@
       </div>
 
       <form action="{{ url('Data_Master_Siswa')}}" method="post">
-      @csrf
-      
-      <div class="modal-body">
-      <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Nisn</label>
+        @csrf
+        
+        <div class="modal-body">
+          <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Nisn</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="text" class="form-control" name="nisn">
+           </div>
          </div>
-         <div class="col-lg-8">
-           <input type="text" class="form-control" name="nisn">
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Nama</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="text" class="form-control" name="nama">
+           </div>
          </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Nama</label>
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Tempat Lahir</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="text" class="form-control" name="tempat_lahir">
+           </div>
          </div>
-         <div class="col-lg-8">
-           <input type="text" class="form-control" name="nama">
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Tanggal Lahir</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="date" class="form-control" name="tanggal_lahir">
+           </div>
          </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Tempat Lahir</label>
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Email</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="email" class="form-control" name="email">
+           </div>
          </div>
-         <div class="col-lg-8">
-           <input type="text" class="form-control" name="tempat_lahir">
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Tanggal Lahir</label>
-         </div>
-         <div class="col-lg-8">
-           <input type="date" class="form-control" name="tanggal_lahir">
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Email</label>
-         </div>
-         <div class="col-lg-8">
-           <input type="email" class="form-control" name="email">
-         </div>
-       </div>
-       <div class="form-group row">
-         <div class="col-lg-3">
-           <label class="col-form-label">Jenis Kelamin</label>
-         </div>
-         <div class="col-lg-8">
-          <select name="jenis_kelamin" class="form-control">
-            <option value="laki-laki">laki-laki</option>
-            <option value="perempuan">perempuan</option>
-          </select>
-         </div>
-       </div>
-       <div class="form-group row">
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Jenis Kelamin</label>
+           </div>
+           <div class="col-lg-8">
+            <select name="jenis_kelamin" class="form-control">
+              <option value="laki-laki">laki-laki</option>
+              <option value="perempuan">perempuan</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group row">
          <div class="col-lg-3">
            <label class="col-form-label">Tahun Masuk</label>
          </div>
          <div class="col-lg-8">
           <input type="text" name="tahun_masuk" class="form-control">
-         </div>
-       </div>
+        </div>
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
         <button type="submit" class="btn btn-primary">Tambah</button>
       </div>
 
-      </form>
-    </div>
+    </form>
   </div>
+</div>
 </div>
 <script type="text/javascript">
   function editData(id){
@@ -179,23 +190,23 @@
       cancelButtonColor: '#d33',
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-        if(result.value) {
+      if(result.value) {
         event.submit();
 
-        }
+      }
     })
   }
 </script>
 @endsection
 
 @push('plugin-scripts')
-  <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
-  <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
-  <script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
+<script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
+<script src="{{ asset('assets/plugins/bootstrap-datepicker/bootstrap-datepicker.min.js') }}"></script>
 @endpush
 
 @push('custom-scripts')
-  <script src="{{ asset('assets/js/data-table.js') }}"></script>
-  <script src="{{ asset('assets/js/datepicker.js') }}"></script>
-  <script src="{{ asset('assets/js/timepicker.js') }}"></script>
+<script src="{{ asset('assets/js/data-table.js') }}"></script>
+<script src="{{ asset('assets/js/datepicker.js') }}"></script>
+<script src="{{ asset('assets/js/timepicker.js') }}"></script>
 @endpush
