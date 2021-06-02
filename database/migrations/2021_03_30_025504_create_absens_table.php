@@ -18,7 +18,7 @@ class CreateAbsensTable extends Migration
             $table->integer('kelas_mapel_id');
             $table->integer('siswa_id');
             $table->integer('pertemuan');
-            $table->string('status');
+            $table->string('status')->nullable(true);
             $table->timestamp('absen_at')->nullable(true);
             $table->timestamps();
         });

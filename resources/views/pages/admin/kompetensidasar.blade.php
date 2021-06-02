@@ -143,7 +143,26 @@
   </div>
 </div>
 @endsection
+<script type="text/javascript">
+  function editData(id){
+    console.log(id);
+  }
+  function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+        event.submit();
 
+        }
+    })
+  }
+</script>
 @push('plugin-scripts')
   <script src="{{ asset('assets/plugins/datatables-net/jquery.dataTables.js') }}"></script>
   <script src="{{ asset('assets/plugins/datatables-net-bs4/dataTables.bootstrap4.js') }}"></script>
