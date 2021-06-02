@@ -16,7 +16,7 @@
 
 <div class="bg-white rounded-lg shadow-sm p-4 md:p-6 lg:p-8 w-full">
   <div class="flex justify-end mb-4 md:mb-6 lg:mb-8">
-   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Rencana Pembelajaran</button>
+   <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Buat Materi Pembelajaran</button>
   </div>
  
   <div class="grid xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 gap-6">
@@ -90,7 +90,9 @@
                       style="font-size: 24px;"
                     
                     >
-                      <i class="fas fa-trash"> </i>
+                    <span class="material-icons" style="font-size: 30px;margin-top: 0.5em;"> 
+                            delete_forever  
+                          </span>
                     </a>
                 </form>
                 
