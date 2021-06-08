@@ -50,7 +50,7 @@
   </h1>
  
     @if($daftarKelas != null)
-    <div class="mt-4  grid  lg:grid-cols-4   gap-6">
+    <div class="mt-4  grid  lg:grid-cols-3  gap-6">
     @foreach($daftarKelas->kelas->jadwal_pelajaran as $row)
     
     <div class="w-full mt-4 hover:mt-0 hover:shadow-md mapel transition-all duration-300 cursor-pointer hover:mt-0 p-4 bg-white rounded-lg flex flex-col">
@@ -98,38 +98,83 @@
   
   
 @else
-@if(Auth::user()->id != '1')
-<div class="profile-page tx-13">
-  <div class="row">
-    <div class="col-12 grid-margin">
-      <div class="profile-header">
-        <div class="cover">
-          <div class="gray-shade"></div>
-          <figure>
-            <img src="{{ url('https://via.placeholder.com/1148x272') }}" class="img-fluid" alt="profile cover">
-          </figure>
-          <div class="cover-body d-flex justify-content-between align-items-center">
-            <div>
-              <img class="profile-pic" src="{{ url('https://via.placeholder.com/100x100') }}" alt="profile">
-              <span class="profile-name">Amiah Burton</span>
-            </div>
-            <div class="d-none d-md-block">
-             <a href="{{ url('/edit_profile', $user_detail->user_id)}}">
-              <button class="btn btn-primary btn-icon-text btn-edit-profile">
-                <i data-feather="eye" class="btn-icon-prepend"></i> Edit profile 
-              </button>
-            </a>
-            </div>
+  @if(Auth::user()->id != '1')
+  <!-- -->
+  <div class="grid bg-gray-100 rounded-xl grid-cols-1 md:p-6 p-4 md:grid-cols-3 md:gap-x-4 gap-y-4">
+    <div class="md:col-span-2">
+      <div class="w-full h-full relative flex flex-col md:justify-end">
+        <div class="flex items-center ">
+          <div class="bg-gray-400 rounded-full w-16 h-16">
+          </div>
+          <!-- <img src="wqw" class="rounded-full w-8 h-8" alt=""> -->
+          <div class="md:py-6 md:ml-4">
+            <p class="md:text-xl font-semibold text-sm capitalize">
+              {{$user_detail->name}}
+            </p>
+            <a href="{{ url('/edit_profile', $user_detail->user_id)}}" class="flex items-center md:py-3 py-1 md:px-4 px-3 bg-blue-500 text-white rounded-lg">
+              
+                <i data-feather="eye" class="btn-icon-prepend"></i> <span class="ml-2 ">
+                edit profile
+                </span> 
+
+            </a> 
           </div>
         </div>
-        <div class="header-links">
-          
-        </div>      </div>
+      </div>
     </div>
+    <div class="md:col-span-1 mt-4 md:mt-0">
+      <h4>
+        Create Kelas
+      </h4>
+      <div class="flex flex-col">
+      <form action="{{ url('dashboard')}}" method="post">
+        @csrf
+        <div class="py-2 flex flex-col">
+            <Label>Kelas</Label>
+            <select name="kelas"  id="kelas">
+              <option value="" selected disabled> -- </option>
+              @foreach($kelas as $row)
+                <option value="{{$row->id}}">
+                  {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}}
+                </option>
+              @endforeach
+            </select>
+          </div>
+          <div class="py-2 flex flex-col">
+            <Label>Jurusan</Label>
+            <select  name="jurusan" onchange="getMapels(event)" class="uppercase" id="">
+              <option selected disabled> -- </option>
+              @foreach($jurusan as $row)
+                <option value="{{$row->id}}" class="uppercase">
+                  {{$row->jurusan}}
+                </option>
+              @endforeach
+            </select>
+          </div>
+         
+          <div class="py-2 flex flex-col">
+            <Label>Mata Pelajaran</Label>
+            <select name="mapel" class="capitalize" id="mapel">
+              <option selected disabled value="">
+                --
+              </option>
+              <!-- <option value="">
+                Matematika
+              </option> -->
+            </select>
+          </div>
+        
+          <div class="md:mt-4 mt-2 flex justify-end">
+            <button class="bg-blue-500 rounded-xl text-white md:py-2 md:px-6 py-1 md:px-4">
+              Create
+            </button>
+          </div>
+        </form>
+      </div>
+    </div> 
   </div>
-</div>
-@else
-    @endif
+  @else
+  @endif
 <div id="kelas" class="md:p-6 w-full lg:p-8 p-4">
 @if(Auth::user()->id != '1')
 
@@ -138,76 +183,130 @@
     </h2>
     @else
     @endif
-    <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-4">
+    <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-3">
       @foreach($kelas as $row)
-       @if($row->jadwal_pelajaran->count() == 0) 
-            <div id="card" class="w-full bg-blue-50 md:p-6 p-4  rounded-md shadow-md">
-              <div id="card-content" class="flex flex-col items-center">
-                  <h3 class="capitalize text-blue-500 mb-1 uppercase md:mb-2 md:text-base text-sm">
-                  {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
-                  </h3>
-                  <p class="capitalize text-gray-400 mb-2 md:mb-4 lg:mb-6 ">
-                  tahun akademik {{$setting_semester->tahun_akademik->tahun_akademik}}
-                  </p>
-                  <div class="mb-2 md:mb-4 lg:mb-6">
-                    <table class="w-full text-gray-600">
-                      <tr>
-                        <td class="px-2 border-r-2 border-gray-500">Siswa: {{$row->daftar_kelas->count()}} </td>
-                        <td class="px-2 border-r-2 border-gray-500">Max KD: 7</td>
-                        <td class="px-2 "> KKM: 75  </td>
-                      </tr>
-                    </table>
-                  </div>
+       
+            <div class="card w-full md:p-6 p-4 transition-all duration-300 text-gray-600 bg-gray-200 rounded-xl hover:shadow-xl">
+              <div class="header uppercase text-center font-bold">
+                {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}}
+              </div>
+              <form action="{{ url('kelas')}}" method="post">
+                @csrf
 
-                  
-                
-            <form class="w-full" method="post" action="{{ url ('kelas')}}">
-              @csrf
-              <input type="text" hidden name="kelas_id" value="{{$row->id}}">
-              <button type="submit" class="w-full md:mt-4 rounded-xl font-semibold text-white hover:bg-green-400 transition-all duration-300 border-none outline-none bg-green-500 py-2 capitalize">
-                Buat Kelas
-              </button>
-            </form>
-            @else
-            @foreach($row->jadwal_pelajaran as $jadwal) 
-            <div id="card" class="w-full bg-blue-50 md:p-6 p-4  rounded-md shadow-md">
-              <div id="card-content" class="flex flex-col items-center">
-                  <h3 class=" text-blue-500 mb-1 uppercase md:mb-2 md:text-base text-sm">
-                  {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
-                  </h3>
-                  <p class="capitalize text-gray-400 mb-2 md:mb-4 lg:mb-6 ">
-                  tahun akademik {{$setting_semester->tahun_akademik->tahun_akademik}}
-                  </p>
-                  <div class="mb-2 md:mb-4 lg:mb-6">
-                    <table class="w-full text-gray-600">
-                      <tr>
-                        <td class="px-2 border-r-2 border-gray-500">Siswa: {{$row->daftar_kelas->count()}} </td>
-                        <td class="px-2 border-r-2 border-gray-500">Max KD: 7</td>
-                        <td class="px-2 "> KKM: 75  </td>
-                      </tr>
-                    </table>
-                  </div>
+                <input type="hidden" name="kelas_id" value="{{$row->id}}">
+              <div class="body md:mt-4 mt-3">
+                <div>
+                  <table class="text-xs text-xs-500 font-semibold">
+                    <tr>
+                      <td>
+                        Jumlah Siswa
+                      </td>
+                      <td>
+                        :
+                      </td>
+                      <td>
+                        {{$row->daftar_kelas->count()}}
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>
+                        Jumlah Kelas Mapel
+                      </td>
+                      <td>
+                        :
+                      </td>
+                      <td>
+                        {{$row->jadwal_pelajaran->count()}}
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+                <select class="mt-2 font-semibold md:mt-3 rounded-lg w-full px-2 py-2 " name="kelas_mapel" id="">
+                  @if($row->jadwal_pelajaran->count() == 0)
+                    <option selected value="" disabled>
+                      --
+                    </option>
+                  @else
+                  @foreach($row->jadwal_pelajaran as $mapel)
+                    <option value="{{$mapel->id}}">
+                      {{$mapel->master_mapel->nama_mapel}}
+                    </option>
+                  @endforeach
 
-                  
-                
-            <form class="w-full" method="get" action="{{ url ('kelas')}}">
-              @csrf
-              <input type="text" hidden name="kelas_id" value="{{$row->id}}">
-              <input type="text" hidden name="kelas_mapel" value="{{$jadwal->id}}">
-              <button type="submit" class="w-full md:mt-4 rounded-xl font-semibold text-white hover:bg-blue-400 transition-all duration-300 border-none outline-none bg-blue-500 py-2 capitalize">
-                masuk
-              </button>
-            </form> 
-            @endforeach
-            @endif
-            
-        </div>
-        </div>
+                  @endif
+                </select>
+                @if($row->jadwal_pelajaran->count() == 0)
+                  <button disabled class="mt-4 font-bold w-full px-4 py-2 rounded-lg bg-red-400 text-white">
+                    Belum Membuat Kelas
+                  </button>
+                @else
+                  <button class="mt-4 font-bold w-full px-4 py-2 rounded-lg bg-blue-400 text-white">
+                    Masuk
+                  </button>
+                @endif
+              </div>
+              </form>
+            </div>
+           
       @endforeach
     </div>
 </div>
 <script>
 $('#calendar').pignoseCalendar();
+
+
+var jurusan_id = null;
+var kelas_id = null;
+
+function fetchData() {
+  if(kelas_id !== null && jurusan_id !== null) {
+    axios.get('/dashboard/get_mapels', {
+    params: {
+      'kelas_id': kelas_id,
+      'jurusan_id': event.target.value,
+    }
+  })
+  .then((resp) => {
+    console.log(resp);
+    const selectMapels = document.getElementById('mapel');
+    selectMapels.innerHTML = '';
+    var defaultOptionValue = document.createElement('option');
+    defaultOptionValue.disabled = true
+    defaultOptionValue.selected = true
+    defaultOptionValue.innerHTML = "--"
+    
+
+    if(resp.data.data.length > 0) {
+        resp.data.data.forEach(element => {
+          const id = element.id;
+          const kelas_name = `${element.nama_mapel}`;
+          var opt = document.createElement('option');
+          opt.value = id;
+          opt.innerHTML = kelas_name
+          selectMapels.appendChild(opt);
+        });
+      }
+      else {
+        selectMapels.appendChild(defaultOptionValue);
+      }
+    // console.log(resp)
+  })
+  .catch((err) => {
+    console.log(err);
+  })
+  }
+}
+
+function getMapels(event) {
+ jurusan_id = event.target.value
+
+  fetchData()
+}
+
+function getKelas(event) {
+    kelas_id = event.target.value;
+    console.log(kelas_id);
+}
 </script>
 <style lang="css">
   .mapel {
@@ -220,6 +319,10 @@ $('#calendar').pignoseCalendar();
     transition:all;
     margin-top: 0px;
     transition-duration: .3s;
+  }
+  select {
+    border-radius: .5em;
+    padding: 0px .5em;
   }
 </style>
 @endif

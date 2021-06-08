@@ -53,12 +53,12 @@
                     <td>
                         {{$key+1}}
                     </td>
-                    <td>
-                     {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
+                    <td class="uppercase">
+                     {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}}
                     </td>  
                     
-                    <td>
-                      {{$row->master_kelas->rombel->jurusan->jurusan}} 
+                    <td class="uppercase">
+                      {{$row->master_kelas->jurusan->jurusan}} 
                     </td>     
                     <td>
                       {{$row->tahun_akademik->tahun_akademik}}

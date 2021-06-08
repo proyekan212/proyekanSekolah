@@ -25,5 +25,6 @@
 import $ from 'jquery';
 window.$ = window.jQuery = $;
 import moment from 'moment';
+import axios from 'axios';
 
 import 'jquery-ui/ui/widgets/datepicker.js';

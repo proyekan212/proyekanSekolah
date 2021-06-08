@@ -11,14 +11,15 @@ class Kelas extends Model
     protected $fillable = [
         'tahun_akademik_id',
         'master_kelas_id',
-        'rombel_id'
+        'jurusan_id'
     ];
 
     public function daftar_kelas() {
         return $this->hasMany('App\Model\DaftarKelas', 'kelas_id', 'id');
     }
-    public function rombel() {
-       return $this->belongsTo('App\Model\RombelKelas', 'rombel_id', 'id');
+    
+    public function jurusan() {
+        return $this->belongsTo(MasterJurusan::class, 'jurusan_id', 'id');
     }
 
     public function master_kelas() {

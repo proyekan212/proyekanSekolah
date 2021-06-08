@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
 use App\Model\MasterKodeKelas;
 use App\Model\RombelKelas;
@@ -18,12 +19,13 @@ class DataMasterKelasController extends Controller
     public function index()
     {
         $datas = MasterKelas::all();
+        $jurusan = MasterJurusan::get();
         $kode_kelas = MasterKodeKelas::all();
         $rombel_kelas = RombelKelas::all();
         return view('pages.admin.datamasterkelas', [
             'datas' => $datas,
             'kode_kelas' => $kode_kelas,
-            'rombel_kelas' => $rombel_kelas
+            'jurusan' => $jurusan
         ]);
     }
 

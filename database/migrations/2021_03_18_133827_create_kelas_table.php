@@ -18,7 +18,7 @@ class CreateKelasTable extends Migration
             $table->integer('hapus')->default(0);
             $table->integer('master_kelas_id');
             $table->integer('tahun_akademik_id');
-            $table->integer('rombel_id');
+            $table->integer('jurusan_id');
             $table->timestamps();
         });
     }

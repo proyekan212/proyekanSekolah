@@ -19,7 +19,7 @@ class CreateMasterKelasTable extends Migration
             $table->bigIncrements('id');
             $table->integer('hapus')->default(0);
             $table->integer('kode_kelas_id');
-            $table->integer('rombel_id');
+            $table->integer('jurusan_id');
             $table->string('kelas');
             $table->timestamps();
         });

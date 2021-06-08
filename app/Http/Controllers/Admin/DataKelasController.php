@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
 use App\Model\Kelas;
+use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
 use App\Model\RombelKelas;
 use App\Model\TahunAkademik;
@@ -23,6 +24,7 @@ class DataKelasController extends Controller
     {   
         $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
         $rombel = RombelKelas::where('hapus', 0)->get();
+        $jurusan = MasterJurusan::get();
         $master_kelas = MasterKelas::where('hapus', 0)->get();
         $datas = Kelas::where('hapus', 0)
         ->with(['daftar_kelas' => function($q) {
@@ -35,6 +37,7 @@ class DataKelasController extends Controller
             'datas' => $datas,
             'tahun_akademik' => $tahun_akademik,
             'rombel' => $rombel,
+            'jurusan' => $jurusan,
             'master_kelas' => $master_kelas,
         ]);
     }

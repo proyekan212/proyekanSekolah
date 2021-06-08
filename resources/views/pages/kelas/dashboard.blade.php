@@ -49,15 +49,15 @@
               <div class="d-flex align-items-center justify-content-between">
                 <div class="d-flex align-items-center">
                   <div class="ml-2">
-                    <p class="capitalize">{{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas->kelas}} {{$kelas->rombel->name}}</p>
-                    <p class="tx-11 text-muted capitalize">Mata Pelajaran {{$kelas_mapel->master_mapel->nama_mapel}} {{$kelas->rombel->jurusan->jurusan}} Kelas {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}}</p>
+                    <p class="capitalize">{{$kelas_mapel->master_mapel->nama_mapel}}</p>
+                    <p class="tx-11 text-muted capitalize">Mata Pelajaran {{$kelas_mapel->master_mapel->nama_mapel}} {{$kelas->jurusan->jurusan}} Kelas {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}}</p>
                   </div>
                 </div>
               </div>
             </div>
             <div class="card-body">
               <p class="mb-3 tx-14 capitalize" >{{$user->user_detail->name}}</p>
-              <p class="mb-3 tx-14 capitalize ">Mata Pelajaran {{$kelas->rombel->jurusan->jurusan}} {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas_mapel->pertemuan}} Pertemuan</p>
+              <p class="mb-3 tx-14 capitalize ">Mata Pelajaran {{$kelas->jurusan->jurusan}} {{$kelas->master_kelas->kelas}} {{$kelas->master_kelas->kode_kelas->kode}} {{$kelas_mapel->pertemuan}} Pertemuan</p>
               <p class="mb-3 tx-14">{{$kelas->daftar_kelas->count()}} Siswa | Max KD : 9 | KKM : 75</p>
             </div>
             <div class="card-footer">

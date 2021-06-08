@@ -6,7 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
 use App\Model\Kelas;
 use App\Model\MasterJadwalPelajaran;
+use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
+use App\Model\MasterMapel;
 use App\Model\MasterSemester;
 use Illuminate\Http\Request;
 use App\Model\Menu;
@@ -14,6 +16,8 @@ use App\Model\SettingSemester;
 use App\Model\User;
 use App\Model\UserDetail;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Concerns\ToArray;
 
 class DashboardController extends Controller
 {
@@ -31,6 +35,7 @@ class DashboardController extends Controller
         $mapel = MasterJadwalPelajaran::all();
         $semester = MasterSemester::all();
         $user = User::where('id', $request->user()->id)->first();
+        $jurusan = MasterJurusan::get();
         $setting_semester = SettingSemester::first();
         $user_detail = UserDetail::where('user_id', $request->user()->id)->first();
         // dd($user_detail);
@@ -63,6 +68,7 @@ class DashboardController extends Controller
             'showMataPelajaran' => $mapel,
             'setting_semester' => $setting_semester,
             'daftarKelas' => $daftarKelas,
+            'jurusan' => $jurusan,
             'kelas' => $kelas,
             'user' => $user,
             'user_detail' => $user_detail,
@@ -88,7 +94,16 @@ class DashboardController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $setting = SettingSemester::first();
+        MasterJadwalPelajaran::create([
+            'mapel_id' => $request->input('mapel'),
+            'kelas_id' => $request->input('kelas'),
+            'user_id' => $request->user()->id,
+            'semester_id' => $setting->semester->id,
+
+        ]);
+
+        return redirect('/dashboard');
     }
 
     /**
@@ -134,5 +149,40 @@ class DashboardController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getKelas(Request $request) {
+        $setting = SettingSemester::first();
+
+        $kelas = Kelas::
+        with(['master_kelas.jurusan', 'master_kelas.kode_kelas'])
+        ->where('tahun_akademik_id', $setting->tahun_akademik_id)
+        ->whereHas('master_kelas.jurusan', function($q) use($request) {
+            $q->where('id', '=', $request->input('jurusan_id'));
+        })
+
+        ->get();
+        return response()->json([
+            "data" => $kelas
+        ]);
+    }
+
+    public function getMapels(Request $request) {
+        $setting = SettingSemester::first();
+        
+        $mapels = MasterMapel::
+        whereNotIn('id', function($q) use($request) {
+            $q->select('mapel_id')->from('master_jadwal_pelajarans')
+            ->where('kelas_id', '<>', $request->input('kelas_id'));
+        })
+        ->where('jurusan_id', '=', $request->input('jurusan_id'))
+        ->get();
+
+
+        // dd($mapels);
+
+        return response()->json([
+            'data' => $mapels
+        ]);
     }
 }

@@ -10,7 +10,7 @@ class MasterKelas extends Model
 
     protected $fillable = [
         'kode_kelas_id',
-        'rombel_id',
+        'jurusan_id',
         'kelas',
         'id'
     ];
@@ -23,7 +23,7 @@ class MasterKelas extends Model
         return $this->belongsTo('App\Model\MasterKodeKelas', 'kode_kelas_id', 'id');
     }
 
-    public function rombel() {
-        return $this->belongsTo('App\Model\RombelKelas', 'rombel_id', 'id');
+    public function jurusan(){
+        return $this->belongsTo(MasterJurusan::class, 'jurusan_id', 'id');
     }
 }

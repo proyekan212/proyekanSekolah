@@ -11,6 +11,8 @@
 |
 */
 
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+
 Route::get('/', 'Auth\AuthController@loginView')->name('login');
 Route::post('/', 'Auth\AuthController@login')->name('loginPost');
 
@@ -26,6 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //DASHBOARD GURU
     Route::get('/dashboard', 'Dashboard\DashboardController@index');
+    Route::post('/dashboard', 'Dashboard\DashboardController@store');
+    Route::get('/dashboard/get_kelas', 'Dashboard\DashboardController@getKelas');
+    Route::get('/dashboard/get_mapels', 'Dashboard\DashboardController@getMapels');
 
     //TEACHER
 

@@ -35,7 +35,7 @@
                 <th>No</th>
                 <th>Kelas</th>
                 <th>Tahun Ajaran</th>
-                <th>Rombel</th>
+                <th>Jurusan</th>
                 <th>Action</th>
               </tr>
             </thead>
@@ -46,14 +46,14 @@
                         <td>
                             {{$index + 1 }}
                         </td>
-                        <td>
-                            {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->kelas}}
+                        <td class="capitalize">
+                            {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}}
                         </td>
                         <td>
                           {{$row->tahun_akademik->tahun_akademik}}
                         </td>
                         <td>
-                          {{$row->rombel->name}}
+                          {{$row->jurusan->jurusan}}
                         </td>
                         <td class="flex items-center ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
@@ -140,13 +140,13 @@
 
          <div class="form-group row">
               <div class="col-lg-3">
-                <label class="col-form-label">Rombel</label>
+                <label class="col-form-label">Jurusan</label>
               </div>
               <div class="col-lg-8">
-                   <select name="rombel" id="">
-                    @foreach($rombel as $row)
+                   <select name="jurusan" id="">
+                    @foreach($jurusan as $row)
                       <option value="{{$row->id}}">
-                        {{$row->name}}
+                        {{$row->jurusan}}
                       </option>
                     @endforeach
                   </select>

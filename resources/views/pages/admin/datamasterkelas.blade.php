@@ -34,7 +34,7 @@
               <tr>
                 <th>No</th>
                 <th>Kode Kelas</th>
-                <th>Rombongan Belajar</th>
+                <th>Jurusan</th>
                 <th>Kelas</th>
                 <th>Action</th>
               </tr>
@@ -44,8 +44,8 @@
                 <tr>
                   <td>{{$index+1}}</td>
                   <td>{{$row->kode_kelas->kode}}</td>
-                  <td> {{$row->rombel->name}}</td>
-                  <td class="uppercase">{{$row->kode_kelas->kode}} {{$row->kelas}}</td>               
+                  <td class="capitalize"> {{$row->jurusan->jurusan}}</td>
+                  <td class="uppercase">{{$row->kode_kelas->kode}} {{$row->jurusan->jurusan}} {{$row->kelas}} </td>               
                   <td class="flex ">
                         <button class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
                           <span class="material-icons">
@@ -105,13 +105,13 @@
         </div>
         <div class="form-group row">
           <div class="col-lg-3">
-            <label class="col-form-label">Rombel Kelas</label>
+            <label class="col-form-label">Jurusan</label>
           </div>
           <div class="col-lg-8">
-            <select name="rombel" required class="form-control form-control-sm mb-3">
+            <select name="jurusan" required class="form-control form-control-sm mb-3">
               <!-- <option selected>- Nama Siswa -</option> -->   
-              @foreach($rombel_kelas as $row)
-                <option value="{{$row->id}}">{{$row->name}}</option>
+              @foreach($jurusan as $row)
+                <option value="{{$row->id}}">{{$row->jurusan}}</option>
               @endforeach
             </select>
           </div>

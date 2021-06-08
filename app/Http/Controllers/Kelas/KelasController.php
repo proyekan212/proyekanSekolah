@@ -18,9 +18,7 @@ class KelasController extends BaseController
         
 
         // dd($request->all());
-        $kelasMapel = MasterJadwalPelajaran::where('user_id', $request->user()->id)->first();
-        // $request->session()->put('kelas_mapel', $kelasMapel->id);
-        $request->session()->put('kelas_mapel', $request->input('kelas_mapel'));
+        $kelasMapel = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
         $kompetensi_dasar = KompetensiDasar::
         with(['penilaian_pengetahuan' => function($q) use($request) {
             $q->where('kelas_mapel_id', $request->session()->get('kelas_mapel'));
@@ -30,7 +28,7 @@ class KelasController extends BaseController
             });
         }])
         ->get();
-        $request->session()->put('kelas_id', $request->input('kelas_id'));
+     
         $kelas = Kelas::where('id', $request->session()->get('kelas_id'))->first();
         $user = User::where('id', $request->user()->id)->first();
         return view('pages.kelas.dashboard', [
@@ -53,17 +51,10 @@ class KelasController extends BaseController
 
     public function store(Request $request) {
         $setting_semester = SettingSemester::first();
-        $jadwalMapel = MasterJadwalPelajaran::create([
-            'kelas_id' => $request->input('kelas_id'),
-            'mapel_id' => 1,
-            'semester_id' => $setting_semester->semester_id,
-            'kkm' => 75,
-            'user_id' => $request->user()->id,
-            
-        ]);
-
-        $request->session()->put('kelas_mapel', $jadwalMapel->id);
+        $request->session()->put('kelas_mapel', $request->input('kelas_mapel'));
+        $request->session()->put('kelas_id', $request->input('kelas_id'));
+        // $request->session()->put('kelas_mapel', $jadwalMapel->id);
         
-        return redirect('dashboard');
+        return redirect('kelas');
     }
 }

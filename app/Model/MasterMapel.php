@@ -22,4 +22,8 @@ class MasterMapel extends Model
     public function kkm() {
         return $this->belongsTo('App\Model\MasterKKM', 'kkm_id', 'id');
     }
+
+    public function kelas_mapel() {
+        return $this->hasMany(MasterJadwalPelajaran::class, 'mapel_id', 'id');
+    }
 }
