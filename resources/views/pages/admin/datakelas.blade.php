@@ -183,7 +183,7 @@
         <input type="text" hidden name="kelas_id" value="{{$row->id}}">
       @csrf
       <div class="table-responsive">
-          <table id="table-siswa" class="table">
+          <table id="table-siswa{{$row->id}}" class="table">
             <thead>
               <tr>
                 <th>No</th>
@@ -227,6 +227,10 @@
     </div>
   </div>
 </div>
+
+<script>
+  $('table#table-siswa{{$row->id}}').DataTable();
+</script>
 @endforeach
 
 <div class="modal fade" id="tambah-siswa" tabindex="-1" role="dialog" aria-labelledby="TambahDataLabel" aria-hidden="true">
@@ -276,7 +280,7 @@
 <script type="text/javascript">
   
   $(document).ready(function() {
-        $('table#table-siswa').DataTable();
+        
         $('table#table-tambah-siswa').DataTable();
         
   });

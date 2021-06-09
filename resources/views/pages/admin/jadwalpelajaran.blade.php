@@ -95,7 +95,7 @@
           <table class="table
           ">
             @if($row->jadwal_pelajaran->count() > 0)
-            <thead>
+            <thead class="capitalize">
               <tr>
                 <th>
                   no
@@ -105,6 +105,12 @@
                 </th>
                 <th>
                   guru
+                </th>
+                <th>
+                  dibuat pada tanggal
+                </th>
+                <th>
+                  Action
                 </th>
               </tr>
             </thead>
@@ -124,6 +130,20 @@
                     @else
                       No name
                     @endif
+                  </td>
+                  <td>
+                    {{$jadwal->created_at->format('l F Y')}}
+                  </td>
+                  <td>
+                    <form action="{{ url('Jadwal_Pelajaran', $jadwal->id)}}" onclick="hapus(this)" method="post">
+                      @csrf
+                      {{ method_field('DELETE')}}
+                      <button  class="px-3 py-1 rounded-lg hover:bg-red-500 duration-300 transition-all bg-red-400 text-white" type="button">
+                        <span class="material-icons">
+                          delete 
+                        </span>
+                      </button>
+                    </form>
                   </td>
                 </tr>
               @endforeach
@@ -227,6 +247,25 @@
     
   </div>
 </div>
+
+<script>
+  function hapus(event) {
+    console.log(event)
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+          event.submit();
+        }
+        
+    })
+  }
+</script>
 @endsection
 
 @push('plugin-scripts')

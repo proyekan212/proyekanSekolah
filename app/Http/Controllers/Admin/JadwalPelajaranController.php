@@ -88,6 +88,8 @@ class JadwalPelajaranController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MasterJadwalPelajaran::where('id', $id)->delete();
+
+        return redirect('Jadwal_Pelajaran');
     }
 }
