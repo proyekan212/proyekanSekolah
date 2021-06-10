@@ -27,7 +27,7 @@ class MasterJadwalPelajaran extends Model
     public function block() {
         return $this->hasMany(BlockKelasMapel::class, 'kelas_mapel_id', 'id');
     }
-    public function master_mapel() {
+public function master_mapel() {
         return $this->belongsTo('App\Model\MasterMapel', 'mapel_id', 'id');
     }
 

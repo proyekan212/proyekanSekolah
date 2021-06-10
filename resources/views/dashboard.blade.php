@@ -131,7 +131,7 @@
         @csrf
         <div class="py-2 flex flex-col">
             <Label>Kelas</Label>
-            <select name="kelas"  id="kelas">
+            <select name="kelas" onchange="getKelas(event)" id="kelas">
               <option value="" selected disabled> -- </option>
               @foreach($kelas as $row)
                 <option value="{{$row->id}}">
@@ -305,7 +305,8 @@ function getMapels(event) {
 
 function getKelas(event) {
     kelas_id = event.target.value;
-    console.log(kelas_id);
+    console.log(event.target.value);
+    
 }
 </script>
 <style lang="css">

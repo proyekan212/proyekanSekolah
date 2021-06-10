@@ -171,10 +171,7 @@ class DashboardController extends Controller
         $setting = SettingSemester::first();
         
         $mapels = MasterMapel::
-        whereNotIn('id', function($q) use($request) {
-            $q->select('mapel_id')->from('master_jadwal_pelajarans')
-            ->where('kelas_id', '<>', $request->input('kelas_id'));
-        })
+        whereNotIn('id', DB::table('master_jadwal_pelajarans')->select('mapel_id')->where('kelas_id',$request->input('kelas_id')))
         ->where('jurusan_id', '=', $request->input('jurusan_id'))
         ->get();
 
