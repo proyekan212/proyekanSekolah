@@ -17,9 +17,12 @@
   <div class="grid grid-cols-12 gap-6">
     <div class=" col-span-4">
       <div class="w-full bg-white p-4 flex items-center  rounded-xl shadow-md">
-        <span style="font-size:50px;" class="material-icons pr-4 text-red-400">
-          assignment_ind
-        </span>
+        @if($user_detail->photo == null)
+       <div class="bg-gray-400 rounded-full w-16 h-16">
+          </div>
+        @else
+        <img src="{{ asset('Album-Foto-siswa/'.$user_detail->photo) }}" class="bg-gray-400 rounded-full w-16 h-16" style=";max-height: 100px;max-width: 100px;">
+        @endif
         <div class="grid md:flex md:flex-col">
           <span class="text-sm capitalize font-semibold text-red-400">
             Nama  :  {{$user->user_detail->name}}
@@ -104,9 +107,12 @@
     <div class="md:col-span-2">
       <div class="w-full h-full relative flex flex-col md:justify-end">
         <div class="flex items-center ">
+           @if($user_detail->photo == null)
           <div class="bg-gray-400 rounded-full w-16 h-16">
           </div>
-          <!-- <img src="wqw" class="rounded-full w-8 h-8" alt=""> -->
+          @else
+          <img src="{{ asset('Album-Foto-Guru/'.$user_detail->photo) }}" class="bg-gray-400 rounded-full w-16 h-16" style=";max-height: 100px;max-width: 100px;"> 
+        @endif
           <div class="md:py-6 md:ml-4">
             <p class="md:text-xl font-semibold text-sm capitalize">
               {{$user_detail->name}}

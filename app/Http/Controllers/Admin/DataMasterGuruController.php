@@ -56,6 +56,7 @@ class DataMasterGuruController extends Controller
         ]);
 
 
+ 
         UserDetail::create([
             'user_id' => $user->id,
             'name' => $data['nama'],
@@ -67,6 +68,8 @@ class DataMasterGuruController extends Controller
             "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
         ]);
+
+       
 
         return redirect('Data_Master_Guru');
     }
@@ -112,7 +115,11 @@ class DataMasterGuruController extends Controller
          // dd($data['role_id']);
 
    
-
+        $file = $request->file('foto');
+        $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
+        $file_formatted = str_replace(' ', '_', $filename);
+        $file->move('Album-Foto-Guru/', $file_formatted);
+        
         UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
             'nisn_or_nip' => $data['nip'],
@@ -122,6 +129,7 @@ class DataMasterGuruController extends Controller
             "tahun_masuk" => $data['tahun_masuk'],
             "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
+            'photo' => $file_formatted
         ]);
 
         return redirect('dashboard');

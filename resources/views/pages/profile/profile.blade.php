@@ -16,9 +16,9 @@
   </div>
 
 @if($showUserDetail->role_id == '2')
- <form action="{{ url('Data_Master_Guru', $showUserDetail->id)}}" method="post">
+ <form action="{{ url('Data_Master_Guru', $showUserDetail->id)}}" enctype="multipart/form-data" method="post">
      @csrf
-
+ 
         {{ method_field('PATCH')}}
            <input type="hidden" class="form-control" value="{{ $showUserDetail->role_id }}" name="role_id">
       
@@ -97,6 +97,15 @@
           </select>
          </div>
        </div>
+  <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Foto</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="file" class="form-control" name="foto">
+           </div>
+         </div>
+         </div>
       <div class="modal-footer">
             <a href="{{url('dashboard')}}">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
@@ -107,7 +116,7 @@
       </form>
       @else
       
- <form action="{{ url('Data_Master_Siswa', $showUserDetail->id)}}" method="post">
+ <form action="{{ url('Data_Master_Siswa', $showUserDetail->id)}}" enctype="multipart/form-data" method="post">
       @csrf
         {{ method_field('PATCH')}}
       
@@ -173,6 +182,14 @@
           <input type="text" name="tahun_masuk" class="form-control" value="{{ $showUserDetail->tahun_masuk }}">
          </div>
        </div>
+         <div class="form-group row">
+           <div class="col-lg-3">
+             <label class="col-form-label">Foto</label>
+           </div>
+           <div class="col-lg-8">
+             <input type="file" class="form-control" name="foto">
+           </div>
+         </div>
        </div>
       <div class="modal-footer">
              <a href="{{url('dashboard')}}">

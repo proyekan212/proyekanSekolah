@@ -63,7 +63,8 @@ class DataKelasController extends Controller
         Kelas::create([
             'master_kelas_id' => $request->input('kelas'),
             'tahun_akademik_id' => $request->input('tahun_akademik'),
-            'rombel_id'=> $request->input('rombel'),
+            // 'rombel_id'=> $request->input('rombel'),
+            'jurusan_id'=> $request->input('jurusan'),
            
         ]);
 

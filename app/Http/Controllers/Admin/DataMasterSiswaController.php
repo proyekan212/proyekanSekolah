@@ -52,6 +52,8 @@ class DataMasterSiswaController extends Controller
             'password' => Hash::make($data['nisn']),
         ]);
 
+        
+
         UserDetail::create([
             'name' => $data['nama'],
             'user_id'=> $user->id,
@@ -61,7 +63,7 @@ class DataMasterSiswaController extends Controller
             'tahun_masuk' => $data['tahun_masuk'],
             'email' => $data['email'],
             'nisn_or_nip' => $data['nisn'],
-            'role_id' => 3
+            'role_id' => 3,
         ]);
 
         return redirect('Data_Master_Siswa');
@@ -102,7 +104,11 @@ class DataMasterSiswaController extends Controller
     public function update(Request $request, $id)
     {
          $data = $request->all();
-        
+
+        $file = $request->file('foto');
+        $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
+        $file_formatted = str_replace(' ', '_', $filename);
+        $file->move('Album-Foto-Siswa/', $file_formatted);
           UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
             'nisn_or_nip' => $data['nip'],
@@ -110,7 +116,9 @@ class DataMasterSiswaController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            'role_id' => 3
+            'role_id' => 3,
+            'photo' => $file_formatted
+
            
         ]);
 
