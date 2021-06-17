@@ -147,7 +147,9 @@ class DataKelasController extends Controller
          Kelas::where('id', $id)->update([
             'master_kelas_id' => $request->input('kelas'),
             'tahun_akademik_id' => $request->input('tahun_akademik'),
-            'rombel_id'=> $request->input('rombel'),
+            // 'rombel_id'=> $request->input('rombel'),
+            'jurusan_id'=> $request->input('jurusan'),
+            
         ]);
 
         return redirect('data_kelas');
