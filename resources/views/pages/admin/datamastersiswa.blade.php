@@ -12,7 +12,35 @@
     <li class="breadcrumb-item active capitalize" aria-current="page" >Data Siswa</li>
   </ol>
 </nav>
+<style type="text/css">
+  .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
 
+.btn-upload {
+  border: 1px solid #7367F0;
+  color: #6E6B7B;
+  background-color: transparent;
+  /*padding: 8px 12px;*/
+  padding: 0.5rem 1rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  /*font-weight: bold;*/
+  /*font-weight: 500;*/
+  line-height: 1;
+
+}
+
+.upload-btn-wrapper input[type=file] {
+  /*font-size: 100px;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+</style>
 <!-- <div class="alert alert-primary " role="alert">
   <h4 class="alert-heading">Info!</h4>
   <p>Jurnal oleh guru mata pelajaran dibuat untuk seluruh peserta didik yang mengikuti mata pelajarannya, setiap kejadian terhadap siswa di dalam kelas mata pelajaran yang Anda ampu dapat dicatat dalam jurnal guru agar dapat dimonitor Wali Kelas dan Guru BK</p>
@@ -26,15 +54,15 @@
           <h6 class="card-title mb-0">Daftar Siswa</h6>
           <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
+           
             <form method="post" action="{{url('daftar_siswa_kelas_excel_import')}}" enctype="multipart/form-data">
               @csrf
-              <div class="file-upload-wrapper">
-                <input type="file"  name="file" required="required" id="input-file-now" class="file-upload" />
-              </div>
-              <button type="submit" class="text-blue-500 hover:text-blue-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300 ">
-        <span class="material-icons"> 
-                            send  
-                          </span>
+
+              <div class="upload-btn-wrapper">
+  <button class="btn-upload btn-outline-primary" >Upload CSV file</button>
+  <input type="file" name="file" />
+</div>
+              
 
             </form>
           </div>

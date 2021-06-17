@@ -17,41 +17,7 @@ class ImportExcelController extends Controller
      */
 
 
-   public function daftar_siswa_kelas_import(Request $request)
-    {
-        // validasi
-        $this->validate($request, [
-            'file' => 'required|mimes:csv,xls,xlsx'
-        ]);
  
-        // menangkap file excel
-        $file = $request->file('file');
- 
-        // membuat nama file unik
-        $nama_file = date('Y-M-d').$file->getClientOriginalName();
-        
-        if (file_exists(public_path('data_siswa/'.$nama_file))) {
-        
-        return redirect()->back();
-          
-        }
-        else{
-
-// ->exists()
-        // upload ke folder file_siswa di dalam folder public
-        $file->move('data_siswa',$nama_file);
- // dd(public_path('data_siswa/'.$nama_file));
-        // import data
-         Excel::import(new DaftarKelasSiswaImport, public_path('data_siswa/'.$nama_file));
-         Excel::import(new DetailSiswaImport, public_path('data_siswa/'.$nama_file));
-        
-        // notifikasi dengan session
-        // Session::flash('sukses','Data Siswa Berhasil Diimport!');
- 
-        // alihkan halaman kembali
-        return redirect('/Data_Master_Siswa');
-    }
-    }
      public function tambah_jadwal_import(Request $request)
     {
         $tanggal = date('Y-M-d');
@@ -84,7 +50,39 @@ class ImportExcelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'file' => 'required|mimes:csv,xls,xlsx'
+        ]);
+ 
+        // menangkap file excel
+        $file = $request->file('file');
+ 
+        // membuat nama file unik
+        $nama_file = date('Y-M-d').$file->getClientOriginalName();
+
+    dd($nama_file);
+
+        if (file_exists(public_path('data_siswa/'.$nama_file))) {
+        
+        return redirect()->back();
+          
+        }
+        else{
+
+// ->exists()
+        // upload ke folder file_siswa di dalam folder public
+        $file->move('data_siswa',$nama_file);
+ // dd(public_path('data_siswa/'.$nama_file));
+        // import data
+         Excel::import(new DaftarKelasSiswaImport, public_path('data_siswa/'.$nama_file));
+         Excel::import(new DetailSiswaImport, public_path('data_siswa/'.$nama_file));
+        
+        // notifikasi dengan session
+        // Session::flash('sukses','Data Siswa Berhasil Diimport!');
+ 
+        // alihkan halaman kembali
+        return redirect('/Data_Master_Siswa');
+    }
     }
 
     /**
