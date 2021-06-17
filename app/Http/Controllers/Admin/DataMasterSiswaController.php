@@ -108,7 +108,7 @@ class DataMasterSiswaController extends Controller
         $file = $request->file('foto');
         $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
-        $file->move('Album-Foto-Siswa/', $file_formatted);
+        $file->move(public_path().'Album-Foto-Siswa/', $file_formatted);
           UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
             'nisn_or_nip' => $data['nip'],
