@@ -49,7 +49,7 @@ class DataMasterKelasController extends Controller
     {
         MasterKelas::create([
             'kode_kelas_id'=>$request->input('kode_kelas'),
-            'rombel_id' => $request->input('rombel'),
+            'jurusan' => $request->input('jurusan'),
             'kelas' => $request->input('kelas'),
         ]);
 
@@ -97,7 +97,7 @@ class DataMasterKelasController extends Controller
     {
          MasterKelas::where('id', $id)->update([
             'kode_kelas_id'=>$request->input('kode_kelas'),
-            'rombel_id' => $request->input('rombel'),
+            'jurusan' => $request->input('jurusan'),
             'kelas' => $request->input('kelas'),
         ]);
 
