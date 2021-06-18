@@ -8,7 +8,7 @@ use App\Model\UserDetail;
 use Illuminate\Http\Request;
 use DB;
 use Illuminate\Support\Facades\Hash;
-
+use Auth;
 class DataMasterSiswaController extends Controller
 {
     /**
@@ -19,7 +19,7 @@ class DataMasterSiswaController extends Controller
     public function index()
     {
 
-        $siswa = UserDetail::where('role_id', 3)->get();
+        $siswa = UserDetail::where('role_id', 3)->where('hapus', 0)->get();
         return view('pages.admin.datamastersiswa', [
           // 'datas' => DB::table('master_kelas')->get(),
           'siswa' => $siswa,
@@ -104,7 +104,24 @@ class DataMasterSiswaController extends Controller
     public function update(Request $request, $id)
     {
          $data = $request->all();
+        //  dd();
+        if (Auth::user()->id != UserDetail::where('id', $id)->first()->user_id) {
+            UserDetail::where('id', $id)->update([
+            'name' => $data['nama'],
+            'nisn_or_nip' => $data['nip'],
+            'tempat_lahir' => $data['tempat_lahir'],
+            'email' => $data['email'],
+            "jenis_kelamin" => $data['jenis_kelamin'],
+            "tahun_masuk" => $data['tahun_masuk'],
+            'role_id' => 3,
+            // 'photo' => $file_formatted
 
+           
+        ]);
+
+        return redirect('Data_Master_Siswa');
+        }
+        else{
         $file = $request->file('foto');
         $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
@@ -122,7 +139,8 @@ class DataMasterSiswaController extends Controller
            
         ]);
 
-        return redirect('dashboard');
+        return redirect('Data_Master_Siswa');
+        }
     }
 
     /**
@@ -133,6 +151,13 @@ class DataMasterSiswaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        // dd($id);
+        $pet = User::where('id',$id)->first();
+        $tes = UserDetail::where('user_id',$id);
+         $pet->update([
+            'hapus' => 1]);
+        $tes->update([
+            'hapus' => 1]);  
+         return redirect('Data_Master_Siswa');
     }
 }

@@ -16,7 +16,7 @@ class MonitoringAktivitasGuruController extends Controller
     public function index()
     {
 
-          $user_detail = UserDetail::where('role_id', 2)->get();
+          $user_detail = UserDetail::where('role_id', 2)->where('hapus',0)->get();
 
         return view('pages.admin.monitoringaktivitasguru', [
           'user_detail'   => $user_detail

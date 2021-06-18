@@ -65,7 +65,7 @@
                           </span>
                         </button>
                 
-                      <form method="post" action="{{ url('Data_Master_Guru', $guru->id)}}" onclick="deleteData('{{$guru->id}}', this)" >
+                      <form method="post" action="{{ url('Data_Master_Guru', $guru->user_id)}}" onclick="deleteData('{{$guru->id}}', this)" >
                         @csrf
                         {{ method_field('DELETE') }}
                         <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">

@@ -21,7 +21,7 @@
 
 .btn-upload {
   border: 1px solid #7367F0;
-  color: #6E6B7B;
+  color: #7367F0;
   background-color: transparent;
   /*padding: 8px 12px;*/
   padding: 0.5rem 1rem 0.4rem;
@@ -53,13 +53,14 @@
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Daftar Siswa</h6>
           <div class="dropdown mb-2">
+              <div>
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
-           
+           </div>
             <form method="post" action="{{url('daftar_siswa_kelas_excel_import')}}" enctype="multipart/form-data">
               @csrf
 
               <div class="upload-btn-wrapper">
-  <button class="btn-upload btn-outline-primary" >Upload CSV file</button>
+  <button class="btn-upload btn-outline-primary" type="submit" >Upload CSV file</button>
   <input type="file" name="file" />
 </div>
               
@@ -103,7 +104,7 @@
                   </span>
                 </button>
                 
-                <form method="post" action="{{ url('Data_Master_Siswa', $siswa->id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
+                <form method="post" action="{{ url('Data_Master_Siswa', $siswa->user_id)}}" onclick="deleteData('{{$siswa->id}}', this)" >
                   @csrf
                   {{ method_field('DELETE') }}
                   <button type="button"  class="text-red-500 hover:text-red-400 hover:text-white capitalize md:text-sm text-xs rounded-lg transition-all duration-300">

@@ -97,7 +97,7 @@
     </div>
   </div>
 </div>
-@endsection
+
 <script type="text/javascript">
   function editData(id){
     console.log(id);

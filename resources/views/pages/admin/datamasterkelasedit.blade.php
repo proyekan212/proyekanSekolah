@@ -34,13 +34,13 @@
         </div>
         <div class="form-group row">
           <div class="col-lg-3">
-            <label class="col-form-label">Rombel Kelas</label>
+            <label class="col-form-label">Jurusan</label>
           </div>
           <div class="col-lg-8">
-            <select name="rombel" required class="form-control form-control-sm mb-3">
+            <select name="jurusan" required class="form-control form-control-sm mb-3">
               <!-- <option selected>- Nama Siswa -</option> -->   
-              @foreach($rombel_kelas as $row)
-                <option value="{{$row->id}}">{{$row->name}}</option>
+              @foreach($jurusan as $row)
+                <option value="{{$row->id}}">{{$row->jurusan}}</option>
               @endforeach
             </select>
           </div>

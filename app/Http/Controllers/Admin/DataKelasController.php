@@ -123,14 +123,14 @@ class DataKelasController extends Controller
             $q->has('user_detail');
         }])
         ->first();
-        $rombel = RombelKelas::where('hapus', 0)->get();
+        $jurusan = MasterJurusan::get();
        
       
         
         return view('pages.admin.datakelasedit', [
             'datas' => $datas,
             'tahun_akademik' => $tahun_akademik,
-            'rombel' => $rombel,
+            'jurusan' => $jurusan,
             'master_kelas' => $master_kelas,
         ]);
     }

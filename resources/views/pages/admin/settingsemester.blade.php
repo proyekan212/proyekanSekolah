@@ -23,7 +23,7 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>
+          <!--<h6 class="card-title mb-0">Daftar Siswa Tergabung Pada IPA X IPA 1_MIPA Fisika</h6>-->
 
           <div class="dropdown mb-2">
             <!--<button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Semester</button>-->

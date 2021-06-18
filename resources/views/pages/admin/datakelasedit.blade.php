@@ -56,13 +56,13 @@
 
           <div class="form-group row">
               <div class="col-lg-3">
-                <label class="col-form-label">Rombel</label>
+                <label class="col-form-label">Jurusan</label>
               </div>
               <div class="col-lg-8">
-                   <select name="rombel" id="">
-                    @foreach($rombel as $row)
+                   <select name="jurusan" id="">
+                    @foreach($jurusan as $row)
                       <option value="{{$row->id}}">
-                        {{$row->name}}
+                        {{$row->jurusan}}
                       </option>
                     @endforeach
                   </select>
@@ -73,7 +73,7 @@
 
        
       <div class="modal-footer">
-        <a href="{{url('dashboard')}}">
+        <a href="{{url('data_kelas')}}">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
         </a>
         <button type="submit" class="btn btn-primary">Tambah

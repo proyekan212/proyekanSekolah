@@ -18,6 +18,7 @@ class User extends Authenticatable
         'username',
         'password',
         'token',
+        'hapus',
         'created_at',
         'updated_at',
         'deleted_at',

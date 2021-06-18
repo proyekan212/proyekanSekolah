@@ -136,6 +136,26 @@
     </div>
   </div>
 </form>
+<script type="text/javascript">
+  function editData(id){
+    console.log(id);
+  }
+  function deleteData(id, event) {
+    Swal.fire({
+      title: 'Apakah yakin menghapus data ini ?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then((result) => {
+        if(result.value) {
+        event.submit();
+
+        }
+    })
+  }
+</script>
 @endsection
 
 @push('plugin-scripts')

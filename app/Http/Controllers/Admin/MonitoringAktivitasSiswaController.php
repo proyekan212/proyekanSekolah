@@ -17,7 +17,7 @@ class MonitoringAktivitasSiswaController extends Controller
     public function index(Request $request)
     {
         
-        $user_detail = UserDetail::where('role_id', 3)->get();
+        $user_detail = UserDetail::where('role_id', 3)->where('hapus',0)->get();
  
 
        return view('pages.admin.monitoringaktivitassiswa', [

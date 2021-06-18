@@ -18,10 +18,10 @@ class DataMasterKelasController extends Controller
      */
     public function index()
     {
-        $datas = MasterKelas::all();
-        $jurusan = MasterJurusan::get();
+        $datas = MasterKelas::where('hapus',0)->get();
+        $jurusan = MasterJurusan::where('hapus',0)->get();
         $kode_kelas = MasterKodeKelas::all();
-        $rombel_kelas = RombelKelas::all();
+        $rombel_kelas = RombelKelas::where('hapus',0)->get();
         return view('pages.admin.datamasterkelas', [
             'datas' => $datas,
             'kode_kelas' => $kode_kelas,
@@ -67,10 +67,11 @@ class DataMasterKelasController extends Controller
          $datas = MasterKelas::where('id', $id)->first();
         $kode_kelas = MasterKodeKelas::all();
         $rombel_kelas = RombelKelas::all();
+         $jurusan = MasterJurusan::get();
         return view('pages.admin.datamasterkelasedit', [
             'datas' => $datas,
             'kode_kelas' => $kode_kelas,
-            'rombel_kelas' => $rombel_kelas
+            'jurusan' => $jurusan
         ]);
       
     }
@@ -113,6 +114,10 @@ class DataMasterKelasController extends Controller
      */
     public function destroy($id)
     {
-        //
+        MasterKelas::where('id', $id)->update([
+            'hapus'=> 1
+        ]);
+        
+        return redirect('Data_Master_Kelas');
     }
 }
