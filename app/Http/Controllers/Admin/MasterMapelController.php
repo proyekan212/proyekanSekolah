@@ -73,7 +73,7 @@ class MasterMapelController extends Controller
     public function show($id)
     {
        $kkm = MasterKKM::where('hapus', 0)->get();
-        $datas = MasterMapel::where('id', $id)->first();
+        $datas = MasterMapel::where('id', $id)->where('hapus', 0)->first();
         
         $jurusan = MasterJurusan::where('hapus', 0)->get();
         return view('pages.admin.master_mapeledit',[

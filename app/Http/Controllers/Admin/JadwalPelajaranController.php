@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterMapel;
 use DB;
+use App\Model\SettingSemester;
+
 class JadwalPelajaranController extends Controller
 {
     /**
@@ -17,8 +19,11 @@ class JadwalPelajaranController extends Controller
      */
     public function index()
     {
-        $datas = Kelas::with(['jadwal_pelajaran.master_mapel', 'jadwal_pelajaran.user.user_detail'])->get();
-    
+        $setting_semester = SettingSemester::first();
+        $datas = Kelas::with(['jadwal_pelajaran.master_mapel', 'jadwal_pelajaran.user.user_detail'])->whereHas('tahun_akademik', function($q) use($setting_semester) {
+            $q->where('id', $setting_semester->tahun_akademik->id);
+        })->get();
+     
       return view('pages.admin.jadwalpelajaran', [
             // 'kompetensi_inti' => MasterJadwalPelajaran::all(),
         'datas' => $datas,

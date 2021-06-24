@@ -49,7 +49,7 @@ class DashboardController extends Controller
         ->first();
      
 
-        
+         
         // dd($user->user_detail->name);
 
 
@@ -63,6 +63,9 @@ class DashboardController extends Controller
             ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
         ])
         ->get();
+        
+        // dd($setting_semester);
+        
         return view('dashboard', [
             'showSemester'      => $semester,
             'showMataPelajaran' => $mapel,

@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-// use App\Http\Controllers\Kelas\ImportExcelController;
+
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', 'Auth\AuthController@loginView')->name('login');
@@ -22,7 +22,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     //LOGOUT
     Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
-
+    Route::get('/edit_password/{id}', 'Profile\ProfileController@edit_password');
+    Route::post('/update_password_user/{id}', 'Profile\ProfileController@update_password_user');
+ 
     //SIDEBAR
     // Route::get('*', 'Sidebar/SidebarController@index');
 
@@ -118,7 +120,7 @@ Route::group(['middleware' => ['auth']], function () {
     //DataMasterSiswa
     Route::resource('/Data_Master_Siswa', 'Admin\DataMasterSiswaController');
     //DataMasterGuru
-    Route::resource('/Data_Master_Guru', 'Admin\DataMasterGuruController');
+    Route::resource('/Data_Master_Guru', 'Admin\DataMasterGuruController'); 
     //JadwalPelajaran
     Route::resource('/Jadwal_Pelajaran', 'Admin\JadwalPelajaranController');
     //KompetensiInti
@@ -163,10 +165,9 @@ Route::group(['middleware' => ['auth']], function () {
     //Download Excel
     Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
     Route::post('daftar_siswa_kelas_excel_import', 'Kelas\ImportExcelController@daftar_siswa_kelas_import');
-    // Route::get('tambah_jadwal_import', 'Kelas\ImportExcelController@tambah_jadwal_import');
+    Route::get('tambah_jadwal_import', 'Kelas\ImportExcelController@tambah_jadwal_import');
     Route::get('kejadian_jurnal_excel/', 'Kelas\ExportExcelController@kejadian_jurnal');
     Route::get('rekap_absen_excel/', 'Kelas\ExportExcelController@rekap_absen');
-    
     
 
 

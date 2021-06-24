@@ -194,7 +194,7 @@
        
             <div class="card w-full md:p-6 p-4 transition-all duration-300 text-gray-600 bg-gray-200 rounded-xl hover:shadow-xl">
               <div class="header uppercase text-center font-bold">
-                {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}}
+                {{$row->master_kelas->kode_kelas->kode}} {{$row->master_kelas->jurusan->jurusan}} {{$row->master_kelas->kelas}} {{$row->tahun_akademik_id}}
               </div>
               <form action="{{ url('kelas')}}" method="post">
                 @csrf
