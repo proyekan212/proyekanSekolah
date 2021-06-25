@@ -8,7 +8,6 @@
         <a class="nav-link dropdown-toggle" href="#" id="profileDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
          <a href="{{ url('/edit_password' , Auth::user()->id)}}" class="p-2 flex items-center">
           <i data-feather="user"></i><span>change password</span>
-          <i class="fas fa-sign-out-alt fa-2x"></i>
         </a>
         <a href="{{ url('/logout')}}" class="p-2 flex items-center">
           <span class="p-0 pr-1 pt-1 text-muted">LOGOUT</span>

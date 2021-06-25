@@ -82,7 +82,7 @@
           <input type="text" name="tahun_masuk" class="form-control" value="{{ $showUserDetail->tahun_masuk }}">
          </div>
        </div>
-
+<!-- 
        <div class="form-group row">
          <div class="col-lg-3">
            <label class="col-form-label">Mapel Kelas Ajar</label>
@@ -96,7 +96,7 @@
             @endforeach
           </select>
          </div>
-       </div>
+       </div> -->
   <div class="form-group row">
            <div class="col-lg-3">
              <label class="col-form-label">Foto</label>

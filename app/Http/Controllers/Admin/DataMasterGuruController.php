@@ -114,7 +114,8 @@ class DataMasterGuruController extends Controller
          $data = $request->all();
          // dd($data['role_id']);
 
-        if (Auth::user()->id != UserDetail::where('id', $id)->first()->user_id) {
+        if (Auth::user()->id != UserDetail::where('id', $id)->first()->user_id
+    ) {
             UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
             'nisn_or_nip' => $data['nip'],
@@ -122,7 +123,7 @@ class DataMasterGuruController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            "mapel_id" => $data['mapel_id'],
+            // "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
             // 'photo' => $file_formatted
         ]);
@@ -130,6 +131,22 @@ class DataMasterGuruController extends Controller
         return redirect('Data_Master_Guru');
         }
         else{
+            if (UserDetail::where('id', $id)->first()->foto != 'null') {
+                UserDetail::where('id', $id)->update([
+            'name' => $data['nama'],
+            'nisn_or_nip' => $data['nip'],
+            'tempat_lahir' => $data['tempat_lahir'],
+            'email' => $data['email'],
+            "jenis_kelamin" => $data['jenis_kelamin'],
+            "tahun_masuk" => $data['tahun_masuk'],
+            // "mapel_id" => $data['mapel_id'],
+            'role_id' => 2,
+            // 'photo' => $file_formatted
+        ]);
+        return redirect('dashboard');
+
+            }
+            else{
         $file = $request->file('foto');
         $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
@@ -142,12 +159,13 @@ class DataMasterGuruController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            "mapel_id" => $data['mapel_id'],
+            // "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
             'photo' => $file_formatted
         ]);
 
-        return redirect('Data_Master_Guru');
+        return redirect('dashboard');
+            }
         }
     }
 
