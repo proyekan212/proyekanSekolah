@@ -18,7 +18,8 @@ class CreateMateriBahanBelajarsTable extends Migration
             $table->string('link');
             $table->string('name');
             $table->string('type');
-            $table->intger('kelas_mapel_id');
+            $table->string('descpritions');
+            $table->integer('kelas_mapel_id');
             $table->integer('hapus')->default(0);
             $table->integer('rating')->default(0);
             $table->integer('sender_id');

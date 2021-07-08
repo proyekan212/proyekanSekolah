@@ -23,6 +23,7 @@ class MateriBahanBelajar extends Model
         'name',
         'rating_id',
         'sender_id',
+        'descriptions',
         'kelas_id',
         'rating_id',
         'created_at',
@@ -36,6 +37,10 @@ class MateriBahanBelajar extends Model
 
     public function kelas() {
         return $this->belongsTo('App\Model\MasterKelas', 'kelas_id', 'id');
+    }
+
+    public function kelas_mapel() {
+        return $this->belongsTo(MasterJadwalPelajaran::class, 'kelas_mapel_id', 'id');
     }
 
     public function created_at_FullDate() {

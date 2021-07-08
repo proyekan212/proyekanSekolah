@@ -14,7 +14,8 @@ class MateriBahanAjarController extends BaseController
        
         $materi = MateriBahanBelajar::where([
             ['hapus', '=', '0'],
-            ['kelas_id', '=', $request->session()->get('kelas_id')]
+            ['kelas_id', '=', $request->session()->get('kelas_id')],
+            ['kelas_mapel_id', '=',$request->session()->get('kelas_mapel')]
         ])->get();
         // dd(count($request->session()->get('kelas_id')));
         return view('pages.kelas.teacher.materi', [
@@ -49,6 +50,7 @@ class MateriBahanAjarController extends BaseController
                 'link' => $file_formatted,
                 'name' => $request->input('name'),
                 'sender_id' => $request->user()->id,
+                'descriptions' => $request->input('descriptions'),
                 'type' => $request->input('type'),
                 'kelas_id' => $request->session()->get('kelas_id'),
                 'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
@@ -58,7 +60,9 @@ class MateriBahanAjarController extends BaseController
         else {
             MateriBahanBelajar::create([
                 'link' => $request->input('link'),
+                'descriptions' => $request->input('descriptions'),
                 'name' => $request->input('name'),
+                'type' => $request->input('type'),
                 'sender_id' => $request->user()->id,
                 'kelas_id' => $request->session()->get('kelas_id'),
                 'kelas_mapel_id' => $request->session()->get('kelas_mapel'),

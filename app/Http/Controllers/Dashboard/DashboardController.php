@@ -10,6 +10,7 @@ use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
 use App\Model\MasterMapel;
 use App\Model\MasterSemester;
+use App\Model\TeacherNotifications;
 use Illuminate\Http\Request;
 use App\Model\Menu;
 use App\Model\SettingSemester;
@@ -30,6 +31,17 @@ class DashboardController extends Controller
     {
 
         // $menu = Menu::all();
+
+        $notifications = null;
+
+        if($request->user()->user_detail->role_id == 2) {
+
+            $notifications = TeacherNotifications::get();
+        }
+
+        else if($request->user()->user_detail->role_id == 3) {
+            $notifications = null;
+        }
 
         // untuk siswa
         $mapel = MasterJadwalPelajaran::all();
@@ -75,6 +87,7 @@ class DashboardController extends Controller
             'kelas' => $kelas,
             'user' => $user,
             'user_detail' => $user_detail,
+            'notifications' => $notifications
             // 'menu' => $menu
         ]);
     }

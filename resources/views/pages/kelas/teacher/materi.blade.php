@@ -40,11 +40,9 @@
                 {{$row->created_at}}
               </p>
               <p
-                class="bg-green-500 py-1 mb-2 md:mb-4 flex justify-center text-white rounded-xl"
+                class=" mb-2 md:mb-4 md:text-xs text-sm"
               >
-                <span class="text-xs capitalize">
-                  
-                </span>
+                {{$row->descriptions}}
               </p>
               <div class="flex justify-between">
                 <a
@@ -71,10 +69,10 @@
                   onclick="showVideo('{{$row->link}}')"
                   data-toggle="modal"
                   data-target="#video"
-                  class="px-6 flex rounded-xl items-center md:px-8 bg-gray-200 "
+                  class="px-6 flex rounded-xl items-center md:px-8 bg-gray-200 hover:text-white hover:bg-green-400"
                 >
                 <span
-                    class="text-xs md:text-sm  font-semibold text-black capitalize"
+                    class="text-xs md:text-sm  font-semibold  capitalize"
                   >
                     open link
                   </span>
@@ -125,6 +123,17 @@
             <div class="col-lg-8">
               <div class="form-group" id="">
                 <input type="text" class="form-control" name="name">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Deskripsi Materi</label>
+            </div>
+            <div class="col-lg-8">
+              <div class="form-group" id="">
+                <textarea name="descriptions"  class="form-control" rows="4"> </textarea>
               </div>
             </div>
           </div>
