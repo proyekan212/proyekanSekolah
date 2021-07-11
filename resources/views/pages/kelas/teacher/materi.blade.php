@@ -31,20 +31,20 @@
               id="card"
               class="w-full p-4 shadow-xl md:p-3 lg:p-8 bg-gray-100 rounded-lg "
               >
-              <h1 class="text-lg capitalize mb-2 md:mb-4 font-semibold text-black">
+              <h1 class="text-lg capitalize mb-2 md:mb-4 font-semibold text-black" style="text-align: center;">
                 {{$row->name}}
               </h1>
               <div id="thumbnail" class="mb-2 w-full md:mb-4">
               </div>
-              <p class="text-xs mb-2 md:mb-4 text-gray-500">
+              <p class="text-xs mb-2 md:mb-4 text-gray-500" style="text-align: center;">
                 {{$row->created_at}}
               </p>
               <p
-                class=" mb-2 md:mb-4 md:text-xs text-sm"
+                class=" mb-2 md:mb-4 md:text-xs text-sm" style="text-align: center;"
               >
                 {{$row->descriptions}}
               </p>
-              <div class="flex justify-between">
+              <div class="flex justify-between" style="margin-right: -2.2em">
                 <a
                   href="{{ url ('kelas/materi_bahan_ajar', $row->id) }}"
                   style="font-size: 24px;"
@@ -79,7 +79,22 @@
                 </a>
                 @endif
 
-                
+             
+                <span style="padding-right: 1em">
+                <form style="cursor: pointer;" action="{{ url ('kelas/materi_bahan_ajar/edit', $row->id) }}"  class="text-red-600 transition-all duration-300 hover:text-red-400"  method="post">
+                  @csrf
+             
+                    <a
+                      href="{{ url('kelas/materi_bahan_ajar', $row->id) }}"
+                      style="font-size: 24px;"
+                    
+                    >
+                    <span class="material-icons" style="font-size: 30px;margin-top: 0.5em;"> 
+                                edit
+                          </span>
+                    </a>
+                </form>
+
                 <form style="cursor: pointer;" action="{{ url ('kelas/materi_bahan_ajar', $row->id) }}"  class="text-red-600 transition-all duration-300 hover:text-red-400" onclick="deleteMateri('{{$row->id}}', this)" method="post">
                   @csrf
                   {{ method_field('DELETE') }}
@@ -93,7 +108,7 @@
                           </span>
                     </a>
                 </form>
-                
+                </span>
                 
               </div>
             </div>

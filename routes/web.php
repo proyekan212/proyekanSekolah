@@ -169,7 +169,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('kejadian_jurnal_excel/', 'Kelas\ExportExcelController@kejadian_jurnal');
     Route::get('rekap_absen_excel/', 'Kelas\ExportExcelController@rekap_absen');
     
-
+    //RPP (UPLOAD FILE)
+    Route::get('/RPP_Admin', 'Kelas\RppController@rpp_admin');
 
     
 });
