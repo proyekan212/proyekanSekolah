@@ -6,6 +6,7 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\Model\MasterKompetensiInti;
+use App\Model\SettingSemester;
 use DB;
 class KompetensiDasarController extends BaseController
 {
