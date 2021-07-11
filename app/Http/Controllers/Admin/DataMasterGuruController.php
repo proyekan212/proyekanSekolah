@@ -131,7 +131,7 @@ class DataMasterGuruController extends Controller
         return redirect('Data_Master_Guru');
         }
         else{
-            if (UserDetail::where('id', $id)->first()->foto != 'null') {
+            if (UserDetail::where('id', $id)->first()->foto == 'null') {
                 UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
             'nisn_or_nip' => $data['nip'],
@@ -147,11 +147,11 @@ class DataMasterGuruController extends Controller
 
             }
             else{
-     
+        
         $file = $request->file('foto');
         $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
-        $file->move('Album-Foto-Guru/', $file_formatted);
+        $file->move(public_path().'/Album-Foto-Guru/', $file_formatted);
         
         UserDetail::where('id', $id)->update([
             'name' => $data['nama'],
