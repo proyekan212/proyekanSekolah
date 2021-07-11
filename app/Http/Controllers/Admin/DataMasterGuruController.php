@@ -147,6 +147,11 @@ class DataMasterGuruController extends Controller
 
             }
             else{
+        $request->validate([
+
+        'foto' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+
+      ]);
         $file = $request->file('foto');
         $filename = $data['nip'].'-'.$data['nama'].'-'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
