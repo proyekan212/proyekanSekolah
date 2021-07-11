@@ -11,16 +11,32 @@ class RppController extends BaseController
 {
     public function index(Request $request){
 
-        $kelas_mapel = 
-        $rpp = MasterRpp::where([
+       
+          $rpp = MasterRpp::where([
             ['hapus', '=', 0],
             ['kelas_id', '=', $request->session()->get('kelas_mapel')]
         ])->get();
         return view('pages.kelas.rpp', [
-            'rpp'=> $rpp
-        ]);
-    }
+            'rpp'=> $rpp,
+            'role_id_user'=> $role_id_user,
 
+        ]);
+      
+    }
+ public function rpp_admin(Request $request){
+
+        $role_id_user = $request->user()->user_detail->role_id;
+        if ( $role_id_user == 1) {
+             $rpp = MasterRpp::where([
+            ['hapus', '=', 0],
+        ])->get();
+        return view('pages.admin.rpp', [
+            'rpp'=> $rpp,
+            'role_id_user'=> $role_id_user,
+        ]);
+        }
+     
+    }
     // public function __construct()
     // {
     //     $this->middleware('auth');

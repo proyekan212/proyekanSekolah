@@ -28,7 +28,19 @@ class MateriBahanAjarController extends BaseController
     {
         $this->middleware('auth');
     }
-
+      public function edit($id)
+    {
+      $materi = MateriBahanBelajar::where([
+            ['hapus', '=', '0'],
+            ['kelas_id', '=', $request->session()->get('kelas_id')],
+            ['kelas_mapel_id', '=',$request->session()->get('kelas_mapel')]
+        ])->where('id', $id)->get();
+        // dd(count($request->session()->get('kelas_id')));
+        return view('pages.kelas.teacher.materiedit', [
+            'materi' => $materi,
+            'kelas_mapel' => $request->session()->get('kelas_mapel'),
+        ]);
+    }
     public function destroy($id) {
         MateriBahanBelajar::where('id', $id)->update([
             'hapus' => 1,

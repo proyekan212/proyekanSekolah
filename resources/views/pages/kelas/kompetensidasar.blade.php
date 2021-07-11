@@ -12,16 +12,16 @@
     <li class="breadcrumb-item active" aria-current="page">Kompetensi Dasar</li>
   </ol>
 </nav>
-
+ 
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Kompetensi Inti(KI) dan Kompetensi Dasar (KD) MIPA X-MIPA-1_MIPA Biologi</h6>
-          <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success">Sesuaikan Kompetensi</button>
-          </div>
+         <!--  <div class="dropdown mb-2">
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Sesuaikan Kompetensi</button>
+          </div> -->
         </div>
         
         <div class="table-responsive">
@@ -100,6 +100,7 @@
     </div>
   </div>
 </div>
+
 @endsection
 
 @push('plugin-scripts')
