@@ -12,7 +12,7 @@ class KompetensiDasarController extends BaseController
     public function index(){
         return view('pages.kelas.kompetensidasar', [
             'kompetensi_inti' => MasterKompetensiInti::all(),
-            'semester' => SettingSemester::first();,
+            'semester' => SettingSemester::first(),
             // 'kompetensi_inti' => MasterKompetensiInti::all(),
         ]);
     }
