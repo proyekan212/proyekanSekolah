@@ -15,6 +15,37 @@
 <div class="row">
   <div class="col-md-12 grid-margin stretch-card">
     <div class="card">
+      
+      
+      <div class="w-64 p-4">
+        Absen
+        <form action="{{ url ('/kelas/absen_guru')}}" method="post">
+            <div class="mb-2">
+            @csrf
+                <select name="pertemuan" class="form-control" id="">
+                  <?php
+                    
+                    $current = $kelas_mapel->current_pertemuan;
+
+                    if($current == null) {
+                      $current = 1; 
+                    }
+                    else {
+                      $current = $current+1;
+                    }
+
+                    for($i = $current; $i < $kelas_mapel->pertemuan; $i++) 
+                    {
+
+                      echo "<option value='$i'>Pertemuan $i</option>";
+                    }
+                  
+                  ?>
+              </select>
+            </div>
+            <button type="submit" class="bg-blue-400 hover:bg-blue-500 text-white py-2 px-4 font-semibold rounded-xl">Absen</button>
+        </form>
+      </div>
       <div class="card-body">
         <h6 class="card-title">Absensi Anda</h6>
         <p class="card-description">
@@ -26,53 +57,31 @@
               <tr>
                 <th>No</th>
                 <th>Tanggal</th>
-                <th>Status</th>
+                <th>pertemuan</th>
                 <th>Keterangan</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>25 Desember 2020</td>
-                <td>Hadir</td>
-                <td>Anda melakukan kehadiran pada 25 Desember 2020 Pukul 10:50:23</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>26 Desember 2020</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>27 Desember 2020</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>28 Desember 2020</td>
-                <td>Hadir</td>
-                <td>Anda melakukan kehadiran pada 28 Desember 2020 Pukul 08:50:23</td>
-              </tr>
-              <tr>
-                <td>4</td>
-                <td>29 Desember 2020</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
-              <tr>
-                <td>5</td>
-                <td>30 Desember 2020</td>
-                <td>Hadir</td>
-                <td>Anda melakukan kehadiran pada 30 Desember 2020 Pukul 10:50:23</td>
-              </tr>
-              <tr>
-                <td>6</td>
-                <td>31 Desember 2020</td>
-                <td>-</td>
-                <td>-</td>
-              </tr>
+             @foreach($absens as $index => $absen) 
+                    <tr>
+                      <td>
+                      {{$index + 1}}
+                      </td>
+                      <td>
+                      {{$absen->created_at}}
+                      </td>
+                      <td>
+                      Petemuan {{$absen->pertemuan}}
+                      </td>
+
+                      <td>
+                        <span class="text-green-500">
+
+                          {{$absen->status}}
+                        </span>
+                      </td>
+                    </tr>
+            @endforeach
             </tbody>
           </table>
         </div>

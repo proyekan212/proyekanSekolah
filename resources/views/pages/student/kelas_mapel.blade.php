@@ -21,23 +21,9 @@
           <div class="grid md:grid-cols-2 md:mt-6 mt-4 gap-x-2 gap-y-3">
           
             <select name="absen" class="form-control" id="">
-             
-              <?php 
-              
-                if($pertemuan->pertemuan_terakhir == null) 
-                {
-                  $pertemuan->pertemuan_terakhir = 0;
-                }
-                $pertemuan->pertemuan_terakhir += 1
-
-                
-              ?>
-              
-              @for($pt = $pertemuan->pertemuan_terakhir; $pt <= $kelas_mapel->pertemuan; $pt++)
-                <option value="{{$pt}}">
-                  Pertemuan {{$pt}}
-                </option>
-              @endfor
+             <option value="{{$kelas_mapel->current_pertemuan}}">
+             {{$kelas_mapel->current_pertemuan}}
+             </option>
             </select>
             <button type="submit" class="bg-blue-400 text-white rounded-xl hover:bg-blue-500 duration-300 transition-all">
               Absen
