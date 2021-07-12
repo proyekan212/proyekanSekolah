@@ -44,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     //MATERI GURU
     Route::get('/materi', 'Teacher\MateriController@materiGet');
     //ABSEN GURU
-    Route::get('/absen', 'Teacher\AbsenController@absenGet');
+    Route::resource('/kelas/absen_guru', 'Teacher\AbsenController');
 
     //MASUK KELAS
     Route::get('kelas', 'Kelas\KelasController@index');

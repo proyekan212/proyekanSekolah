@@ -12,6 +12,7 @@ class MasterJadwalPelajaran extends Model
         'id',
         'kelas_id',
         'mapel_id',
+        'current_pertemuan',
         'kkm',
         'semester_id',
         'user_id',
