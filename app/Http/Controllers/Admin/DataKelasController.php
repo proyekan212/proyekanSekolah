@@ -26,7 +26,7 @@ class DataKelasController extends Controller
     {   
         $tahun_akademik = TahunAkademik::where('hapus', 0)->get();
         $rombel = RombelKelas::where('hapus', 0)->get();
-        $jurusan = MasterJurusan::get();
+        $jurusan = MasterJurusan::where('hapus', 0)->get();
         $master_kelas = MasterKelas::where('hapus', 0)->get();
         $datas = Kelas::where('hapus', 0)
         ->with(['daftar_kelas' => function($q) {
