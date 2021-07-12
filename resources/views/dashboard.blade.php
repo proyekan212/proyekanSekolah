@@ -97,9 +97,7 @@
   </div>
   
 </div>
- </div>
-  
-  
+ </div>  
 @else
   @if(Auth::user()->id != '1')
   <!-- -->
@@ -187,8 +185,6 @@
     <h2 class="lg:text-lg text-base capitalize font-semibold text-blue-600">
     Tahun Ajaran {{$setting_semester->tahun_akademik->tahun_akademik}} - semester {{$setting_semester->semester->nama_semester}}
     </h2>
-    @else
-    @endif
     <div class="grid md:gap-8 lg:gap-6 gap-4 md:grid-cols-2 mt-4 md:mt-6 lg:mt-8 lg:grid-cols-3">
       @foreach($kelas as $row)
        
@@ -256,6 +252,9 @@
            
       @endforeach
     </div>
+    @else
+    @endif
+    
 </div>
 <script>
 $('#calendar').pignoseCalendar();

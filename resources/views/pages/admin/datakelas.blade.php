@@ -75,7 +75,7 @@
                       <button data-toggle="modal" data-target="#list-siswa{{$row->id}}" class="mx-2 bg-blue-500 text-white px-4 py-2 rounded-xl outline-none">
                           {{$row->daftar_kelas->count()}} Siswa
                       </button>
-                      <button data-toggle="modal" onclick="setKelas('{{$row->id}}', '{{$row->master_kelas->kode_kelas->numerik}}')" data-kelas_id="{{$row->id}}" data-kelas_numerik="{{$row->master_kelas->kode_kelas->numerik}}" data-target="#tambah-siswa" class="mx-2 bg-green-500 text-white px-4 py-2 rounded-xl outline-none">
+                      <button data-toggle="modal" onclick="setKelas('{{$row->id}}', '{{$row->master_kelas->kode_kelas->numerik}}' , '{{$row->tahun_akademik_id}}')" data-kelas_id="{{$row->id}}" data-kelas_numerik="{{$row->master_kelas->kode_kelas->numerik}}" data-target="#tambah-siswa" class="mx-2 bg-green-500 text-white px-4 py-2 rounded-xl outline-none">
                           Tambah Siswa
                       </button>
                     </td>
@@ -181,6 +181,8 @@
       <form action=" {{ url('/data_kelas/store_siswa')}} " method="post">
 
         <input type="text" hidden name="kelas_id" value="{{$row->id}}">
+        <input type="text" hidden name="tahun_id" value="{{$row->tahun_akademik_id}}">
+      
       @csrf
       <div class="table-responsive">
           <table id="table-siswa{{$row->id}}" class="table">
@@ -285,22 +287,18 @@
         
   });
 
-  function setKelas(kelas_id, kode_kelas) {
+  function setKelas(kelas_id, kode_kelas, tahun_akademik) {
     document.querySelector('#kelas_id').value = kelas_id
-    console.log(document.querySelector('#kelas_id'));
-    const data = {
-      'kode_kelas' : kode_kelas
-    };
+
+    console.log(tahun_akademik);
     axios.get('data_kelas/'+kelas_id, {
       params: {
-        "kode_kelas" : kode_kelas
+        "kode_kelas" : kode_kelas,
+        'tahun_akademik' : tahun_akademik
       }
     }).
     then((res) => {
       console.log(res)
-
-    
-
       const tbody = $('table#table-tambah-siswa').find('tbody');
       tbody.empty();
       res.data.data.forEach((element, index) => {

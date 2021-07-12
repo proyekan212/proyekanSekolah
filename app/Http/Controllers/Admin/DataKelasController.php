@@ -8,10 +8,12 @@ use App\Model\Kelas;
 use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
 use App\Model\RombelKelas;
+use App\Model\SettingSemester;
 use App\Model\TahunAkademik;
 use App\Model\UserDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DataKelasController extends Controller
 {
@@ -80,25 +82,29 @@ class DataKelasController extends Controller
     public function show($id, Request $request)
     {   
         
+        $tahun_akademik = TahunAkademik::where('id', $request->input('tahun_akademik'))->first();
+        $tahun_akademik_first = explode('/', $tahun_akademik->tahun_akademik);
+        $setting_semester = SettingSemester::first();
         
         $data = UserDetail::where([
             ['role_id', '=', 3],
             ])
-            ->with(['daftar_kelas.kelas' => function($q) use($id) {
-                $q->where([
-
-                    ['id', '!=', $id],
-                    ['id', '=', null]
-                ]);
-        
-            },])
-            // ->whereHas('daftar_kelas', function($q) use($id) {
-            //     $q->where('kelas_id', '!=', $id);
-            // })
-            // ->whereRaw(Carbon::now()->format('Y'). '- tahun_masuk = '. $request->input('kode_kelas'))
-            
-            
-            
+            ->where(function ($query) use($id, $request) {
+                $query->whereHas('daftar_kelas.kelas', function($q) use($id, $request){
+                    $q->where([
+                        [ 'id', '!=', $id ],
+                        [ 'tahun_akademik_id', '=', $request->input('tahun_akademik')]
+                    ]);
+                    
+                });
+                
+                
+            })
+            ->orWhere(function ($query) use($id, $request) {
+                $query->whereNotIn('id', DB::table('daftar_kelas')->select('user_id')); 
+                
+            })
+            ->whereRaw($tahun_akademik_first[0]. '- tahun_masuk = '. $request->input('kode_kelas'))
             ->get();
 
         
