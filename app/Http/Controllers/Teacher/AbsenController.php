@@ -8,6 +8,7 @@ use App\Auth;
 use App\model\AbsenGuru;
 use App\Model\MasterJadwalPelajaran;
 use DB;
+
 class AbsenController extends BaseController
 {
     public function index(Request $request){
