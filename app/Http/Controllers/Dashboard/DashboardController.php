@@ -74,6 +74,7 @@ class DashboardController extends Controller
         ->where([
             ['tahun_akademik_id', '=', $setting_semester->tahun_akademik_id],
         ])
+        ->where('hapus', 0)
         ->get();
         
         // dd($setting_semester);

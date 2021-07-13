@@ -18,7 +18,7 @@ class RppController extends BaseController
         ])->get();
         return view('pages.kelas.rpp', [
             'rpp'=> $rpp,
-            'role_id_user'=> $role_id_user,
+            // 'role_id_user'=> $role_id_user,
 
         ]);
       

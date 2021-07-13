@@ -172,7 +172,7 @@ class DataKelasController extends Controller
          Kelas::where('id', $id)->update([
             'hapus'=> 1
         ]);
-        
+        // Kelas::where('id', $id)->delete();
         return redirect('data_kelas');
     }
 
