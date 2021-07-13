@@ -178,12 +178,12 @@
         </button>
       </div>
       <div class="modal-body">
-      <form action=" {{ url('/data_kelas/store_siswa')}} " method="post">
+      <!--<form action=" {{ url('/data_kelas/store_siswa')}} " method="post">-->
 
-        <input type="text" hidden name="kelas_id" value="{{$row->id}}">
-        <input type="text" hidden name="tahun_id" value="{{$row->tahun_akademik_id}}">
+      <!--  <input type="text" hidden name="kelas_id" value="{{$row->id}}">-->
+      <!--  <input type="text" hidden name="tahun_id" value="{{$row->tahun_akademik_id}}">-->
       
-      @csrf
+      <!--@csrf-->
       <div class="table-responsive">
           <table id="table-siswa{{$row->id}}" class="table">
             <thead>
@@ -220,12 +220,12 @@
 
        
       <div class="modal-footer">
-        <button type="button" class="btn btn-danger" data-dismiss="modal">Batal </button>
-        <button type="submit" class="btn btn-primary">Tambah
-        </button>
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close </button>
+        <!--<button type="submit" class="btn btn-primary">Tambah-->
+        <!--</button>-->
       </div>
 
-      </form>
+      <!--</form>-->
     </div>
   </div>
 </div>
