@@ -123,7 +123,7 @@ class DataMasterGuruController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            // "mapel_id" => $data['mapel_id'],
+            "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
             // 'photo' => $file_formatted
         ]);
@@ -139,7 +139,7 @@ class DataMasterGuruController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            // "mapel_id" => $data['mapel_id'],
+            "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
             // 'photo' => $file_formatted
         ]);
@@ -160,7 +160,7 @@ class DataMasterGuruController extends Controller
             'email' => $data['email'],
             "jenis_kelamin" => $data['jenis_kelamin'],
             "tahun_masuk" => $data['tahun_masuk'],
-            // "mapel_id" => $data['mapel_id'],
+            "mapel_id" => $data['mapel_id'],
             'role_id' => 2,
             'photo' => $file_formatted
         ]);
