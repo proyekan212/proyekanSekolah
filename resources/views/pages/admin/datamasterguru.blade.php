@@ -12,6 +12,35 @@
     <li class="breadcrumb-item active capitalize" aria-current="page" >Data Guru</li>
   </ol>
 </nav>
+<style type="text/css">
+  .upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.btn-upload {
+  border: 1px solid #7367F0;
+  color: #7367F0;
+  background-color: transparent;
+  /*padding: 8px 12px;*/
+  padding: 0.5rem 1rem 0.4rem;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  /*font-weight: bold;*/
+  /*font-weight: 500;*/
+  line-height: 1;
+
+}
+
+.upload-btn-wrapper input[type=file] {
+  /*font-size: 100px;*/
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+</style>
 
 <!-- <div class="alert alert-primary " role="alert">
   <h4 class="alert-heading">Info!</h4>
@@ -24,10 +53,24 @@
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
           <h6 class="card-title mb-0">Daftar Guru</h6>
-          <div class="dropdown mb-2">
-            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah Guru</button>
+                   <div class="dropdown mb-2">
+              <div>
+            <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
+           </div>
+            <form method="post" action="{{url('daftar_guru_kelas_excel_import')}}" enctype="multipart/form-data">
+              @csrf
+
+              <div class="upload-btn-wrapper">
+  <button class="btn-upload btn-outline-primary" type="submit" >Upload CSV file</button>
+  <input type="file" name="file" />
+</div>
+              
+
+            </form>
           </div>
         </div>
+
+
         <div class="table-responsive">
           <table id="dataTableExample" class="table">
             <thead>
@@ -114,7 +157,7 @@
          <div class="col-lg-8">
            <input type="text" class="form-control" name="nama">
          </div>
-       </div>
+       </div> 
        <div class="form-group row">
          <div class="col-lg-3">
            <label class="col-form-label">Tempat Lahir</label>

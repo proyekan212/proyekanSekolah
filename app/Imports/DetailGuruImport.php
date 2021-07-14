@@ -27,7 +27,9 @@ class DetailGuruImport implements ToModel,WithStartRow
        'email' => $row[9],
        // 'user_id' => $row[0],
        'role_id' => 2,
+
        'mapel_id' => 1,
+
 
 
 
