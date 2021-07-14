@@ -8,17 +8,13 @@ use App\Model\User;
 use App\Model\UserDetail;
 use Illuminate\Support\Facades\Hash;
 
-class DaftarKelasSiswaImport implements ToModel, WithStartRow
+class DaftarKelasGuru implements ToModel ,WithStartRow
 {
     /**
     * @param array $row
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
-
-    // HeadingRowFormatter::default('none');
-    // dd($row);
-
     public function model(array $row)
     {
      return new User([
@@ -36,4 +32,3 @@ class DaftarKelasSiswaImport implements ToModel, WithStartRow
 
   }
 }
-
