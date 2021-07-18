@@ -54,8 +54,11 @@
           <h6 class="card-title mb-0">Daftar Siswa</h6>
           <div class="dropdown mb-2">
               <div>
+
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
            </div>
+                <a style="margin-left: -62.5em" href="{{ url('/format_excel/format_daftar_user_siswa') }}">Format Impor Excel Siswa</a>
+
             <form method="post" action="{{url('daftar_siswa_kelas_excel_import')}}" enctype="multipart/form-data">
               @csrf
 

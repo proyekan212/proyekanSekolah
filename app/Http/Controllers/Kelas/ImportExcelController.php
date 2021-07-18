@@ -144,9 +144,14 @@ class ImportExcelController extends Controller
     }
 
 
-    public function index()
+    public function format_daftar_user_guru()
     {
-        //
+        // public_path().'/format_excel'
+         $export = public_path('format_excel/format_daftar_user_guru.csv');
+
+        return Excel::download( $export, 'format_daftar_user_guru.csv');  
+
+
     }
 
     /**

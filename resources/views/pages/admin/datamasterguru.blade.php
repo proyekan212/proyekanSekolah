@@ -57,6 +57,8 @@
               <div>
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target="#TambahData">Tambah  Siswa</button>
            </div>
+                <a style="margin-left: -62.5em" href="{{ url('/format_excel/format_daftar_user_guru.csv') }}">Format Impor Excel Guru</a>
+
             <form method="post" action="{{url('daftar_guru_kelas_excel_import')}}" enctype="multipart/form-data">
               @csrf
 

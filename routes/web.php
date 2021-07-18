@@ -166,6 +166,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('daftar_siswa_kelas_excel', 'Kelas\ExportExcelController@daftar_siswa_kelas');
     Route::post('daftar_siswa_kelas_excel_import', 'Kelas\ImportExcelController@daftar_siswa_kelas_import');
     Route::post('daftar_guru_kelas_excel_import', 'Kelas\ImportExcelController@daftar_guru_kelas_excel_import');    
+    // Route::get('format_daftar_user_guru', 'Kelas\ImportExcelController@format_daftar_user_guru');    
+    // Route::get('format_daftar_user_siswa', 'Kelas\ImportExcelController@format_daftar_user_siswa');    
     Route::get('tambah_jadwal_import', 'Kelas\ImportExcelController@tambah_jadwal_import');
     Route::get('kejadian_jurnal_excel/', 'Kelas\ExportExcelController@kejadian_jurnal');
     Route::get('rekap_absen_excel/', 'Kelas\ExportExcelController@rekap_absen');
