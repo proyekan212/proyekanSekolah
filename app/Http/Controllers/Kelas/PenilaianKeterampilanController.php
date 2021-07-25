@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Model\DaftarKelas;
 use App\Model\KeterampilanKompetensiDasar;
 use App\Model\MasterSkemaKeterampilan;
+use App\Model\StudentNotifications;
 
 class PenilaianKeterampilanController extends Controller
 {
@@ -81,9 +82,17 @@ class PenilaianKeterampilanController extends Controller
         ];
         $request->validate($rules);
         $kompetensi_dasar = "";
-
        
+        $siswas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))->get();
+           foreach($siswas as $siswa ) {
+               StudentNotifications::create([
+                   'siswa_id' => $siswa->user_detail->user_id,
+                   'guru_id' => $request->user()->id,
+                   'descriptions' => 'tugas keterampilan ',
+                   'kelas_mapel_id' => $request->session()->get('kelas_mapel')
 
+               ]);
+           }
         
 
         // dd($request->all());
@@ -131,6 +140,8 @@ class PenilaianKeterampilanController extends Controller
         $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
         $data = MasterPenilaianKeterampilan::findOrFail($id);
         $skema = MasterSkemaKeterampilan::get();
+
+        
         return view('pages.kelas.PenilaianKd4edit', [
             'kompetensi_dasar'=> $kompetensi_dasar,
             'datas'=> $data,

@@ -11,6 +11,7 @@ use App\Model\DaftarKelas;
 use App\Model\MasterKompetensiInti;
 use App\Model\MasterSkemaKeterampilan;
 use App\Model\MasterSkemaPengetahuan;
+use App\Model\StudentNotifications;
 
 class PenilaianPengetahuanController extends Controller
 {
@@ -78,7 +79,16 @@ class PenilaianPengetahuanController extends Controller
         // dd($request->all());
         $data = $request->all();
         //    dd($data);
-           
+           $siswas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))->get();
+           foreach($siswas as $siswa ) {
+               StudentNotifications::create([
+                   'siswa_id' => $siswa->user_detail->user_id,
+                   'guru_id' => $request->user()->id,
+                   'descriptions' => 'tugas pengetahuan ',
+                   'kelas_mapel_id' => $request->session()->get('kelas_mapel')
+
+               ]);
+           }
            MasterPenilaianPengetahuan::create([
             'pertemuan' => $request->pertemuan,
             'kelas_mapel_id' => $request->session()->get('kelas_mapel'),

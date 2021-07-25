@@ -15,6 +15,11 @@ class CreateStudentNotificationsTable extends Migration
     {
         Schema::create('student_notifications', function (Blueprint $table) {
             $table->id();
+            $table->integer('siswa_id');
+            $table->integer('guru_id');
+            $table->string('descriptions');
+            $table->integer('kelas_mapel_id');
+            $table->smallInteger('read')->default(0);
             $table->timestamps();
         });
     }
