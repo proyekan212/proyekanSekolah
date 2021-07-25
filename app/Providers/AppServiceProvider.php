@@ -122,7 +122,7 @@ $kelas_mapel_session = $this->app->request->session()->get('kelas_mapel');
             if($user != null) {
                 if($user->user_detail->role_id == 3) {
                     $notifications = StudentNotifications::where('siswa_id', $user->id)->get();
-                     
+                      
                 }
 
                 else if($user->user_detail->role_id == 2) {
