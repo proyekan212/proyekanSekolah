@@ -7,6 +7,8 @@ use App\Model\Menu;
 use App\Model\MenuKelas;
 use App\Model\MenuRole;
 use App\Model\MenuRoleKelas;
+use App\Model\StudentNotifications;
+use App\Model\TeacherNotifications;
 use App\Model\User;
 use App\Model\UserDetail;
 use View;
@@ -112,5 +114,27 @@ $kelas_mapel_session = $this->app->request->session()->get('kelas_mapel');
 
             $view->with('kelas_mapel_session', $kelas_mapel_session);
         });
+
+
+        View::composer('*', function($view) {
+            $user = $this->app->request->user();
+            $notifications = null;
+            if($user != null) {
+                if($user->user_detail->role_id == 3) {
+                    $notifications = StudentNotifications::where('siswa_id', $user->id)->get();
+                     
+                }
+
+                else if($user->user_detail->role_id == 2) {
+                    $notifications = TeacherNotifications::where('guru_id', $user->id)->get();
+                     
+                }
+                
+                
+            }
+
+            $view->with('notifications', $notifications);
+        });
+
     }
 }

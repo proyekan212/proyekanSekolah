@@ -7,9 +7,9 @@
 @endpush
 
 @section('content')
-<div class="grid md:grid-cols-2 gap-4">
+<div class="">
   <div class="flex flex-col justify-center">
-      <div class="md:mt-4 mt-2">
+      <div class="w-64 md:mt-4 mt-2">
         
         <div class="w-full h-full bg-white rounded-xl md:p-6 p-4">
         <h5 class="md:text-center">
@@ -51,11 +51,15 @@
 
                 <div class="card">
                       <div class="card-header flex justify-between items-center" id="headingOne">
-                      <h5 class="mb-0">
-                          <button class="btn capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapse{{$row->id}}">
+                      <h5 class="mb-0 flex-col flex">
+                          <button class="btn  capitalize btn-link" data-toggle="collapse" data-target="#collapse{{$row->id}}" aria-expanded="true" aria-controls="collapse{{$row->id}}">
                               {{$row->pertemuan}}
-                            
+                             
                           </button>
+                        <span class="text-gray-600">
+                        Dibuat: {{$row->created_at->format('j-F-Y')}}
+
+                        </span>
                       </h5>
                       @if($row->tugas_pengetahuan->count() > 0) 
                           <span class="text-green-400">
@@ -88,7 +92,7 @@
                                   check
                                 <i class="fas fa-eye"></i>
                               </a>
-        
+                             
 
 
                                 <form method="post" onclick="deleteData('{{$row->id}}', this)" class="pl-16" action="{{url('tugas_siswa_pengetahuan', $row->tugas_pengetahuan[0]->id)}}" >
@@ -103,6 +107,9 @@
                                   
                                 </form>
                               </div>
+                              <p class="text-xs text-gray-600">
+                                mengumpulkan pada tanggal : {{$row->tugas_pengetahuan->first()->created_at->format('j-F-Y')}}
+                                </p>
                               @else
 
                               <form enctype="multipart/form-data" action="{{ URL ('tugas_siswa_pengetahuan')}}" method="post" >

@@ -20,18 +20,18 @@
                    </a>
                    <div class="absolute -top-3 -right-5 bg-blue-400 text-white h-7 w-7 rounded-full flex items-center justify-center">
                      <span class="font-bold">
-                      {{--  @if($notifications->count() > 100)
+                       @if($notifications->count() > 100)
                         99+
                       @else 
                         {{$notifications->count()}}
-                      @endif --}}
+                      @endif 
                      </span>
                   </div>
                   <div id="notif" style="display: none;width:300px; top: 35px; left: -2px; height: 300px;" class="absolute shadow-md rounded-xl bg-white  ">
                     <div style="height:285px" class="w-full overflow-y-scroll overflow-x-hidden">
                       <ul class="px-2 pt-4">
-                        
-                      {{--   @if($notifications != null)
+                      
+                       @if($notifications != null)
                              @foreach($notifications as $notif) 
                             @if($notif->read == 1)
                               <li class="p-2 rounded-lg bg-gray-100 mb-2 "> 
@@ -53,18 +53,98 @@
                                         {{$notif->kelas_mapel->kelas->master_kelas->kode_kelas->kode}}  {{$notif->kelas_mapel->kelas->master_kelas->jurusan->jurusan}}
                                       {{$notif->kelas_mapel->kelas->master_kelas->kelas}}
                                      </span>
-                                    </span>
-                                  </div>
 
-                                  <div class="mb-2 font-semibold capitalize">
-                                    {{$notif->descprition}} {{$notif->kelas_mapel->master_mapel->nama_mapel}}
-                                  </div>
 
+                                 </div>
+                                 <div>
+
+                                 <span>
+                                      {{$notif->description}}
+                                     </span>
+            
                                  </div>
                               </li>
                             @endif
                           @endforeach
-                        @endif --}}
+                        @endif 
+                    
+                      </ul>
+
+                     
+                    </div>
+                  </div>
+            </div>
+          @elseif(Auth::user()->user_detail->role_id == 3)
+          <div class="relative mr-4">
+                  <a onclick="showNotifications()" class="cursor-pointer relative text-gray-600 focus:text-gray-800 hover:text-gray-800">
+                    <span class="material-icons">
+                      notifications
+                    </span>
+                
+                   </a>
+                   <div class="absolute -top-3 -right-5 bg-blue-400 text-white h-7 w-7 rounded-full flex items-center justify-center">
+                     <span class="font-bold">
+                       @if($notifications != null)
+                          @if($notifications->count() > 100)
+                            99+
+                          @else 
+                            {{$notifications->count()}}
+                          @endif
+
+                        @else
+                          0
+                        @endif 
+                     </span>
+                  </div>
+                  <div id="notif" style="display: none;width:300px; top: 35px; left: -2px; height: 300px;" class="absolute shadow-md rounded-xl bg-white  ">
+                    <div style="height:285px" class="w-full overflow-y-scroll overflow-x-hidden">
+                      <ul class="px-2 pt-4">
+                      
+                       @if($notifications != null)
+                             @foreach($notifications as $notif) 
+                            @if($notif->read == 1)
+                              <li class="p-2 rounded-lg bg-gray-100 mb-2 "> 
+                                {{$notif->kelas_mapel->kelas}}
+                              </li>
+
+                            @else 
+                              <li class="p-2 text-white mb-2 break-all overflow-x-hidden  rounded-lg bg-green-400 "> 
+                                 <div class=" mb-2">
+                                  <div class="flex-col flex">
+                                    <span class="text-sm mb-1">
+                                      Guru: {{$notif->guru->user_detail->name}}
+                                    </span>
+                                    <span class="text-xs mb-1">
+                                      Nip:
+                                      
+                                      <span class="font-bold uppercase"> {{$notif->siswa->user_detail->nisn_or_nip}} </span>
+                                    </span>
+                                    <span class="text-xs  ">
+                                     Kelas: <span class="font-bold uppercase">
+                                        {{$notif->kelas_mapel->kelas->master_kelas->kode_kelas->kode}}  {{$notif->kelas_mapel->kelas->master_kelas->jurusan->jurusan}}
+                                      {{$notif->kelas_mapel->kelas->master_kelas->kelas}}
+                                     </span>
+                                    </span>
+
+                                     <span class="text-xs  ">
+                                     Mapel: <span class="font-bold uppercase">
+                                        {{$notif->kelas_mapel->master_mapel->nama_mapel}}  
+                                     </span>
+                                     </span>
+
+
+                                 </div>
+                                 <div>
+
+                                 <span>
+                                      {{$notif->descriptions}}
+                                     </span>
+            
+                                 </div>
+                              </li>
+                            @endif
+                          @endforeach
+                        @endif 
                     
                       </ul>
 
@@ -72,8 +152,6 @@
                     </div>
                   </div>
         </div>
-          @elseif(Auth::user()->user_detail->role_id == 3)
-
           @endif
           <a href="{{ url('/edit_password' , Auth::user()->id)}}" class="p-2 flex items-center">
           <i data-feather="user"></i><span>change password</span>
@@ -116,8 +194,7 @@
           </ul>
         </div>
       </div>
-    </li>
-  </ul>
+    </li> 
 </div>
 
 </nav>

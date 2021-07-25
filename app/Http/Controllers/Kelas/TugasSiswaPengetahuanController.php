@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
+use App\Model\MasterJadwalPelajaran;
+use App\Model\TeacherNotifications;
 use Illuminate\Http\Request;
 use File;
 use App\Model\TugasSiswaPengetahuan;
@@ -41,6 +43,15 @@ class TugasSiswaPengetahuanController extends Controller
         $filename = time().'.'.$file->getClientOriginalName();
         $file_formatted = str_replace(' ', '_', $filename);
         $file->move('tugas/pengetahuan', $file_formatted);
+        $kelas_mapel = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+
+        TeacherNotifications::create([
+            'kelas_mapel_id' => $kelas_mapel->id,
+            'guru_id' => $kelas_mapel->user_id,
+            'description' => "mengumpulkan tugas pengetahuan",
+            'siswa_id' => $request->user()->id, 
+        ]); 
+        
          TugasSiswaPengetahuan::create([
             'user_id' => $request->user()->id,
             'filename_path' => $file_formatted,
