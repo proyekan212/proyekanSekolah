@@ -37,7 +37,7 @@
             <thead>
               <tr>
                 <th>No</th>
-                <th>FOTO</th>
+                <!-- <th>FOTO</th> -->
                 <th>NISN</th>
                 <th>NAMA</th>
                 <th>L/P</th>
@@ -51,7 +51,7 @@
               @foreach($siswa as $index => $row)
               <tr>
                 <td>{{$index+1}}</td>
-                <td>{{$row->user_detail->photo}}</td>
+                <!-- <td>{{$row->user_detail->photo}}</td> -->
                 <td>{{$row->user_detail->nisn_or_nip}}</td>
                 <td>{{$row->user_detail->name}}</td>
                 <td class="capitalize">{{$row->user_detail->jenis_kelamin}}</td>

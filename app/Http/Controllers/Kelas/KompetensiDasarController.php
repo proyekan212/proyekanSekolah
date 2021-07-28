@@ -6,46 +6,48 @@ use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Http\Request;
 use App\Auth;
 use App\Model\MasterKompetensiInti;
+use App\Model\KompetensiDasar;
+use App\Model\KompetensiDasarPerKelas;
 use App\Model\SettingSemester;
 use DB;
 class KompetensiDasarController extends BaseController
 {
     public function index(){
+        $semester_id = SettingSemester::first();
+
         return view('pages.kelas.kompetensidasar', [
             'kompetensi_inti' => MasterKompetensiInti::all(),
-            'semester' => SettingSemester::first(),
-            // 'kompetensi_inti' => MasterKompetensiInti::all(),
+            'semester' => $semester_id->semester_id,
+            'kompetensi_dasar' => KompetensiDasar::where('semester_id' , $semester_id->semester_id)->get(),
         ]);
     }
 
-      public function store(Request $request)
+    public function store(Request $request)
     {   
-       // $data = $request->all();
-    //    dd($data);
+   
+    
+        $semester_id = SettingSemester::first();
 
 
+        foreach ($request->kompetensi_dasar as $key => $value) {
 
-     MasterKejadianJurnal::create([
-        'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
-        'waktu' => $request->input('waktu'),
-        'kejadian' => $request->input('kejadian'),
-        'tindakan' => $request->input('tindakan'),
-        'tindak_lanjut' => $request->input('tindak_lanjut'),
-        'butir_sikap' => $request->input('butir_sikap'),
-        'user_id' => $request->input('user_id')     
-    ]);
+          $kompetensi_inti_id = KompetensiDasar::where('id' , $value)->first();
+           KompetensiDasarPerKelas::create([
+            'kelas_mapel_id' => $request->session()->get('kelas_mapel'),
+            'semester_id' => $semester_id->semester_id,
+            // 'tahun_akademik_id' => $semester_id->tahun_akademik_id,
+            'kompetensi_dasar_id' => $value,
+            'kompetensi_inti_id' => $kompetensi_inti_id->kompetensi_inti_id,
+        ]);
+       }
 
+ 
 
- //    MasterKejadianJurnal::create(
- //     $data
+       return redirect('kelas/kompetensi_dasar');
+   }
 
- // );
-
-    return redirect('kelas/kejadian_jurnal');
+   public function __construct()
+   {
+    $this->middleware('auth');
 }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
 }

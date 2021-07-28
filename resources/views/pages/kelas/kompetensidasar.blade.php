@@ -18,10 +18,10 @@
     <div class="card">
       <div class="card-body">
         <div class="d-flex justify-content-between align-items-baseline mb-2">
-          <h6 class="card-title mb-0">Kompetensi Inti(KI) dan Kompetensi Dasar (KD) MIPA X-MIPA-1_MIPA Biologi</h6>
-         <!--  <div class="dropdown mb-2">
+          <!-- <h6 class="card-title mb-0">Kompetensi Inti(KI) dan Kompetensi Dasar (KD) MIPA X-MIPA-1_MIPA Biologi</h6> -->
+          <div class="dropdown mb-2">
             <button type="button" class="btn btn-outline-success" data-toggle="modal" data-target=".TambahData">Sesuaikan Kompetensi</button>
-          </div> -->
+          </div>
         </div>
         
         <div class="table-responsive">
@@ -100,7 +100,42 @@
     </div>
   </div>
 </div>
-
+<div class="modal fade TambahData" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-xl" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Kompetensi Dasar</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="{{ url('kelas/kompetensi_dasar')}}">
+        @csrf
+      <div class="form-group mb-0 row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
+            </div>
+            <div class="col-lg-8">
+                @foreach($kompetensi_dasar as $data) 
+                    <p class="flex items-center mb-1 md:mb-2">
+                      <input type="checkbox" name="kompetensi_dasar[]" value="{{$data->id}}">
+                      <span class=" capitalize pl-2 text-xs lg:text-sm">
+                      {{$data->nama_kompetensi_dasar}}
+                      </span>
+                    </p>   
+                @endforeach
+            </div>
+          </div>
+           </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal </button>
+        <button type="submit" class="btn btn-success">Simpan</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
 @endsection
 
 @push('plugin-scripts')

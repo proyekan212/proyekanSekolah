@@ -12,6 +12,7 @@ use App\Model\MasterKompetensiInti;
 use App\Model\MasterSkemaKeterampilan;
 use App\Model\MasterSkemaPengetahuan;
 use App\Model\StudentNotifications;
+use App\Model\KompetensiDasarPerKelas;
 
 class PenilaianPengetahuanController extends Controller
 {
@@ -23,7 +24,8 @@ class PenilaianPengetahuanController extends Controller
     public function index(Request $request)
     {   
         
-        $kompetensi_dasar = MasterKompetensiInti::get();
+        // $kompetensi_dasar = MasterKompetensiInti::get();
+           $kompetensi_dasar = KompetensiDasarPerKelas::where('kompetensi_inti_id', 1)->where('kelas_mapel_id',$request->session()->get('kelas_mapel'))->get();
         $DaftarKelas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))
         ->with(['kelas.jadwal_pelajaran' => function($q) use($request) {
             $q->where('id', $request->session()->get('kelas_mapel'));

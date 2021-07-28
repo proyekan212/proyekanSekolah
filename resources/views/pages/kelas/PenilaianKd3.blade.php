@@ -150,7 +150,7 @@
               <input class="form-control" type="number" maxlength="10" name="penilaian_harian" id="defaultconfig-3" placeholder="Type Something..">
             </div>
           </div>
-          <div class="form-group mb-0 row">
+        <!--   <div class="form-group mb-0 row">
             <div class="col-lg-3">
               <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
             </div>
@@ -159,7 +159,7 @@
          
                     @foreach($kompetensi_dasar as $index => $row) 
 
-                      @if($row->name == 'pengetahuan')
+                      @if($row->kompetensi_dasar->name == 'pengetahuan')
                         @foreach($row->kompetensi_dasar as $kd)
                           <option value="{{$kd->id}}">
                            {{$row->kode}}.{{$kd->id}} {{$kd->nama_kompetensi_dasar}}
@@ -170,6 +170,20 @@
                     @endforeach
               </select>
             </div>
+          </div> -->
+            <div class="form-group mb-0 row">
+            <div class="col-lg-3">
+              <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
+            </div>
+            <div class="col-lg-8">
+              <select name="kompetensi_dasar_id" class="form-control form-control-sm mb-3">
+              @foreach($kompetensi_dasar as $data) 
+               <option value="{{$data->kompetensi_dasar->id}}">
+                {{$data->kompetensi_dasar->nama_kompetensi_dasar}}
+              </option>   
+              @endforeach
+            </select>
+          </div>
           </div>
           <!--  -->
           <div class="form-group mb-0 row">
