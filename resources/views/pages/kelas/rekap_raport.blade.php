@@ -68,18 +68,18 @@
                     @foreach($kompetensi_dasar_keterampilan as $kd_keterampilan)
                       <tr>
                           <td>
-                            {{$kd_keterampilan->kompetensi_inti->kode}}.{{$kd_keterampilan->id}}
+                            {{$kd_keterampilan->kompetensi_dasar->kompetensi_inti->kode}}.{{$kd_keterampilan->kompetensi_dasar_id}}
                           </td>
                           <?php
                             $nilai_akhir = 0;
                         ?>
                         @foreach($skema_keterampilan as $ske)
                             <?php 
-                              $nilai_akhir =  $nilai_akhir + (int) $ske->by_siswa($row->user_detail->id, $kd_keterampilan->id);
+                              $nilai_akhir =  $nilai_akhir + (int) $ske->by_siswa($row->user_detail->id, $kd_keterampilan->kompetensi_dasar->id);
                               
                             ?>
                             <td>
-                              {{$ske->by_siswa($row->user_detail->id, $kd_keterampilan->id)}}
+                              {{$ske->by_siswa($row->user_detail->id, $kd_keterampilan->kompetensi_dasar->id)}}
                             </td>
                         @endforeach
 
@@ -108,7 +108,7 @@
                     @else
                     <tr>
                           <td>
-                            {{$kompetensi_dasar_keterampilan->first()->kompetensi_inti->kode}}.{{$kompetensi_dasar_keterampilan->first()->id}}
+                            {{$kompetensi_dasar_keterampilan->first()->kompetensi_dasar->kompetensi_inti->kode}}.{{$kompetensi_dasar_keterampilan->first()->kompetensi_dasar->id}}
                           </td>
                           <?php
                           
@@ -197,7 +197,7 @@
                     ?>
                       <tr>
                         <td>
-                          {{$kd->kompetensi_inti->kode}}.{{$kd->id}}
+                          {{$kd->kompetensi_dasar->kompetensi_inti->kode}}.{{$kd->kompetensi_dasar->id}}
                         </td>
 
                         @foreach($skema_pengetahuan as $ske)
@@ -244,17 +244,17 @@
                     </td>
 
                     <td>
-                      {{$kompetensi_dasar_pengetahuan->first()->kompetensi_inti_id}}.{{$kompetensi_dasar_pengetahuan->first()->id}}
+                      {{$kompetensi_dasar_pengetahuan->first()->kompetensi_dasar->kompetensi_inti_id}}.{{$kompetensi_dasar_pengetahuan->first()->kompetensi_dasar->id}}
                     </td>
                       <?php 
                         $nilai_akhir_k = 0;
                       ?>
                     @foreach($skema_pengetahuan as $ske)
                       <?php 
-                        $nilai_akhir_k += (int)  $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->id);
+                        $nilai_akhir_k += (int)  $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->kompetensi_dasar->id);
                       ?>
                       <td>
-                        $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->id)
+                        $ske->by_siswa($row->user_detail->id, $kompetensi_dasar_pengetahuan->first()->kompetensi_dasar->id)
                       </td>
                     @endforeach
                     <td>

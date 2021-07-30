@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Kelas;
 
 use App\Http\Controllers\Controller;
+use App\Model\DaftarKelas;
 use App\Model\UserDetail;
 use Illuminate\Http\Request;
 
@@ -14,13 +15,10 @@ class PenilaianSemesterController extends Controller
      *
      * @return \IlluminatUserDetail::all()e\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {   
-
-        $siswa = UserDetail::with(['role' => function($query) {
-            $query->where('name_role', '=', 'siswa');
-        }])->get();
-        
+        // dd($request->session()->get('kelas_id'));
+        $siswa = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))->get();
         return view('pages.kelas.PenilaianSemester', [
             'siswa'=> $siswa
         ]

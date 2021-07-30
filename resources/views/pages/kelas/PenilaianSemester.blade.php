@@ -49,11 +49,11 @@
                 
                 <tr>
                   <td>{{$index+1}}</td>
-                  <td>{{$row->photo}}</td>
-                  <td>{{$row->nisn_or_nip}}</td>
-                  <td class="capitalize">{{$row->name}}</td>
-                  <td>{{$row->jenis_kelamin}}</td>
-                  <td class="capitalize">{{$row->tempat_lahir}}, {{$row->tanggal_lahir}}</td>
+                  <td>{{$row->user_detail->photo}}</td>
+                  <td>{{$row->user_detail->nisn_or_nip}}</td>
+                  <td class="capitalize">{{$row->user_detail->name}}</td>
+                  <td>{{$row->user_detail->jenis_kelamin}}</td>
+                  <td class="capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
                   <td>0</td>
                   <td>0</td>
                 </tr>

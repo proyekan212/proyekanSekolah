@@ -120,7 +120,7 @@
               <select name="pertemuan" class="form-control form-control-sm mb-3">
                   <option selected>- Pilih Pertemuan -</option>
                   <?php
-                    for ($x = 1; $x <= 4; $x++) { 
+                    for ($x = 1; $x <= $kelas_mapel->pertemuan; $x++) { 
                       echo "<option value='pertermuan $x'> pertemuan $x</option> ";
                     }
                   ?>
@@ -158,15 +158,9 @@
               <select name="kompetensi_dasar_id" class="form-control form-control-sm mb-3">
          
                     @foreach($kompetensi_dasar as $index => $row) 
-
-                      @if($row->kompetensi_dasar->name == 'pengetahuan')
-                        @foreach($row->kompetensi_dasar as $kd)
-                          <option value="{{$kd->id}}">
-                           {{$row->kode}}.{{$kd->id}} {{$kd->nama_kompetensi_dasar}}
-                          </option>
-                        @endforeach
-                  
-                      @endif
+                    <option value="{{$row->kompetensi_dasar_id}}">
+                      {{$row->kompetensi_dasar->nama_kompetensi_dasar}}
+                    </option>
                     @endforeach
               </select>
             </div>
