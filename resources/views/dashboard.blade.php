@@ -101,8 +101,8 @@
 @else
   @if(Auth::user()->id != '1')
   <!-- -->
-  <div class="grid bg-gray-100 rounded-xl grid-cols-1 md:p-6 p-4 md:grid-cols-3 md:gap-x-4 gap-y-4">
-    <div class="md:col-span-2">
+  <div class="grid bg-gray-100 rounded-xl grid-cols-1 md:p-6 p-4 md:grid-cols-2 md:gap-x-4 gap-y-4">
+    <div class="md:col-span-1">
       <div class="w-full h-full relative flex flex-col md:justify-end">
         <div class="flex items-center ">
            @if($user_detail->photo == null)
@@ -126,12 +126,15 @@
         </div>
       </div>
     </div>
-    <div class="md:col-span-1 mt-4 md:mt-0">
-      <h4>
+    <div class="md:col-span-1  mt-4 md:mt-0">
+      <h4 class="text-center font-bold md:text-xl ">
         Create Kelas
       </h4>
-      <div class="flex flex-col">
       <form action="{{ url('dashboard')}}" method="post">
+      <div class="grid md:gap-x-6 gap-y-4 grid-cols-1 grid">
+   
+      <div class="flex flex-col">
+        
         @csrf
         <div class="py-2 flex flex-col">
             <Label>Kelas</Label>
@@ -168,13 +171,43 @@
             </select>
           </div>
         
-          <div class="md:mt-4 mt-2 flex justify-end">
+       
+      </div>
+      <div class="">
+        Kompetensi dasar
+        <div style="height:200px;"  class="overflow-x-scroll bg-white p-4 w-full border-gray-200 border-2">
+          <ul>
+          @foreach($kompetensi as $kompetensi) 
+            <li class=" mb-3 font-bold capitalize text-base">
+              {{$kompetensi->name}}
+              
+              <ul class="mt-1">
+                @foreach($kompetensi->kompetensi_dasar as $kd)
+                  <li class="font-normal flex items-center text-sm mb-2">
+                    <input type="checkbox" value="{{$kd->id}}" name="kompetensi_dasar[]">
+                    <span class="pl-2">
+                    {{$kd->nama_kompetensi_dasar}}
+                    </span>
+                  </li>
+                @endforeach
+              
+              </ul>
+
+            </li>
+          @endforeach
+          </ul>
+        </div>
+      </div>
+
+
+      <div class="md:mt-4 mt-2 flex justify-end">
             <button class="bg-blue-500 rounded-xl text-white md:py-2 md:px-6 py-1 md:px-4">
               Create
             </button>
           </div>
-        </form>
+
       </div>
+      </form>
     </div> 
   </div>
   @else

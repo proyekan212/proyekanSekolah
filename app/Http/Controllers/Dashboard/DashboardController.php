@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Dashboard;
 use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
 use App\Model\Kelas;
+use App\Model\KompetensiDasarKelasMapel;
 use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterJurusan;
 use App\Model\MasterKelas;
+use App\Model\MasterKompetensiInti;
 use App\Model\MasterMapel;
 use App\Model\MasterSemester;
 use App\Model\TeacherNotifications;
@@ -34,14 +36,7 @@ class DashboardController extends Controller
 
         $notifications = null;
 
-        if($request->user()->user_detail->role_id == 2) {
-
-            $notifications = TeacherNotifications::get();
-        }
-
-        else if($request->user()->user_detail->role_id == 3) {
-            $notifications = null;
-        }
+        $kompetensi = MasterKompetensiInti::get();
 
         // untuk siswa
         $mapel = MasterJadwalPelajaran::all();
@@ -88,7 +83,8 @@ class DashboardController extends Controller
             'kelas' => $kelas,
             'user' => $user,
             'user_detail' => $user_detail,
-            'notifications' => $notifications
+            'notifications' => $notifications,
+            'kompetensi' => $kompetensi
             // 'menu' => $menu
         ]);
     }
@@ -112,13 +108,24 @@ class DashboardController extends Controller
     public function store(Request $request)
     {
         $setting = SettingSemester::first();
-        MasterJadwalPelajaran::create([
+        $kelas_mapel = MasterJadwalPelajaran::create([
             'mapel_id' => $request->input('mapel'),
             'kelas_id' => $request->input('kelas'),
             'user_id' => $request->user()->id,
             'semester_id' => $setting->semester->id,
 
         ]);
+
+
+        $kd = $request->input('kompetensi_dasar');
+
+        foreach($kd as $kompetensi_dasar) {
+            KompetensiDasarKelasMapel::create([
+                'kompetensi_dasar_id' => $kompetensi_dasar,
+                'kelas_mapel_id' => $kelas_mapel->id
+            ]);
+        }
+        // dd($request->input(['kompetensi_dasar']));
 
         return redirect('/dashboard');
     }
@@ -154,7 +161,7 @@ class DashboardController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+    //
     }
 
     /**

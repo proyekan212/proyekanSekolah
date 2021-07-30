@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Kelas;
 use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
 use App\Model\KompetensiDasar;
+use App\Model\KompetensiDasarKelasMapel;
 use App\Model\MasterPenilaianKeterampilan;
 use App\Model\MasterPenilaianPengetahuan;
 use App\Model\MasterSkemaKeterampilan;
@@ -26,10 +27,23 @@ class RekapRaportController extends Controller
             $q->where('id', $request->session()->get('kelas_mapel'));
         }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
         ->get();
-        
         // keterampilan
         $skema_keterampilan = MasterSkemaKeterampilan::get();
-        $kompetensi_dasar_keterampilan = KompetensiDasar::where('kompetensi_inti_id', '2')->get();
+
+
+        $kompetensi_dasar_keterampilan = KompetensiDasarKelasMapel::
+        with('kompetensi_dasar')
+        ->
+        where([
+            ['kelas_mapel_id' ,'=', $request->session()->get('kelas_mapel')],
+            
+        ])
+        ->whereHas('kompetensi_dasar.kompetensi_inti', function($q) {
+            $q->where('kode', '=', '4');
+        })
+        ->get();
+
+
         $keterampilan = MasterPenilaianKeterampilan::where('kelas_mapel_id', $request->session()->get('kelas_mapel') )
         ->get();
         
@@ -38,7 +52,18 @@ class RekapRaportController extends Controller
         $skema_pengetahuan = MasterSkemaPengetahuan::get();
         $pengetahuan = MasterPenilaianPengetahuan::where('kelas_mapel_id', $request->session()->get('kelas_mapel'))
         ->get();
-        $kompetensi_dasar_pengetahuan = KompetensiDasar::where('kompetensi_inti_id', '1')->get();
+        $kompetensi_dasar_pengetahuan = KompetensiDasarKelasMapel::
+        with('kompetensi_dasar')
+        ->
+        where([
+            ['kelas_mapel_id' ,'=', $request->session()->get('kelas_mapel')],
+            
+        ])
+        ->whereHas('kompetensi_dasar.kompetensi_inti', function($q) {
+            $q->where('kode', '=', '3');
+        })
+        ->get();
+        
         // dd($keterampilan);s
         return view('pages.kelas.rekap_raport', 
             [

@@ -8,6 +8,8 @@ use App\Model\MasterPenilaianPengetahuan;
 use Illuminate\Http\Request;
 
 use App\Model\DaftarKelas;
+use App\Model\KompetensiDasarKelasMapel;
+use App\Model\MasterJadwalPelajaran;
 use App\Model\MasterKompetensiInti;
 use App\Model\MasterSkemaKeterampilan;
 use App\Model\MasterSkemaPengetahuan;
@@ -23,7 +25,18 @@ class PenilaianPengetahuanController extends Controller
     public function index(Request $request)
     {   
         
-        $kompetensi_dasar = MasterKompetensiInti::get();
+        $kompetensi_dasar = KompetensiDasarKelasMapel::
+        with('kompetensi_dasar')
+        ->
+        where([
+            ['kelas_mapel_id' ,'=', $request->session()->get('kelas_mapel')],
+            
+        ])
+        ->whereHas('kompetensi_dasar.kompetensi_inti', function($q) {
+            $q->where('kode', '=', '3');
+        })
+        ->get();
+        
         $DaftarKelas = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))
         ->with(['kelas.jadwal_pelajaran' => function($q) use($request) {
             $q->where('id', $request->session()->get('kelas_mapel'));
@@ -34,14 +47,15 @@ class PenilaianPengetahuanController extends Controller
             ['kelas_mapel_id', $request->session()->get('kelas_mapel')]
         ])
         ->get();
-
+        $kelas_mapel = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
         $skema = MasterSkemaKeterampilan::get();
         
         return view('pages.kelas.PenilaianKd3', [
             'kompetensi_dasar'=> $kompetensi_dasar,
             'datas'=> $datas,
             'daftar_kelas'=> $DaftarKelas,
-            'skema' => $skema
+            'skema' => $skema,
+            'kelas_mapel' => $kelas_mapel
         ]);
 
         // $kompetensi_dasars = KompetensiDasar::all();

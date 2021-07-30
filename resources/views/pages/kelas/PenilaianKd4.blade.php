@@ -171,11 +171,11 @@
               <label class="col-form-label">Kompetensi Dasar (KD) (*)</label>
             </div>
             <div class="col-lg-8">
-                @foreach($kompetensi_dasar as $data) 
+                @foreach($kompetensi_dasar as $kd) 
                     <p class="flex items-center mb-1 md:mb-2">
-                      <input type="checkbox" name="kompetensi_dasar[]" value="{{$data->id}}">
+                      <input type="checkbox" name="kompetensi_dasar[]" value="{{$data->kompetensi_dasar_id}}">
                       <span class=" capitalize pl-2 text-xs lg:text-sm">
-                      {{$data->nama_kompetensi_dasar}}
+                      {{$kd->kompetensi_dasar->nama_kompetensi_dasar}}
                       </span>
                     </p>   
                 @endforeach

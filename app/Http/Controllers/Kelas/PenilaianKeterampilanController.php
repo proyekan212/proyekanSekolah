@@ -8,6 +8,7 @@ use App\Model\MasterPenilaianKeterampilan;
 use Illuminate\Http\Request;
 use App\Model\DaftarKelas;
 use App\Model\KeterampilanKompetensiDasar;
+use App\Model\KompetensiDasarKelasMapel;
 use App\Model\MasterSkemaKeterampilan;
 use App\Model\StudentNotifications;
 
@@ -20,6 +21,18 @@ class PenilaianKeterampilanController extends Controller
      */
     public function index(Request $request)
     {
+
+        $kompetensi_dasar = KompetensiDasarKelasMapel::
+        with('kompetensi_dasar')
+        ->
+        where([
+            ['kelas_mapel_id' ,'=', $request->session()->get('kelas_mapel')],
+            
+        ])
+        ->whereHas('kompetensi_dasar.kompetensi_inti', function($q) {
+            $q->where('kode', '=', '4');
+        })
+        ->get();
         // $DaftarKelas = DaftarKelas::with('kelas.jadwal_pelajaran.penilaian_keterampilan')
         // ->
         // where([
@@ -36,7 +49,6 @@ class PenilaianKeterampilanController extends Controller
             $q->where('id', $request->session()->get('kelas_mapel'));
         }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
         ->get();
-        $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
         $skema = MasterSkemaKeterampilan::get();
         $datas = MasterPenilaianKeterampilan::with(['jadwal_pelajaran.kelas.daftar_kelas'])->
             where([
