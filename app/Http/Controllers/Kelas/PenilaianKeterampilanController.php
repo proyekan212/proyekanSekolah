@@ -50,15 +50,6 @@ class PenilaianKeterampilanController extends Controller
             $q->where('id', $request->session()->get('kelas_mapel'));
         }, 'kelas.jadwal_pelajaran.penilaian_keterampilan'])
         ->get();
-<<<<<<< HEAD
-        // $kompetensi_dasar = KompetensiDasar::where('kompetensi_inti_id', 2)->get();
-// foreach ($kompetensi_dasar as $key => $value) {
-    
-
-        $kompetensi_dasar = KompetensiDasarPerKelas::where('kompetensi_inti_id', 2)->where('kelas_mapel_id',$request->session()->get('kelas_mapel'))->get();
-    // dd($kompetensi_dasar);
-=======
->>>>>>> verrandy
         $skema = MasterSkemaKeterampilan::get();
         $datas = MasterPenilaianKeterampilan::with(['jadwal_pelajaran.kelas.daftar_kelas'])->
             where([
