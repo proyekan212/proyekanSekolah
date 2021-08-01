@@ -49,6 +49,8 @@ class PenilaianPengetahuanController extends Controller
         ])
         ->get();
         $kelas_mapel = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+        // dd($request->session()->get('kelas_mapel_id')); 
+        // dd($kelas_mapel);
         $skema = MasterSkemaKeterampilan::get();
         
         return view('pages.kelas.PenilaianKd3', [

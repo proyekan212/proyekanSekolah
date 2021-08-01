@@ -20,6 +20,11 @@ class KompetensiDasar extends Model
 
     ];
 
+    public function kompetensi_dasar_mapel() {
+
+        return $this->hasMany('App\Model\KompetensiDasarKelasMapel', 'kelas_mapel_id', 'id');
+    }
+
     public function kompetensi_inti() {
 
         return $this->belongsTo('App\Model\MasterKompetensiInti', 'kompetensi_inti_id', 'id');
