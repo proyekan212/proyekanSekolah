@@ -41,7 +41,10 @@ class AppServiceProvider extends ServiceProvider
             $user_role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
             // dd($user_role->role_id);
             // $menu = MenuRole::where('role_id', $user_role)->get();
-            $menu = MenuRoleKelas::where('role_id', 2)->get();
+            $menu = MenuKelas::with(['menu_role' => function($q) {
+                // dd($q);
+            $q->where('role_id', $this->app->request->user()->id);
+        }])->orderBy('reorder' , 'asc')->get();
             // dd($menu);
 
             // dd($menu);
