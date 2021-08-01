@@ -8,17 +8,29 @@ use App\Auth;
 use App\Model\MasterKompetensiInti;
 use App\Model\KompetensiDasar;
 use App\Model\KompetensiDasarPerKelas;
+use App\Model\KompetensiDasarKelasMapel;
 use App\Model\SettingSemester;
 use DB;
 class KompetensiDasarController extends BaseController
 {
-    public function index(){
+    public function index(Request $request){
         $semester_id = SettingSemester::first();
-
+        $kompetensi_dasar = KompetensiDasarKelasMapel::
+        with('kompetensi_dasar')
+        ->
+        where([
+            ['kelas_mapel_id' ,'=', $request->session()->get('kelas_mapel')],
+            
+        ])
+        ->get();
+        // dd($kompetensi_dasar);
+ 
+        // dd($request->session()->get('kelas_mapel_id'));
+        $kompetensi_inti =  MasterKompetensiInti::all();
         return view('pages.kelas.kompetensidasar', [
-            'kompetensi_inti' => MasterKompetensiInti::all(),
+            'kompetensi_inti' => $kompetensi_inti,
             'semester' => $semester_id->semester_id,
-            'kompetensi_dasar' => KompetensiDasar::where('semester_id' , $semester_id->semester_id)->get(),
+            'kompetensi_dasar' => $kompetensi_dasar,
         ]);
     }
 

@@ -54,8 +54,8 @@
                   <td class="capitalize">{{$row->user_detail->name}}</td>
                   <td>{{$row->user_detail->jenis_kelamin}}</td>
                   <td class="capitalize">{{$row->user_detail->tempat_lahir}}, {{$row->user_detail->tanggal_lahir}}</td>
-                  <td>0</td>
-                  <td>0</td>
+                  <td>{{$kelas_mapel->kkm}}</td>
+                  <td>{{$row->nilai}}</td>
                 </tr>
               @endforeach
             </tbody>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Model\DaftarKelas;
 use App\Model\UserDetail;
 use Illuminate\Http\Request;
+use App\Model\MasterJadwalPelajaran;
 
 
 class PenilaianSemesterController extends Controller
@@ -18,9 +19,12 @@ class PenilaianSemesterController extends Controller
     public function index(Request $request)
     {   
         // dd($request->session()->get('kelas_id'));
-        $siswa = DaftarKelas::where('kelas_id', $request->session()->get('kelas_id'))->get();
+        $kelas_mapel = MasterJadwalPelajaran::where('id', $request->session()->get('kelas_mapel'))->first();
+
+        $siswa = DaftarKelas::with('kelas.jadwal_pelajaran.penilaian_keterampilan')->where('kelas_id', $request->session()->get('kelas_id'))->get();
         return view('pages.kelas.PenilaianSemester', [
-            'siswa'=> $siswa
+            'siswa'=> $siswa,
+            'kelas_mapel' => $kelas_mapel
         ]
         
     );
