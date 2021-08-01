@@ -13,6 +13,9 @@ class MenuRoleKelas extends Model
     ] ;
 
     public function menu() {
-        return $this->belongsTo('App\Model\MenuKelas', 'menu_id', 'id');
+        return $this->belongsTo(MenuKelas::class, 'menu_id', 'id');
     }
+
+
+
 }
