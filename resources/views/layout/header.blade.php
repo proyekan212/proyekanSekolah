@@ -68,6 +68,12 @@
                               @endif
                             @endif
                           @endforeach
+
+
+                          @else
+                            <h1>
+                              tidak ada notifications
+                            </h1>
                         @endif 
                     
                       </ul>
@@ -103,7 +109,7 @@
                       <ul class="px-2 pt-4">
                       
                        @if($notifications != null)
-                             @foreach($notifications as $notif) 
+                          @foreach($notifications as $notif) 
                             @if($notif->read == 1)
                               <li class="p-2 rounded-lg bg-gray-100 mb-2 "> 
                                 {{$notif->kelas_mapel->kelas}}
@@ -148,6 +154,11 @@
                               @endif
                             @endif
                           @endforeach
+
+                          @else
+                            <h1>
+                              tidak ada notifications
+                            </h1>
                         @endif 
                     
                       </ul>
