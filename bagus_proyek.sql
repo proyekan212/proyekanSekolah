@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jul 30, 2021 at 09:28 AM
+-- Generation Time: Aug 01, 2021 at 03:11 PM
 -- Server version: 10.5.9-MariaDB-1
 -- PHP Version: 7.4.15
 
@@ -114,24 +114,7 @@ CREATE TABLE `daftar_kelas` (
 --
 
 INSERT INTO `daftar_kelas` (`id`, `user_id`, `kelas_id`, `rombel_id`, `created_at`, `updated_at`) VALUES
-(1, 4, 2, 1, '2021-04-19 08:46:59', '2021-04-19 08:46:59'),
-(2, 6, 2, 1, '2021-04-21 00:34:51', '2021-04-21 00:34:51'),
-(3, 4, 5, 1, '2021-05-27 16:19:32', '2021-05-27 19:02:01'),
-(4, 7, 5, 1, '2021-05-27 16:19:37', '2021-05-27 18:45:12'),
-(5, 7, 5, 1, '2021-05-27 16:23:32', '2021-05-27 18:46:11'),
-(6, 6, 5, 1, '2021-05-27 16:23:43', '2021-05-27 18:46:06'),
-(7, 7, 4, 1, '2021-05-27 16:55:55', '2021-05-27 16:55:55'),
-(8, 6, 4, 1, '2021-05-27 17:22:44', '2021-05-27 17:22:44'),
-(9, 13, 7, 1, '2021-06-21 23:53:22', '2021-06-21 23:53:22'),
-(10, 8, 7, 1, '2021-06-21 23:53:54', '2021-06-21 23:53:54'),
-(11, 19, 7, 1, '2021-06-21 23:59:17', '2021-06-21 23:59:17'),
-(12, 13, 10, 1, '2021-07-11 19:18:46', '2021-07-11 19:18:46'),
-(13, 19, 10, 1, '2021-07-11 19:19:27', '2021-07-11 19:19:27'),
-(14, 19, 10, 1, '2021-07-11 19:31:24', '2021-07-11 19:31:24'),
-(15, 19, 11, 1, '2021-07-11 20:07:34', '2021-07-11 20:07:34'),
-(16, 8, 8, 1, '2021-07-29 18:22:02', '2021-07-29 18:22:02'),
-(17, 13, 8, 1, '2021-07-29 18:22:02', '2021-07-29 18:22:02'),
-(18, 19, 8, 1, '2021-07-29 18:22:02', '2021-07-29 18:22:02');
+(1, 19, 8, 1, '2021-07-31 09:14:44', '2021-07-31 09:14:44');
 
 -- --------------------------------------------------------
 
@@ -305,7 +288,18 @@ INSERT INTO `kompetensi_dasar_kelas_mapels` (`id`, `created_at`, `updated_at`, `
 (9, '2021-07-29 17:33:08', '2021-07-29 17:33:08', 1, 37),
 (10, '2021-07-29 17:33:08', '2021-07-29 17:33:08', 2, 37),
 (11, '2021-07-29 17:33:08', '2021-07-29 17:33:08', 5, 37),
-(12, '2021-07-29 17:33:08', '2021-07-29 17:33:08', 7, 37);
+(12, '2021-07-29 17:33:08', '2021-07-29 17:33:08', 7, 37),
+(13, '2021-07-31 06:15:29', '2021-07-31 06:15:29', 6, 38),
+(14, '2021-07-31 06:15:29', '2021-07-31 06:15:29', 8, 38),
+(15, '2021-07-31 06:15:29', '2021-07-31 06:15:29', 5, 38),
+(16, '2021-07-31 06:15:29', '2021-07-31 06:15:29', 7, 38),
+(17, '2021-07-31 07:33:52', '2021-07-31 07:33:52', 1, 39),
+(18, '2021-07-31 07:33:52', '2021-07-31 07:33:52', 2, 39),
+(19, '2021-07-31 07:33:52', '2021-07-31 07:33:52', 6, 39),
+(20, '2021-07-31 07:33:52', '2021-07-31 07:33:52', 5, 39),
+(21, '2021-07-31 07:33:52', '2021-07-31 07:33:52', 7, 39),
+(22, '2021-07-31 08:59:09', '2021-07-31 08:59:09', 1, 1),
+(23, '2021-07-31 08:59:09', '2021-07-31 08:59:09', 7, 1);
 
 -- --------------------------------------------------------
 
@@ -332,19 +326,7 @@ CREATE TABLE `master_jadwal_pelajarans` (
 --
 
 INSERT INTO `master_jadwal_pelajarans` (`id`, `kelas_id`, `semester_id`, `mapel_id`, `pertemuan`, `current_pertemuan`, `hapus`, `kkm`, `user_id`, `created_at`, `updated_at`) VALUES
-(25, 3, 1, 2, 16, NULL, 0, 75, 2, '2021-06-08 01:59:36', '2021-06-08 01:59:36'),
-(26, 3, 1, 3, 16, NULL, 0, 75, 2, '2021-06-08 02:00:08', '2021-06-08 02:00:08'),
-(27, 3, 1, 1, 16, NULL, 0, 75, 2, '2021-06-08 02:00:23', '2021-06-08 02:00:23'),
-(28, 4, 1, 3, 16, NULL, 0, 75, 7, '2021-06-13 00:55:48', '2021-06-13 00:55:48'),
-(29, 4, 1, 2, 16, NULL, 0, 75, 2, '2021-06-19 04:13:21', '2021-06-19 04:13:21'),
-(30, 6, 1, 2, 16, NULL, 0, 75, 2, '2021-06-19 04:14:03', '2021-06-19 04:14:03'),
-(31, 4, 1, 1, 16, NULL, 0, 75, 2, '2021-06-19 04:14:24', '2021-06-19 04:14:24'),
-(32, 7, 1, 1, 16, 4, 0, 75, 2, '2021-06-22 00:01:28', '2021-07-11 19:11:33'),
-(33, 7, 1, 3, 16, NULL, 0, 75, 58, '2021-06-22 00:06:08', '2021-06-22 00:06:08'),
-(34, 7, 1, 5, 16, NULL, 0, 75, 2, '2021-07-11 19:12:13', '2021-07-11 19:12:13'),
-(35, 8, 1, 1, 16, NULL, 0, 75, 2, '2021-07-29 17:32:05', '2021-07-29 17:32:05'),
-(36, 8, 1, 1, 16, NULL, 0, 75, 2, '2021-07-29 17:32:15', '2021-07-29 17:32:15'),
-(37, 8, 1, 5, 16, NULL, 0, 75, 2, '2021-07-29 17:33:08', '2021-07-29 17:33:08');
+(1, 8, 1, 3, 16, NULL, 0, 75, 2, '2021-07-31 08:59:09', '2021-07-31 08:59:09');
 
 -- --------------------------------------------------------
 
@@ -654,7 +636,11 @@ INSERT INTO `master_penilaian_pengetahuans` (`id`, `pertemuan`, `kompetensi_dasa
 (5, 'pertermuan 1', 2, 0, 'ww1', 21, 0, 1, '2021-06-08 17:00:00', '2021-06-09 17:00:00', '2021-06-08 01:26:56', '2021-06-08 01:26:56'),
 (6, 'pertermuan 1', 3, 20, 'dwqdqw', 31, 0, 2, '2021-06-03 17:00:00', '2021-06-24 17:00:00', '2021-06-19 04:15:12', '2021-06-19 04:15:12'),
 (7, 'pertermuan 1', 2, 2, 'eqweqwe', 32, 0, 2, '2021-07-09 17:00:00', '2021-07-22 17:00:00', '2021-07-16 06:42:44', '2021-07-16 06:42:44'),
-(8, 'pertermuan 4', 2, 21, 'eqweqe', 37, 0, 3, '2021-07-15 17:00:00', '2021-07-26 17:00:00', '2021-07-29 18:14:09', '2021-07-29 18:14:09');
+(8, 'pertermuan 4', 2, 21, 'eqweqe', 37, 0, 3, '2021-07-15 17:00:00', '2021-07-26 17:00:00', '2021-07-29 18:14:09', '2021-07-29 18:14:09'),
+(9, 'pertermuan 3', 6, 58, 'll', 38, 0, 3, '2021-08-01 17:00:00', '2021-08-02 17:00:00', '2021-07-31 06:50:01', '2021-07-31 06:50:01'),
+(10, 'pertermuan 4', 6, 79, 'qweqeqweqwe', 38, 0, 3, '2021-07-27 17:00:00', '2021-08-26 17:00:00', '2021-07-31 07:25:26', '2021-07-31 07:25:26'),
+(11, 'pertermuan 1', 6, 90, 'swswsw', 39, 0, 3, '2021-07-30 17:00:00', '2021-07-30 17:00:00', '2021-07-31 07:34:48', '2021-07-31 07:34:48'),
+(12, 'pertermuan 1', 1, 90, 'kk', 1, 0, 3, '2021-08-02 17:00:00', '2021-08-03 17:00:00', '2021-07-31 09:01:33', '2021-07-31 09:01:33');
 
 -- --------------------------------------------------------
 
@@ -1212,7 +1198,19 @@ INSERT INTO `student_notifications` (`id`, `siswa_id`, `guru_id`, `descriptions`
 (3, 59, 2, 'tugas pengetahuan ', 32, 0, '2021-07-23 13:41:46', '2021-07-23 13:41:46'),
 (4, 33, 2, 'tugas pengetahuan ', 32, 0, '2021-07-23 14:00:26', '2021-07-23 14:00:26'),
 (5, 10, 2, 'tugas pengetahuan ', 32, 0, '2021-07-23 14:00:26', '2021-07-23 14:00:26'),
-(6, 59, 2, 'tugas pengetahuan ', 32, 0, '2021-07-23 14:00:26', '2021-07-23 14:00:26');
+(6, 59, 2, 'tugas pengetahuan ', 32, 0, '2021-07-23 14:00:26', '2021-07-23 14:00:26'),
+(7, 10, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 06:50:01', '2021-07-31 06:50:01'),
+(8, 33, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 06:50:01', '2021-07-31 06:50:01'),
+(9, 59, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 06:50:01', '2021-07-31 06:50:01'),
+(10, 10, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:24:54', '2021-07-31 07:24:54'),
+(11, 33, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:24:54', '2021-07-31 07:24:54'),
+(12, 59, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:24:54', '2021-07-31 07:24:54'),
+(13, 10, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:25:26', '2021-07-31 07:25:26'),
+(14, 33, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:25:26', '2021-07-31 07:25:26'),
+(15, 59, 2, 'tugas pengetahuan ', 38, 0, '2021-07-31 07:25:26', '2021-07-31 07:25:26'),
+(16, 10, 2, 'tugas pengetahuan ', 39, 0, '2021-07-31 07:34:48', '2021-07-31 07:34:48'),
+(17, 33, 2, 'tugas pengetahuan ', 39, 0, '2021-07-31 07:34:48', '2021-07-31 07:34:48'),
+(18, 59, 2, 'tugas pengetahuan ', 39, 0, '2021-07-31 07:34:48', '2021-07-31 07:34:48');
 
 -- --------------------------------------------------------
 
@@ -1363,8 +1361,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `token`, `verify_token`, `created_at`, `updated_at`, `active`, `hapus`) VALUES
-(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, NULL, NULL, '2021-07-29 18:21:39', 1, 0),
-(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, NULL, NULL, '2021-07-29 16:57:40', 1, 0),
+(1, '4892118481', '$2y$10$VtSxgzGRFmmAxsbOanQJpe4PoQOqtvGJ53RRo1nPuAJpd87rOu8.e', NULL, NULL, NULL, '2021-07-31 09:16:02', 0, 0),
+(2, '9630159739', '$2y$10$jogAhsur6Si7jFJ9IcqBFe9RykIRw0tdqtYl3rMOgtO00MNAFjE3e', NULL, NULL, NULL, '2021-08-01 00:13:21', 1, 0),
 (3, '9630159739', '$2y$10$GT8DC/RyTOe3PvIevhLs3u.PApaxbdtu/ok3tWxqLeJaMv24wDqW.', NULL, NULL, NULL, NULL, 0, 0),
 (4, '2766170294', '$2y$10$8W5XSqBNaGdcUkSSoKTtMeC4bSGL1A9I5sSC0wFjO7fzF630GJyku', NULL, NULL, NULL, '2021-05-30 23:14:38', 0, 0),
 (5, '7724909893', '$2y$10$iZGAwJi3uNiV7d04AoRC3.wqIdXVDITpcVoBSIVLzVjd9nKlGigM.', NULL, NULL, NULL, NULL, 0, 0),
@@ -1377,7 +1375,7 @@ INSERT INTO `users` (`id`, `username`, `password`, `token`, `verify_token`, `cre
 (33, '77777', '$2y$10$WUTRbE4Q/G2ehY12boGOO.fYAQsrh9JctvFQiFiCEgoBX9c0g0Smq', NULL, NULL, '2021-06-17 19:40:04', '2021-06-17 20:22:46', 0, 1),
 (57, '363636363636', '$2y$10$2uvAmkhaf3VWl5CF/ujC6uuMbKb7wGULfNr24aOY/8ErPb2DyhjHC', NULL, NULL, '2021-06-17 20:23:27', '2021-06-17 20:23:55', 0, 1),
 (58, '3123123', '$2y$10$eWBAdOOLGffFZde7H85.n.hgqltBcUlhiWNLHqlaO26uL2Z9emkxO', NULL, NULL, '2021-06-21 23:56:33', '2021-06-22 00:06:23', 1, 0),
-(59, '74816348123', '$2y$10$PVfID2MEXk8YarT29YTzw.JI6JkVlbtk9x89hOcxtWMfb5XB1QyzW', NULL, NULL, '2021-06-21 23:58:58', '2021-07-25 08:30:07', 0, 0);
+(59, '74816348123', '$2y$10$PVfID2MEXk8YarT29YTzw.JI6JkVlbtk9x89hOcxtWMfb5XB1QyzW', NULL, NULL, '2021-06-21 23:58:58', '2021-07-31 08:02:00', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -1752,7 +1750,7 @@ ALTER TABLE `config`
 -- AUTO_INCREMENT for table `daftar_kelas`
 --
 ALTER TABLE `daftar_kelas`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `failed_jobs`
@@ -1788,13 +1786,13 @@ ALTER TABLE `kompetensi_dasars`
 -- AUTO_INCREMENT for table `kompetensi_dasar_kelas_mapels`
 --
 ALTER TABLE `kompetensi_dasar_kelas_mapels`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `master_jadwal_pelajarans`
 --
 ALTER TABLE `master_jadwal_pelajarans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `master_jurusans`
@@ -1860,7 +1858,7 @@ ALTER TABLE `master_penilaian_keterampilans`
 -- AUTO_INCREMENT for table `master_penilaian_pengetahuans`
 --
 ALTER TABLE `master_penilaian_pengetahuans`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `master_rpps`
@@ -1950,7 +1948,7 @@ ALTER TABLE `setting_semesters`
 -- AUTO_INCREMENT for table `student_notifications`
 --
 ALTER TABLE `student_notifications`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `tahun_akademiks`
