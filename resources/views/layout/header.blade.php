@@ -39,31 +39,33 @@
                               </li>
 
                             @else 
-                              <li class="p-2 text-white mb-2 break-all overflow-x-hidden  rounded-lg bg-green-400 "> 
-                                 <div class=" mb-2">
-                                  <div class="flex-col flex">
-                                    <span class="text-sm mb-1">
-                                      {{$notif->siswa->user_detail->name}}
-                                    </span>
-                                    <span class="text-xs font-semibold mb-1">
-                                      NISN: {{$notif->siswa->user_detail->nisn_or_nip}}
-                                    </span>
-                                    <span class="text-xs  ">
-                                     Kelas: <span class="font-bold uppercase">
-                                        {{$notif->kelas_mapel->kelas->master_kelas->kode_kelas->kode}}  {{$notif->kelas_mapel->kelas->master_kelas->jurusan->jurusan}}
-                                      {{$notif->kelas_mapel->kelas->master_kelas->kelas}}
-                                     </span>
+                              @if($notif->kelas_mapel != null ) 
+                                <li class="p-2 text-white mb-2 break-all overflow-x-hidden  rounded-lg bg-green-400 "> 
+                                  <div class=" mb-2">
+                                    <div class="flex-col flex">
+                                      <span class="text-sm mb-1">
+                                        {{$notif->siswa->user_detail->name}}
+                                      </span>
+                                      <span class="text-xs font-semibold mb-1">
+                                        NISN: {{$notif->siswa->user_detail->nisn_or_nip}}
+                                      </span>
+                                      <span class="text-xs  ">
+                                      Kelas: <span class="font-bold uppercase">
+                                          {{$notif->kelas_mapel->kelas->master_kelas->kode_kelas->kode}}  {{$notif->kelas_mapel->kelas->master_kelas->jurusan->jurusan}}
+                                        {{$notif->kelas_mapel->kelas->master_kelas->kelas}}
+                                      </span>
 
 
-                                 </div>
-                                 <div>
+                                  </div>
+                                  <div>
 
-                                 <span>
-                                      {{$notif->description}}
-                                     </span>
-            
-                                 </div>
-                              </li>
+                                  <span>
+                                        {{$notif->description}}
+                                      </span>
+              
+                                  </div>
+                                </li>
+                              @endif
                             @endif
                           @endforeach
                         @endif 
@@ -108,6 +110,7 @@
                               </li>
 
                             @else 
+                              @if($notif->kelas_mapel != null ) 
                               <li class="p-2 text-white mb-2 break-all overflow-x-hidden  rounded-lg bg-green-400 "> 
                                  <div class=" mb-2">
                                   <div class="flex-col flex">
@@ -142,6 +145,7 @@
             
                                  </div>
                               </li>
+                              @endif
                             @endif
                           @endforeach
                         @endif 
