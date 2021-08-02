@@ -68,8 +68,12 @@ class AppServiceProvider extends ServiceProvider
         });
         View::composer('pages/admin.*', function ($view) {
             $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
-            $menu = MenuRole::where('role_id', $role->role_id)->get();
+            // $menu = MenuRole::where('role_id', $role->role_id)->get();
                $data_auth = UserDetail::where('role_id',$role->role_id)->where('user_id', '=', $this->app->request->user()->id)->first();
+            $menu = Menu::with(['menu_role' => function($q) {
+                // dd($q);
+            $q->where('role_id', $this->app->request->user()->id);
+        }])->orderBy('reorder' , 'asc')->get();
             $view->with('data_auth', $data_auth);
             $view->with('menu', $menu);$kelas_mapel_session = $this->app->request->session()->get('kelas_id');
 
@@ -78,7 +82,11 @@ class AppServiceProvider extends ServiceProvider
         View::composer('dashboard', function ($view) {
             // dd($this->app->request->user()->id);
             $role = UserDetail::where('user_id', $this->app->request->user()->id)->first();
-            $menu = MenuRole::where('role_id', $role->role_id)->get();
+            // $menu = MenuRole::where('role_id', $role->role_id)->get();
+             $menu = Menu::with(['menu_role' => function($q) {
+                // dd($q);
+            $q->where('role_id', $this->app->request->user()->id);
+        }])->orderBy('reorder' , 'asc')->get();
             $data_auth = UserDetail::where('role_id',$role->role_id)->where('user_id', '=', $this->app->request->user()->id)->first();
             $view->with('data_auth', $data_auth);
 // dd($menu->menu_id);

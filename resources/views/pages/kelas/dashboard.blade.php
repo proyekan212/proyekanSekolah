@@ -17,8 +17,7 @@
             <table id="dataMapel" class="table table-striped">
               <thead>
                 <tr class="text-center">
-                  <th>KD</th>
-                  <th>Jumlah Materi</th>
+                  <th>Pertemuan</th>
                   <th>Jumlah Penilaian Pengetahuan	</th>
                   <th>Jumlah Penilaian Keterampilan</th>
                 </tr>
@@ -26,8 +25,7 @@
               <tbody class="text-center">
                 @foreach($kompetensi_dasar as $kd)
                 <tr>
-                  <td>KD {{$kd->id}}</td>
-                  <td>2</td>
+                  <td>Pertemuan {{$kd->id}}</td>
                   <td>{{$kd->penilaian_pengetahuan->count()}}</td>
                   <td>{{$kd->penilaian_keterampilan->count()}}</td>
                 </tr>

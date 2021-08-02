@@ -19,4 +19,7 @@ class Menu extends Model
         'updated_at',
         'deleted_at'
     ];
+     public function menu_role() {
+        return $this->belongsTo(MenuRole::class, 'menu_id', 'id');
+    }
 }
